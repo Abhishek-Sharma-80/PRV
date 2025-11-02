@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+
   <script>
     tailwind.config = {
       theme: {
@@ -26,7 +27,24 @@
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <!-- Smooth Scroll -->
+  <style>
+    html { scroll-behavior: smooth; }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1s ease-out forwards;
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
+
 <body class="font-outfit bg-gray-50">
 
   <!-- Header -->
@@ -82,7 +100,8 @@
           <i class="fas fa-globe"></i> ENGLISH <i class="fas fa-angle-down"></i>
         </div>
 
-        <a href="../training/signup.html" class="flex items-center space-x-1 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+        <a href="../training/signup.html"
+          class="flex items-center space-x-1 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
           <i class="fas fa-sign-in-alt"></i>
           <span class="hidden sm:inline">SIGN IN TO TRAINING ACADEMY</span>
         </a>
@@ -103,7 +122,8 @@
         <a href="#education" class="text-gray-700 hover:text-blue-600">Education</a>
         <a href="#accreditations" class="text-blue-600 font-medium hover:underline">ACCREDITATIONS</a>
         <a href="#contact" class="text-gray-700 font-medium hover:underline">CONTACT US</a>
-        <a href="../training/signup.html" class="flex items-center space-x-1 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+        <a href="../training/signup.html"
+          class="flex items-center space-x-1 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
           <i class="fas fa-sign-in-alt"></i>
           <span>SIGN IN TO TRAINING ACADEMY</span>
         </a>
@@ -113,7 +133,6 @@
     <script>
       const btn = document.getElementById('menu-btn');
       const menu = document.getElementById('mobile-menu');
-
       btn.addEventListener('click', () => {
         menu.classList.toggle('hidden');
       });
@@ -121,61 +140,76 @@
   </header>
 
   <!-- Hero Section -->
-  <section id="hero" class="bg-blue-50 py-20">
-    <div class="container mx-auto px-6 text-center">
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-600 mb-4">Unlock Your Next-Level Growth</h1>
-      <p class="text-lg sm:text-xl md:text-2xl text-gray-700 mb-6">PRV Consultancy: Your Path to Next-Level Growth.</p>
-      <p class="text-gray-600 mb-8 max-w-2xl mx-auto">We combine deep industry insight with a dynamic, forward-thinking approach to deliver clear, measurable results for your business.</p>
-      <a href="#contact" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-blue-700 transition-colors">Start Your Ascent Today</a>
+  <section id="hero" class="bg-gradient-to-r from-blue-100 to-blue-200 py-20 text-center">
+    <div class="container mx-auto px-6 fade-in">
+      <h1 class="text-4xl sm:text-5xl font-bold text-blue-700 mb-4 animate-bounce">
+        Unlock Your Next-Level Growth
+      </h1>
+      <p class="text-lg sm:text-xl text-gray-700 mb-6">PRV Consultancy: Your Path to Success.</p>
+      <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+        We combine deep industry insight with forward-thinking strategies to deliver measurable results for your business.
+      </p>
+      <a href="#contact"
+         class="inline-block bg-blue-600 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-blue-700 transition-colors">
+         Start Your Ascent Today
+      </a>
     </div>
   </section>
 
   <!-- Services Section -->
   <section id="services" class="py-16 bg-white">
     <div class="container mx-auto px-6">
-      <h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-12">Our Comprehensive Consultancy Services</h2>
+      <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Our Comprehensive Consultancy Services</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+        <div class="bg-blue-50 p-6 rounded-lg shadow hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
           <h3 class="font-bold text-blue-600 mb-2">Business Strategy & Planning</h3>
-          <p class="text-gray-700">Market analysis, strategic roadmap development, and competitive positioning for sustainable success.</p>
+          <p class="text-gray-700">Market analysis, strategic roadmap development, and competitive positioning for long-term success.</p>
         </div>
-        <div class="bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+        <div class="bg-blue-50 p-6 rounded-lg shadow hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
           <h3 class="font-bold text-blue-600 mb-2">Financial Advisory & Cost Control</h3>
-          <p class="text-gray-700">Budgeting, financial forecasting, risk management, and comprehensive cost-reduction strategies.</p>
+          <p class="text-gray-700">Budgeting, forecasting, risk management, and comprehensive cost-reduction strategies.</p>
         </div>
-        <div class="bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+        <div class="bg-blue-50 p-6 rounded-lg shadow hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
           <h3 class="font-bold text-blue-600 mb-2">Operations & Process Optimization</h3>
-          <p class="text-gray-700">Streamlining workflows, supply chain management, and efficiency audits to boost performance.</p>
+          <p class="text-gray-700">Streamlining workflows and enhancing efficiency across departments.</p>
         </div>
-        <div class="bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
-          <h3 class="font-bold text-blue-600 mb-2">Human Resources (HR) Consulting</h3>
-          <p class="text-gray-700">Talent management, organizational design, training and development, and compliance strategy.</p>
+        <div class="bg-blue-50 p-6 rounded-lg shadow hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+          <h3 class="font-bold text-blue-600 mb-2">Human Resources Consulting</h3>
+          <p class="text-gray-700">Talent management, training and development, and HR compliance solutions.</p>
         </div>
-        <div class="bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+        <div class="bg-blue-50 p-6 rounded-lg shadow hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
           <h3 class="font-bold text-blue-600 mb-2">Digital & IT Transformation</h3>
-          <p class="text-gray-700">Technology implementation, system integration, data analytics strategy, and IT governance.</p>
+          <p class="text-gray-700">Data analytics, IT governance, and innovative digital solutions for modern growth.</p>
         </div>
-        <div class="bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+        <div class="bg-blue-50 p-6 rounded-lg shadow hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
           <h3 class="font-bold text-blue-600 mb-2">Marketing & Sales Strategy</h3>
-          <p class="text-gray-700">Brand development, lead generation, sales process optimization, and digital marketing blueprints.</p>
+          <p class="text-gray-700">Brand development, digital marketing, and sales performance enhancement.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Contact / CTA Section -->
-  <section id="contact" class="bg-blue-50 py-16">
-    <div class="container mx-auto px-6 max-w-xl text-center">
-      <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">Ready to gain <span class="text-blue-600">PRV Consultancy</span>?</h2>
+  <section id="contact" class="bg-blue-50 py-16 text-center">
+    <div class="container mx-auto px-6 max-w-xl fade-in">
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Ready to grow with <span class="text-blue-600">PRV Consultancy</span>?</h2>
       <p class="text-gray-700 mb-6">Reach out directly for a Free Clarity Call:</p>
-      <a href="tel:7489351297" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-blue-700 transition-colors mb-4">Call Us Now: 7489351297</a>
-      <p class="text-gray-600 mt-2">Or email us: <a href="mailto:prachiaimssharma@gmail.com" class="text-blue-600 hover:underline">prachiaimssharma@gmail.com</a></p>
+      <a href="tel:7489351297"
+         class="inline-block bg-blue-600 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-blue-700 transition-colors mb-4">
+         Call Us Now: 7489351297
+      </a>
+      <p class="text-gray-600 mt-2">
+        Or email us: 
+        <a href="mailto:prvconsultancyservices@gmail.com" class="text-blue-600 hover:underline">
+          prvconsultancyservices@gmail.com
+        </a>
+      </p>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-white py-6 shadow-inner">
-    <div class="container mx-auto px-6 text-center text-gray-600">
+  <footer class="bg-gradient-to-r from-blue-100 to-blue-200 py-6 shadow-inner">
+    <div class="container mx-auto px-6 text-center text-gray-700 font-medium">
       &copy; 2025 PRV Consultancy. All rights reserved.
     </div>
   </footer>
