@@ -1,11 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testing Page</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h2>Testing</h2>
+<body class="bg-gray-100 text-gray-800 font-sans">
+  <!-- Header -->
+  <header class="bg-blue-600 text-white py-4 shadow-md">
+    <div class="container mx-auto text-center">
+      <h1 class="text-3xl font-bold">Welcome to the Testing Page</h1>
+      <p class="text-blue-100">A simple and clean example webpage</p>
+    </div>
+  </header>
+
+  <!-- Main Section -->
+  <main class="container mx-auto mt-10 p-6 bg-white rounded-2xl shadow-lg">
+    <h2 class="text-2xl font-semibold mb-4 text-blue-700">About This Page</h2>
+    <p class="mb-4">
+      This page is created to demonstrate how HTML and Tailwind CSS can be used to design a simple, elegant webpage. 
+      You can use this as a starting point for any small project or webpage idea.
+    </p>
+    <ul class="list-disc list-inside mb-4">
+      <li>Uses Tailwind CSS for quick styling</li>
+      <li>Fully responsive on mobile and desktop</li>
+      <li>Lightweight and easy to edit</li>
+    </ul>
+
+    <a href="#" class="inline-block bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition">
+      Learn More
+    </a>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-10 bg-gray-800 text-gray-300 py-4 text-center">
+    <p>&copy; 2025 Testing Page | Designed with ❤️ using Tailwind CSS</p>
+  </footer>
 </body>
 </html>
