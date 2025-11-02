@@ -166,35 +166,49 @@
 
   <!-- JavaScript -->
   <script>
-    const form = document.getElementById('signupForm');
-    const formContainer = document.getElementById('form-container');
-    const confirmation = document.getElementById('confirmation');
-    const displayName = document.getElementById('displayName');
-    const displayEmail = document.getElementById('displayEmail');
-    const displayCourse = document.getElementById('displayCourse');
-    const newRegistration = document.getElementById('newRegistration');
+  const form = document.getElementById('signupForm');
+  const formContainer = document.getElementById('form-container');
+  const confirmation = document.getElementById('confirmation');
+  const displayName = document.getElementById('displayName');
+  const displayEmail = document.getElementById('displayEmail');
+  const displayCourse = document.getElementById('displayCourse');
+  const newRegistration = document.getElementById('newRegistration');
 
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
 
-      const name = document.getElementById('fullname').value;
-      const email = document.getElementById('email').value;
-      const course = document.getElementById('course').value;
+    const name = document.getElementById('fullname').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const course = document.getElementById('course').value;
+    const message = document.getElementById('message').value;
 
-      displayName.textContent = name;
-      displayEmail.textContent = email;
-      displayCourse.textContent = course;
+    // Replace with your deployed Apps Script URL 👇
+    const scriptURL = "YOUR_WEB_APP_URL";
 
-      formContainer.classList.add('hidden');
-      confirmation.classList.remove('hidden');
-    });
+    fetch(scriptURL, {
+      method: "POST",
+      body: JSON.stringify({ fullname: name, email, phone, course, message }),
+      headers: { "Content-Type": "application/json" }
+    })
+    .then(response => {
+      if (response.ok) {
+        displayName.textContent = name;
+        displayEmail.textContent = email;
+        displayCourse.textContent = course;
+        formContainer.classList.add('hidden');
+        confirmation.classList.remove('hidden');
+      } else {
+        alert("Error submitting form. Try again.");
+      }
+    })
+    .catch(error => alert("Error: " + error.message));
+  });
 
-    newRegistration.addEventListener('click', () => {
-      form.reset();
-      confirmation.classList.add('hidden');
-      formContainer.classList.remove('hidden');
-    });
-  </script>
+  newRegistration.addEventListener('click', () => {
+    form.reset();
+    confirmation.classList.add('hidden');
+    formContainer.classList.remove('hidden');
+  });
+</script>
 
-</body>
-</html>
