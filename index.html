@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
-<script>
+  <script>
     tailwind.config = {
       theme: {
         extend: {
@@ -23,48 +23,55 @@
       },
     }
   </script>
+
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
 <body class="font-outfit bg-gray-50">
 
   <!-- Header -->
-  <header class="bg-white shadow">
-    <div class="container mx-auto flex flex-wrap items-center justify-between py-4 px-6">
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="container mx-auto flex items-center justify-between py-4 px-6">
+      <!-- Logo -->
       <a href="#" class="flex items-center space-x-2">
         <img src="../prv-logo.png" alt="PRV Logo" class="h-10 w-auto">
         <span class="text-xl font-bold text-blue-600">PRV</span>
         <span class="text-gray-700 font-medium">Consultancy</span>
       </a>
 
-      <!-- Navigation -->
-      <nav class="flex flex-wrap items-center gap-2 md:gap-4 mt-4 md:mt-0">
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button id="menu-btn" class="text-gray-700 focus:outline-none">
+          <i class="fas fa-bars text-2xl"></i>
+        </button>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex md:items-center md:gap-4 flex-wrap">
         <!-- ABOUT PRV Dropdown -->
-        <div class="relative">
-          <select onchange="if(this.value) window.location.href=this.value;" class="border border-gray-300 rounded-md p-2 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-400 appearance-none">
-            <option disabled selected>ABOUT PRV</option>
-            <option value="../our-story.html">Our Story</option>
-            <option value="#team">Meet the Team</option>
-            <option value="#values">Our Values</option>
-          </select>
-          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-            <i class="fas fa-angle-down"></i>
+        <div class="relative group">
+          <button class="flex items-center gap-1 text-gray-700 font-medium hover:text-blue-600 focus:outline-none">
+            ABOUT PRV <i class="fas fa-angle-down text-sm"></i>
+          </button>
+          <div class="absolute hidden group-hover:block bg-white shadow-md mt-2 rounded-md min-w-[180px] z-50">
+            <a href="../our-story.html" class="block px-4 py-2 text-gray-700 hover:bg-blue-50">Our Story</a>
+            <a href="#team" class="block px-4 py-2 text-gray-700 hover:bg-blue-50">Meet the Team</a>
+            <a href="#values" class="block px-4 py-2 text-gray-700 hover:bg-blue-50">Our Values</a>
           </div>
         </div>
 
         <!-- INDUSTRIES WE SERVE Dropdown -->
-        <div class="relative">
-          <select class="border border-gray-300 rounded-md p-2 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-400 appearance-none">
-            <option disabled selected>INDUSTRIES WE SERVE</option>
-            <option value="#healthcare">Healthcare</option>
-            <option value="#finance">Finance</option>
-            <option value="#retail">Retail</option>
-            <option value="#manufacturing">Manufacturing</option>
-            <option value="#technology">Technology</option>
-            <option value="#education">Education</option>
-          </select>
-          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-            <i class="fas fa-angle-down"></i>
+        <div class="relative group">
+          <button class="flex items-center gap-1 text-gray-700 font-medium hover:text-blue-600 focus:outline-none">
+            INDUSTRIES WE SERVE <i class="fas fa-angle-down text-sm"></i>
+          </button>
+          <div class="absolute hidden group-hover:block bg-white shadow-md mt-2 rounded-md min-w-[200px] z-50">
+            <a href="#healthcare" class="block px-4 py-2 text-gray-700 hover:bg-blue-50">Healthcare</a>
+            <a href="#finance" class="block px-4 py-2 text-gray-700 hover:bg-blue-50">Finance</a>
+            <a href="#retail" class="block px-4 py-2 text-gray-700 hover:bg-blue-50">Retail</a>
+            <a href="#manufacturing" class="block px-4 py-2 text-gray-700 hover:bg-blue-50">Manufacturing</a>
+            <a href="#technology" class="block px-4 py-2 text-gray-700 hover:bg-blue-50">Technology</a>
+            <a href="#education" class="block px-4 py-2 text-gray-700 hover:bg-blue-50">Education</a>
           </div>
         </div>
 
@@ -81,6 +88,36 @@
         </a>
       </nav>
     </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
+      <nav class="flex flex-col p-4 gap-2">
+        <a href="../our-story.html" class="text-gray-700 hover:text-blue-600">Our Story</a>
+        <a href="#team" class="text-gray-700 hover:text-blue-600">Meet the Team</a>
+        <a href="#values" class="text-gray-700 hover:text-blue-600">Our Values</a>
+        <a href="#healthcare" class="text-gray-700 hover:text-blue-600">Healthcare</a>
+        <a href="#finance" class="text-gray-700 hover:text-blue-600">Finance</a>
+        <a href="#retail" class="text-gray-700 hover:text-blue-600">Retail</a>
+        <a href="#manufacturing" class="text-gray-700 hover:text-blue-600">Manufacturing</a>
+        <a href="#technology" class="text-gray-700 hover:text-blue-600">Technology</a>
+        <a href="#education" class="text-gray-700 hover:text-blue-600">Education</a>
+        <a href="#accreditations" class="text-blue-600 font-medium hover:underline">ACCREDITATIONS</a>
+        <a href="#contact" class="text-gray-700 font-medium hover:underline">CONTACT US</a>
+        <a href="../training/signup.html" class="flex items-center space-x-1 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+          <i class="fas fa-sign-in-alt"></i>
+          <span>SIGN IN TO TRAINING ACADEMY</span>
+        </a>
+      </nav>
+    </div>
+
+    <script>
+      const btn = document.getElementById('menu-btn');
+      const menu = document.getElementById('mobile-menu');
+
+      btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+      });
+    </script>
   </header>
 
   <!-- Hero Section -->
