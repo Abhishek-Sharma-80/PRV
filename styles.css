@@ -336,3 +336,23 @@ footer {
     width: auto;
     height: 60px;
 }
+.nav-item-dropdown{
+    display: inline-block;
+    position: relative;
+}
+.nav-item-dropdown select{
+    padding: 10px 40px 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: white;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+.nav-item-dropdown i{
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
