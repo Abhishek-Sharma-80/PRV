@@ -21,15 +21,20 @@
             </div>
             
             <nav class="main-nav">
-                
-                <div class="nav-item dropdown">
+                <select class="nav-item-dropdown" onchange="if(this.value) window.location.href=this.value;">
+  <option disabled selected>ABOUT PRV</option>
+  <option value="../our-story.html">Our Story</option>
+  <option value="#team">Meet the Team</option>
+  <option value="#values">Our Values</option>
+</select>
+                <!-- <div class="nav-item dropdown">
                     <a href="#about-prv" class="nav-dropdown-link nav-accent-link">ABOUT PRV <i class="fas fa-angle-down"></i></a>
                     <ul class="dropdown-menu">
                         <li><a href="../our-story.html">Our Story</a></li>
                         <li><a href="#team">Meet the Team</a></li>
                         <li><a href="#values">Our Values</a></li>
                     </ul>
-                </div>
+                </div> -->
                 
                 <select class="nav-item-dropdown">
                     <option disabled selected>INDUSTRIES WE SERVE <i class="fas fa-angle-down"></i></option>
