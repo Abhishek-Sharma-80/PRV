@@ -11,7 +11,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
-  <!-- Tailwind Configuration -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Tailwind Font Config -->
@@ -29,10 +28,11 @@
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen font-outfit">
 
-  <div class="bg-white shadow-lg rounded-lg p-6 sm:p-8 w-full max-w-md">
+  <div id="form-container" class="bg-white shadow-lg rounded-lg p-6 sm:p-8 w-full max-w-md">
     <h2 class="text-2xl font-bold text-blue-600 text-center mb-6">Training Sign-Up</h2>
 
-    <form action="#" method="POST" class="space-y-4">
+    <!-- Sign-Up Form -->
+    <form id="signupForm" class="space-y-4">
       <!-- Full Name -->
       <div>
         <label for="fullname" class="block text-gray-700 font-medium mb-1">Full Name</label>
@@ -51,6 +51,7 @@
       <div>
         <label for="phone" class="block text-gray-700 font-medium mb-1">Phone Number</label>
         <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required
+               pattern="[0-9]{10}" title="Enter a valid 10-digit phone number"
                class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 hover:border-blue-400 transition-colors"/>
       </div>
 
@@ -60,14 +61,74 @@
         <select id="course" name="course" required
                 class="w-full border border-gray-300 rounded-md p-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-400 appearance-none hover:border-blue-400 transition-colors">
           <option value="">-- Select Training Program --</option>
-          <option value="java">Java Programming</option>
-          <option value="python">Python Development</option>
-          <option value="webdev">Web Development</option>
-          <option value="datasci">Data Science</option>
+
+          <!-- IT & Programming -->
+          <optgroup label="💻 Information Technology & Programming">
+            <option value="Java Programming">Java Programming</option>
+            <option value="Python Development">Python Development</option>
+            <option value="C++ / C# Development">C++ / C# Development</option>
+            <option value="Web Development (HTML, CSS, JS)">Web Development (HTML, CSS, JS)</option>
+            <option value="Full-Stack Development (MERN / MEAN)">Full-Stack Development (MERN / MEAN)</option>
+            <option value="Android App Development">Android App Development</option>
+            <option value="iOS App Development">iOS App Development</option>
+            <option value="Cloud Computing (AWS / Azure / GCP)">Cloud Computing (AWS / Azure / GCP)</option>
+            <option value="DevOps Fundamentals">DevOps Fundamentals</option>
+            <option value="Cybersecurity & Ethical Hacking">Cybersecurity & Ethical Hacking</option>
+          </optgroup>
+
+          <!-- Data & AI -->
+          <optgroup label="📊 Data, AI & Analytics">
+            <option value="Data Science">Data Science</option>
+            <option value="Machine Learning & AI">Machine Learning & AI</option>
+            <option value="Deep Learning with TensorFlow">Deep Learning with TensorFlow</option>
+            <option value="Data Analysis with Excel & Power BI">Data Analysis with Excel & Power BI</option>
+            <option value="Big Data & Hadoop">Big Data & Hadoop</option>
+            <option value="SQL & Database Management">SQL & Database Management</option>
+          </optgroup>
+
+          <!-- Design -->
+          <optgroup label="🎨 Design & Creative Skills">
+            <option value="Graphic Design (Photoshop / Illustrator)">Graphic Design (Photoshop / Illustrator)</option>
+            <option value="UI/UX Design">UI/UX Design</option>
+            <option value="3D Animation & Motion Graphics">3D Animation & Motion Graphics</option>
+            <option value="Video Editing (Premiere Pro / DaVinci)">Video Editing (Premiere Pro / DaVinci)</option>
+          </optgroup>
+
+          <!-- Business & Management -->
+          <optgroup label="🏢 Business & Management">
+            <option value="Business Management">Business Management</option>
+            <option value="Entrepreneurship & Startups">Entrepreneurship & Startups</option>
+            <option value="Leadership & Team Management">Leadership & Team Management</option>
+            <option value="Project Management (PMP / Agile)">Project Management (PMP / Agile)</option>
+            <option value="Supply Chain Management">Supply Chain Management</option>
+          </optgroup>
+
+          <!-- Marketing -->
+          <optgroup label="📣 Marketing & Communication">
+            <option value="Digital Marketing (SEO / SEM / SMM)">Digital Marketing (SEO / SEM / SMM)</option>
+            <option value="Content Writing & Copywriting">Content Writing & Copywriting</option>
+            <option value="Brand Management">Brand Management</option>
+            <option value="Public Relations & Communication">Public Relations & Communication</option>
+          </optgroup>
+
+          <!-- Finance -->
+          <optgroup label="💰 Finance & Accounting">
+            <option value="Financial Modeling & Analysis">Financial Modeling & Analysis</option>
+            <option value="Accounting & Taxation">Accounting & Taxation</option>
+            <option value="Investment & Stock Market Basics">Investment & Stock Market Basics</option>
+            <option value="Excel for Finance Professionals">Excel for Finance Professionals</option>
+          </optgroup>
+
+          <!-- Soft Skills -->
+          <optgroup label="🗣️ Personal & Soft Skills">
+            <option value="Communication & Presentation Skills">Communication & Presentation Skills</option>
+            <option value="Personality Development">Personality Development</option>
+            <option value="Time Management & Productivity">Time Management & Productivity</option>
+            <option value="Career Development & Resume Building">Career Development & Resume Building</option>
+            <option value="Interview Preparation">Interview Preparation</option>
+          </optgroup>
         </select>
-        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-          ▼
-        </div>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">▼</div>
       </div>
 
       <!-- Additional Comments -->
@@ -89,6 +150,51 @@
       © 2025 Training Academy. All rights reserved.
     </div>
   </div>
+
+  <!-- Confirmation Section (hidden initially) -->
+  <div id="confirmation" class="hidden bg-white shadow-lg rounded-lg p-6 sm:p-8 w-full max-w-md text-center">
+    <h2 class="text-2xl font-bold text-green-600 mb-4">Registration Successful!</h2>
+    <p class="text-gray-700 mb-4">Thank you for signing up, <span id="displayName" class="font-semibold"></span>.</p>
+    <p class="text-gray-700 mb-4">You have registered for <span id="displayCourse" class="font-semibold"></span>.</p>
+    <p class="text-gray-500 text-sm mb-6">We’ve sent a confirmation to <span id="displayEmail"></span>.</p>
+
+    <button id="newRegistration"
+            class="bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
+      Register Another Participant
+    </button>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const form = document.getElementById('signupForm');
+    const formContainer = document.getElementById('form-container');
+    const confirmation = document.getElementById('confirmation');
+    const displayName = document.getElementById('displayName');
+    const displayEmail = document.getElementById('displayEmail');
+    const displayCourse = document.getElementById('displayCourse');
+    const newRegistration = document.getElementById('newRegistration');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('fullname').value;
+      const email = document.getElementById('email').value;
+      const course = document.getElementById('course').value;
+
+      displayName.textContent = name;
+      displayEmail.textContent = email;
+      displayCourse.textContent = course;
+
+      formContainer.classList.add('hidden');
+      confirmation.classList.remove('hidden');
+    });
+
+    newRegistration.addEventListener('click', () => {
+      form.reset();
+      confirmation.classList.add('hidden');
+      formContainer.classList.remove('hidden');
+    });
+  </script>
 
 </body>
 </html>
