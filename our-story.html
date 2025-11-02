@@ -1,42 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Testing Page</title>
-  <!-- Tailwind CSS CDN -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans">
+
+<body class="bg-gray-100 font-sans min-h-screen flex flex-col">
+
   <!-- Header -->
-  <header class="bg-blue-600 text-white py-4 shadow-md">
-    <div class="container mx-auto text-center">
-      <h1 class="text-3xl font-bold">Welcome to the Testing Page</h1>
-      <p class="text-blue-100">A simple and clean example webpage</p>
+  <header class="bg-blue-700 text-white py-4 shadow-md">
+    <div class="container mx-auto px-6 flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Admin Dashboard</h1>
+      <nav>
+        <a href="#" class="px-4 hover:underline">Home</a>
+        <a href="#" class="px-4 hover:underline">Manage Users</a>
+        <a href="#" class="px-4 hover:underline">Reports</a>
+        <a href="#" class="px-4 hover:underline">Settings</a>
+      </nav>
     </div>
   </header>
 
-  <!-- Main Section -->
-  <main class="container mx-auto mt-10 p-6 bg-white rounded-2xl shadow-lg">
-    <h2 class="text-2xl font-semibold mb-4 text-blue-700">About This Page</h2>
-    <p class="mb-4">
-      This page is created to demonstrate how HTML and Tailwind CSS can be used to design a simple, elegant webpage. 
-      You can use this as a starting point for any small project or webpage idea.
-    </p>
-    <ul class="list-disc list-inside mb-4">
-      <li>Uses Tailwind CSS for quick styling</li>
-      <li>Fully responsive on mobile and desktop</li>
-      <li>Lightweight and easy to edit</li>
-    </ul>
+  <!-- Main Content -->
+  <main class="flex-1 container mx-auto px-6 py-10">
+    <h2 class="text-xl font-semibold text-gray-700 mb-6">Welcome, Admin 👋</h2>
 
-    <a href="#" class="inline-block bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition">
-      Learn More
-    </a>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Card 1 -->
+      <div class="bg-white shadow-lg rounded-xl p-6 hover:shadow-xl transition">
+        <h3 class="text-lg font-semibold text-blue-700 mb-2">Total Users</h3>
+        <p class="text-3xl font-bold text-gray-800">245</p>
+        <p class="text-sm text-gray-500">Active users this month</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white shadow-lg rounded-xl p-6 hover:shadow-xl transition">
+        <h3 class="text-lg font-semibold text-blue-700 mb-2">New Sign-ups</h3>
+        <p class="text-3xl font-bold text-gray-800">42</p>
+        <p class="text-sm text-gray-500">This week’s registrations</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white shadow-lg rounded-xl p-6 hover:shadow-xl transition">
+        <h3 class="text-lg font-semibold text-blue-700 mb-2">Pending Requests</h3>
+        <p class="text-3xl font-bold text-gray-800">8</p>
+        <p class="text-sm text-gray-500">Awaiting approval</p>
+      </div>
+    </div>
+
+    <!-- Table Section -->
+    <div class="mt-10 bg-white shadow-md rounded-xl p-6 overflow-x-auto">
+      <h3 class="text-lg font-semibold text-gray-700 mb-4">Recent Registrations</h3>
+      <table class="w-full border-collapse">
+        <thead>
+          <tr class="bg-blue-50 text-blue-700">
+            <th class="border p-3 text-left">Name</th>
+            <th class="border p-3 text-left">Email</th>
+            <th class="border p-3 text-left">Course</th>
+            <th class="border p-3 text-left">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border p-3">Aarav Sharma</td>
+            <td class="border p-3">aarav@example.com</td>
+            <td class="border p-3">Python Development</td>
+            <td class="border p-3 text-green-600 font-semibold">Approved</td>
+          </tr>
+          <tr class="bg-gray-50">
+            <td class="border p-3">Priya Verma</td>
+            <td class="border p-3">priya@example.com</td>
+            <td class="border p-3">Web Development</td>
+            <td class="border p-3 text-yellow-600 font-semibold">Pending</td>
+          </tr>
+          <tr>
+            <td class="border p-3">Rahul Mehta</td>
+            <td class="border p-3">rahul@example.com</td>
+            <td class="border p-3">UI/UX Design</td>
+            <td class="border p-3 text-green-600 font-semibold">Approved</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </main>
 
   <!-- Footer -->
-  <footer class="mt-10 bg-gray-800 text-gray-300 py-4 text-center">
-    <p>&copy; 2025 Testing Page | Designed with ❤️ using Tailwind CSS</p>
+  <footer class="bg-gray-800 text-gray-300 text-center py-4 mt-10">
+    &copy; 2025 Admin Dashboard. All Rights Reserved.
   </footer>
+
 </body>
 </html>

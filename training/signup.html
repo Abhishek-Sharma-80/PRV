@@ -10,10 +10,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CSS CDN -->
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Tailwind Font Config -->
+  <!-- Tailwind Config -->
   <script>
     tailwind.config = {
       theme: {
@@ -26,8 +26,10 @@
     }
   </script>
 </head>
+
 <body class="bg-gray-100 flex items-center justify-center min-h-screen font-outfit">
 
+  <!-- Sign-Up Form Container -->
   <div id="form-container" class="bg-white shadow-lg rounded-lg p-6 sm:p-8 w-full max-w-md">
     <h2 class="text-2xl font-bold text-blue-600 text-center mb-6">Training Sign-Up</h2>
 
@@ -55,83 +57,28 @@
                class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 hover:border-blue-400 transition-colors"/>
       </div>
 
-      <!-- Training Program Dropdown -->
+      <!-- Training Dropdown -->
       <div class="relative">
         <label for="course" class="block text-gray-700 font-medium mb-1">Training Program</label>
         <select id="course" name="course" required
                 class="w-full border border-gray-300 rounded-md p-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-400 appearance-none hover:border-blue-400 transition-colors">
           <option value="">-- Select Training Program --</option>
-
-          <!-- IT & Programming -->
           <optgroup label="💻 Information Technology & Programming">
             <option value="Java Programming">Java Programming</option>
             <option value="Python Development">Python Development</option>
-            <option value="C++ / C# Development">C++ / C# Development</option>
             <option value="Web Development (HTML, CSS, JS)">Web Development (HTML, CSS, JS)</option>
             <option value="Full-Stack Development (MERN / MEAN)">Full-Stack Development (MERN / MEAN)</option>
-            <option value="Android App Development">Android App Development</option>
-            <option value="iOS App Development">iOS App Development</option>
-            <option value="Cloud Computing (AWS / Azure / GCP)">Cloud Computing (AWS / Azure / GCP)</option>
-            <option value="DevOps Fundamentals">DevOps Fundamentals</option>
             <option value="Cybersecurity & Ethical Hacking">Cybersecurity & Ethical Hacking</option>
           </optgroup>
-
-          <!-- Data & AI -->
           <optgroup label="📊 Data, AI & Analytics">
             <option value="Data Science">Data Science</option>
             <option value="Machine Learning & AI">Machine Learning & AI</option>
-            <option value="Deep Learning with TensorFlow">Deep Learning with TensorFlow</option>
-            <option value="Data Analysis with Excel & Power BI">Data Analysis with Excel & Power BI</option>
-            <option value="Big Data & Hadoop">Big Data & Hadoop</option>
-            <option value="SQL & Database Management">SQL & Database Management</option>
-          </optgroup>
-
-          <!-- Design -->
-          <optgroup label="🎨 Design & Creative Skills">
-            <option value="Graphic Design (Photoshop / Illustrator)">Graphic Design (Photoshop / Illustrator)</option>
-            <option value="UI/UX Design">UI/UX Design</option>
-            <option value="3D Animation & Motion Graphics">3D Animation & Motion Graphics</option>
-            <option value="Video Editing (Premiere Pro / DaVinci)">Video Editing (Premiere Pro / DaVinci)</option>
-          </optgroup>
-
-          <!-- Business & Management -->
-          <optgroup label="🏢 Business & Management">
-            <option value="Business Management">Business Management</option>
-            <option value="Entrepreneurship & Startups">Entrepreneurship & Startups</option>
-            <option value="Leadership & Team Management">Leadership & Team Management</option>
-            <option value="Project Management (PMP / Agile)">Project Management (PMP / Agile)</option>
-            <option value="Supply Chain Management">Supply Chain Management</option>
-          </optgroup>
-
-          <!-- Marketing -->
-          <optgroup label="📣 Marketing & Communication">
-            <option value="Digital Marketing (SEO / SEM / SMM)">Digital Marketing (SEO / SEM / SMM)</option>
-            <option value="Content Writing & Copywriting">Content Writing & Copywriting</option>
-            <option value="Brand Management">Brand Management</option>
-            <option value="Public Relations & Communication">Public Relations & Communication</option>
-          </optgroup>
-
-          <!-- Finance -->
-          <optgroup label="💰 Finance & Accounting">
-            <option value="Financial Modeling & Analysis">Financial Modeling & Analysis</option>
-            <option value="Accounting & Taxation">Accounting & Taxation</option>
-            <option value="Investment & Stock Market Basics">Investment & Stock Market Basics</option>
-            <option value="Excel for Finance Professionals">Excel for Finance Professionals</option>
-          </optgroup>
-
-          <!-- Soft Skills -->
-          <optgroup label="🗣️ Personal & Soft Skills">
-            <option value="Communication & Presentation Skills">Communication & Presentation Skills</option>
-            <option value="Personality Development">Personality Development</option>
-            <option value="Time Management & Productivity">Time Management & Productivity</option>
-            <option value="Career Development & Resume Building">Career Development & Resume Building</option>
-            <option value="Interview Preparation">Interview Preparation</option>
           </optgroup>
         </select>
         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">▼</div>
       </div>
 
-      <!-- Additional Comments -->
+      <!-- Comments -->
       <div>
         <label for="message" class="block text-gray-700 font-medium mb-1">Additional Comments</label>
         <textarea id="message" name="message" rows="3" placeholder="Any comments..."
@@ -151,7 +98,7 @@
     </div>
   </div>
 
-  <!-- Confirmation Section (hidden initially) -->
+  <!-- Confirmation Section -->
   <div id="confirmation" class="hidden bg-white shadow-lg rounded-lg p-6 sm:p-8 w-full max-w-md text-center">
     <h2 class="text-2xl font-bold text-green-600 mb-4">Registration Successful!</h2>
     <p class="text-gray-700 mb-4">Thank you for signing up, <span id="displayName" class="font-semibold"></span>.</p>
@@ -166,49 +113,51 @@
 
   <!-- JavaScript -->
   <script>
-  const form = document.getElementById('signupForm');
-  const formContainer = document.getElementById('form-container');
-  const confirmation = document.getElementById('confirmation');
-  const displayName = document.getElementById('displayName');
-  const displayEmail = document.getElementById('displayEmail');
-  const displayCourse = document.getElementById('displayCourse');
-  const newRegistration = document.getElementById('newRegistration');
+    const form = document.getElementById('signupForm');
+    const formContainer = document.getElementById('form-container');
+    const confirmation = document.getElementById('confirmation');
+    const displayName = document.getElementById('displayName');
+    const displayEmail = document.getElementById('displayEmail');
+    const displayCourse = document.getElementById('displayCourse');
+    const newRegistration = document.getElementById('newRegistration');
 
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
 
-    const name = document.getElementById('fullname').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    const course = document.getElementById('course').value;
-    const message = document.getElementById('message').value;
+      const name = document.getElementById('fullname').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const course = document.getElementById('course').value;
+      const message = document.getElementById('message').value;
 
-    // Replace with your deployed Apps Script URL 👇
-    const scriptURL = "YOUR_WEB_APP_URL";
+      // Replace this with your backend API URL if needed
+      const scriptURL = "YOUR_WEB_APP_URL";
 
-    fetch(scriptURL, {
-      method: "POST",
-      body: JSON.stringify({ fullname: name, email, phone, course, message }),
-      headers: { "Content-Type": "application/json" }
-    })
-    .then(response => {
-      if (response.ok) {
-        displayName.textContent = name;
-        displayEmail.textContent = email;
-        displayCourse.textContent = course;
-        formContainer.classList.add('hidden');
-        confirmation.classList.remove('hidden');
-      } else {
-        alert("Error submitting form. Try again.");
-      }
-    })
-    .catch(error => alert("Error: " + error.message));
-  });
+      fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify({ fullname: name, email, phone, course, message }),
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(response => {
+        if (response.ok) {
+          displayName.textContent = name;
+          displayEmail.textContent = email;
+          displayCourse.textContent = course;
+          formContainer.classList.add('hidden');
+          confirmation.classList.remove('hidden');
+        } else {
+          alert("Error submitting form. Try again.");
+        }
+      })
+      .catch(error => alert("Error: " + error.message));
+    });
 
-  newRegistration.addEventListener('click', () => {
-    form.reset();
-    confirmation.classList.add('hidden');
-    formContainer.classList.remove('hidden');
-  });
-</script>
+    newRegistration.addEventListener('click', () => {
+      form.reset();
+      confirmation.classList.add('hidden');
+      formContainer.classList.remove('hidden');
+    });
+  </script>
 
+</body>
+</html>
