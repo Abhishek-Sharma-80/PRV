@@ -1,0 +1,338 @@
+/* --- Colour Palette Variables --- */
+:root {
+    --prv-blue: #004AAD;      /* Deep Sapphire Blue (Primary/Sign In Button) */
+    --prv-coral: #FF6B6B;     /* Vibrant Coral (CTA/Accent 1/Nav Links) */
+    --prv-teal: #1DD1A1;      /* Bright Teal/Mint (Accent 2/Graphics) */
+    --prv-bg: #F7F7F7;        /* Off-White Background */
+    --prv-text: #333333;      /* Dark Grey Text */
+    --prv-light-text: #555555;
+}
+
+/* --- Base Styles --- */
+body {
+    font-family: 'Roboto', sans-serif;
+    color: var(--prv-text);
+    background-color: var(--prv-bg);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h2, h3, h4 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--prv-blue);
+    margin-top: 0;
+}
+
+/* --- Logo & Header (CSS-Based Logo and New Nav Structure) --- */
+header {
+    background-color: #ffffff;
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; 
+}
+
+/* Logo Styling (CSS-Based) */
+.logo-area {
+    font-family: 'Poppins', sans-serif;
+    color: var(--prv-blue); 
+    display: flex;
+    align-items: center;
+}
+.logo-area a {
+    text-decoration: none;
+    color: var(--prv-blue); 
+    display: flex;
+    align-items: center;
+}
+.logo-initials {
+    font-size: 1.8em; 
+    font-weight: 900;
+    line-height: 1;
+    margin-right: 5px;
+}
+.logo-accent {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: var(--prv-coral); 
+    margin-top: 5px;
+}
+/* Graphic Design Element: The Momentum Dash */
+.logo-area a::after {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 20px;
+    background-color: var(--prv-teal); 
+    transform: skewX(-20deg); 
+    margin-left: 8px;
+    margin-right: 5px;
+}
+
+/* Main Navigation Container (Matches the requested image) */
+.main-nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    font-family: 'Roboto', sans-serif; 
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+/* Base style for all new navigation links */
+.main-nav a, .language-select {
+    text-decoration: none;
+    color: var(--prv-text);
+    margin: 0 15px;
+    padding: 5px 0;
+    white-space: nowrap; 
+    transition: color 0.3s;
+    cursor: pointer;
+}
+.main-nav a:hover {
+    color: var(--prv-blue);
+}
+
+/* Accent link styling (Matches the orange links in the image) */
+.nav-accent-link {
+    color: var(--prv-coral) !important;
+    font-weight: 700;
+}
+.nav-accent-link:hover {
+    color: var(--prv-blue) !important;
+}
+
+/* Language Selector Styling */
+.language-select {
+    color: var(--prv-text);
+    padding: 5px 10px;
+}
+.language-select i {
+    margin-right: 5px;
+}
+
+/* Sign In Button Styling (Deep Blue with White Text - Matches the large blue button) */
+.sign-in-button {
+    background-color: var(--prv-blue) !important;
+    color: white !important;
+    padding: 10px 20px !important;
+    margin-left: 20px;
+    border-radius: 5px;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.sign-in-button:hover {
+    background-color: #003a8d !important; 
+    transform: none !important;
+}
+
+.sign-in-button i {
+    margin-right: 8px;
+}
+
+/* --- Hero Section & Tagline --- */
+.hero-section {
+    position: relative;
+    padding: 100px 0;
+    background-color: white;
+    overflow: hidden; 
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2; 
+    max-width: 600px;
+}
+
+.hero-content h2 {
+    font-size: 3.5em;
+    line-height: 1.1;
+    margin-bottom: 5px; 
+}
+
+.tagline {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--prv-coral); 
+    margin-bottom: 30px; 
+    letter-spacing: 1px;
+}
+
+.hero-content p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    max-width: 450px;
+}
+
+/* Graphic Design Element: The Coral Circle */
+.graphic-circle {
+    position: absolute;
+    top: -50px;
+    right: -100px;
+    width: 500px;
+    height: 500px;
+    background-color: var(--prv-coral);
+    border-radius: 50%;
+    opacity: 0.1; 
+    z-index: 1;
+}
+
+/* --- Service Cards --- */
+.section {
+    padding: 60px 0;
+}
+
+.section h3 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.service-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 30px;
+}
+
+.card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    border-left: 5px solid var(--prv-teal); 
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h4 {
+    color: var(--prv-blue);
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+/* --- CTA Button Styling (Reused) --- */
+.cta-button {
+    display: inline-block;
+    background-color: var(--prv-coral);
+    color: white !important;
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s, transform 0.2s;
+    border: none;
+}
+.cta-button:hover {
+    background-color: #e55a5a; 
+    transform: translateY(-2px);
+}
+.cta-button.large {
+    padding: 15px 40px;
+    font-size: 1.1em;
+}
+
+/* --- CTA Banner (Contact Section) --- */
+.cta-banner {
+    background-color: var(--prv-blue);
+    padding: 50px 0;
+    text-align: center;
+}
+.contact-box h4 {
+    color: white;
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+.contact-box h4 strong {
+    color: var(--prv-teal); 
+}
+.contact-highlight {
+    color: white;
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.contact-email-link {
+    color: white;
+    margin-top: 15px;
+    font-size: 1.1em;
+}
+.contact-email-link a {
+    color: var(--prv-teal);
+    text-decoration: none;
+    font-weight: 700;
+}
+.contact-email-link a:hover {
+    text-decoration: underline;
+}
+
+/* --- Footer --- */
+footer {
+    background-color: #222222;
+    color: #cccccc;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9em;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .main-nav {
+        justify-content: center;
+        margin-top: 15px;
+        width: 100%;
+    }
+    .main-nav a, .language-select {
+        margin: 5px 10px;
+        padding: 5px 0;
+    }
+    .sign-in-button {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        margin: 10px 0;
+    }
+}
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+    }
+    .hero-content h2 {
+        font-size: 2em;
+    }
+    .tagline {
+        font-size: 1.2em;
+    }
+    .service-cards {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 480px) {
+    .cta-button.large {
+        width: 90%;
+        padding: 15px 10px;
+        box-sizing: border-box;
+    }
+}
+.logo{
+    width: auto;
+    height: 60px;
+}
