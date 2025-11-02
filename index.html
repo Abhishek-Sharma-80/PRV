@@ -1,136 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRV Consultancy: Your Path to Next-Level Growth</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PRV Consultancy: Your Path to Next-Level Growth</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
-<body>
-<marquee></marquee>
-    <header>
-        <div class="container">
-            <div class="logo-area">
-                <a href="#">
-                    <img class="logo" src="../prv-logo.png" alt="PRV Consultancy Logo" class="logo-image">
-                    <span class="logo-initials">PRV</span> 
-                    <span class="logo-accent">Consultancy</span>
-                </a>
-            </div>
-            
-            <nav class="main-nav">
-                <select class="nav-item-dropdown" onchange="if(this.value) window.location.href=this.value;">
-  <option disabled selected>ABOUT PRV</option>
-  <option value="../our-story.html">Our Story</option>
-  <option value="#team">Meet the Team</option>
-  <option value="#values">Our Values</option>
-</select>
-                <!-- <div class="nav-item dropdown">
-                    <a href="#about-prv" class="nav-dropdown-link nav-accent-link">ABOUT PRV <i class="fas fa-angle-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="../our-story.html">Our Story</a></li>
-                        <li><a href="#team">Meet the Team</a></li>
-                        <li><a href="#values">Our Values</a></li>
-                    </ul>
-                </div> -->
-                
-                <select class="nav-item-dropdown">
-                    <option disabled selected>INDUSTRIES WE SERVE <i class="fas fa-angle-down"></i></option>
-                    <option value="#healthcare">Healthcare</option>
-                    <option value="#finance">Finance</option>
-                    <option value="#retail">Retail</option>
-                    <option value="#manufacturing">Manufacturing</option>
-                    <option value="#technology">Technology</option>
-                    <option value="#education">Education</option>
-                </select>
-                <!-- <div class="nav-item dropdown">
-                    <a href="#services" class="nav-dropdown-link nav-accent-link">OUR SERVICES <i class="fas fa-angle-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#strategy">Business Strategy</a></li>
-                        <li><a href="#financial">Financial Advisory</a></li>
-                        <li><a href="#operations">Operations Consulting</a></li>
-                        <li><a href="#digital">Digital Transformation</a></li>
-                    </ul>
-                </div> -->
-                
-                <a href="#accreditations" class="nav-accent-link">ACCREDITATIONS</a>
-                <a href="#contact" class="nav-link">CONTACT US</a>
+<body class="font-outfit bg-gray-50">
 
-                <div class="language-select">
-                    <i class="fas fa-globe"></i> ENGLISH <i class="fas fa-angle-down"></i>
-                </div>
-                
-                <a href="../training/signup.html" class="sign-in-button">
-                    <i class="fas fa-sign-in-alt"></i> SIGN IN TO TRAINING ACADEMY
-                </a>
-            </nav>
-            
+  <!-- Header -->
+  <header class="bg-white shadow">
+    <div class="container mx-auto flex flex-wrap items-center justify-between py-4 px-6">
+      <a href="#" class="flex items-center space-x-2">
+        <img src="../prv-logo.png" alt="PRV Logo" class="h-10 w-auto">
+        <span class="text-xl font-bold text-blue-600">PRV</span>
+        <span class="text-gray-700 font-medium">Consultancy</span>
+      </a>
+
+      <!-- Navigation -->
+      <nav class="flex flex-wrap items-center gap-2 md:gap-4 mt-4 md:mt-0">
+        <!-- ABOUT PRV Dropdown -->
+        <div class="relative">
+          <select onchange="if(this.value) window.location.href=this.value;" class="border border-gray-300 rounded-md p-2 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-400 appearance-none">
+            <option disabled selected>ABOUT PRV</option>
+            <option value="../our-story.html">Our Story</option>
+            <option value="#team">Meet the Team</option>
+            <option value="#values">Our Values</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <i class="fas fa-angle-down"></i>
+          </div>
         </div>
-    </header>
 
-    <main>
-        <section id="hero" class="hero-section">
-            <div class="hero-content container">
-                <div class="graphic-circle"></div> 
-                
-                <h2>Unlock Your Next-Level Growth</h2>
-                <p class="tagline">PRV Consultancy: Your Path to Next-Level Growth.</p>
-                <p>We combine deep industry insight with a dynamic, forward-thinking approach to deliver clear, measurable results for your business.</p>
-                <a href="#contact" class="cta-button">Start Your Ascent Today</a>
-            </div>
-        </section>
-
-        <section id="services" class="section">
-            <div class="container">
-                <h3>Our Comprehensive Consultancy Services</h3>
-                <div class="service-cards">
-                    <div class="card">
-                        <h4>Business Strategy & Planning</h4>
-                        <p>Market analysis, strategic roadmap development, and competitive positioning for sustainable success.</p>
-                    </div>
-                    <div class="card">
-                        <h4>Financial Advisory & Cost Control</h4>
-                        <p>Budgeting, financial forecasting, risk management, and comprehensive cost-reduction strategies.</p>
-                    </div>
-                    <div class="card">
-                        <h4>Operations & Process Optimization</h4>
-                        <p>Streamlining workflows, supply chain management, and efficiency audits to boost performance.</p>
-                    </div>
-                    <div class="card">
-                        <h4>Human Resources (HR) Consulting</h4>
-                        <p>Talent management, organizational design, training and development, and compliance strategy.</p>
-                    </div>
-                    <div class="card">
-                        <h4>Digital & IT Transformation</h4>
-                        <p>Technology implementation, system integration, data analytics strategy, and IT governance.</p>
-                    </div>
-                    <div class="card">
-                        <h4>Marketing & Sales Strategy</h4>
-                        <p>Brand development, lead generation, sales process optimization, and digital marketing blueprints.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="cta-banner">
-            <div class="container">
-                <div class="contact-box">
-                    <h4>Ready to gain **PRV Consultancy**?</h4>
-                    <p class="contact-highlight">Reach out directly for a Free Clarity Call:</p>
-                    <a href="tel:7489351297" class="cta-button large">Call Us Now: 7489351297</a>
-                    <p class="contact-email-link">Or email us: <a href="mailto:prachiaimssharma@gmail.com">prachiaimssharma@gmail.com</a></p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 PRV Consultancy. All rights reserved.</p>
+        <!-- INDUSTRIES WE SERVE Dropdown -->
+        <div class="relative">
+          <select class="border border-gray-300 rounded-md p-2 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-400 appearance-none">
+            <option disabled selected>INDUSTRIES WE SERVE</option>
+            <option value="#healthcare">Healthcare</option>
+            <option value="#finance">Finance</option>
+            <option value="#retail">Retail</option>
+            <option value="#manufacturing">Manufacturing</option>
+            <option value="#technology">Technology</option>
+            <option value="#education">Education</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <i class="fas fa-angle-down"></i>
+          </div>
         </div>
-    </footer>
+
+        <a href="#accreditations" class="text-blue-600 font-medium hover:underline">ACCREDITATIONS</a>
+        <a href="#contact" class="text-gray-700 font-medium hover:underline">CONTACT US</a>
+
+        <div class="flex items-center space-x-1 border border-gray-300 rounded-md px-2 py-1 text-gray-700 cursor-pointer hover:bg-gray-100">
+          <i class="fas fa-globe"></i> ENGLISH <i class="fas fa-angle-down"></i>
+        </div>
+
+        <a href="../training/signup.html" class="flex items-center space-x-1 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+          <i class="fas fa-sign-in-alt"></i>
+          <span class="hidden sm:inline">SIGN IN TO TRAINING ACADEMY</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="bg-blue-50 py-20">
+    <div class="container mx-auto px-6 text-center">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-600 mb-4">Unlock Your Next-Level Growth</h1>
+      <p class="text-lg sm:text-xl md:text-2xl text-gray-700 mb-6">PRV Consultancy: Your Path to Next-Level Growth.</p>
+      <p class="text-gray-600 mb-8 max-w-2xl mx-auto">We combine deep industry insight with a dynamic, forward-thinking approach to deliver clear, measurable results for your business.</p>
+      <a href="#contact" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-blue-700 transition-colors">Start Your Ascent Today</a>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-12">Our Comprehensive Consultancy Services</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+          <h3 class="font-bold text-blue-600 mb-2">Business Strategy & Planning</h3>
+          <p class="text-gray-700">Market analysis, strategic roadmap development, and competitive positioning for sustainable success.</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+          <h3 class="font-bold text-blue-600 mb-2">Financial Advisory & Cost Control</h3>
+          <p class="text-gray-700">Budgeting, financial forecasting, risk management, and comprehensive cost-reduction strategies.</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+          <h3 class="font-bold text-blue-600 mb-2">Operations & Process Optimization</h3>
+          <p class="text-gray-700">Streamlining workflows, supply chain management, and efficiency audits to boost performance.</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+          <h3 class="font-bold text-blue-600 mb-2">Human Resources (HR) Consulting</h3>
+          <p class="text-gray-700">Talent management, organizational design, training and development, and compliance strategy.</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+          <h3 class="font-bold text-blue-600 mb-2">Digital & IT Transformation</h3>
+          <p class="text-gray-700">Technology implementation, system integration, data analytics strategy, and IT governance.</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+          <h3 class="font-bold text-blue-600 mb-2">Marketing & Sales Strategy</h3>
+          <p class="text-gray-700">Brand development, lead generation, sales process optimization, and digital marketing blueprints.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / CTA Section -->
+  <section id="contact" class="bg-blue-50 py-16">
+    <div class="container mx-auto px-6 max-w-xl text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">Ready to gain <span class="text-blue-600">PRV Consultancy</span>?</h2>
+      <p class="text-gray-700 mb-6">Reach out directly for a Free Clarity Call:</p>
+      <a href="tel:7489351297" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-blue-700 transition-colors mb-4">Call Us Now: 7489351297</a>
+      <p class="text-gray-600 mt-2">Or email us: <a href="mailto:prachiaimssharma@gmail.com" class="text-blue-600 hover:underline">prachiaimssharma@gmail.com</a></p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-white py-6 shadow-inner">
+    <div class="container mx-auto px-6 text-center text-gray-600">
+      &copy; 2025 PRV Consultancy. All rights reserved.
+    </div>
+  </footer>
 
 </body>
 </html>
