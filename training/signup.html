@@ -4,95 +4,90 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Training Sign-Up</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #4A90E2, #50C9C3);
-      height: 100vh;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+
+  <!-- Google Fonts: Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Font Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            outfit: ['"Outfit"', 'sans-serif'],
+          },
+        },
+      },
     }
-    .signup-container {
-      background-color: white;
-      padding: 30px 40px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-      width: 100%;
-      max-width: 400px;
-    }
-    h2 {
-      text-align: center;
-      color: #333;
-      margin-bottom: 20px;
-    }
-    label {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 5px;
-      color: #555;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 14px;
-    }
-    button {
-      background-color: #4A90E2;
-      color: white;
-      border: none;
-      padding: 12px;
-      width: 100%;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    button:hover {
-      background-color: #357ABD;
-    }
-    .footer-text {
-      text-align: center;
-      margin-top: 10px;
-      font-size: 12px;
-      color: #666;
-    }
-  </style>
+  </script>
 </head>
-<body>
-  <div class="signup-container">
-    <h2>Training Sign-Up</h2>
-    <form action="#" method="POST">
-      <label for="fullname">Full Name</label>
-      <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required />
+<body class="bg-gray-100 flex items-center justify-center min-h-screen font-outfit">
 
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="Enter your email" required />
+  <div class="bg-white shadow-lg rounded-lg p-6 sm:p-8 w-full max-w-md">
+    <h2 class="text-2xl font-bold text-blue-600 text-center mb-6">Training Sign-Up</h2>
 
-      <label for="phone">Phone Number</label>
-      <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required />
+    <form action="#" method="POST" class="space-y-4">
+      <!-- Full Name -->
+      <div>
+        <label for="fullname" class="block text-gray-700 font-medium mb-1">Full Name</label>
+        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required
+               class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 hover:border-blue-400 transition-colors"/>
+      </div>
 
-      <label for="course">Training Program</label>
-      <select id="course" name="course" required>
-        <option value="">-- Select Training Program --</option>
-        <option value="java">Java Programming</option>
-        <option value="python">Python Development</option>
-        <option value="webdev">Web Development</option>
-        <option value="datasci">Data Science</option>
-      </select>
+      <!-- Email -->
+      <div>
+        <label for="email" class="block text-gray-700 font-medium mb-1">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required
+               class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 hover:border-blue-400 transition-colors"/>
+      </div>
 
-      <label for="message">Additional Comments</label>
-      <textarea id="message" name="message" rows="3" placeholder="Any comments..."></textarea>
+      <!-- Phone -->
+      <div>
+        <label for="phone" class="block text-gray-700 font-medium mb-1">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required
+               class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 hover:border-blue-400 transition-colors"/>
+      </div>
 
-      <button type="submit">Sign Up</button>
+      <!-- Training Program Dropdown -->
+      <div class="relative">
+        <label for="course" class="block text-gray-700 font-medium mb-1">Training Program</label>
+        <select id="course" name="course" required
+                class="w-full border border-gray-300 rounded-md p-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-400 appearance-none hover:border-blue-400 transition-colors">
+          <option value="">-- Select Training Program --</option>
+          <option value="java">Java Programming</option>
+          <option value="python">Python Development</option>
+          <option value="webdev">Web Development</option>
+          <option value="datasci">Data Science</option>
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+          ▼
+        </div>
+      </div>
+
+      <!-- Additional Comments -->
+      <div>
+        <label for="message" class="block text-gray-700 font-medium mb-1">Additional Comments</label>
+        <textarea id="message" name="message" rows="3" placeholder="Any comments..."
+                  class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 hover:border-blue-400 transition-colors"></textarea>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit"
+              class="w-full bg-blue-600 text-white font-bold py-2 rounded-md hover:bg-blue-700 transition-colors">
+        Sign Up
+      </button>
     </form>
-    <div class="footer-text">
+
+    <!-- Footer -->
+    <div class="text-center text-gray-500 text-sm mt-4">
       © 2025 Training Academy. All rights reserved.
     </div>
   </div>
+
 </body>
 </html>
