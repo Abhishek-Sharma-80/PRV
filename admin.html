@@ -412,6 +412,22 @@
       }
     }
 
+    // API fetch helper with localhost:3000 fallback
+    async function apiFetch(url, options = {}) {
+      try {
+        const res = await fetch(url, options);
+        if (res && res.ok) return res;
+      } catch (e) {}
+
+      if (!url.startsWith('http')) {
+        try {
+          const res = await fetch('http://localhost:3000' + url, options);
+          if (res && res.ok) return res;
+        } catch (e) {}
+      }
+      return null;
+    }
+
     // Login Handle
     document.getElementById('admin-login-form').addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -419,12 +435,12 @@
       const p = document.getElementById('login-password').value.trim();
 
       try {
-        const res = await fetch('/api/auth/login', {
+        const res = await apiFetch('/api/auth/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username: u, password: p })
         });
-        if (res.ok) {
+        if (res && res.ok) {
           const data = await res.json();
           if (data.success) {
             localStorage.setItem('prv_admin_token', data.token);
@@ -464,8 +480,8 @@
 
     async function fetchStats() {
       try {
-        const res = await fetch('/api/dashboard/stats');
-        if (res.ok) {
+        const res = await apiFetch('/api/dashboard/stats');
+        if (res && res.ok) {
           const d = await res.json();
           if (d.success) {
             document.getElementById('stat-total').textContent = d.stats.totalEnquiries;
@@ -495,8 +511,8 @@
 
       try {
         const url = `/api/enquiries?search=${encodeURIComponent(search)}&service=${encodeURIComponent(service)}&status=${encodeURIComponent(status)}`;
-        const res = await fetch(url);
-        if (res.ok) {
+        const res = await apiFetch(url);
+        if (res && res.ok) {
           const d = await res.json();
           if (d.success) {
             currentEnquiries = d.data;
@@ -527,8 +543,8 @@
 
     async function fetchSeminars() {
       try {
-        const res = await fetch('/api/seminars');
-        if (res.ok) {
+        const res = await apiFetch('/api/seminars');
+        if (res && res.ok) {
           const d = await res.json();
           if (d.success) {
             currentSeminars = d.data;

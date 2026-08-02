@@ -236,13 +236,22 @@ function initFormHandler() {
       };
 
       try {
-        const response = await fetch('/api/enquiries', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
+        let response = null;
+        try {
+          response = await fetch('/api/enquiries', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        } catch (e) {
+          response = await fetch('http://localhost:3000/api/enquiries', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        }
 
-        if (response.ok) {
+        if (response && response.ok) {
           const result = await response.json();
           if (result.success) {
             showToast(`Enquiry #${result.id} submitted! Stored in client_enquiries DB.`);
@@ -299,13 +308,22 @@ function initFormHandler() {
       };
 
       try {
-        const response = await fetch('/api/seminars', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
+        let response = null;
+        try {
+          response = await fetch('/api/seminars', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        } catch (e) {
+          response = await fetch('http://localhost:3000/api/seminars', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        }
 
-        if (response.ok) {
+        if (response && response.ok) {
           const result = await response.json();
           if (result.success) {
             showToast(`Seminar Signup #${result.id} recorded in seminar_registrations DB!`);
