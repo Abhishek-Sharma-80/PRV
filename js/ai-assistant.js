@@ -246,7 +246,7 @@
           playChatSound('receive');
           speakText(data.response);
         } else {
-          appendMessage('bot', '⚠️ Sorry, I encountered a minor server issue. Please try again or call our team at +91 98765 43210.');
+          appendMessage('bot', '⚠️ Sorry, I encountered a minor server issue. Please try again or call our team at +91 74893 51297.');
         }
       } catch (err) {
         removeTypingIndicator();

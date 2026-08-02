@@ -481,7 +481,7 @@ const server = http.createServer(async (req, res) => {
       if (msgLower.includes('zed') || msgLower.includes('msme') || msgLower.includes('subsidy') || msgLower.includes('zero defect')) {
         detectedService = 'ZED Certification';
         aiResponse = `🏆 **ZED (Zero Defect Zero Effect) Scheme for MSMEs**\n\nPRV Consultancy is an accredited consultant for the Ministry of MSME ZED Certification Scheme.\n\n✨ **Key Benefits & Subsidies**:\n• **Bronze Level**: 80% Subsidy on Certification cost + ₹10,000 Handholding Support Grant.\n• **Silver Level**: 60% Subsidy + Up to ₹5 Lakhs Testing & Capital Subsidy.\n• **Gold Level**: 50% Subsidy + Freight & Concessional Bank Interest (0.5% lower interest).\n\n📋 **Process**: Udyam Registration -> Self-Assessment -> Handholding by PRV Experts -> Desktop Verification -> Final Audit & Subsidy Clearance.\n\nWould you like our senior consultant to guide your MSME unit?`;
-        quickReplies = ['Book ZED Consultation', 'ISO 9001 Process', 'NATS Apprenticeship', 'Call +91 98765 43210'];
+        quickReplies = ['Book ZED Consultation', 'ISO 9001 Process', 'NATS Apprenticeship', 'Call +91 74893 51297'];
       }
       else if (msgLower.includes('iso') || msgLower.includes('9001') || msgLower.includes('14001') || msgLower.includes('45001') || msgLower.includes('27001') || msgLower.includes('22000') || msgLower.includes('13485')) {
         detectedService = 'ISO Certifications';
@@ -511,11 +511,11 @@ const server = http.createServer(async (req, res) => {
       else if (msgLower.includes('price') || msgLower.includes('cost') || msgLower.includes('fee') || msgLower.includes('kharcha') || msgLower.includes('rate') || msgLower.includes('kitna')) {
         detectedService = 'Pricing Inquiry';
         aiResponse = `💰 **Pricing & Investment Overview**\n\nPRV Consultancy provides cost-optimized pricing tailored to your company's size, employee count, and certification scope:\n\n• **ZED Certification**: Up to 80% government subsidy available!\n• **NATS Apprenticeship**: Government stipend reimbursement reduces effective manpower cost.\n• **ISO & Audit Consultancies**: Milestone-based flexible pricing.\n\nType your phone number or email in chat to receive an instant detailed customized quotation!`;
-        quickReplies = ['Book Consultation', 'ZED Subsidy Details', 'ISO 9001 Quote', 'Call +91 98765 43210'];
+        quickReplies = ['Book Consultation', 'ZED Subsidy Details', 'ISO 9001 Quote', 'Call +91 74893 51297'];
       }
       else if (msgLower.includes('contact') || msgLower.includes('phone') || msgLower.includes('call') || msgLower.includes('number') || msgLower.includes('address') || msgLower.includes('email') || msgLower.includes('whatsapp') || msgLower.includes('samparak')) {
         detectedService = 'Contact Request';
-        aiResponse = `📞 **PRV Consultancy Services - Contact Details**\n\n• **Phone / Mobile**: +91 98765 43210\n• **Email**: info@prvconsultancy.com\n• **Coverage**: Pan-India & Global Consultancy Services\n• **Headquarters**: Industrial Hub Consultancy Wing\n\nYou can share your phone number directly here in chat, and our senior consultant will reach out to you within 15 minutes!`;
+        aiResponse = `📞 **PRV Consultancy Services - Contact Details**\n\n• **Phone / Mobile**: +91 74893 51297\n• **Email**: info@prvconsultancy.com\n• **Coverage**: Pan-India & Global Consultancy Services\n• **Headquarters**: Industrial Hub Consultancy Wing\n\nYou can share your phone number directly here in chat, and our senior consultant will reach out to you within 15 minutes!`;
         quickReplies = ['Book Free Consultation', 'ZED Scheme', 'ISO Certification', 'WhatsApp Chat'];
       }
       else if (msgLower.includes('hi') || msgLower.includes('hello') || msgLower.includes('namaste') || msgLower.includes('madad') || msgLower.includes('help') || msgLower.includes('kaise')) {
