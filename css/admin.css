@@ -1,0 +1,437 @@
+/* ==========================================================================
+   PRV CONSULTANCY SERVICES - ENTERPRISE CRM ADMIN STYLESHEET
+   ========================================================================== */
+
+:root {
+  --admin-navy: #0A192F;
+  --admin-navy-light: #112240;
+  --admin-green: #00B894;
+  --admin-green-dark: #00997B;
+  --admin-blue: #0984E3;
+  --admin-gold: #F39C12;
+  --admin-red: #D63031;
+  --admin-bg: #F4F7FA;
+  --admin-card: #FFFFFF;
+  --admin-border: #E2E8F0;
+  --admin-text: #1E293B;
+  --admin-muted: #64748B;
+
+  --shadow-card: 0 4px 12px rgba(15, 25, 47, 0.06);
+  --shadow-hover: 0 8px 24px rgba(15, 25, 47, 0.12);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--admin-bg);
+  color: var(--admin-text);
+  line-height: 1.5;
+}
+
+/* LOGIN OVERLAY */
+.login-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, var(--admin-navy), #050D1A);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.login-card {
+  background: #FFF;
+  width: 100%;
+  max-width: 420px;
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.login-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--admin-navy);
+  margin-bottom: 24px;
+}
+
+.login-logo span {
+  color: var(--admin-green);
+}
+
+.login-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.login-subtitle {
+  font-size: 0.88rem;
+  color: var(--admin-muted);
+  margin-bottom: 24px;
+}
+
+/* LAYOUT STRUCTURE */
+.admin-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--admin-navy);
+  color: #FFF;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.3rem;
+  font-weight: 900;
+  margin-bottom: 35px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-grow: 1;
+}
+
+.sidebar-item {
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  color: #8892B0;
+  font-weight: 600;
+  font-size: 0.92rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sidebar-item:hover, .sidebar-item.active {
+  background: rgba(0, 184, 148, 0.15);
+  color: var(--admin-green);
+}
+
+.sidebar-user {
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 30px 40px;
+  overflow-y: auto;
+}
+
+.top-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.page-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--admin-navy);
+}
+
+/* STATS GRID */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+  margin-bottom: 35px;
+}
+
+.stat-card {
+  background: var(--admin-card);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  border: 1px solid var(--admin-border);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat-val {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--admin-navy);
+}
+
+.stat-lbl {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--admin-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+/* TAB CONTROLS */
+.view-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  border-bottom: 2px solid var(--admin-border);
+  padding-bottom: 12px;
+}
+
+.view-tab {
+  padding: 8px 18px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--admin-muted);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.view-tab.active {
+  background: var(--admin-navy);
+  color: #FFF;
+}
+
+/* FILTER BAR */
+.filter-bar {
+  background: var(--admin-card);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  border: 1px solid var(--admin-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 25px;
+  box-shadow: var(--shadow-card);
+}
+
+.filter-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-grow: 1;
+}
+
+.search-input {
+  width: 280px;
+  padding: 9px 14px;
+  border: 1px solid var(--admin-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+}
+
+.select-input {
+  padding: 9px 14px;
+  border: 1px solid var(--admin-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  background: #FFF;
+}
+
+/* DATA TABLE */
+.table-wrapper {
+  background: var(--admin-card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--admin-border);
+  box-shadow: var(--shadow-card);
+  overflow-x: auto;
+}
+
+.crm-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.88rem;
+}
+
+.crm-table th {
+  background: #F8FAFC;
+  padding: 14px 18px;
+  font-weight: 800;
+  color: var(--admin-navy);
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.crm-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--admin-border);
+  vertical-align: middle;
+}
+
+.crm-table tr:hover {
+  background: #F8FAFC;
+}
+
+/* STATUS BADGES */
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.badge-new { background: #E3F2FD; color: #1976D2; }
+.badge-contacted { background: #FFF3E0; color: #F57C00; }
+.badge-quotation { background: #F3E5F5; color: #7B1FA2; }
+.badge-converted { background: #E8F5E9; color: #2E7D32; }
+.badge-closed { background: #FFEBEE; color: #C62828; }
+
+/* KANBAN BOARD */
+.kanban-board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.kanban-col {
+  background: #EDF2F7;
+  border-radius: var(--radius-md);
+  padding: 16px;
+  min-height: 500px;
+}
+
+.kanban-col-title {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--admin-navy);
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kanban-card {
+  background: #FFF;
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  border-left: 4px solid var(--admin-blue);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.kanban-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.kanban-client-name {
+  font-weight: 800;
+  font-size: 0.92rem;
+  color: var(--admin-navy);
+}
+
+.kanban-company {
+  font-size: 0.8rem;
+  color: var(--admin-muted);
+  margin-bottom: 8px;
+}
+
+.kanban-service {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--admin-green-dark);
+}
+
+/* EDIT MODAL */
+.admin-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 25, 47, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.admin-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content-box {
+  background: #FFF;
+  width: 100%;
+  max-width: 550px;
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  box-shadow: var(--shadow-hover);
+}
+
+/* BUTTON UTILITIES */
+.btn-action {
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-whatsapp { background: #25D366; color: #FFF; }
+.btn-whatsapp:hover { background: #1EBE5D; }
+
+.btn-edit { background: #0984E3; color: #FFF; }
+.btn-edit:hover { background: #0773C5; }
+
+.btn-delete { background: #D63031; color: #FFF; }
+.btn-delete:hover { background: #B52627; }
+
+.btn-export { background: var(--admin-navy); color: #FFF; padding: 9px 16px; font-weight: 700; font-size: 0.88rem; border-radius: var(--radius-sm); }
+.btn-export:hover { background: var(--admin-navy-light); }

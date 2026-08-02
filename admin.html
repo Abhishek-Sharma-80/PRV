@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRV Consultancy - Admin CRM & Lead Management Portal</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Admin Stylesheet -->
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       1. LOGIN SCREEN OVERLAY
+       ========================================================================== -->
+  <div class="login-screen" id="login-overlay">
+    <div class="login-card">
+      <div class="login-logo">
+        <i class="fa-solid fa-shield-halved" style="color: var(--admin-green);"></i> PRV <span>CRM</span>
+      </div>
+      <h2 class="login-title">Admin Portal Login</h2>
+      <p class="login-subtitle">Enter your credentials to access the Lead Management System.</p>
+
+      <form id="admin-login-form">
+        <div style="margin-bottom: 16px; text-align: left;">
+          <label style="font-size: 0.85rem; font-weight: 700; color: var(--admin-navy);">Username</label>
+          <input type="text" id="login-username" class="search-input" style="width: 100%; margin-top: 4px;" value="admin" required>
+        </div>
+
+        <div style="margin-bottom: 24px; text-align: left;">
+          <label style="font-size: 0.85rem; font-weight: 700; color: var(--admin-navy);">Password</label>
+          <input type="password" id="login-password" class="search-input" style="width: 100%; margin-top: 4px;" value="admin123" required>
+        </div>
+
+        <button type="submit" class="btn-export" style="width: 100%; padding: 12px; font-size: 1rem; cursor: pointer;">
+          <i class="fa-solid fa-right-to-bracket"></i> Sign In to Dashboard
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       2. MASTER ADMIN DASHBOARD LAYOUT
+       ========================================================================== -->
+  <div class="admin-wrapper" id="admin-dashboard-wrapper" style="display: none;">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <i class="fa-solid fa-shield-halved" style="color: var(--admin-green);"></i> PRV CRM
+      </div>
+
+      <div class="sidebar-menu">
+        <div class="sidebar-item active" data-view="table">
+          <i class="fa-solid fa-table-list"></i> Enquiries Table
+        </div>
+        <div class="sidebar-item" data-view="kanban">
+          <i class="fa-solid fa-kanban"></i> Lead Pipeline (Kanban)
+        </div>
+        <div class="sidebar-item" data-view="seminars">
+          <i class="fa-solid fa-graduation-cap"></i> Seminar Registrations
+        </div>
+      </div>
+
+      <div class="sidebar-user">
+        <div>
+          <strong id="user-display-name">Master Admin</strong>
+          <div style="color: #8892B0; font-size: 0.75rem;">PRV Consultancy</div>
+        </div>
+        <button id="logout-btn" style="background: none; border: none; color: var(--admin-red); cursor: pointer; font-size: 1.1rem;" title="Logout">
+          <i class="fa-solid fa-power-off"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Top Header -->
+      <div class="top-header">
+        <div>
+          <h1 class="page-title">Lead Management & CRM</h1>
+          <p style="color: var(--admin-muted); font-size: 0.9rem;">Real-time inquiry capture from <code>client_enquiries</code> & <code>seminar_registrations</code> databases.</p>
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+          <a href="/api/enquiries/export" target="_blank" class="btn-export" style="text-decoration: none;">
+            <i class="fa-solid fa-file-csv"></i> Export CSV
+          </a>
+          <button onclick="window.print()" class="btn-export" style="background: var(--admin-green);">
+            <i class="fa-solid fa-print"></i> Print Report
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div>
+            <div class="stat-lbl">Total Enquiries</div>
+            <div class="stat-val" id="stat-total">0</div>
+          </div>
+          <div class="stat-icon" style="background: #E3F2FD; color: #1976D2;"><i class="fa-solid fa-inbox"></i></div>
+        </div>
+
+        <div class="stat-card">
+          <div>
+            <div class="stat-lbl">Today's Leads</div>
+            <div class="stat-val" id="stat-today">0</div>
+          </div>
+          <div class="stat-icon" style="background: #FFF3E0; color: #F57C00;"><i class="fa-solid fa-calendar-day"></i></div>
+        </div>
+
+        <div class="stat-card">
+          <div>
+            <div class="stat-lbl">Pending Leads</div>
+            <div class="stat-val" id="stat-pending">0</div>
+          </div>
+          <div class="stat-icon" style="background: #F3E5F5; color: #7B1FA2;"><i class="fa-solid fa-clock"></i></div>
+        </div>
+
+        <div class="stat-card">
+          <div>
+            <div class="stat-lbl">Converted Leads</div>
+            <div class="stat-val" id="stat-converted">0</div>
+          </div>
+          <div class="stat-icon" style="background: #E8F5E9; color: #2E7D32;"><i class="fa-solid fa-circle-check"></i></div>
+        </div>
+
+        <div class="stat-card">
+          <div>
+            <div class="stat-lbl">Seminar Signups</div>
+            <div class="stat-val" id="stat-seminars">0</div>
+          </div>
+          <div class="stat-icon" style="background: #E0F2F1; color: #00897B;"><i class="fa-solid fa-user-graduate"></i></div>
+        </div>
+      </div>
+
+      <!-- View Navigation Tabs -->
+      <div class="view-tabs">
+        <div class="view-tab active" data-view="table"><i class="fa-solid fa-list"></i> Enquiries Master Table</div>
+        <div class="view-tab" data-view="kanban"><i class="fa-solid fa-chart-kanban"></i> Pipeline Kanban Board</div>
+        <div class="view-tab" data-view="seminars"><i class="fa-solid fa-graduation-cap"></i> Seminar Registrations</div>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <div class="filter-controls">
+          <input type="text" id="search-filter" class="search-input" placeholder="Search by Name, Company, Email or Mobile...">
+          
+          <select id="service-filter" class="select-input">
+            <option value="">All Services</option>
+            <option value="ZED Certification">ZED Certification</option>
+            <option value="ISO Certifications">ISO Certifications</option>
+            <option value="IATF 16949">IATF 16949</option>
+            <option value="SEDEX / SMETA">SEDEX / SMETA</option>
+            <option value="5S / Kaizen">5S / Kaizen</option>
+            <option value="FSSAI Compliance">FSSAI Compliance</option>
+            <option value="NATS">NATS Apprenticeship</option>
+          </select>
+
+          <select id="status-filter" class="select-input">
+            <option value="">All Statuses</option>
+            <option value="New">New</option>
+            <option value="Contacted">Contacted</option>
+            <option value="Quotation Sent">Quotation Sent</option>
+            <option value="Meeting Scheduled">Meeting Scheduled</option>
+            <option value="Converted">Converted</option>
+            <option value="Closed">Closed</option>
+          </select>
+        </div>
+
+        <button id="reset-filters" class="btn-action" style="background: var(--admin-muted); color: #FFF;">
+          <i class="fa-solid fa-rotate-left"></i> Reset
+        </button>
+      </div>
+
+      <!-- VIEW 1: ENQUIRIES MASTER TABLE -->
+      <div id="view-table-section" class="view-section">
+        <div class="table-wrapper">
+          <table class="crm-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Client / Company</th>
+                <th>Contact</th>
+                <th>Service Required</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Assigned To</th>
+                <th>Follow-up</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="enquiries-table-body">
+              <!-- Dynamically populated via AJAX -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- VIEW 2: KANBAN PIPELINE BOARD -->
+      <div id="view-kanban-section" class="view-section" style="display: none;">
+        <div class="kanban-board">
+          <!-- Column 1: New -->
+          <div class="kanban-col">
+            <div class="kanban-col-title">NEW <span id="count-kanban-new" class="status-badge badge-new">0</span></div>
+            <div id="kanban-cards-new"></div>
+          </div>
+
+          <!-- Column 2: Contacted -->
+          <div class="kanban-col">
+            <div class="kanban-col-title">CONTACTED <span id="count-kanban-contacted" class="status-badge badge-contacted">0</span></div>
+            <div id="kanban-cards-contacted"></div>
+          </div>
+
+          <!-- Column 3: Quotation Sent -->
+          <div class="kanban-col">
+            <div class="kanban-col-title">QUOTATION SENT <span id="count-kanban-quotation" class="status-badge badge-quotation">0</span></div>
+            <div id="kanban-cards-quotation"></div>
+          </div>
+
+          <!-- Column 4: Converted -->
+          <div class="kanban-col">
+            <div class="kanban-col-title">CONVERTED <span id="count-kanban-converted" class="status-badge badge-converted">0</span></div>
+            <div id="kanban-cards-converted"></div>
+          </div>
+
+          <!-- Column 5: Closed -->
+          <div class="kanban-col">
+            <div class="kanban-col-title">CLOSED <span id="count-kanban-closed" class="status-badge badge-closed">0</span></div>
+            <div id="kanban-cards-closed"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 3: SEMINAR REGISTRATIONS TABLE -->
+      <div id="view-seminars-section" class="view-section" style="display: none;">
+        <div class="table-wrapper">
+          <table class="crm-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Participant Name</th>
+                <th>Contact info</th>
+                <th>Organization</th>
+                <th>Seminar / Workshop Name</th>
+                <th>Headcount</th>
+                <th>Date Registered</th>
+              </tr>
+            </thead>
+            <tbody id="seminars-table-body">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ==========================================================================
+       3. EDIT LEAD & FOLLOW-UP MODAL
+       ========================================================================== -->
+  <div class="admin-modal" id="edit-lead-modal">
+    <div class="modal-content-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h3 style="font-weight: 800; font-size: 1.3rem;">Edit Lead #<span id="modal-lead-id"></span></h3>
+        <button id="close-lead-modal" style="background: none; border: none; font-size: 1.4rem; cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <form id="edit-lead-form">
+        <input type="hidden" id="edit-id">
+
+        <div style="margin-bottom: 14px;">
+          <label style="font-size: 0.85rem; font-weight: 700;">Status Stage</label>
+          <select id="edit-status" class="select-input" style="width: 100%;">
+            <option value="New">New</option>
+            <option value="Contacted">Contacted</option>
+            <option value="Quotation Sent">Quotation Sent</option>
+            <option value="Meeting Scheduled">Meeting Scheduled</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Converted">Converted</option>
+            <option value="Completed">Completed</option>
+            <option value="Closed">Closed</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom: 14px;">
+          <label style="font-size: 0.85rem; font-weight: 700;">Assigned Consultant / Sales Rep</label>
+          <input type="text" id="edit-assigned" class="search-input" style="width: 100%;" placeholder="e.g. Senior Consultant Team A">
+        </div>
+
+        <div style="margin-bottom: 14px;">
+          <label style="font-size: 0.85rem; font-weight: 700;">Next Follow-up Date</label>
+          <input type="date" id="edit-followup" class="search-input" style="width: 100%;">
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <label style="font-size: 0.85rem; font-weight: 700;">Remarks / Discussion Notes</label>
+          <textarea id="edit-remarks" class="search-input" style="width: 100%; height: 80px;" placeholder="Enter notes..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-export" style="width: 100%; cursor: pointer;">
+          <i class="fa-solid fa-floppy-disk"></i> Save Lead Changes
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JavaScript for CRM Operations -->
+  <script>
+    let currentEnquiries = [];
+    let currentSeminars = [];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      checkAuth();
+      initEvents();
+    });
+
+    function checkAuth() {
+      const token = localStorage.getItem('prv_admin_token');
+      if (token) {
+        document.getElementById('login-overlay').style.display = 'none';
+        document.getElementById('admin-dashboard-wrapper').style.display = 'flex';
+        loadDashboardData();
+      } else {
+        document.getElementById('login-overlay').style.display = 'flex';
+        document.getElementById('admin-dashboard-wrapper').style.display = 'none';
+      }
+    }
+
+    // Login Handle
+    document.getElementById('admin-login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const u = document.getElementById('login-username').value;
+      const p = document.getElementById('login-password').value;
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: u, password: p })
+        });
+        const data = await res.json();
+        if (data.success) {
+          localStorage.setItem('prv_admin_token', data.token);
+          document.getElementById('user-display-name').textContent = data.user.name;
+          checkAuth();
+        } else {
+          alert('Invalid login credentials! Use admin / admin123');
+        }
+      } catch (err) {
+        alert('Server login error');
+      }
+    });
+
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      localStorage.removeItem('prv_admin_token');
+      checkAuth();
+    });
+
+    // Load Data
+    async function loadDashboardData() {
+      await fetchStats();
+      await fetchEnquiries();
+      await fetchSeminars();
+    }
+
+    async function fetchStats() {
+      try {
+        const res = await fetch('/api/dashboard/stats');
+        const d = await res.json();
+        if (d.success) {
+          document.getElementById('stat-total').textContent = d.stats.totalEnquiries;
+          document.getElementById('stat-today').textContent = d.stats.todayEnquiries;
+          document.getElementById('stat-pending').textContent = d.stats.pendingEnquiries;
+          document.getElementById('stat-converted').textContent = d.stats.convertedEnquiries;
+          document.getElementById('stat-seminars').textContent = d.stats.seminarCount;
+        }
+      } catch (err) { console.error(err); }
+    }
+
+    async function fetchEnquiries() {
+      try {
+        const search = document.getElementById('search-filter').value;
+        const service = document.getElementById('service-filter').value;
+        const status = document.getElementById('status-filter').value;
+
+        const url = `/api/enquiries?search=${encodeURIComponent(search)}&service=${encodeURIComponent(service)}&status=${encodeURIComponent(status)}`;
+        const res = await fetch(url);
+        const d = await res.json();
+        if (d.success) {
+          currentEnquiries = d.data;
+          renderEnquiriesTable(currentEnquiries);
+          renderKanbanBoard(currentEnquiries);
+        }
+      } catch (err) { console.error(err); }
+    }
+
+    async function fetchSeminars() {
+      try {
+        const res = await fetch('/api/seminars');
+        const d = await res.json();
+        if (d.success) {
+          currentSeminars = d.data;
+          renderSeminarsTable(currentSeminars);
+        }
+      } catch (err) { console.error(err); }
+    }
+
+    // Render Table
+    function renderEnquiriesTable(items) {
+      const tbody = document.getElementById('enquiries-table-body');
+      tbody.innerHTML = '';
+
+      if (items.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--admin-muted); padding: 30px;">No enquiries found in database.</td></tr>`;
+        return;
+      }
+
+      items.forEach(item => {
+        const tr = document.createElement('tr');
+        const statusClass = getStatusBadgeClass(item.status);
+        const cleanPhone = (item.mobile_number || '').replace(/[^0-9]/g, '');
+
+        tr.innerHTML = `
+          <td><strong>#${item.id}</strong></td>
+          <td>
+            <strong style="color: var(--admin-navy);">${escapeHtml(item.full_name)}</strong><br>
+            <span style="font-size: 0.8rem; color: var(--admin-muted);">${escapeHtml(item.company_name || 'N/A')}</span>
+          </td>
+          <td>
+            <a href="tel:${item.mobile_number}" style="color: var(--admin-navy); text-decoration: none;">${escapeHtml(item.mobile_number)}</a><br>
+            <span style="font-size: 0.78rem; color: var(--admin-muted);">${escapeHtml(item.email)}</span>
+          </td>
+          <td><span class="status-badge" style="background: #E0F2F1; color: #00796B;">${escapeHtml(item.service_required)}</span></td>
+          <td>${escapeHtml(item.city || item.state || 'India')}</td>
+          <td><span class="status-badge ${statusClass}">${escapeHtml(item.status)}</span></td>
+          <td>${escapeHtml(item.assigned_to || 'Unassigned')}</td>
+          <td>${escapeHtml(item.follow_up_date || 'None')}</td>
+          <td>
+            <div style="display: flex; gap: 6px;">
+              <a href="https://wa.me/${cleanPhone}?text=Hi%20${encodeURIComponent(item.full_name)},%20regarding%20your%20PRV%20Consultancy%20inquiry..." target="_blank" class="btn-action btn-whatsapp" title="WhatsApp Chat">
+                <i class="fa-brands fa-whatsapp"></i>
+              </a>
+              <button onclick="openEditModal(${item.id})" class="btn-action btn-edit" title="Edit Lead">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+              <button onclick="deleteLead(${item.id})" class="btn-action btn-delete" title="Delete">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Render Kanban
+    function renderKanbanBoard(items) {
+      const cols = {
+        'New': document.getElementById('kanban-cards-new'),
+        'Contacted': document.getElementById('kanban-cards-contacted'),
+        'Quotation Sent': document.getElementById('kanban-cards-quotation'),
+        'Converted': document.getElementById('kanban-cards-converted'),
+        'Closed': document.getElementById('kanban-cards-closed')
+      };
+
+      Object.values(cols).forEach(c => c.innerHTML = '');
+
+      const counts = { 'New': 0, 'Contacted': 0, 'Quotation Sent': 0, 'Converted': 0, 'Closed': 0 };
+
+      items.forEach(item => {
+        const colKey = cols[item.status] ? item.status : 'New';
+        counts[colKey]++;
+
+        const card = document.createElement('div');
+        card.className = 'kanban-card';
+        card.onclick = () => openEditModal(item.id);
+        card.innerHTML = `
+          <div class="kanban-client-name">${escapeHtml(item.full_name)}</div>
+          <div class="kanban-company">${escapeHtml(item.company_name || 'Individual')}</div>
+          <div class="kanban-service">${escapeHtml(item.service_required)}</div>
+          <div style="font-size: 0.75rem; color: var(--admin-muted); margin-top: 6px; display: flex; justify-content: space-between;">
+            <span><i class="fa-solid fa-phone"></i> ${escapeHtml(item.mobile_number)}</span>
+            <span>#${item.id}</span>
+          </div>
+        `;
+
+        if (cols[colKey]) {
+          cols[colKey].appendChild(card);
+        }
+      });
+
+      document.getElementById('count-kanban-new').textContent = counts['New'];
+      document.getElementById('count-kanban-contacted').textContent = counts['Contacted'];
+      document.getElementById('count-kanban-quotation').textContent = counts['Quotation Sent'];
+      document.getElementById('count-kanban-converted').textContent = counts['Converted'];
+      document.getElementById('count-kanban-closed').textContent = counts['Closed'];
+    }
+
+    // Render Seminars
+    function renderSeminarsTable(items) {
+      const tbody = document.getElementById('seminars-table-body');
+      tbody.innerHTML = '';
+
+      if (items.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 25px;">No seminar registrations recorded.</td></tr>`;
+        return;
+      }
+
+      items.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>#${item.id}</strong></td>
+          <td><strong>${escapeHtml(item.full_name)}</strong></td>
+          <td>${escapeHtml(item.mobile_number)}<br><span style="font-size: 0.78rem; color: var(--admin-muted);">${escapeHtml(item.email)}</span></td>
+          <td>${escapeHtml(item.organization || 'N/A')}</td>
+          <td><span class="status-badge badge-quotation">${escapeHtml(item.seminar_name)}</span></td>
+          <td><strong>${item.number_of_participants}</strong> Person(s)</td>
+          <td>${escapeHtml(item.created_at)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function getStatusBadgeClass(st) {
+      switch (st) {
+        case 'New': return 'badge-new';
+        case 'Contacted': return 'badge-contacted';
+        case 'Quotation Sent': return 'badge-quotation';
+        case 'Converted': return 'badge-converted';
+        case 'Closed': return 'badge-closed';
+        default: return 'badge-new';
+      }
+    }
+
+    function escapeHtml(str) {
+      return (str || '').replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    // Modal Edit Functions
+    function openEditModal(id) {
+      const item = currentEnquiries.find(x => x.id === id);
+      if (!item) return;
+
+      document.getElementById('modal-lead-id').textContent = item.id;
+      document.getElementById('edit-id').value = item.id;
+      document.getElementById('edit-status').value = item.status || 'New';
+      document.getElementById('edit-assigned').value = item.assigned_to || '';
+      document.getElementById('edit-followup').value = item.follow_up_date || '';
+      document.getElementById('edit-remarks').value = item.remarks || '';
+
+      document.getElementById('edit-lead-modal').classList.add('active');
+    }
+
+    document.getElementById('close-lead-modal').onclick = () => {
+      document.getElementById('edit-lead-modal').classList.remove('active');
+    };
+
+    document.getElementById('edit-lead-form').onsubmit = async (e) => {
+      e.preventDefault();
+      const id = document.getElementById('edit-id').value;
+      const payload = {
+        status: document.getElementById('edit-status').value,
+        assigned_to: document.getElementById('edit-assigned').value,
+        follow_up_date: document.getElementById('edit-followup').value,
+        remarks: document.getElementById('edit-remarks').value
+      };
+
+      try {
+        const res = await fetch(`/api/enquiries/${id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const d = await res.json();
+        if (d.success) {
+          document.getElementById('edit-lead-modal').classList.remove('active');
+          loadDashboardData();
+        }
+      } catch (err) { alert('Error updating lead'); }
+    };
+
+    async function deleteLead(id) {
+      if (!confirm(`Are you sure you want to delete lead #${id}?`)) return;
+      try {
+        const res = await fetch(`/api/enquiries/${id}`, { method: 'DELETE' });
+        const d = await res.json();
+        if (d.success) loadDashboardData();
+      } catch (err) { alert('Error deleting lead'); }
+    }
+
+    // View Switching & Event Handlers
+    function initEvents() {
+      document.querySelectorAll('.view-tab, .sidebar-item').forEach(el => {
+        el.addEventListener('click', () => {
+          const view = el.getAttribute('data-view');
+          
+          document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
+          
+          document.querySelectorAll(`[data-view="${view}"]`).forEach(node => node.classList.add('active'));
+
+          document.getElementById('view-table-section').style.display = view === 'table' ? 'block' : 'none';
+          document.getElementById('view-kanban-section').style.display = view === 'kanban' ? 'block' : 'none';
+          document.getElementById('view-seminars-section').style.display = view === 'seminars' ? 'block' : 'none';
+        });
+      });
+
+      document.getElementById('search-filter').addEventListener('input', fetchEnquiries);
+      document.getElementById('service-filter').addEventListener('change', fetchEnquiries);
+      document.getElementById('status-filter').addEventListener('change', fetchEnquiries);
+      document.getElementById('reset-filters').addEventListener('click', () => {
+        document.getElementById('search-filter').value = '';
+        document.getElementById('service-filter').value = '';
+        document.getElementById('status-filter').value = '';
+        fetchEnquiries();
+      });
+    }
+  </script>
+</body>
+</html>
