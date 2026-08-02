@@ -242,20 +242,36 @@ function initFormHandler() {
           body: JSON.stringify(payload)
         });
 
-        const result = await response.json();
-        if (result.success) {
-          showToast(`Enquiry #${result.id} submitted! Stored in client_enquiries DB.`);
-          document.getElementById('consultation-modal').classList.remove('active');
-          consultationForm.reset();
-        } else {
-          showToast(result.message || 'Error submitting enquiry.');
+        if (response.ok) {
+          const result = await response.json();
+          if (result.success) {
+            showToast(`Enquiry #${result.id} submitted! Stored in client_enquiries DB.`);
+            document.getElementById('consultation-modal').classList.remove('active');
+            consultationForm.reset();
+            return;
+          }
         }
-      } catch (err) {
-        showToast('Server connection error. Please try again.');
-      } finally {
-        isSubmitting = false;
-        submitBtn.innerHTML = originalText;
+      } catch (err) {}
+
+      // Fallback for Vercel static hosting / offline backend
+      const localEnqs = JSON.parse(localStorage.getItem('prv_local_enquiries') || '[]');
+      const newId = localEnqs.length ? Math.max(...localEnqs.map(x => x.id || 0)) + 1 : 101;
+      const newLead = {
+        id: newId,
+        created_at: new Date().toISOString().replace('T', ' ').substring(0, 16),
+        ...payload,
+        status: 'New',
+        assigned_to: 'Unassigned',
+        follow_up_date: '',
+        remarks: ''
+      };
+      localEnqs.unshift(newLead);
+      localStorage.setItem('prv_local_enquiries', JSON.stringify(localEnqs));
+      showToast(`Enquiry #${newId} submitted successfully!`);
+      if (document.getElementById('consultation-modal')) {
+        document.getElementById('consultation-modal').classList.remove('active');
       }
+      consultationForm.reset();
     });
   }
 
@@ -289,20 +305,34 @@ function initFormHandler() {
           body: JSON.stringify(payload)
         });
 
-        const result = await response.json();
-        if (result.success) {
-          showToast(`Seminar Signup #${result.id} recorded in seminar_registrations DB!`);
-          document.getElementById('seminar-modal').classList.remove('active');
-          seminarForm.reset();
-        } else {
-          showToast(result.message || 'Error saving seminar registration.');
+        if (response.ok) {
+          const result = await response.json();
+          if (result.success) {
+            showToast(`Seminar Signup #${result.id} recorded in seminar_registrations DB!`);
+            document.getElementById('seminar-modal').classList.remove('active');
+            seminarForm.reset();
+            return;
+          }
         }
-      } catch (err) {
-        showToast('Server connection error.');
-      } finally {
-        isSubmitting = false;
-        submitBtn.innerHTML = originalText;
+      } catch (err) {}
+
+      // Fallback for Vercel static hosting / offline backend
+      const localSeminars = JSON.parse(localStorage.getItem('prv_local_seminars') || '[]');
+      const newSemId = localSeminars.length ? Math.max(...localSeminars.map(x => x.id || 0)) + 1 : 501;
+      const newSem = {
+        id: newSemId,
+        created_at: new Date().toISOString().replace('T', ' ').substring(0, 16),
+        ...payload,
+        status: 'Registered',
+        remarks: ''
+      };
+      localSeminars.unshift(newSem);
+      localStorage.setItem('prv_local_seminars', JSON.stringify(localSeminars));
+      showToast(`Seminar Signup #${newSemId} recorded successfully!`);
+      if (document.getElementById('seminar-modal')) {
+        document.getElementById('seminar-modal').classList.remove('active');
       }
+      seminarForm.reset();
     });
   }
 

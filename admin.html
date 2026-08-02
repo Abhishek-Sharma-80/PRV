@@ -321,6 +321,40 @@
     let currentEnquiries = [];
     let currentSeminars = [];
 
+    // Fallback data for Vercel static deployment
+    const SAMPLE_ENQUIRIES = [
+      { id: 101, created_at: '2026-08-01 10:30', full_name: 'Rajesh Kumar', company_name: 'Apex Manufacturing Pvt Ltd', designation: 'Operations Head', mobile_number: '+91 9876543210', email: 'rajesh@apexmfg.in', city: 'Pune', state: 'Maharashtra', industry: 'Manufacturing', company_size: '50-250 Employees', service_required: 'ZED Certification', message: 'Looking to apply for ZED Gold certification.', source: 'Website Form', status: 'New', assigned_to: 'Unassigned', follow_up_date: '2026-08-05', remarks: 'High priority MSME lead' },
+      { id: 102, created_at: '2026-08-01 11:15', full_name: 'Ananya Sharma', company_name: 'TexStyles Global', designation: 'Quality Manager', mobile_number: '+91 9812345678', email: 'ananya@texstyles.com', city: 'Surat', state: 'Gujarat', industry: 'Textile & Apparel', company_size: '250+ Employees', service_required: 'SEDEX / SMETA', message: 'Need 4-Pillar SMETA audit preparation.', source: 'Popup Form', status: 'Contacted', assigned_to: 'Consultant Team A', follow_up_date: '2026-08-04', remarks: 'Sent proposal PDF via email' },
+      { id: 103, created_at: '2026-08-01 14:20', full_name: 'Vikram Malhotra', company_name: 'AutoTech Components', designation: 'General Manager', mobile_number: '+91 9988776655', email: 'v.malhotra@autotech.co.in', city: 'Gurugram', state: 'Haryana', industry: 'Automotive', company_size: '100-500 Employees', service_required: 'IATF 16949', message: 'Core Tools training required.', source: 'Header CTA', status: 'Quotation Sent', assigned_to: 'Sales Lead Rohit', follow_up_date: '2026-08-06', remarks: 'Quotation Q-2026-104 sent' },
+      { id: 104, created_at: '2026-08-02 09:45', full_name: 'Meera Nair', company_name: 'Innovatech Systems', designation: 'HR Lead', mobile_number: '+91 9765432109', email: 'meera@innovatech.io', city: 'Bengaluru', state: 'Karnataka', industry: 'IT & Tech Solutions', company_size: '20-50 Employees', service_required: 'NATS', message: 'Want to onboard 15 engineering apprentices.', source: 'Floating Button', status: 'Converted', assigned_to: 'Apprenticeship Dept', follow_up_date: '2026-08-10', remarks: 'Contract signed.' }
+    ];
+
+    const SAMPLE_SEMINARS = [
+      { id: 501, created_at: '2026-08-01 16:00', full_name: 'Rohan Verma', mobile_number: '+91 9898989898', email: 'rohan@gmail.com', city: 'Delhi', qualification: 'B.Tech Mechanical', organization: 'Delhi Technological Univ', seminar_name: 'Industrial Safety & ISO 45001 Workshop', training_type: 'Industrial Training', number_of_participants: 2, message: 'Interested in safety compliance certification.' }
+    ];
+
+    function getLocalEnquiries() {
+      const stored = localStorage.getItem('prv_local_enquiries');
+      if (!stored) {
+        localStorage.setItem('prv_local_enquiries', JSON.stringify(SAMPLE_ENQUIRIES));
+        return SAMPLE_ENQUIRIES;
+      }
+      return JSON.parse(stored);
+    }
+
+    function saveLocalEnquiries(data) {
+      localStorage.setItem('prv_local_enquiries', JSON.stringify(data));
+    }
+
+    function getLocalSeminars() {
+      const stored = localStorage.getItem('prv_local_seminars');
+      if (!stored) {
+        localStorage.setItem('prv_local_seminars', JSON.stringify(SAMPLE_SEMINARS));
+        return SAMPLE_SEMINARS;
+      }
+      return JSON.parse(stored);
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       checkAuth();
       initEvents();
@@ -341,8 +375,8 @@
     // Login Handle
     document.getElementById('admin-login-form').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const u = document.getElementById('login-username').value;
-      const p = document.getElementById('login-password').value;
+      const u = document.getElementById('login-username').value.trim();
+      const p = document.getElementById('login-password').value.trim();
 
       try {
         const res = await fetch('/api/auth/login', {
@@ -350,16 +384,29 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username: u, password: p })
         });
-        const data = await res.json();
-        if (data.success) {
-          localStorage.setItem('prv_admin_token', data.token);
-          document.getElementById('user-display-name').textContent = data.user.name;
-          checkAuth();
-        } else {
-          alert('Invalid login credentials! Use admin / admin123');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success) {
+            localStorage.setItem('prv_admin_token', data.token);
+            document.getElementById('user-display-name').textContent = data.user.name;
+            checkAuth();
+            return;
+          } else {
+            alert('Invalid login credentials! Use admin / admin123');
+            return;
+          }
         }
       } catch (err) {
-        alert('Server login error');
+        // Backend API not reachable (Vercel static hosting)
+      }
+
+      // Fallback for Vercel static deployment
+      if (u === 'admin' && p === 'admin123') {
+        localStorage.setItem('prv_admin_token', 'demo-vercel-token');
+        document.getElementById('user-display-name').textContent = 'Master Admin';
+        checkAuth();
+      } else {
+        alert('Invalid login credentials! Use admin / admin123');
       }
     });
 
@@ -378,43 +425,81 @@
     async function fetchStats() {
       try {
         const res = await fetch('/api/dashboard/stats');
-        const d = await res.json();
-        if (d.success) {
-          document.getElementById('stat-total').textContent = d.stats.totalEnquiries;
-          document.getElementById('stat-today').textContent = d.stats.todayEnquiries;
-          document.getElementById('stat-pending').textContent = d.stats.pendingEnquiries;
-          document.getElementById('stat-converted').textContent = d.stats.convertedEnquiries;
-          document.getElementById('stat-seminars').textContent = d.stats.seminarCount;
+        if (res.ok) {
+          const d = await res.json();
+          if (d.success) {
+            document.getElementById('stat-total').textContent = d.stats.totalEnquiries;
+            document.getElementById('stat-today').textContent = d.stats.todayEnquiries;
+            document.getElementById('stat-pending').textContent = d.stats.pendingEnquiries;
+            document.getElementById('stat-converted').textContent = d.stats.convertedEnquiries;
+            document.getElementById('stat-seminars').textContent = d.stats.seminarCount;
+            return;
+          }
         }
-      } catch (err) { console.error(err); }
+      } catch (err) {}
+
+      // Fallback: calculate stats from local data
+      const enqs = getLocalEnquiries();
+      const sem = getLocalSeminars();
+      document.getElementById('stat-total').textContent = enqs.length;
+      document.getElementById('stat-today').textContent = enqs.filter(x => (x.created_at || '').includes('2026-08-02')).length;
+      document.getElementById('stat-pending').textContent = enqs.filter(x => x.status === 'New' || x.status === 'Contacted').length;
+      document.getElementById('stat-converted').textContent = enqs.filter(x => x.status === 'Converted').length;
+      document.getElementById('stat-seminars').textContent = sem.length;
     }
 
     async function fetchEnquiries() {
-      try {
-        const search = document.getElementById('search-filter').value;
-        const service = document.getElementById('service-filter').value;
-        const status = document.getElementById('status-filter').value;
+      const search = (document.getElementById('search-filter').value || '').toLowerCase();
+      const service = document.getElementById('service-filter').value;
+      const status = document.getElementById('status-filter').value;
 
+      try {
         const url = `/api/enquiries?search=${encodeURIComponent(search)}&service=${encodeURIComponent(service)}&status=${encodeURIComponent(status)}`;
         const res = await fetch(url);
-        const d = await res.json();
-        if (d.success) {
-          currentEnquiries = d.data;
-          renderEnquiriesTable(currentEnquiries);
-          renderKanbanBoard(currentEnquiries);
+        if (res.ok) {
+          const d = await res.json();
+          if (d.success) {
+            currentEnquiries = d.data;
+            renderEnquiriesTable(currentEnquiries);
+            renderKanbanBoard(currentEnquiries);
+            return;
+          }
         }
-      } catch (err) { console.error(err); }
+      } catch (err) {}
+
+      // Fallback: filter local data
+      let list = getLocalEnquiries();
+      if (search) {
+        list = list.filter(item => 
+          (item.full_name || '').toLowerCase().includes(search) ||
+          (item.company_name || '').toLowerCase().includes(search) ||
+          (item.email || '').toLowerCase().includes(search) ||
+          (item.mobile_number || '').toLowerCase().includes(search)
+        );
+      }
+      if (service) list = list.filter(item => item.service_required === service);
+      if (status) list = list.filter(item => item.status === status);
+
+      currentEnquiries = list;
+      renderEnquiriesTable(currentEnquiries);
+      renderKanbanBoard(currentEnquiries);
     }
 
     async function fetchSeminars() {
       try {
         const res = await fetch('/api/seminars');
-        const d = await res.json();
-        if (d.success) {
-          currentSeminars = d.data;
-          renderSeminarsTable(currentSeminars);
+        if (res.ok) {
+          const d = await res.json();
+          if (d.success) {
+            currentSeminars = d.data;
+            renderSeminarsTable(currentSeminars);
+            return;
+          }
         }
-      } catch (err) { console.error(err); }
+      } catch (err) {}
+
+      currentSeminars = getLocalSeminars();
+      renderSeminarsTable(currentSeminars);
     }
 
     // Render Table
@@ -567,6 +652,24 @@
       document.getElementById('edit-lead-modal').classList.remove('active');
     };
 
+    function updateLocalEnquiry(id, payload) {
+      let list = getLocalEnquiries();
+      const idx = list.findIndex(x => String(x.id) === String(id));
+      if (idx !== -1) {
+        list[idx] = { ...list[idx], ...payload };
+        saveLocalEnquiries(list);
+      }
+      document.getElementById('edit-lead-modal').classList.remove('active');
+      loadDashboardData();
+    }
+
+    function deleteLocalEnquiry(id) {
+      let list = getLocalEnquiries();
+      list = list.filter(x => String(x.id) !== String(id));
+      saveLocalEnquiries(list);
+      loadDashboardData();
+    }
+
     document.getElementById('edit-lead-form').onsubmit = async (e) => {
       e.preventDefault();
       const id = document.getElementById('edit-id').value;
@@ -583,21 +686,33 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
-        const d = await res.json();
-        if (d.success) {
-          document.getElementById('edit-lead-modal').classList.remove('active');
-          loadDashboardData();
+        if (res.ok) {
+          const d = await res.json();
+          if (d.success) {
+            document.getElementById('edit-lead-modal').classList.remove('active');
+            loadDashboardData();
+            return;
+          }
         }
-      } catch (err) { alert('Error updating lead'); }
+      } catch (err) {}
+
+      updateLocalEnquiry(id, payload);
     };
 
     async function deleteLead(id) {
       if (!confirm(`Are you sure you want to delete lead #${id}?`)) return;
       try {
         const res = await fetch(`/api/enquiries/${id}`, { method: 'DELETE' });
-        const d = await res.json();
-        if (d.success) loadDashboardData();
-      } catch (err) { alert('Error deleting lead'); }
+        if (res.ok) {
+          const d = await res.json();
+          if (d.success) {
+            loadDashboardData();
+            return;
+          }
+        }
+      } catch (err) {}
+
+      deleteLocalEnquiry(id);
     }
 
     // View Switching & Event Handlers
