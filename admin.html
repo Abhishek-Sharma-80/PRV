@@ -68,6 +68,9 @@
         <div class="sidebar-item" data-view="seminars">
           <i class="fa-solid fa-graduation-cap"></i> Seminar Registrations
         </div>
+        <div class="sidebar-item" data-view="ai-logs">
+          <i class="fa-solid fa-robot" style="color: var(--admin-green);"></i> AI Chat Logs & Insights
+        </div>
       </div>
 
       <div class="sidebar-user">
@@ -258,6 +261,43 @@
               </tr>
             </thead>
             <tbody id="seminars-table-body">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- VIEW 4: AI CHAT LOGS & INSIGHTS -->
+      <div id="view-ai-logs-section" class="view-section" style="display: none;">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px;">
+          <div class="stat-card" style="background: #F8FAFC; border-left: 4px solid var(--admin-green);">
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--admin-muted); text-transform: uppercase;">Total AI Conversations</div>
+            <div id="stat-ai-total" style="font-size: 1.8rem; font-weight: 800; color: var(--admin-navy); margin-top: 4px;">0</div>
+          </div>
+          <div class="stat-card" style="background: #F8FAFC; border-left: 4px solid var(--admin-green);">
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--admin-muted); text-transform: uppercase;">Auto-Captured AI Leads</div>
+            <div id="stat-ai-leads" style="font-size: 1.8rem; font-weight: 800; color: var(--admin-green); margin-top: 4px;">0</div>
+          </div>
+          <div class="stat-card" style="background: #F8FAFC; border-left: 4px solid var(--admin-navy);">
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--admin-muted); text-transform: uppercase;">Top Inquired Topic</div>
+            <div id="stat-ai-topic" style="font-size: 1.1rem; font-weight: 800; color: var(--admin-navy); margin-top: 8px;">ZED & ISO</div>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="crm-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Session ID</th>
+                <th>Timestamp</th>
+                <th>User Query</th>
+                <th>Inquired Service</th>
+                <th>AI Response Summary</th>
+                <th>CRM Lead Status</th>
+              </tr>
+            </thead>
+            <tbody id="ai-logs-table-body">
               <!-- Dynamically populated -->
             </tbody>
           </table>
@@ -715,6 +755,56 @@
       deleteLocalEnquiry(id);
     }
 
+    async function fetchAiLogs() {
+      try {
+        const res = await fetch('/api/ai/logs');
+        if (res.ok) {
+          const d = await res.json();
+          if (d.success) {
+            document.getElementById('stat-ai-total').textContent = d.stats.totalChats || 0;
+            document.getElementById('stat-ai-leads').textContent = d.stats.leadsFromAi || 0;
+            if (d.topTopics && d.topTopics.length > 0) {
+              document.getElementById('stat-ai-topic').textContent = d.topTopics[0].service + ' (' + d.topTopics[0].count + ')';
+            }
+            renderAiLogsTable(d.data);
+            return;
+          }
+        }
+      } catch (err) {}
+
+      renderAiLogsTable([]);
+    }
+
+    function renderAiLogsTable(items) {
+      const tbody = document.getElementById('ai-logs-table-body');
+      tbody.innerHTML = '';
+
+      if (!items || items.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 25px; color: var(--admin-muted);">No AI chat logs recorded yet. Test the AI Assistant widget on the website!</td></tr>`;
+        return;
+      }
+
+      items.forEach(item => {
+        const tr = document.createElement('tr');
+        const leadBadge = item.lead_captured 
+          ? `<span class="status-badge badge-converted"><i class="fa-solid fa-user-check"></i> Lead Captured</span>`
+          : `<span class="status-badge" style="background: #F1F5F9; color: #475569;">Inquiry Only</span>`;
+
+        tr.innerHTML = `
+          <td><strong>#${item.id}</strong></td>
+          <td><code>${escapeHtml(item.session_id)}</code></td>
+          <td>${escapeHtml(item.created_at)}</td>
+          <td><strong>"${escapeHtml(item.user_message)}"</strong></td>
+          <td><span class="status-badge" style="background: #E0F2F1; color: #00796B;">${escapeHtml(item.detected_service)}</span></td>
+          <td style="max-width: 250px; font-size: 0.8rem; color: var(--admin-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+            ${escapeHtml(item.ai_response.replace(/[\n*]/g, ' '))}
+          </td>
+          <td>${leadBadge}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
     // View Switching & Event Handlers
     function initEvents() {
       document.querySelectorAll('.view-tab, .sidebar-item').forEach(el => {
@@ -729,6 +819,11 @@
           document.getElementById('view-table-section').style.display = view === 'table' ? 'block' : 'none';
           document.getElementById('view-kanban-section').style.display = view === 'kanban' ? 'block' : 'none';
           document.getElementById('view-seminars-section').style.display = view === 'seminars' ? 'block' : 'none';
+          document.getElementById('view-ai-logs-section').style.display = view === 'ai-logs' ? 'block' : 'none';
+
+          if (view === 'ai-logs') {
+            fetchAiLogs();
+          }
         });
       });
 

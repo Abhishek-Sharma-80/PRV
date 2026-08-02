@@ -1071,13 +1071,75 @@
     </button>
   </div>
 
-  <!-- Toast Notification -->
-  <div class="toast-notification" id="toast-notification">
-    <i class="fa-solid fa-circle-check" style="color: var(--accent-green); font-size: 1.4rem;"></i>
-    <div id="toast-message" style="font-size: 0.9rem; font-weight: 600;">Submitted successfully to PRV Database!</div>
+  <!-- ==========================================================================
+       AI ASSISTANT FLOATING WIDGET & CHAT WINDOW
+       ========================================================================== -->
+  <div id="prv-ai-widget">
+    <!-- Floating AI Trigger Button -->
+    <button id="ai-chat-toggle-btn" class="ai-float-btn" aria-label="Open PRV AI Assistant" aria-expanded="false">
+      <div class="ai-float-icon">
+        <i class="fa-solid fa-robot"></i>
+      </div>
+      <div class="ai-float-text">
+        <span class="ai-float-title">PRV AI Advisor</span>
+        <span class="ai-float-subtitle"><i class="fa-solid fa-sparkles"></i> Ask Questions 24/7</span>
+      </div>
+      <span class="ai-unread-badge" id="ai-unread-badge">AI</span>
+    </button>
+
+    <!-- AI Chat Popup Modal Window -->
+    <div id="ai-chat-window" class="ai-chat-window" role="dialog" aria-label="PRV AI Assistant Chat Window">
+      <!-- Header -->
+      <div class="ai-chat-header">
+        <div class="ai-chat-header-info">
+          <div class="ai-chat-avatar">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+          <div>
+            <div class="ai-chat-title">PRV AI Sahayak <i class="fa-solid fa-certificate" style="color: var(--accent-gold); font-size: 0.75rem;"></i></div>
+            <div class="ai-chat-status">
+              <span class="status-dot"></span> Instant Business Advisor • Online
+            </div>
+          </div>
+        </div>
+
+        <div class="ai-chat-header-actions">
+          <button id="ai-chat-tts-btn" class="ai-header-btn" title="Toggle Sound Output (Speech)">
+            <i class="fa-solid fa-volume-high"></i>
+          </button>
+          <button id="ai-chat-close-btn" class="ai-header-btn" title="Close Chat Window">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Messages Area -->
+      <div id="ai-chat-messages" class="ai-chat-messages">
+        <!-- Messages dynamically rendered by js/ai-assistant.js -->
+      </div>
+
+      <!-- Quick Prompt Chips -->
+      <div id="ai-quick-chips" class="ai-quick-chips">
+        <!-- Chips injected dynamically -->
+      </div>
+
+      <!-- Input Area -->
+      <div class="ai-chat-input-area">
+        <input type="text" id="ai-chat-input" class="ai-chat-input" placeholder="Ask about ISO, ZED, SEDEX, NATS or Hindi me puchhiye..." autocomplete="off">
+        
+        <button id="ai-chat-voice-btn" class="ai-input-btn" title="Voice Input (Speak to ask)" style="display: none; background: #64748B;">
+          <i class="fa-solid fa-microphone"></i>
+        </button>
+
+        <button id="ai-chat-send-btn" class="ai-input-btn" title="Send Message">
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
   </div>
 
-  <!-- Master JavaScript File -->
+  <!-- Master JavaScript Files -->
   <script src="js/main.js"></script>
+  <script src="js/ai-assistant.js"></script>
 </body>
 </html>
