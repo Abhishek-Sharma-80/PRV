@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSeminarModalSystem();
   initFormHandler();
   initMobileNav();
+  initInstantFinder();
 });
 
 /* --------------------------------------------------------------------------
@@ -398,4 +399,63 @@ function initMobileNav() {
       }
     });
   }
+}
+
+/* --------------------------------------------------------------------------
+   8. INSTANT CERTIFICATION & SUBSIDY FINDER
+   -------------------------------------------------------------------------- */
+function initInstantFinder() {
+  const calculateBtn = document.getElementById('finder-calculate-btn');
+  const resultCard = document.getElementById('finder-result');
+  const industrySelect = document.getElementById('finder-industry');
+  const goalSelect = document.getElementById('finder-goal');
+
+  if (!calculateBtn || !resultCard) return;
+
+  calculateBtn.addEventListener('click', () => {
+    const ind = industrySelect ? industrySelect.value : 'manufacturing';
+    const goal = goalSelect ? goalSelect.value : 'subsidy';
+
+    let title = 'ZED Gold/Silver Certification & ISO 9001:2015';
+    let desc = 'Up to 80% Govt Subsidy + 0.5% Concessional Bank Loan Interest + Tender Eligibility.';
+    let tags = ['ZED 80% Subsidy', 'ISO 9001 QMS', 'Tender Eligible', '2-3 Weeks'];
+
+    if (ind === 'food') {
+      title = 'FSSAI License & ISO 22000 FSMS';
+      desc = 'Mandatory Food Safety License + HACCP Export Buyer Clearance & Hygiene Rating.';
+      tags = ['FSSAI License', 'ISO 22000', 'HACCP', '10-15 Days'];
+    } else if (ind === 'automobile') {
+      title = 'IATF 16949 & Core Tools (APQP, PPAP, FMEA, MSA, SPC)';
+      desc = 'Mandatory Automotive Quality Standard required for Tier-1 / Tier-2 OEM Vendors.';
+      tags = ['IATF 16949', 'Core Tools', 'OEM Approved', '2-3 Months'];
+    } else if (ind === 'it') {
+      title = 'ISO/IEC 27001:2022 Cybersecurity & SOC 2 Readiness';
+      desc = 'International Gold Standard for Data Security & US/European SaaS Client Contracts.';
+      tags = ['ISO 27001 ISMS', 'SOC 2 Ready', 'Cyber Security', '3-4 Weeks'];
+    } else if (ind === 'textile') {
+      title = 'SEDEX SMETA Ethical Audit (4-Pillar) & ISO 9001';
+      desc = 'Ethical Social Audit clearance for Walmart, Disney, Zara & Global Garment Exporters.';
+      tags = ['SEDEX SMETA', 'Ethical Audit', 'Export Grade', '1-2 Weeks'];
+    } else if (ind === 'healthcare') {
+      title = 'ISO 13485 Medical Devices QMS & ISO 9001';
+      desc = 'CDSCO Licensing readiness & Healthcare Service Quality Standard.';
+      tags = ['ISO 13485 Medical', 'CDSCO Clearance', 'Hospital QMS', '4-6 Weeks'];
+    }
+
+    resultCard.innerHTML = `
+      <div class="finder-result-info">
+        <h4><i class="fa-solid fa-award"></i> Recommended Match: ${title}</h4>
+        <p>${desc}</p>
+        <div class="finder-result-tags">
+          ${tags.map(t => `<span class="finder-tag"><i class="fa-solid fa-circle-check" style="color: var(--accent-green);"></i> ${t}</span>`).join('')}
+        </div>
+      </div>
+      <a href="#contact" class="btn btn-primary open-modal-trigger" data-service="${title}">
+        <i class="fa-solid fa-paper-plane"></i> Claim Grants & Consult
+      </a>
+    `;
+
+    resultCard.style.display = 'flex';
+    resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
 }
