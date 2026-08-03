@@ -507,6 +507,78 @@ const server = http.createServer(async (req, res) => {
       let leadCaptured = 0;
       let actionType = null;
 
+      // ------------------------------------------------------------------------
+      // MULTI-LANGUAGE AUTOMATIC DETECTION & SESSION MEMORY ENGINE
+      // ------------------------------------------------------------------------
+
+      // In-memory language session store
+      global.languageSessions = global.languageSessions || {};
+
+      function detectLanguage(text, sessId) {
+        if (!text) return global.languageSessions[sessId] || 'english';
+        const txt = text.toLowerCase();
+
+        // 1. Explicit request to switch language
+        if (txt.includes('speak hindi') || txt.includes('hindi me') || txt.includes('हिंदी में')) {
+          global.languageSessions[sessId] = 'hindi';
+          return 'hindi';
+        }
+        if (txt.includes('speak hinglish') || txt.includes('hinglish me')) {
+          global.languageSessions[sessId] = 'hinglish';
+          return 'hinglish';
+        }
+        if (txt.includes('speak english') || txt.includes('in english')) {
+          global.languageSessions[sessId] = 'english';
+          return 'english';
+        }
+
+        // 2. Unicode Script Detection
+        if (/[\u0900-\u097F]/.test(text)) {
+          global.languageSessions[sessId] = 'hindi';
+          return 'hindi';
+        }
+        if (/[\u0B80-\u0BFF]/.test(text)) {
+          global.languageSessions[sessId] = 'tamil';
+          return 'tamil';
+        }
+        if (/[\u0C00-\u0C7F]/.test(text)) {
+          global.languageSessions[sessId] = 'telugu';
+          return 'telugu';
+        }
+        if (/[\u0A80-\u0AFF]/.test(text)) {
+          global.languageSessions[sessId] = 'gujarati';
+          return 'gujarati';
+        }
+        if (/[\u0A00-\u0A7F]/.test(text)) {
+          global.languageSessions[sessId] = 'punjabi';
+          return 'punjabi';
+        }
+        if (/[\u0980-\u09FF]/.test(text)) {
+          global.languageSessions[sessId] = 'bengali';
+          return 'bengali';
+        }
+        if (/[\u0600-\u06FF]/.test(text)) {
+          global.languageSessions[sessId] = 'urdu';
+          return 'urdu';
+        }
+
+        // 3. Hinglish Keyword Pattern Matching
+        const hinglishKeywords = ['kya', 'kaise', 'hai', 'hain', 'hu', 'hoo', 'batao', 'chahiye', 'kitna', 'lagela', 'lagta', 'kare', 'kaun', 'ho', 'mujhko', 'mujhe', 'aapka', 'aapki', 'ko', 'se', 'me', 'mein', 'par'];
+        const words = txt.replace(/[^a-z0-9\s]/g, '').split(/\s+/);
+        const matchCount = words.filter(w => hinglishKeywords.includes(w)).length;
+
+        if (matchCount >= 1 && !txt.startsWith('http')) {
+          global.languageSessions[sessId] = 'hinglish';
+          return 'hinglish';
+        }
+
+        // Fallback to session memory or default to English
+        const activeLang = global.languageSessions[sessId] || 'english';
+        return activeLang;
+      }
+
+      const userLang = detectLanguage(userMessage, sessionId);
+
       // Extract phone number or email from message for auto-lead generation
       const phoneMatch = userMessage.match(/(?:\+91[\s-]?)?[6-9]\d{9}/);
       const emailMatch = userMessage.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
@@ -526,7 +598,7 @@ const server = http.createServer(async (req, res) => {
             capturedPhone || 'Provided via Chat',
             capturedEmail || 'ai_chat@prvconsultancy.com',
             'AI Business Consultation',
-            `User Chat Inquiry: "${userMessage}"`
+            `User Chat Inquiry (${userLang}): "${userMessage}"`
           );
           leadCaptured = 1;
         } catch (errLead) {
@@ -865,10 +937,10 @@ const server = http.createServer(async (req, res) => {
         aiResponse = `📜 **PRV Consultancy Services - Complete Expertise Hub**\n\nWe provide end-to-end consulting for:\n\n1️⃣ **ISO Certifications**: ISO 9001, 14001, 45001, 27001, 22000, 22301, 50001, 13485, 17025\n2️⃣ **Government Schemes**: ZED (80% Subsidy), NATS, NAPS, Udyam, GeM, Startup India\n3️⃣ **Automotive & Core Tools**: IATF 16949, APQP, PPAP, FMEA, MSA, SPC, MACE Audit\n4️⃣ **Ethical & Social Compliance**: SEDEX SMETA (2/4 Pillar), SA 8000, Social Audits\n5️⃣ **Operational Excellence**: 5S, Lean, Kaizen, Cost Reduction, Profit Maximization\n6️⃣ **Industrial & Leadership Training**: Skill workshops & Master Excellence programs\n\n*Which service would you like to explore? Type any query in Hindi, English, or Hinglish!*`;
         quickReplies = ['Which certificate do I need?', 'ZED MSME Subsidy', 'ISO 9001 Guide', 'Book Consultation'];
       }
-      else if (msgLower.includes('hi') || msgLower.includes('hello') || msgLower.includes('namaste') || msgLower.includes('madad') || msgLower.includes('help')) {
-        detectedService = 'Greeting';
-        aiResponse = `🙏 **Namaste! I am "PRV AI Consultant", your official Business Excellence Assistant.**\n\nI am here to understand your business requirements and guide you to the correct certification & subsidy solutions.\n\n• Ask *"I need certificate"* or *"Which certificate is best for my company?"*\n• Ask *"What is ISO 9001?"* or *"What is ZED Scheme?"*\n• Compare *"ISO vs ZED"* or *"NATS vs NAPS"*`;
-        quickReplies = ['Which certificate do I need?', 'ZED MSME Subsidy', 'ISO 9001 Process', 'Book Free Consultation'];
+      else if (userLang === 'hindi' && (msgLower.includes('hindi') || msgLower.includes('हिंदी'))) {
+        detectedService = 'Language Switch to Hindi';
+        aiResponse = `🙏 **नमस्ते! मैं PRV AI Consultant हूँ।**\n\nमैं आपकी भाषा (हिन्दी) में सहायता करूँगा।\n\nआप PRV Consultancy Services से निम्नलिखित विषयों पर जानकारी प्राप्त कर सकते हैं:\n1️⃣ **ZED Certification** (80% तक सरकारी सब्सिडी)\n2️⃣ **ISO 9001 / 14001 / 45001 / 27001 / 22000**\n3️⃣ **IATF 16949 & Automotive Core Tools**\n4️⃣ **SEDEX SMETA Audits & FSSAI Compliance**\n5️⃣ **NATS & NAPS सरकारी योजनाएं**\n\n*आप किस सेवा के बारे में जानना चाहते हैं?*`;
+        quickReplies = ['ZED Subsidy', 'ISO 9001 Info', 'FSSAI License', 'Book Free Consultation'];
       }
       else {
         detectedService = 'General Assistance';
@@ -899,7 +971,8 @@ const server = http.createServer(async (req, res) => {
         quickReplies,
         leadCaptured,
         actionType,
-        sessionId
+        sessionId,
+        detectedLanguage: userLang
       }));
     } catch (err) {
       console.error('Error in /api/ai/chat:', err);
