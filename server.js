@@ -607,14 +607,70 @@ const server = http.createServer(async (req, res) => {
       // PRV SYSTEM PROMPT RULES 1-15 ENGINE
       // ------------------------------------------------------------------------
 
-      // RULE 12: OFF-TOPIC SAFEGUARD
+      // ------------------------------------------------------------------------
+      // PRV 3-LAYER AI BUSINESS EXCELLENCE ADVISOR ENGINE
+      // ------------------------------------------------------------------------
+
       const offTopicKeywords = ['cricket', 'ipl', 'match', 'movie', 'film', 'actor', 'actress', 'weather', 'politics', 'election', 'song', 'recipe', 'food recipe', 'game', 'football', 'joke', 'python code', 'java code', 'programming', 'who is president', 'who won'];
       const isOffTopic = offTopicKeywords.some(kw => msgLower.includes(kw)) && !msgLower.includes('iso') && !msgLower.includes('zed') && !msgLower.includes('audit');
 
-      if (isOffTopic) {
+      // WELCOME ACTION TRIGGER BUTTONS
+      if (msgLower.includes('get certified') || msgLower.includes('🏆 get certified')) {
+        detectedService = 'Qualification Step 1';
+        aiResponse = `🏆 **Let's find the right certification for your organization!**\n\nTo give you the exact recommendation and calculate government subsidies, please select your Industry:\n\n1️⃣ 🏭 Manufacturing & Engineering\n2️⃣ 🚗 Automotive & Components\n3️⃣ 🥗 Food & Beverage\n4️⃣ 💻 IT, Software & SaaS\n5️⃣ 🧵 Textile & Apparel\n6️⃣ 🏥 Healthcare & Pharma\n7️⃣ 📦 MSME / Startup`;
+        quickReplies = ['Manufacturing', 'Automobile', 'Food Industry', 'IT Company', 'Textile', 'MSME / Startup'];
+      }
+      else if (msgLower.includes('audit & compliance') || msgLower.includes('📋 audit & compliance')) {
+        detectedService = 'Audit & Compliance';
+        aiResponse = `📋 **PRV Audit & Compliance Solutions**:\n\n1️⃣ **SEDEX / SMETA Ethical Audit (2 & 4 Pillar)**: Global export & retail buyer compliance.\n2️⃣ **MACE Audit Prep**: Maruti Suzuki & Tier-1 OEM audit readiness.\n3️⃣ **FSSAI Food Safety Compliance**: Mandatory licensing, FoSTaC & Hygiene SOPs.\n4️⃣ **ISO Internal & Statutory Audits**: ISO 9001, 14001, 45001, 27001.\n\n*Which audit compliance do you need assistance with?*`;
+        quickReplies = ['SEDEX SMETA Audit', 'MACE Audit Prep', 'FSSAI License', 'Book Free Consultation'];
+      }
+      else if (msgLower.includes('improve productivity') || msgLower.includes('📈 improve productivity')) {
+        detectedService = 'Productivity Improvement';
+        aiResponse = `📈 **PRV Operational Excellence & Productivity Solutions**:\n\n1️⃣ **5S & Shopfloor Organization**: 20-30% shopfloor waste reduction.\n2️⃣ **Lean Kaizen & Capacity Optimization**: Eliminate bottleneck losses & increase throughput.\n3️⃣ **Profit Maximization Blueprint**: Cost reduction & margin enhancement.\n4️⃣ **Master Business Excellence Program**: 11 Excellence Pillars for business transformation.`;
+        quickReplies = ['5S Kaizen Workshop', 'Profit Maximization', 'Master Business Program', 'Book Free Consultation'];
+      }
+      else if (msgLower.includes('reduce costs') || msgLower.includes('💰 reduce costs')) {
+        detectedService = 'Cost Reduction & Subsidies';
+        aiResponse = `💰 **Financial Incentives & Cost Reduction Roadmap**:\n\n1️⃣ **ZED Scheme**: Claim up to **80% Govt Subsidy** on audit fees + **0.5% lower bank interest rate**.\n2️⃣ **NATS Scheme**: Central Govt stipend reimbursement up to **₹1,500/month per apprentice**.\n3️⃣ **Operational Waste Reduction**: Save lakhs annually through 5S Lean Kaizen.\n\n*Would you like to calculate exact subsidy eligibility for your unit?*`;
+        quickReplies = ['Calculate ZED Subsidy', 'NATS Stipend Info', 'Cost Reduction Plan', 'Book Free Consultation'];
+      }
+      else if (msgLower.includes('industrial training') || msgLower.includes('👨‍🏭 industrial training')) {
+        detectedService = 'Training Academy';
+        aiResponse = `👨‍🏭 **PRV Industrial & Corporate Training Academy**:\n\n• **Automotive Core Tools**: APQP, PPAP, FMEA (AIAG-VDA), MSA, SPC.\n• **Quality & Shopfloor Mastery**: 5S, Kaizen, Poka-Yoke, 7 QC Tools.\n• **Soft Skills & Leadership**: Supervisor to Leader transformation & managerial skills.\n• **Custom Corporate Workshops**: Tailored for your plant team.`;
+        quickReplies = ['Core Tools Workshop', '5S Kaizen Training', 'Leadership Program', 'Book Consultation'];
+      }
+      else if (msgLower.includes('nats / naps') || msgLower.includes('🎓 nats / naps')) {
+        detectedService = 'Apprenticeship Schemes';
+        aiResponse = `🎓 **NATS & NAPS Government Apprenticeship Schemes**:\n\n• **NATS (National Apprenticeship Training Scheme)**: For Diploma/Engineering graduates; Govt reimburses up to ₹1,500/month per apprentice stipend.\n• **NAPS (National Apprenticeship Promotion Scheme)**: For ITI & non-technical apprentices.\n• **PRV Handholding**: Portal registration, candidate placement, monthly claim submission.`;
+        quickReplies = ['NATS Registration', 'NAPS Process', 'NATS vs NAPS', 'Book Free Consultation'];
+      }
+      else if (msgLower.includes('book free consultation') || msgLower.includes('📅 book free consultation')) {
+        detectedService = 'Consultation Booking';
+        actionType = 'qualification_step_lead';
+        aiResponse = `📅 **Book Your FREE 15-Minute Strategy Session with Senior PRV Consultant**\n\nPlease share your details below so we can schedule a convenient time slot:\n\n• **Full Name**\n• **Company Name**\n• **Mobile Number**\n• **Work Email**\n• **City & Industry**\n• **Preferred Date & Time**\n\n*Or type your Mobile Number & Email directly in chat!*`;
+        quickReplies = ['Download PDF Brochure', 'WhatsApp Support', 'Call +91 74893 51297'];
+      }
+
+      // RULE 12: OFF-TOPIC SAFEGUARD
+      else if (isOffTopic) {
         detectedService = 'Off-Topic Safeguard';
         aiResponse = `I specialize in PRV Consultancy Services, including certifications, compliance, training, operational excellence, and business improvement. I'd be happy to help with those topics.`;
         quickReplies = ['Which certificate do I need?', 'ZED MSME Subsidy', 'ISO 9001 Process', 'Book Free Consultation'];
+      }
+
+      // DISAMBIGUATION RULE FOR GENERIC ISO QUERY ("What is ISO" / "ISO kya hai")
+      else if (msgLower === 'what is iso' || msgLower === 'what is iso?' || msgLower === 'iso kya hai' || msgLower === 'iso kya hai?' || msgLower === 'iso' || msgLower.includes('tell me about iso')) {
+        detectedService = 'ISO Disambiguation';
+        aiResponse = `📜 Main aapki help karta hoon!\n\nKya aap kisi **specific ISO standard** (jaise ISO 9001 Quality, ISO 14001 Environment, ISO 27001 Cybersecurity, ISO 22000 Food Safety) ke baare me jaana chahte hain, ya main aapke business ke hisaab se sahi ISO recommend karun?`;
+        quickReplies = ['Recommend for my business', 'ISO 9001 QMS', 'ISO 27001 ISMS', 'ISO 22000 Food Safety'];
+      }
+
+      // RULE 6: EXPLAIN ONLY ZED (DO NOT EXPLAIN ISO)
+      else if (msgLower === 'what is zed' || msgLower === 'what is zed?' || msgLower.includes('explain zed') || (msgLower.includes('what is zed') && !msgLower.includes('iso'))) {
+        detectedService = 'ZED Explanation Only';
+        aiResponse = `🏆 **What is ZED (Zero Defect Zero Effect) Scheme?**\n\nZED is an official national certification scheme launched by the Ministry of MSME, Government of India, to encourage MSME manufacturing units to produce high-quality goods with zero defects and zero environmental damage.\n\n💰 **Government Subsidies & Benefits**:\n- **Bronze Level**: 80% Subsidy on Certification cost + ₹10,000 Handholding Grant\n- **Silver Level**: 60% Subsidy + Up to ₹5 Lakhs Capital & Testing Subsidy\n- **Gold Level**: 50% Subsidy + 0.5% Concessional Bank Interest Rate on loans\n\n**Eligibility**: All MSME manufacturing units with a valid Udyam Registration.`;
+        quickReplies = ['Apply for ZED Subsidy', 'ZED Documents', 'Book Consultation'];
       }
 
       // RULE 8: COST QUERY (EXACT WORDING REQUIREMENT)
@@ -638,20 +694,6 @@ const server = http.createServer(async (req, res) => {
         quickReplies = ['ISO 9001 Docs', 'ZED Subsidy Docs', 'FSSAI License Docs', 'IATF Docs'];
       }
 
-      // RULE 5: EXPLAIN ONLY ISO (DO NOT EXPLAIN ZED)
-      else if (msgLower === 'what is iso' || msgLower === 'what is iso?' || msgLower.includes('explain iso') || (msgLower.includes('what is iso') && !msgLower.includes('zed'))) {
-        detectedService = 'ISO Explanation Only';
-        aiResponse = `📜 **What is ISO Certification?**\n\nISO (International Organization for Standardization) standards are globally recognized benchmarks that prove your organization follows standard Quality, Environmental, Safety, or Information Security Management Systems.\n\n• **ISO 9001 (QMS)**: Quality Management & Customer Satisfaction\n• **ISO 14001 (EMS)**: Environmental & Waste Management\n• **ISO 45001 (OH&S)**: Workplace Health & Safety\n• **ISO 27001 (ISMS)**: Information Security & Data Protection\n\n**Why Needed**: Mandatory for winning Government Tenders, Corporate Vendor Empanelments, Export Orders, and Buyer Audits.`;
-        quickReplies = ['ISO 9001 Guide', 'ISO 14001 Guide', 'ISO 27001 Guide', 'Book Consultation'];
-      }
-
-      // RULE 6: EXPLAIN ONLY ZED (DO NOT EXPLAIN ISO)
-      else if (msgLower === 'what is zed' || msgLower === 'what is zed?' || msgLower.includes('explain zed') || (msgLower.includes('what is zed') && !msgLower.includes('iso'))) {
-        detectedService = 'ZED Explanation Only';
-        aiResponse = `🏆 **What is ZED (Zero Defect Zero Effect) Scheme?**\n\nZED is an official national certification scheme launched by the Ministry of MSME, Government of India, to encourage MSME manufacturing units to produce high-quality goods with zero defects and zero environmental damage.\n\n💰 **Government Subsidies & Benefits**:\n- **Bronze Level**: 80% Subsidy on Certification cost + ₹10,000 Handholding Grant\n- **Silver Level**: 60% Subsidy + Up to ₹5 Lakhs Capital & Testing Subsidy\n- **Gold Level**: 50% Subsidy + 0.5% Concessional Bank Interest Rate on loans\n\n**Eligibility**: All MSME manufacturing units with a valid Udyam Registration.`;
-        quickReplies = ['Apply for ZED Subsidy', 'ZED Documents', 'Book Consultation'];
-      }
-
       // RULE 10: COMPARISON TABLE GENERATION (ISO VS ZED)
       else if (msgLower.includes('compare iso and zed') || msgLower.includes('iso vs zed') || msgLower.includes('zed vs iso') || msgLower.includes('difference between iso and zed')) {
         detectedService = 'Comparison: ISO vs ZED';
@@ -659,44 +701,31 @@ const server = http.createServer(async (req, res) => {
         quickReplies = ['ZED Subsidy Details', 'ISO 9001 Process', 'Book Free Consultation', 'WhatsApp Support'];
       }
 
-      // RULE 2, 3, 4, 9: INTENT-DRIVEN DIAGNOSTIC & SECTOR RECOMMENDATIONS
-      else if (msgLower.includes('i need certificate') || msgLower.includes('which certificate is best') || msgLower.includes('which certificate') || msgLower.includes('konsa certificate') || msgLower.includes('kaun sa certificate') || msgLower.includes('help me choose')) {
-        detectedService = 'Industry Qualification Step 1';
-        actionType = 'qualification_step_1';
-        aiResponse = `🤔 **To recommend the exact certification for your company, please select your Industry:**\n\n1️⃣ 🏭 **Manufacturing / Engineering**\n2️⃣ 🥗 **Food / Agriculture**\n3️⃣ 🚗 **Automobile / Component Manufacturing**\n4️⃣ 💻 **IT / Software / SaaS**\n5️⃣ 🏥 **Hospital / Healthcare**\n6️⃣ 🏗️ **Construction / Infrastructure**\n7️⃣ 🧵 **Textile / Apparel**\n8️⃣ 🧪 **Chemical / Pharma**\n9️⃣ 🎓 **Education / Training**\n\n*Click your industry below or type it in chat!*`;
-        quickReplies = ['Manufacturing', 'Food Industry', 'Automobile', 'IT Company', 'Hospital', 'Textile'];
+      // SMART RECOMMENDATION LOGIC PER SECTOR
+      else if (msgLower.includes('food') || msgLower.includes('beverage') || msgLower.includes('restaurant') || msgLower.includes('hotel')) {
+        detectedService = 'Food Sector Smart Match';
+        aiResponse = `🥗 **PRV Smart Recommendation for Food Businesses**:\n\n1️⃣ **FSSAI License (Basic / State / Central)**: Mandatory statutory food license.\n2️⃣ **ISO 22000:2018 (FSMS)**: Global food safety management standard.\n3️⃣ **HACCP Support**: Hazard analysis critical control points for export buyers.\n4️⃣ **Food Hygiene Training**: Staff sanitation & GMP compliance.\n\n*May I know your City, Email & Phone to send a customized food safety checklist?*`;
+        quickReplies = ['FSSAI License Quote', 'ISO 22000 FSMS', 'Book Free Consultation'];
       }
-
-      // RULE 3 & 4: SECTOR SPECIFIC TARGETED RECOMMENDATIONS
-      else if (msgLower.includes('manufacturing') || msgLower.includes('engineering factory')) {
-        detectedService = 'Manufacturing Sector Recommendation';
-        aiResponse = `🏭 **Recommended Certifications & Schemes for Manufacturing Units**:\n\n1️⃣ **ZED Certification**: Claim up to **80% Govt Subsidy** + **0.5% Concessional Bank Interest**.\n2️⃣ **ISO 9001:2015 (QMS)**: Mandatory for winning Government Tenders & OEM vendor approvals.\n3️⃣ **ISO 14001 (EMS) & ISO 45001 (OH&S)**: Environmental & Shopfloor Worker Safety compliance.\n4️⃣ **5S & Lean Kaizen**: Reduce shopfloor waste by 20-30% and boost productivity.\n\n*What is your primary objective? (Government Tender / Export / Cost Reduction / Buyer Requirement)*`;
-        quickReplies = ['Government Tender', 'Export Market', 'Cost Reduction', 'Book Free Consultation'];
+      else if (msgLower.includes('automobile') || msgLower.includes('auto component') || msgLower.includes('oem vendor')) {
+        detectedService = 'Automobile Smart Match';
+        aiResponse = `🚗 **PRV Smart Recommendation for Automotive Manufacturers**:\n\n1️⃣ **IATF 16949:2016**: Mandatory automotive quality standard required by Tier-1 OEMs.\n2️⃣ **Automotive Core Tools Training**: Hands-on mastery of APQP, PPAP, FMEA (AIAG-VDA), MSA & SPC.\n3️⃣ **ISO 9001:2015**: Foundational Quality Management System.\n4️⃣ **Supplier Development & MACE Audit Prep**: Maruti Suzuki & OEM audit readiness.\n\n*Would you like our consultant to share an IATF implementation roadmap?*`;
+        quickReplies = ['IATF 16949 Roadmap', 'Core Tools Workshop', 'MACE Audit Prep', 'Book Consultation'];
       }
-      else if (msgLower.includes('food') || msgLower.includes('agriculture') || msgLower.includes('hotel')) {
-        detectedService = 'Food Sector Recommendation';
-        aiResponse = `🥗 **Recommended Licenses & Certifications for Food Businesses**:\n\n1️⃣ **FSSAI License (Basic / State / Central)**: Mandatory statutory license to legally operate food manufacturing or trade in India.\n2️⃣ **ISO 22000:2018 (FSMS)**: International Food Safety Standard for food processors, packagers & exporters.\n3️⃣ **HACCP (Hazard Analysis)**: Critical control point audit for export buyers & high-end retail supply.\n4️⃣ **Food Hygiene Training**: Mandatory employee safety & sanitation compliance.`;
-        quickReplies = ['FSSAI License Quote', 'ISO 22000 Food Safety', 'FSSAI vs ISO 22000', 'Book Consultation'];
-      }
-      else if (msgLower.includes('automobile') || msgLower.includes('auto component') || msgLower.includes('oem')) {
-        detectedService = 'Automobile Sector Recommendation';
-        aiResponse = `🚗 **Recommended Standards & Solutions for Automotive Component Manufacturers**:\n\n1️⃣ **IATF 16949:2016**: Mandatory automotive quality standard required by Tier-1 & Tier-2 OEMs.\n2️⃣ **Automotive Core Tools Training**: Hands-on mastery of APQP, PPAP, FMEA (AIAG-VDA), MSA & SPC.\n3️⃣ **ISO 9001:2015**: Foundational Quality Management System.\n4️⃣ **Supplier Development & MACE Audit Prep**: Maruti Suzuki & OEM audit readiness.`;
-        quickReplies = ['IATF 16949 Guide', 'Core Tools Workshop', 'MACE Audit Prep', 'Book Consultation'];
+      else if (msgLower.includes('manufacturing') || msgLower.includes('engineering') || msgLower.includes('factory')) {
+        detectedService = 'Manufacturing Smart Match';
+        aiResponse = `🏭 **PRV Smart Recommendation for Manufacturing & MSME Units**:\n\n1️⃣ **ZED Certification**: Claim up to **80% Govt Subsidy** + **0.5% Concessional Bank Interest**.\n2️⃣ **ISO 9001:2015 (QMS)**: Mandatory for Govt Tenders & corporate vendor approvals.\n3️⃣ **ISO 14001 & ISO 45001**: EHS Environmental & Shopfloor Safety compliance.\n4️⃣ **5S & Lean Kaizen**: Reduce shopfloor waste by 20-30% and boost net profit.\n\n*May I know your Mobile & Email to calculate your exact ZED subsidy eligibility?*`;
+        quickReplies = ['Calculate ZED Subsidy', 'ISO 9001 Quote', '5S Kaizen Info', 'Book Free Consultation'];
       }
       else if (msgLower.includes('it company') || msgLower.includes('software') || msgLower.includes('saas') || msgLower.includes('tech')) {
-        detectedService = 'IT Sector Recommendation';
-        aiResponse = `💻 **Recommended Certifications for IT, Software & Tech Companies**:\n\n1️⃣ **ISO/IEC 27001:2022 (ISMS)**: International Gold Standard for Cybersecurity & Data Security.\n2️⃣ **SOC 2 Type I & II Readiness**: Essential for US & European SaaS client contracts.\n3️⃣ **ISO/IEC 20000-1**: IT Service Management System standard.\n4️⃣ **ISO 9001:2015**: Quality assurance for software deliverables & IT client tenders.`;
-        quickReplies = ['ISO 27001 ISMS Quote', 'SOC 2 Audit Prep', 'ISO 20000-1 Info', 'Book Consultation'];
+        detectedService = 'IT Sector Smart Match';
+        aiResponse = `💻 **PRV Smart Recommendation for IT & Software Companies**:\n\n1️⃣ **ISO/IEC 27001:2022 (ISMS)**: Gold standard for Information Security & Data Protection.\n2️⃣ **SOC 2 Type I & II Readiness**: Essential for US & European SaaS client contracts.\n3️⃣ **ISO/IEC 20000-1**: IT Service Management System standard.\n4️⃣ **ISO 9001:2015**: Quality assurance for software deliverables & IT client tenders.\n\n*Would you like a customized ISO 27001 audit proposal?*`;
+        quickReplies = ['ISO 27001 ISMS Quote', 'SOC 2 Audit Prep', 'Book Consultation'];
       }
-      else if (msgLower.includes('hospital') || msgLower.includes('healthcare') || msgLower.includes('clinic')) {
-        detectedService = 'Healthcare Sector Recommendation';
-        aiResponse = `🏥 **Recommended Standards for Hospitals & Healthcare Facilities**:\n\n1️⃣ **ISO 9001:2015**: Healthcare Service Quality Management.\n2️⃣ **ISO 45001:2018**: Occupational Safety for medical & hospital staff.\n3️⃣ **ISO 13485**: Quality Management System for Medical Devices & Diagnostic equipment.\n4️⃣ **Statutory Hygiene & Safety Compliance**: Waste disposal & environmental safety.`;
-        quickReplies = ['ISO 9001 Hospital', 'ISO 13485 Medical', 'Book Free Consultation'];
-      }
-      else if (msgLower.includes('textile') || msgLower.includes('apparel') || msgLower.includes('garment')) {
-        detectedService = 'Textile Sector Recommendation';
-        aiResponse = `🧵 **Recommended Certifications & Audits for Textile & Apparel Exporters**:\n\n1️⃣ **SEDEX / SMETA Audit (2-Pillar & 4-Pillar)**: Ethical & Social audit required by global fashion brands (Zara, H&M, Walmart).\n2️⃣ **ISO 9001:2015**: Process quality & defect reduction.\n3️⃣ **GOTS & OEKO-TEX Support**: Eco-safe & organic textile standards compliance.`;
-        quickReplies = ['Prepare for SMETA Audit', 'SEDEX vs Social Audit', 'ISO 9001 QMS', 'Book Consultation'];
+      else if (msgLower.includes('textile') || msgLower.includes('apparel') || msgLower.includes('garment export')) {
+        detectedService = 'Textile Smart Match';
+        aiResponse = `🧵 **PRV Smart Recommendation for Textile & Apparel Exporters**:\n\n1️⃣ **SEDEX / SMETA Audit (2-Pillar & 4-Pillar)**: Ethical & Social audit required by global fashion brands (Zara, Walmart, Disney).\n2️⃣ **OEKO-TEX Support**: Eco-safe & organic textile standards.\n3️⃣ **Social Audit Compliance**: Labour standards, Health & Safety, EHS SOPs.\n\n*Please share your Mobile & Email for a mock SMETA audit checklist!*`;
+        quickReplies = ['Prepare for SMETA Audit', 'SEDEX vs Social Audit', 'Book Consultation'];
       }
 
       // OTHER COMPARISONS

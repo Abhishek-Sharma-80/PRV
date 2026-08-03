@@ -345,8 +345,16 @@
 
     // 3. MESSAGE HANDLING FUNCTIONS
     function sendWelcomeGreeting() {
-      const welcomeText = `🙏 **Namaste! Welcome to PRV AI Consultant!**\n\nI am your official AI Business Excellence Advisor for **PRV Consultancy Services**.\n\nI can help your business with:\n1️⃣ **Certification Selection & Subsidies** (ZED up to 80% Subsidy)\n2️⃣ **ISO Standards** (9001, 14001, 45001, 27001, 22000, 13485, 50001)\n3️⃣ **Automotive & Audits** (IATF 16949, SEDEX SMETA, MACE Audit)\n4️⃣ **Government Schemes** (NATS & NAPS Apprenticeship Subsidies)\n5️⃣ **5S, Lean & Profit Maximization**\n\n*Ask any query in Hindi, English, or Hinglish!*`;
-      const quickReplies = ['Which certificate do I need?', 'ZED MSME Subsidy', 'ISO vs ZED', 'Book Free Consultation', 'Download PDF Brochure'];
+      const welcomeText = `👋 **Welcome to PRV Consultancy Services.**\n\nI'm your **PRV AI Business Excellence Advisor**.\n\nI can help you choose the right certification, improve your business processes, explain compliance requirements, answer your questions, and connect you with our experts.\n\n**What would you like to achieve today?**`;
+      const quickReplies = [
+        '🏆 Get Certified',
+        '📋 Audit & Compliance',
+        '📈 Improve Productivity',
+        '💰 Reduce Costs',
+        '👨‍🏭 Industrial Training',
+        '🎓 NATS / NAPS',
+        '📅 Book Free Consultation'
+      ];
       appendMessage('bot', welcomeText, quickReplies);
     }
 
