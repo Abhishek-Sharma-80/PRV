@@ -1,0 +1,440 @@
+{
+  "company": {
+    "name": "PRV Consultancy Services",
+    "assistant_name": "PRV AI Consultant",
+    "contact": {
+      "phone": "+91 74893 51297",
+      "email": "info@prvconsultancy.com",
+      "whatsapp": "+917489351297",
+      "website": "https://prvconsultancy.com"
+    },
+    "services_list": [
+      "ZED Certification",
+      "ISO 9001",
+      "ISO 14001",
+      "ISO 45001",
+      "ISO/IEC 27001",
+      "ISO/IEC 20000-1",
+      "ISO 22000",
+      "ISO 22301",
+      "ISO 50001",
+      "ISO 13485",
+      "ISO/IEC 17025",
+      "IATF 16949",
+      "SEDEX / SMETA",
+      "Social Audit",
+      "MACE Audit",
+      "FSSAI",
+      "IT Compliance",
+      "Quality Improvement",
+      "Productivity Improvement",
+      "5S",
+      "Lean",
+      "Kaizen",
+      "Capacity Improvement",
+      "Cost Reduction",
+      "Profit Maximization",
+      "Industrial Training",
+      "NATS",
+      "NAPS",
+      "Placement Preparation",
+      "Leadership Development",
+      "Future Guidance Seminar",
+      "Master Business Excellence Program"
+    ]
+  },
+  "guides": {
+    "zed": {
+      "title": "ZED (Zero Defect Zero Effect) Certification Guide",
+      "what_it_is": "ZED is a national certification scheme by the Ministry of MSME, Government of India, to motivate MSMEs to manufacture high-quality products with zero defects and zero environmental effect.",
+      "why_needed": "Improves manufacturing efficiency, reduces waste, enhances export competitiveness, and unlocks massive government subsidies & financial incentives.",
+      "who_should_apply": "All registered MSME manufacturing enterprises having a valid Udyam Registration.",
+      "levels_and_subsidies": {
+        "Bronze": "80% Subsidy on Certification cost + ₹10,000 Handholding Support Grant",
+        "Silver": "60% Subsidy + Up to ₹5 Lakhs Testing & Capital Subsidy",
+        "Gold": "50% Subsidy + Freight & Concessional Bank Interest (0.5% lower interest rate on bank loans)"
+      },
+      "benefits": [
+        "Up to 80% subsidy on certification costs",
+        "Concessional interest rate on bank loans (0.5% lower)",
+        "Exemption from processing fees on bank loans",
+        "Preference in government tenders & procurement",
+        "₹10,000 grant for consultant handholding",
+        "Up to ₹5 Lakhs capital subsidy for testing equipment"
+      ],
+      "process": [
+        "Udyam Registration verification",
+        "Pledge taking on MSME ZED Portal",
+        "Self-assessment parameter filling",
+        "PRV Consultant GAP analysis & handholding",
+        "Desktop verification & document submission",
+        "On-site / Remote Audit clearance & ZED Certificate issuance"
+      ],
+      "documents_required": [
+        "Udyam Registration Certificate",
+        "GST Certificate",
+        "Pan Card & Plant Layout",
+        "Quality policy & Process Flow Diagram",
+        "Electricity bill / Land proof"
+      ],
+      "time_required": "2 to 4 weeks with PRV fast-track handholding.",
+      "cost_note": "The cost depends on the size of your organization, number of employees, locations and project scope. Our consultant can provide a customized quotation.",
+      "how_prv_helps": "PRV Consultancy handles end-to-end ZED registration, GAP analysis, parameter documentation, portal submission, audit management, and subsidy claim processing."
+    },
+    "iso_9001": {
+      "title": "ISO 9001:2015 Quality Management System (QMS) Guide",
+      "what_it_is": "ISO 9001:2015 is the world's most recognized international standard for Quality Management Systems (QMS), focused on customer satisfaction and consistent quality delivery.",
+      "why_needed": "Mandatory for winning government tenders, corporate vendor approvals, export orders, and building customer trust.",
+      "who_should_apply": "Any manufacturing, service, IT, construction, healthcare, or trading organization of any size.",
+      "benefits": [
+        "Globally accepted quality mark",
+        "Eligibility for Govt Tenders & OEM Vendor empanelment",
+        "Reduction in operational errors and re-work",
+        "Enhanced customer trust and satisfaction",
+        "Standardized SOPs and process control"
+      ],
+      "process": [
+        "Gap Analysis of current processes",
+        "Documentation & SOP preparation",
+        "Implementation & Staff Training",
+        "Internal Audit & Management Review (MRM)",
+        "Final Certification Audit by accredited certification body"
+      ],
+      "documents_required": [
+        "Company Registration / GST Certificate",
+        "Organization Chart & Quality Policy",
+        "Standard Operating Procedures (SOPs)",
+        "Calibration & Maintenance Records",
+        "Customer Feedback & Complaint logs"
+      ],
+      "time_required": "10 to 20 days.",
+      "cost_note": "The cost depends on the size of your organization, number of employees, locations and project scope. Our consultant can provide a customized quotation.",
+      "how_prv_helps": "PRV provides end-to-end guidance including SOP drafting, staff training, internal audit, and 100% audit clearance guarantee."
+    },
+    "iso_14001": {
+      "title": "ISO 14001:2015 Environmental Management System (EMS) Guide",
+      "what_it_is": "ISO 14001:2015 specifies requirements for an environmental management system to reduce environmental impact, waste, and legal liability.",
+      "why_needed": "Mandatory for state pollution board clearances, global export buyers, ESG compliance, and green corporate branding.",
+      "who_should_apply": "Manufacturing plants, chemical processing, construction, textiles, automotive, and energy companies.",
+      "benefits": [
+        "Compliance with CPCB / SPCB pollution norms",
+        "Reduction in waste generation and energy consumption",
+        "Positive corporate image & ESG rating boost",
+        "Competitive edge in international buyer audits"
+      ],
+      "process": [
+        "Environmental Aspect-Impact Identification",
+        "Legal & Regulatory Register setup",
+        "EMS Documentation & Operational Controls",
+        "Internal Audit & Mock Drills",
+        "Certification Audit"
+      ],
+      "documents_required": ["Pollution NOC (CTE/CTO)", "Waste disposal records", "Aspect-Impact register", "Emergency response plan"],
+      "time_required": "2 to 3 weeks.",
+      "cost_note": "The cost depends on the size of your organization, number of employees, locations and project scope. Our consultant can provide a customized quotation.",
+      "how_prv_helps": "PRV helps set up legal registers, aspect-impact matrices, waste management protocols, and auditor handholding."
+    },
+    "iso_45001": {
+      "title": "ISO 45001:2018 Occupational Health & Safety (OH&S) Guide",
+      "what_it_is": "ISO 45001 is the global standard for workplace health and safety, preventing work-related injuries and ill health.",
+      "why_needed": "Protects workers, reduces workplace accidents, avoids legal penalties under Factory Acts, and lowers insurance premiums.",
+      "who_should_apply": "Factories, construction sites, heavy engineering, chemical industries, logistics, and infrastructure units.",
+      "benefits": [
+        "Zero accident culture & worker safety enhancement",
+        "Strict compliance with Indian Factory Act regulations",
+        "Reduction in insurance liabilities and downtime",
+        "High morale among shop-floor workforce"
+      ],
+      "process": ["Hazard Identification & Risk Assessment (HIRA)", "Safety policy & emergency SOPs", "PPE enforcement & safety training", "Internal Safety Audit", "Certification Audit"],
+      "documents_required": ["Factory license", "HIRA Register", "Safety committee minutes", "First aid & medical checkup records"],
+      "time_required": "2 to 4 weeks.",
+      "cost_note": "The cost depends on the size of your organization, number of employees, locations and project scope. Our consultant can provide a customized quotation.",
+      "how_prv_helps": "PRV experts conduct HIRA audits, draft emergency response plans, train floor staff, and lead certification audits."
+    },
+    "iso_27001": {
+      "title": "ISO/IEC 27001:2022 Information Security Management System (ISMS) Guide",
+      "what_it_is": "ISO 27001 is the international gold standard for data security, cybersecurity, privacy protection, and risk management.",
+      "why_needed": "Essential for IT companies, SaaS providers, BPOs, fintech, healthcare, and enterprises handling sensitive client data.",
+      "who_should_apply": "IT services, software development, cloud providers, fintech, BPO/KPO, healthcare IT, and financial institutions.",
+      "benefits": [
+        "Protection against cyber threats, ransomware, and data leaks",
+        "Mandatory requirement for US/European IT client contracts",
+        "Compliance with GDPR, DPDP Act 2023, and SOC 2 requirements",
+        "Enhanced client trust and zero breach reputation"
+      ],
+      "process": ["Asset Inventory & Risk Assessment", "Statement of Applicability (SoA) creation", "Security Annex A Controls implementation", "Vulnerability Assessment (VAPT)", "Certification Audit"],
+      "documents_required": ["Information Security Policy", "SoA Document", "Risk Treatment Plan", "Access control & backup logs"],
+      "time_required": "3 to 6 weeks.",
+      "cost_note": "The cost depends on the size of your organization, number of employees, locations and project scope. Our consultant can provide a customized quotation.",
+      "how_prv_helps": "PRV conducts VAPT audits, designs ISO 27001:2022 SoA controls, prepares policies, and guarantees certification success."
+    },
+    "iso_22000": {
+      "title": "ISO 22000:2018 Food Safety Management System (FSMS) Guide",
+      "what_it_is": "ISO 22000 combines HACCP principles and ISO management standard requirements to ensure food safety from farm to fork.",
+      "why_needed": "Crucial for food processing units, exporters, FMCG brands, cold chains, and hotel/catering businesses.",
+      "who_should_apply": "Food manufacturers, agricultural exporters, packaging suppliers, hotels, and food logistics operators.",
+      "benefits": [
+        "Complete food safety hazard control (Biological, Chemical, Physical)",
+        "Compliance with FSSAI Central License and international food export norms",
+        "Prevention of food recall and brand damage"
+      ],
+      "process": ["Prerequisite Programs (PRPs) setup", "HACCP Plan & CCP identification", "FSMS SOPs & Sanitation routines", "Internal FSMS Audit", "Certification Audit"],
+      "documents_required": ["FSSAI License", "HACCP Plan", "Pest control & water testing reports", "Sanitation SOPs"],
+      "time_required": "2 to 4 weeks.",
+      "cost_note": "The cost depends on the size of your organization, number of employees, locations and project scope. Our consultant can provide a customized quotation.",
+      "how_prv_helps": "PRV food safety experts build HACCP plans, train hygiene teams, and manage certification audits."
+    },
+    "iso_22301": {
+      "title": "ISO 22301:2019 Business Continuity Management System (BCMS) Guide",
+      "what_it_is": "ISO 22301 helps organizations prepare for, respond to, and recover from unexpected disruptions (disasters, cyberattacks, supply chain failure).",
+      "why_needed": "Ensures your business stays operational during emergencies.",
+      "who_should_apply": "Banks, IT companies, data centers, hospitals, critical manufacturing, telecom.",
+      "benefits": ["Uninterrupted business operations", "Protection of revenue and brand reputation", "Client assurance during crises"],
+      "process": ["Business Impact Analysis (BIA)", "Risk Assessment", "Continuity Strategy & BC Plan", "Disaster Recovery Testing", "Audit"],
+      "documents_required": ["BCMS Policy", "BIA Report", "Disaster Recovery Plan", "Test drill logs"],
+      "time_required": "3 to 5 weeks.",
+      "cost_note": "The cost depends on the size of your organization, number of employees, locations and project scope. Our consultant can provide a customized quotation.",
+      "how_prv_helps": "PRV drafts Business Impact Analysis, Disaster Recovery plans, and handholds during certification."
+    },
+    "iso_50001": {
+      "title": "ISO 50001:2018 Energy Management System (EnMS) Guide",
+      "what_it_is": "ISO 50001 provides a framework to systematically improve energy performance, efficiency, and consumption reduction.",
+      "why_needed": "Drastically reduces electricity & fuel bills in energy-intensive industries.",
+      "who_should_apply": "Steel, textile, cement, paper, chemical, thermal, automotive factories.",
+      "benefits": ["10-20% reduction in energy bills", "Carbon footprint reduction", "Compliance with BEE (Bureau of Energy Efficiency) PAT scheme"],
+      "process": ["Energy review & baseline setup", "EnPI (Energy Performance Indicators) definition", "Energy action plan", "Internal audit", "Certification"],
+      "documents_required": ["Energy review report", "Utility bill logs", "Equipment efficiency data"],
+      "time_required": "3 to 5 weeks.",
+      "cost_note": "The cost depends on the size of your organization, number of employees, locations and project scope. Our consultant can provide a customized quotation.",
+      "how_prv_helps": "PRV energy consultants conduct energy baseline reviews, calculate EnPIs, and ensure audit success."
+    },
+    "iso_13485": {
+      "title": "ISO 13485:2016 Medical Devices Quality Management System Guide",
+      "what_it_is": "ISO 13485 specifies QMS requirements for design, manufacture, and installation of medical devices and related services.",
+      "why_needed": "Mandatory requirement by CDSCO (India) and global regulators (CE, FDA) for manufacturing medical devices.",
+      "who_should_apply": "Medical device manufacturers, surgical equipment makers, IVD diagnostic kit manufacturers, and suppliers.",
+      "benefits": ["CDSCO MD-5 / MD-9 license readiness", "Global market entry for medical exports", "Strict risk management (ISO 14971) compliance"],
+      "process": ["ISO 14971 Risk Management setup", "Cleanroom & sterilization SOPs", "Device Master Record (DMR) preparation", "Audit"],
+      "documents_required": ["Device Master Record", "Risk Analysis Report", "Sterilization validation", "Cleanroom particle count logs"],
+      "time_required": "4 to 8 weeks.",
+      "cost_note": "The cost depends on the size of your organization, number of employees, locations and project scope. Our consultant can provide a customized quotation.",
+      "how_prv_helps": "PRV biomedical consultants handle technical documentation, CDSCO liaisoning, and ISO 13485 certification."
+    },
+    "iatf_16949": {
+      "title": "IATF 16949:2016 Automotive Quality Management System & Core Tools Guide",
+      "what_it_is": "IATF 16949 is the global standard for automotive manufacturing quality, required by Tier-1 & Tier-2 automotive OEMs (Tata, Maruti, Hyundai, Mahindra, etc.).",
+      "why_needed": "Mandatory to become an approved supplier to automotive OEMs and Tier-1 vendors.",
+      "who_should_apply": "Automotive component manufacturers, stamping units, plastic injection molding, wire harness, and forge/casting units.",
+      "core_tools": [
+        "APQP (Advanced Product Quality Planning)",
+        "PPAP (Production Part Approval Process)",
+        "FMEA (Failure Mode and Effects Analysis - AIAG-VDA 1st Edition)",
+        "MSA (Measurement Systems Analysis)",
+        "SPC (Statistical Process Control)"
+      ],
+      "benefits": [
+        "Tier-1 / Tier-2 OEM vendor approval",
+        "Drastic reduction in shop-floor rejection and rework",
+        "Practical mastery of 5 Automotive Core Tools among engineering team"
+      ],
+      "process": ["Process Audit & Core Tools Gap Analysis", "PFMEA & Control Plan implementation", "MSA & SPC study execution", "Internal Process & Product Audit", "IATF Certification Audit"],
+      "documents_required": ["Control Plans", "PFMEA sheets", "PPAP Level 1-5 dossiers", "Gauge R&R reports", "Cpk/Ppk SPC charts"],
+      "time_required": "2 to 4 months.",
+      "cost_note": "The cost depends on the size of your organization, number of employees, locations and project scope. Our consultant can provide a customized quotation.",
+      "how_prv_helps": "PRV provides hands-on Core Tools implementation on shopfloor, PFMEA creation, PPAP submission, and IATF audit handholding."
+    },
+    "sedex_smeta": {
+      "title": "SEDEX / SMETA Audit & Social Compliance Guide",
+      "what_it_is": "SMETA (Sedex Members Ethical Trade Audit) is the world's most widely used ethical audit format, assessing labor standards, health & safety, environment, and business ethics.",
+      "why_needed": "Mandatory for supplying to global brands & retailers (Walmart, Disney, Zara, H&M, Target, Amazon).",
+      "audit_pillars": {
+        "2-Pillar": "Labor Standards + Health & Safety",
+        "4-Pillar": "Labor Standards + Health & Safety + Environmental Assessment + Business Ethics"
+      },
+      "benefits": [
+        "Approved supplier status for international buyers",
+        "Zero NC (Non-Conformity) audit report",
+        "Worker satisfaction & safety compliance"
+      ],
+      "process": ["Pre-audit GAP assessment", "Labor register & wage records verification", "Factory fire & safety infrastructure audit", "Mock Audit & Worker Interview prep", "Official SMETA Audit execution"],
+      "documents_required": ["Muster Roll & Wage Register", "PF & ESI Challans", "Fire NOC & Building Stability Cert", "Minimum wages compliance proof"],
+      "time_required": "1 to 3 weeks.",
+      "cost_note": "The cost depends on the size of your organization, number of employees, locations and project scope. Our consultant can provide a customized quotation.",
+      "how_prv_helps": "PRV conducts rigorous Mock Audits, verifies labor documents, trains HR/Safety personnel, and ensures zero NC clearance."
+    },
+    "mace_audit": {
+      "title": "MACE (Maruti Suzuki Center for Excellence) Supplier Audit Guide",
+      "what_it_is": "MACE Audit is Maruti Suzuki's supplier quality and manufacturing excellence evaluation framework for component vendors.",
+      "why_needed": "Mandatory for automotive component manufacturers supplying to Maruti Suzuki and Tier-1 MSIL vendors.",
+      "benefits": ["High MACE score green rating", "Increased business share from Maruti Suzuki", "World-class shop floor quality"],
+      "process": ["5S & Shopfloor layout audit", "Poka-Yoke & Line validation", "Process capability audit", "MACE Mock Audit", "Final MSIL Evaluation"],
+      "documents_required": ["Process Control Plans", "5S scorecards", "Tool maintenance logs"],
+      "time_required": "3 to 6 weeks.",
+      "cost_note": "The cost depends on the size of your organization, number of employees, locations and project scope. Our consultant can provide a customized quotation.",
+      "how_prv_helps": "PRV Maruti-ex consultants transform your shopfloor, conduct MACE mock audits, and guarantee top ratings."
+    },
+    "fssai": {
+      "title": "FSSAI Food License & Compliance Guide",
+      "what_it_is": "FSSAI (Food Safety and Standards Authority of India) is the mandatory food license required for any food business operator in India.",
+      "license_types": {
+        "Basic Registration": "Turnover up to ₹12 Lakhs/year",
+        "State License": "Turnover ₹12 Lakhs to ₹20 Crores/year",
+        "Central License": "Turnover > ₹20 Crores/year or Importers/Exporters/E-commerce"
+      },
+      "why_needed": "Legal requirement under Food Safety Act. Operating without FSSAI attracts severe fines and closure.",
+      "process": ["Category selection", "Document preparation", "FoSCoS portal application", "Department query response", "License issuance"],
+      "documents_required": ["PAN & Aadhaar of proprietor", "Proof of premises (Rent agreement/Electricity bill)", "List of food categories", "Water test report (for manufacturing)"],
+      "time_required": "7 to 15 days.",
+      "cost_note": "The cost depends on the size of your organization, number of employees, locations and project scope. Our consultant can provide a customized quotation.",
+      "how_prv_helps": "PRV files FoSCoS applications, handles inspection queries, and gets fast-track FSSAI license approval."
+    },
+    "nats": {
+      "title": "NATS (National Apprenticeship Training Scheme) Guide",
+      "what_it_is": "NATS is a flagship Central Government scheme providing 1-year apprenticeship training to Engineering Graduates, Diploma Holders, and General Stream Graduates (BA/BSc/BCom).",
+      "why_needed": "Saves up to ₹1,500/month per apprentice on stipend costs and exempts employer from ESI & PF contributions on apprentices.",
+      "benefits": [
+        "Government stipend reimbursement (up to ₹1,500/month per candidate)",
+        "Zero ESI & PF statutory contribution on apprentices",
+        "Pre-trained pipeline of young engineers and graduates",
+        "CSR & Skill India mandate compliance"
+      ],
+      "process": ["Employer registration on NATS Portal", "Vacancy posting & contract generation", "Apprentice onboarding", "Monthly attendance uploading", "Direct Benefit Transfer (DBT) stipend claim submission"],
+      "documents_required": ["Company PAN & GST", "Employer registration details", "Apprentice qualification certificates & Bank account"],
+      "time_required": "1 to 2 weeks for employer onboarding.",
+      "cost_note": "PRV offers end-to-end NATS management at nominal processing fees. Government stipend reimbursement covers maximum costs.",
+      "how_prv_helps": "PRV manages NATS portal profile, contract generation, monthly portal filings, and timely government stipend reimbursement claims."
+    },
+    "naps": {
+      "title": "NAPS (National Apprenticeship Promotion Scheme) Guide",
+      "what_it_is": "NAPS promotes apprenticeship training for ITI pass-outs, 10th/12th pass-outs, and Skill Development candidates across industries.",
+      "why_needed": "Government reimburses 25% of prescribed stipend (up to ₹1,500/month) per apprentice.",
+      "benefits": [
+        "Direct financial stipend subsidy from Govt of India",
+        "Exemption from PF & ESI for apprentice period",
+        "Flexible workforce scaling for manufacturing plants"
+      ],
+      "process": ["NAPS Portal establishment registration", "Basic training & OJT mapping", "Apprentice contract approval", "Stipend claim filing"],
+      "documents_required": ["Company registration", "PF/ESI establishment code", "Candidate Aadhaar & ITI certificates"],
+      "time_required": "1 to 2 weeks.",
+      "cost_note": "The cost depends on the size of your organization, number of employees, locations and project scope. Our consultant can provide a customized quotation.",
+      "how_prv_helps": "PRV handles NAPS portal portal management, candidate mapping, contract approvals, and claim reimbursement."
+    },
+    "profit_maximization": {
+      "title": "Profit Maximization & Cost Reduction Blueprint",
+      "what_it_is": "A structured consulting intervention to boost net profit margins by identifying hidden operational wastes, reducing production costs, and increasing overall throughput.",
+      "why_needed": "Essential for MSMEs and corporate factories facing margin compression, high raw material waste, or bottleneck delays.",
+      "pillars": [
+        "Cost Reduction (Direct material, energy, labor waste removal)",
+        "Productivity & OEE Boost (Overall Equipment Effectiveness)",
+        "Yield Improvement & Scrap Reduction",
+        "Inventory & Working Capital Optimization"
+      ],
+      "benefits": [
+        "15% to 35% increase in bottom-line net profit",
+        "50% reduction in shopfloor scrap and rework",
+        "Streamlined working capital and faster order turnaround"
+      ],
+      "process": ["Diagnostic Value Stream Mapping (VSM)", "Waste identification (7 Mudas)", "Action plan & KPI assignment", "Weekly coaching & implementation", "ROI measurement"],
+      "time_required": "1 to 3 months consulting program.",
+      "cost_note": "The cost depends on the size of your organization, number of employees, locations and project scope. Our consultant can provide a customized quotation.",
+      "how_prv_helps": "PRV master consultants work on-site with your leadership team to drive measurable financial ROI."
+    },
+    "lean_5s": {
+      "title": "5S & Lean Kaizen Transformation Guide",
+      "what_it_is": "5S is the foundational Japanese methodology for workplace organization, cleanliness, visual management, and continuous improvement (Kaizen).",
+      "five_s": {
+        "1S - Seiri (Sort)": "Eliminate unneeded items from work area",
+        "2S - Seiton (Set in Order)": "Organize tools with clear visual labelling",
+        "3S - Seiso (Shine)": "Clean and inspect equipment daily",
+        "4S - Seiketsu (Standardize)": "Establish standard operating procedures and audit checklists",
+        "5S - Shitsuke (Sustain)": "Build habit, discipline, and continuous Kaizen culture"
+      },
+      "benefits": [
+        "20% to 40% increase in productivity",
+        "Zero tool searching time",
+        "Immaculate shopfloor that wows prospective clients & auditors",
+        "Higher safety and worker morale"
+      ],
+      "process": ["5S Baseline Audit", "Red-tagging campaign", "Shadow board & visual markings", "5S SOP creation", "Weekly 5S internal competitions"],
+      "time_required": "2 to 4 weeks workshop & implementation.",
+      "cost_note": "The cost depends on the size of your organization, number of employees, locations and project scope. Our consultant can provide a customized quotation.",
+      "how_prv_helps": "PRV conducts hands-on shopfloor 5S implementation workshops, red-tagging events, and auditor training."
+    },
+    "industrial_training": {
+      "title": "Industrial Training, Leadership & Master Business Excellence Program Guide",
+      "what_it_is": "Practical industry-oriented training programs for engineering students, floor supervisors, line managers, and CXOs.",
+      "programs": [
+        "Master Business Excellence Program",
+        "Automotive Core Tools (APQP, PPAP, FMEA, MSA, SPC) Certification",
+        "5S & Lean Leadership Workshop",
+        "Placement Preparation & Campus-to-Corporate Seminar",
+        "Future Guidance & Career Excellence Seminars"
+      ],
+      "benefits": ["Industry-ready practical skills", "Government & PRV joint certificates", "High employability and career growth"],
+      "process": ["Interactive classroom / online sessions", "Real case studies & shopfloor exercises", "Assessment & Certification"],
+      "time_required": "1-day workshops to 6-week intensive modules.",
+      "cost_note": "The cost depends on the size of your organization, number of employees, locations and project scope. Our consultant can provide a customized quotation.",
+      "how_prv_helps": "PRV veteran industry experts deliver high-impact practical training with real-world industry tools."
+    }
+  },
+  "comparisons": {
+    "iso_vs_zed": {
+      "title": "ISO Certification vs ZED Certification",
+      "table": [
+        ["Parameter", "ISO Certification (e.g. ISO 9001)", "ZED Certification (MSME Scheme)"],
+        ["Origin", "International Standard (Geneva)", "Ministry of MSME, Govt of India"],
+        ["Target Audience", "All companies (Global)", "Indian MSMEs only"],
+        ["Government Subsidy", "No direct subsidy (except state schemes)", "Up to 80% Subsidy + ₹10,000 Grant"],
+        ["Bank Benefits", "Helps in vendor empanelment", "0.5% lower loan interest + Fee waiver"],
+        ["Scope", "Process standardization", "Zero Defect + Zero Environmental Effect"],
+        ["PRV Recommendation", "Get ISO for export & tender eligibility", "Get ZED to claim Govt grants & bank relief"]
+      ],
+      "verdict": "Both complement each other! We recommend MSMEs start with ZED Gold to get 80% subsidy and bank loan discounts, and implement ISO 9001 for buyer tenders."
+    },
+    "iso_vs_iatf": {
+      "title": "ISO 9001 vs IATF 16949",
+      "table": [
+        ["Parameter", "ISO 9001:2015", "IATF 16949:2016"],
+        ["Industry Focus", "General manufacturing & services", "Automotive supply chain only"],
+        ["Strictness", "Standard QMS requirements", "Extremely strict zero-defect requirements"],
+        ["Core Tools", "Not mandatory", "Mandatory (APQP, PPAP, FMEA, MSA, SPC)"],
+        ["Prerequisite", "None", "Must have ISO 9001 or automotive manufacturing setup"],
+        ["Market Requirement", "General buyer requirement", "Mandatory for Tier-1/2 Automotive OEMs"]
+      ],
+      "verdict": "If you manufacture automotive parts, IATF 16949 is mandatory. For general manufacturing, ISO 9001 is sufficient."
+    },
+    "nats_vs_naps": {
+      "title": "NATS Scheme vs NAPS Scheme",
+      "table": [
+        ["Parameter", "NATS (National Apprenticeship Training)", "NAPS (National Apprenticeship Promotion)"],
+        ["Target Candidates", "Engineering Graduates, Diploma, BA/BSc/BCom", "ITI Pass-outs, 10th/12th pass, Skill trainees"],
+        ["Managing Ministry", "Ministry of Education (MoE / BOAT)", "Ministry of Skill Development (MSDE / RDSDE)"],
+        ["Stipend Subsidy", "Up to ₹1,500/month per candidate via DBT", "25% of stipend (up to ₹1,500/month)"],
+        ["Statutory Relief", "Exempt from PF & ESI for 1 year", "Exempt from PF & ESI for apprentice period"]
+      ],
+      "verdict": "Use NATS for hiring engineers & graduates, and NAPS for ITI technicians & floor operators. PRV handles both!"
+    },
+    "sedex_vs_social_audit": {
+      "title": "SEDEX / SMETA vs General Social Audit",
+      "table": [
+        ["Parameter", "SEDEX / SMETA Audit", "General Social Audit (SA 8000 / BSCI)"],
+        ["Platform", "Sedex Global Portal (UK)", "Varies by certifying agency / brand"],
+        ["Report Sharing", "Shared with multiple global buyers on Sedex", "Specific to single buyer"],
+        ["Audit Pillars", "2-Pillar (Labor, Safety) or 4-Pillar (Env, Ethics)", "Standard SA8000 9 social criteria"],
+        ["Buyer Acceptance", "Accepted by 90%+ Western retailers", "Accepted by specific buyers"]
+      ],
+      "verdict": "SMETA on Sedex is the most versatile audit because 1 audit report can be shared with all your export buyers!"
+    },
+    "fssai_vs_iso_22000": {
+      "title": "FSSAI License vs ISO 22000 FSMS",
+      "table": [
+        ["Parameter", "FSSAI License", "ISO 22000 FSMS"],
+        ["Nature", "Mandatory Indian Statutory License", "Voluntary International Standard"],
+        ["Legal Requirement", "Illegal to operate food business without FSSAI", "Not legally mandatory, but buyer requirement"],
+        ["Audit Level", "Basic inspection by Food Safety Officer", "Rigorous HACCP & System Audit by registrar"],
+        ["Export Value", "Domestic compliance", "Essential for international food exports"]
+      ],
+      "verdict": "FSSAI License is mandatory for domestic sales in India; ISO 22000 is required for food processing export & high-end retail supply."
+    }
+  }
+}

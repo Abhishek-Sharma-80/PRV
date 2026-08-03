@@ -1817,3 +1817,165 @@ button {
   }
 }
 
+/* --------------------------------------------------------------------------
+   AI CHAT ASSISTANT ENHANCEMENTS (TABLES, MODALS & BUTTONS)
+   -------------------------------------------------------------------------- */
+.ai-msg-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 0.78rem;
+  background: #FFF;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.ai-msg-content th {
+  background: var(--primary-navy);
+  color: #FFF;
+  padding: 6px 8px;
+  text-align: left;
+  font-weight: 700;
+}
+
+.ai-msg-content td {
+  padding: 6px 8px;
+  border-bottom: 1px solid #E2E8F0;
+  color: #1E293B;
+}
+
+.ai-msg-content tr:nth-child(even) {
+  background: #F8FAFC;
+}
+
+/* Consultation Booking Modal Styles */
+.ai-booking-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.ai-booking-modal-content {
+  background: #FFF;
+  border-radius: 16px;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ai-booking-modal-header {
+  background: var(--primary-navy);
+  color: #FFF;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ai-booking-modal-header h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--accent-green);
+}
+
+.ai-modal-close-btn {
+  background: transparent;
+  border: none;
+  color: #94A3B8;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.ai-modal-close-btn:hover {
+  color: #FFF;
+}
+
+.ai-booking-form {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ai-booking-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ai-booking-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.ai-booking-form label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+.ai-booking-form input,
+.ai-booking-form select,
+.ai-booking-form textarea {
+  padding: 10px 14px;
+  border: 1px solid #CBD5E1;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+.ai-booking-form input:focus,
+.ai-booking-form select:focus,
+.ai-booking-form textarea:focus {
+  border-color: var(--accent-green);
+  box-shadow: 0 0 0 3px rgba(0, 201, 167, 0.15);
+}
+
+.ai-submit-booking-btn {
+  background: var(--accent-green);
+  color: #0F172A;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.ai-submit-booking-btn:hover {
+  background: #00B395;
+  transform: translateY(-2px);
+}
+
+

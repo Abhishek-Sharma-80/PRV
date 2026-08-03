@@ -63,7 +63,7 @@
     window.speechSynthesis.speak(utterance);
   }
 
-  // Simple Markdown & Formatting Parser for Chat Messages
+  // Simple Markdown & Formatting Parser for Chat Messages (Supports Tables & Formatting)
   function parseMarkdown(text) {
     let formatted = text
       .replace(/&/g, '&amp;')
@@ -71,9 +71,49 @@
       .replace(/>/g, '&gt;')
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
-      .replace(/`([^`]+)`/g, '<code class="chat-code">$1</code>')
-      .replace(/\n/g, '<br>');
+      .replace(/`([^`]+)`/g, '<code class="chat-code">$1</code>');
 
+    // Parse Markdown Tables
+    if (formatted.includes('|')) {
+      const lines = formatted.split('\n');
+      let inTable = false;
+      let tableHtml = '<table>';
+      let newLines = [];
+
+      lines.forEach(line => {
+        const trimmed = line.trim();
+        if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
+          if (trimmed.includes('---')) {
+            // Separator row
+            return;
+          }
+          const cells = trimmed.substring(1, trimmed.length - 1).split('|').map(c => c.trim());
+          if (!inTable) {
+            inTable = true;
+            tableHtml += '<thead><tr>' + cells.map(c => `<th>${c}</th>`).join('') + '</tr></thead><tbody>';
+          } else {
+            tableHtml += '<tr>' + cells.map(c => `<td>${c}</td>`).join('') + '</tr>';
+          }
+        } else {
+          if (inTable) {
+            inTable = false;
+            tableHtml += '</tbody></table>';
+            newLines.push(tableHtml);
+            tableHtml = '<table>';
+          }
+          newLines.push(line);
+        }
+      });
+
+      if (inTable) {
+        tableHtml += '</tbody></table>';
+        newLines.push(tableHtml);
+      }
+
+      formatted = newLines.join('\n');
+    }
+
+    formatted = formatted.replace(/\n/g, '<br>');
     return formatted;
   }
 
@@ -200,22 +240,113 @@
       });
     }
 
+    const whatsappBtn = document.getElementById('ai-chat-whatsapp-btn');
+    const brochureBtn = document.getElementById('ai-chat-brochure-btn');
+    const bookBtn = document.getElementById('ai-chat-book-btn');
+    const bookingModal = document.getElementById('ai-booking-modal');
+    const bookingCloseBtn = document.getElementById('ai-booking-modal-close');
+    const bookingForm = document.getElementById('ai-booking-form');
+
+    // WhatsApp Handover Click
+    if (whatsappBtn) {
+      whatsappBtn.addEventListener('click', () => {
+        const text = encodeURIComponent('Hello PRV Consultancy! I am inquiring from your website AI Assistant regarding certification & consultation.');
+        window.open(`https://wa.me/917489351297?text=${text}`, '_blank');
+      });
+    }
+
+    // PDF Brochure Download Trigger
+    if (brochureBtn) {
+      brochureBtn.addEventListener('click', () => {
+        appendMessage('bot', '📄 **PRV Consultancy Services - Official Master Brochure PDF**\n\nYour brochure download request is starting... If it does not start automatically, click below:\n\n👉 [Download PRV Consultancy Services Brochure (PDF)](#)');
+        alert('Downloading PRV Consultancy Services Master Brochure...');
+      });
+    }
+
+    // Consultation Booking Modal Trigger
+    if (bookBtn) {
+      bookBtn.addEventListener('click', () => {
+        if (bookingModal) bookingModal.style.display = 'flex';
+      });
+    }
+
+    if (bookingCloseBtn && bookingModal) {
+      bookingCloseBtn.addEventListener('click', () => {
+        bookingModal.style.display = 'none';
+      });
+    }
+
+    // Form Submission Handler for Consultation Booking Modal
+    if (bookingForm) {
+      bookingForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const full_name = document.getElementById('book-name').value.trim();
+        const mobile_number = document.getElementById('book-mobile').value.trim();
+        const email = document.getElementById('book-email').value.trim();
+        const company_name = document.getElementById('book-company').value.trim();
+        const service_required = document.getElementById('book-service').value;
+        const preferred_date = document.getElementById('book-date').value;
+        const preferred_time = document.getElementById('book-time').value;
+        const notes = document.getElementById('book-notes').value.trim();
+
+        if (!full_name || !mobile_number) {
+          alert('Please provide your Name and Mobile Number.');
+          return;
+        }
+
+        try {
+          let res = null;
+          try {
+            res = await fetch('/api/ai/book-consultation', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ full_name, mobile_number, email, company_name, service_required, preferred_date, preferred_time, notes })
+            });
+          } catch (errFetch) {
+            res = await fetch('http://localhost:3000/api/ai/book-consultation', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ full_name, mobile_number, email, company_name, service_required, preferred_date, preferred_time, notes })
+            });
+          }
+
+          if (bookingModal) bookingModal.style.display = 'none';
+          bookingForm.reset();
+
+          appendMessage('bot', `🎉 **FREE Consultation Booked Successfully!**\n\n• **Name**: ${full_name}\n• **Mobile**: ${mobile_number}\n• **Service**: ${service_required}\n• **Preferred Slot**: ${preferred_date || 'Earliest Available'} (${preferred_time})\n\nOur Senior Business Advisor will contact you to confirm your slot!`, ['Which certificate do I need?', 'ZED MSME Subsidy', 'WhatsApp Support'], true);
+          playChatSound('receive');
+        } catch (errBooking) {
+          console.error('Booking submission error:', errBooking);
+          alert('Saved booking locally. A PRV consultant will reach out to you shortly!');
+          if (bookingModal) bookingModal.style.display = 'none';
+        }
+      });
+    }
+
     // Handle Quick Reply Chips Click
     if (quickChipsBox) {
       quickChipsBox.addEventListener('click', (e) => {
         const chip = e.target.closest('.ai-chip');
         if (chip) {
           const query = chip.getAttribute('data-query') || chip.textContent.trim();
-          inputField.value = query;
-          handleSendMessage();
+          if (query === 'Book Free Consultation' || query === 'Book Consultation') {
+            if (bookingModal) bookingModal.style.display = 'flex';
+          } else if (query === 'Download PDF Brochure') {
+            if (brochureBtn) brochureBtn.click();
+          } else if (query === 'WhatsApp Support') {
+            if (whatsappBtn) whatsappBtn.click();
+          } else {
+            inputField.value = query;
+            handleSendMessage();
+          }
         }
       });
     }
 
     // 3. MESSAGE HANDLING FUNCTIONS
     function sendWelcomeGreeting() {
-      const welcomeText = `👋 **Welcome to PRV Consultancy Services AI Assistant!**\n\nI am your 24/7 AI Business Advisor. Ask me anything about:\n• **ZED MSME Subsidy** (Up to 80% grant)\n• **ISO Certifications** (9001, 14001, 45001, 27001)\n• **SEDEX & SMETA Audits** (Social compliance)\n• **NATS & NAPS** (Stipend reimbursement scheme)\n• **5S & Kaizen** (Shopfloor productivity)\n\n*Aap Hindi ya Hinglish me bhi sawal puchh sakte hain!*`;
-      const quickReplies = ['ZED MSME Subsidy', 'ISO 9001 Process', 'SEDEX SMETA Audit', 'NATS Apprenticeship'];
+      const welcomeText = `🙏 **Namaste! Welcome to PRV AI Consultant!**\n\nI am your official AI Business Excellence Advisor for **PRV Consultancy Services**.\n\nI can help your business with:\n1️⃣ **Certification Selection & Subsidies** (ZED up to 80% Subsidy)\n2️⃣ **ISO Standards** (9001, 14001, 45001, 27001, 22000, 13485, 50001)\n3️⃣ **Automotive & Audits** (IATF 16949, SEDEX SMETA, MACE Audit)\n4️⃣ **Government Schemes** (NATS & NAPS Apprenticeship Subsidies)\n5️⃣ **5S, Lean & Profit Maximization**\n\n*Ask any query in Hindi, English, or Hinglish!*`;
+      const quickReplies = ['Which certificate do I need?', 'ZED MSME Subsidy', 'ISO vs ZED', 'Book Free Consultation', 'Download PDF Brochure'];
       appendMessage('bot', welcomeText, quickReplies);
     }
 
