@@ -761,6 +761,145 @@ button {
   font-size: 1.1rem;
 }
 
+/* --------------------------------------------------------------------------
+   4.5 INDUSTRIES WE SERVE SECTION (INTERACTIVE 10-CARD GRID)
+   -------------------------------------------------------------------------- */
+.industries-section {
+  padding: 90px 0;
+  background: var(--bg-card-alt);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.industry-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+.industry-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-md);
+  padding: 24px 20px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.industry-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: transparent;
+  transition: var(--transition-fast);
+}
+
+.industry-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--accent-green);
+  box-shadow: 0 15px 35px -10px rgba(0, 201, 167, 0.25);
+}
+
+.industry-card:hover::before {
+  background: var(--gradient-accent);
+}
+
+.ind-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.ind-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-green-light);
+  color: var(--accent-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  transition: var(--transition-fast);
+}
+
+.industry-card:hover .ind-icon-box {
+  background: var(--primary-navy);
+  color: var(--accent-green);
+}
+
+.ind-card-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--primary-navy);
+  line-height: 1.2;
+}
+
+.ind-service-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ind-service-list li {
+  font-size: 0.82rem;
+  color: var(--text-dark);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ind-service-list li i {
+  color: var(--accent-green);
+  font-size: 0.75rem;
+}
+
+.ind-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--bg-card-alt);
+  color: var(--primary-navy);
+  font-weight: 700;
+  font-size: 0.82rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  transition: var(--transition-fast);
+}
+
+.ind-cta-btn:hover, .industry-card:hover .ind-cta-btn {
+  background: var(--primary-navy);
+  color: #FFFFFF;
+  border-color: var(--primary-navy);
+}
+
+.ind-cta-btn i {
+  color: var(--accent-green);
+  transition: var(--transition-fast);
+}
+
+.ind-cta-btn:hover i {
+  transform: translateX(4px);
+}
+
 /* Hero Right Visual Card */
 .hero-card {
   background: rgba(255, 255, 255, 0.05);
