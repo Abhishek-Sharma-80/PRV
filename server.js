@@ -96,7 +96,7 @@ if (count === 0) {
   `);
 
   insertSample.run(
-    'Rajesh Kumar', 'Apex Manufacturing Pvt Ltd', 'Operations Head', '+91 9876543210', 'rajesh@apexmfg.in',
+    'Rajesh Kumar', 'Apex Manufacturing Pvt Ltd', 'Operations Head', '+91 7489 351 297', 'rajesh@apexmfg.in',
     'Pune', 'Maharashtra', 'Manufacturing', '50-250 Employees', 'ZED Certification',
     'Looking to apply for ZED Gold certification and claim government subsidy.', 'Website Form', 'New', 'Unassigned', '2026-08-05', 'High priority MSME lead'
   );
