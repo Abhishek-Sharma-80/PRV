@@ -411,13 +411,23 @@
       }
     }
 
-    // Smart Offline Client-Side AI Response Engine
+    // Smart Offline Client-Side Enterprise AI Response Engine
     function generateOfflineAiResponse(userMessage) {
       const msgLower = userMessage.toLowerCase();
       let aiResponse = '';
       let detectedService = 'General';
       let quickReplies = [];
       let leadCaptured = false;
+
+      const MANDATORY_CLOSING = "Would you like me to recommend the best solution for your business?";
+
+      function enforceClosing(text) {
+        const trimmed = (text || '').trim();
+        if (trimmed.endsWith(MANDATORY_CLOSING)) {
+          return trimmed;
+        }
+        return `${trimmed}\n\n${MANDATORY_CLOSING}`;
+      }
 
       // Auto-capture lead if phone or email is detected in user message
       const phoneMatch = userMessage.match(/(?:\+91[\s-]?)?[6-9]\d{9}/);
@@ -444,85 +454,115 @@
         } catch (e) {}
       }
 
-      if (msgLower.includes('certificate') || msgLower.includes('certifications') || msgLower.includes('shreni') || msgLower.includes('konsa') || msgLower.includes('kaun sa') || msgLower.includes('types of certificate') || msgLower.includes('certificate list') || msgLower.includes('all certificates')) {
-        detectedService = 'Certificate Directory';
-        aiResponse = `📜 **PRV Consultancy Services - Complete Certificate & Compliance Directory**\n\nPRV Consultancy is an accredited 1-Stop Hub for all Indian & International Certifications:\n\n1️⃣ **ISO Certifications**: ISO 9001 (QMS), ISO 14001 (EMS), ISO 45001 (Safety), ISO 27001 (Cybersecurity), ISO 22000 (Food), ISO 13485 (Medical), ISO 50001 (Energy).\n2️⃣ **Government & MSME Subsidies**: ZED Certification (Bronze/Silver/Gold with up to 80% Grant), Udyam Registration, GeM Vendor Certificate, Startup India DPIIT, NSIC.\n3️⃣ **Export & International Standards**: CE Mark (Europe), FDA Approval (USA), RoHS/REACH (Chemical Safety), HALAL, Kosher, GOTS & OEKO-TEX (Textiles).\n4️⃣ **Automotive & High-Tech**: IATF 16949, Core Tools (APQP, PPAP, FMEA), AS9100D (Aerospace), VDA 6.3 Audit.\n5️⃣ **Social & Ethical Audits**: SEDEX / SMETA (2-Pillar & 4-Pillar), SA 8000, BSCI, EcoVadis ESG Rating.\n6️⃣ **Licenses & Statutory Permits**: FSSAI License, BIS / ISI Mark, Pollution Board NOC (CTE/CTO), EPR License (E-Waste/Plastic), Fire Safety NOC.\n\n*Which specific certificate do you need for your business? Ask any query in Hindi or English!*`;
-        quickReplies = ['ISO Certifications', 'ZED MSME Subsidy', 'CE Export Mark', 'BIS / ISI License'];
+      // SCENARIO 1: AUTO PARTS MANUFACTURER QUERY
+      if (
+        (msgLower.includes('auto part') || msgLower.includes('auto component') || msgLower.includes('automotive') || msgLower.includes('car part') || msgLower.includes('oem supplier')) &&
+        (msgLower.includes('which') || msgLower.includes('recommend') || msgLower.includes('take') || msgLower.includes('need') || msgLower.includes('certificate') || msgLower.includes('certification'))
+      ) {
+        detectedService = 'Auto Parts Certification Reasoning';
+        aiResponse = `🚗 **PRV Consultant Strategic Analysis for Auto Parts Manufacturers**\n\nBased on your manufacturing profile as an automotive component producer, **you should NOT take generic certifications**. \n\nWe specifically recommend **IATF 16949:2016** (Automotive Quality Management System) along with the **5 Automotive Core Tools**.\n\n### Why IATF 16949 is Required for Your Business:\n1️⃣ **Mandatory OEM Empanelment**: Top automotive OEMs (Maruti Suzuki, Tata Motors, Hyundai, Mahindra, Hero MotoCorp) and Tier-1 suppliers strictly mandate IATF 16949 certification to award vendor purchase orders.\n2️⃣ **Zero-Defect Standard**: Automotive supply chains require zero PPM rejections, full traceability, and strict defect prevention.\n3️⃣ **5 Automotive Core Tools Mastery**:\n   - **APQP**: Advanced Product Quality Planning for new part development.\n   - **PPAP**: Production Part Approval Process for buyer sign-off.\n   - **FMEA**: Failure Mode & Effects Analysis to prevent shopfloor errors.\n   - **MSA**: Measurement Systems Analysis for gauge accuracy.\n   - **SPC**: Statistical Process Control to guarantee process capability (Cpk > 1.33).\n\n⏱️ **Timeline**: 2 to 3 months (includes shopfloor core tools implementation & audit handholding).\n🤝 **How PRV Helps**: PRV's automotive consultants implement Core Tools directly on your shopfloor and guarantee Tier-1/OEM audit clearance.`;
+        quickReplies = ['IATF 16949 Roadmap', 'Core Tools Workshop', 'MACE Audit Prep', 'Book Free Consultation'];
       }
-      else if (msgLower.includes('ce mark') || msgLower.includes('ce marking') || msgLower.includes('export') || msgLower.includes('rohs') || msgLower.includes('reach') || msgLower.includes('fda') || msgLower.includes('halal') || msgLower.includes('kosher') || msgLower.includes('gots') || msgLower.includes('apeda') || msgLower.includes('import export') || msgLower.includes('iec')) {
-        detectedService = 'Export & Product Compliance';
-        aiResponse = `🌍 **Export Compliance & International Product Certifications**\n\nPRV Consultancy enables seamless international trade & buyer approvals:\n\n• **CE Marking**: Mandatory European Union conformity mark for machinery, electronics & medical devices.\n• **FDA Registration**: US Food & Drug Administration approval for pharma, cosmetics & food exports.\n• **RoHS & REACH**: Hazardous substance & chemical safety compliance for EU exports.\n• **HALAL & KOSHER Certification**: Global food, cosmetic & pharma export approvals.\n• **GOTS & OEKO-TEX**: Organic & eco-safe textile certification for global apparel brands.\n• **IEC & APEDA**: Import Export Code & Agricultural product export registration.`;
-        quickReplies = ['CE Marking Guide', 'FDA Approval Quote', 'ISO Certifications', 'Call +91 74893 51297'];
+
+      // SCENARIO 2: EXPORT QUERY
+      else if (
+        msgLower === 'i want to export' || msgLower === 'i want to export.' || msgLower.includes('want to export') || msgLower.includes('exporting goods') || msgLower.includes('export certification')
+      ) {
+        detectedService = 'Export Certification Reasoning';
+        
+        if (msgLower.includes('food') || msgLower.includes('spices') || msgLower.includes('pharma') || msgLower.includes('cosmetics')) {
+          aiResponse = `🌍 **PRV Consultant Export Solution for Food, Pharma & Cosmetics**\n\nTo export food or pharmaceutical products internationally, you require specific international regulatory clearances:\n\n1️⃣ **FDA Registration & Approval**: Mandatory for exporting food, cosmetics, and pharmaceuticals to the United States.\n2️⃣ **ISO 22000 / HACCP**: Global food safety certification required by international supermarket chains & buyers.\n3️⃣ **HALAL & Kosher Certification**: Essential for exporting to Middle East, SEA, and European food markets.\n4️⃣ **FSSAI Central License**: Mandatory statutory Indian license for export-import food operators.\n\n⏱️ **Timeline**: 2 to 4 weeks.`;
+          quickReplies = ['FDA Approval Quote', 'ISO 22000 FSMS', 'HALAL Certification', 'Book Free Consultation'];
+        }
+        else if (msgLower.includes('machine') || msgLower.includes('electronic') || msgLower.includes('equipment') || msgLower.includes('device') || msgLower.includes('hardware')) {
+          aiResponse = `🌍 **PRV Consultant Export Solution for Machinery & Electronics**\n\nFor exporting machinery, electricals, or industrial hardware, buyer regions require conformity marks:\n\n1️⃣ **CE Marking**: Mandatory European Union conformity certification for selling industrial machinery, electronics, and hardware in Europe.\n2️⃣ **RoHS & REACH Compliance**: Hazardous substance & chemical safety verification required for EU & UK markets.\n3️⃣ **ISO 9001:2015**: Globally recognized baseline quality management system for international buyers.\n\n⏱️ **Timeline**: 2 to 3 weeks.`;
+          quickReplies = ['CE Marking Guide', 'RoHS Compliance', 'ISO 9001 Quote', 'Book Free Consultation'];
+        }
+        else if (msgLower.includes('textile') || msgLower.includes('garment') || msgLower.includes('apparel') || msgLower.includes('clothing')) {
+          aiResponse = `🌍 **PRV Consultant Export Solution for Textiles & Apparel**\n\nFor exporting garments and textiles to Western buyers (Walmart, Zara, Disney, Target):\n\n1️⃣ **SEDEX / SMETA Ethical Audit (2 & 4 Pillar)**: Mandatory social, labor, safety, and business ethics audit.\n2️⃣ **GOTS / OEKO-TEX**: Global Organic Textile Standard & eco-friendly fabric safety certification.\n\n⏱️ **Timeline**: 1 to 3 weeks.`;
+          quickReplies = ['Prepare for SMETA Audit', 'GOTS Certification', 'Book Free Consultation'];
+        }
+        else {
+          aiResponse = `🌍 **PRV Consultant Export Certification Roadmap**\n\nExport certification requirements depend strictly on your **product category** and **target country**:\n\n• **Machinery & Electronics**: Require **CE Marking** & **RoHS/REACH** (European Union).\n• **Food, Pharma & Cosmetics**: Require **FDA Registration**, **ISO 22000 / HACCP**, and **HALAL**.\n• **Textiles & Consumer Goods**: Require **SEDEX / SMETA Ethical Audits** for global retail buyers.\n• **All Product Lines**: Require **ISO 9001:2015** as baseline quality assurance.\n\n👉 **To give you the exact export requirement**: What specific product does your company manufacture, and which country are you planning to export to?`;
+          quickReplies = ['Exporting Machinery', 'Exporting Food/Pharma', 'Exporting Textiles', 'Book Free Consultation'];
+        }
       }
-      else if (msgLower.includes('bis') || msgLower.includes('isi') || msgLower.includes('crs') || msgLower.includes('bee') || msgLower.includes('gem') || msgLower.includes('government e marketplace') || msgLower.includes('startup india') || msgLower.includes('dpiit') || msgLower.includes('nsic')) {
-        detectedService = 'BIS & Govt Licenses';
-        aiResponse = `🇮🇳 **Indian Government & Mandatory Product Certificates**\n\n• **BIS / ISI Mark**: Mandatory Indian Standard quality certification for electronics, steel, toys, footwear & industrial items.\n• **BIS CRS (Compulsory Registration Scheme)**: Mandatory testing & safety registration for IT goods.\n• **GeM Portal Registration**: Government e-Marketplace vendor onboarding to win central & state government tenders.\n• **Startup India DPIIT Recognition**: Tax exemptions, fast-track patenting, and government funding eligibility.\n• **NSIC Registration**: Single Point Registration for MSMEs for EMD waiver in tenders.\n• **BEE Star Rating**: Bureau of Energy Efficiency certification for electrical appliances.`;
-        quickReplies = ['BIS ISI Mark Info', 'GeM Registration', 'Startup India DPIIT', 'Talk to Consultant'];
+
+      // SCENARIO 3: SUBSIDY QUERY
+      else if (
+        msgLower === 'i want government subsidy' || msgLower === 'i want government subsidy.' || msgLower.includes('want subsidy') || msgLower.includes('government subsidy') || msgLower.includes('govt grant')
+      ) {
+        detectedService = 'Government Subsidy Reasoning';
+        aiResponse = `💰 **PRV Consultant Analysis of Applicable Government Subsidies**\n\nPRV Consultancy helps MSMEs and industrial units claim direct government financial subsidies:\n\n1️⃣ **ZED (Zero Defect Zero Effect) MSME Scheme**:\n   - **Up to 80% Subsidy** on audit & certification costs.\n   - **₹10,000 Handholding Support Grant** for consultancy.\n   - **0.5% Concessional Bank Interest Rate** on business loans.\n   - **Up to ₹5 Lakhs Capital Subsidy** for testing equipment.\n\n2️⃣ **NATS & NAPS Apprenticeship Schemes**:\n   - Central Government stipend reimbursement up to **₹1,500/month per candidate**.\n   - **100% Exemption from PF & ESI** liabilities on apprentice stipends.\n\n3️⃣ **GeM & Startup India Subsidies**:\n   - EMD waiver on government tenders & fast-track patent grants.\n\n📋 **Eligibility Check**: Do you hold an active **Udyam MSME Registration** for your unit?`;
+        quickReplies = ['ZED MSME Subsidy', 'NATS Stipend Subsidy', 'GeM Portal Info', 'Book Free Consultation'];
       }
-      else if (msgLower.includes('food') || msgLower.includes('fssai') || msgLower.includes('haccp') || msgLower.includes('medical') || msgLower.includes('13485') || msgLower.includes('cdsco') || msgLower.includes('gmp') || msgLower.includes('dawa') || msgLower.includes('khana')) {
-        detectedService = 'Food & Medical Certifications';
-        aiResponse = `🥗 **Food Safety & Medical Compliance Certificates**\n\n• **FSSAI Basic, State & Central License**: Mandatory food business operator license in India.\n• **ISO 22000 & HACCP**: Hazard Analysis Critical Control Point certification for food processors & exporters.\n• **GMP Certificate**: Good Manufacturing Practice certification for Pharma, Cosmetics & Herbal units.\n• **ISO 13485 & CDSCO Licensing**: Mandatory Quality Management System & Central Drugs Standard Control clearance for medical device manufacturers.`;
-        quickReplies = ['FSSAI License Quote', 'ISO 22000 Food Safety', 'ISO 13485 Medical', 'Book Consultation'];
+
+      // SCENARIO 4: DISAMBIGUATION FOR GENERIC ISO QUERY ("What is ISO?")
+      else if (
+        msgLower === 'what is iso' || msgLower === 'what is iso?' || msgLower === 'iso kya hai' || msgLower === 'iso kya hai?' || msgLower === 'iso' || msgLower === 'tell me about iso'
+      ) {
+        detectedService = 'ISO Professional Overview';
+        aiResponse = `📜 **Professional Overview of ISO (International Organization for Standardization)**\n\nISO is an independent, non-governmental international organization based in Geneva, Switzerland. It develops globally recognized standards for quality, safety, security, environmental protection, and operational efficiency.\n\n### Key ISO Standards for Businesses:\n• **ISO 9001:2015**: Quality Management System (QMS) - Standard for tenders & vendor onboarding.\n• **ISO 14001:2015**: Environmental Management System (EMS) - Standard for pollution compliance & ESG.\n• **ISO 45001:2018**: Occupational Health & Safety (OH&S) - Standard for worker safety & Factory Act compliance.\n• **ISO 27001:2022**: Information Security (ISMS) - Standard for IT companies & data protection.\n• **ISO 22000:2018**: Food Safety (FSMS) - Standard for food processors & exporters.\n• **ISO 50001:2018**: Energy Management (EnMS) - Standard for slacking factory power bills.\n\n👉 **Which industry or product does your company operate in?** Tell me your business type, and I will recommend the exact ISO standard that will bring you the highest business value.`;
+        quickReplies = ['Recommend for my business', 'ISO 9001 QMS', 'ISO 27001 ISMS', 'ISO 22000 Food Safety'];
       }
-      else if (msgLower.includes('pollution') || msgLower.includes('cpcb') || msgLower.includes('spcb') || msgLower.includes('epr') || msgLower.includes('waste') || msgLower.includes('fire') || msgLower.includes('noc') || msgLower.includes('esg') || msgLower.includes('environment')) {
-        detectedService = 'Environmental & Statutory Licenses';
-        aiResponse = `🌱 **Environmental, EPR & Statutory Safety Certificates**\n\n• **Pollution Board NOC**: CTE (Consent to Establish) and CTO (Consent to Operate) from SPCB / CPCB.\n• **EPR License (Extended Producer Responsibility)**: Mandatory authorization for Plastic Packaging, E-Waste & Battery importers/producers.\n• **Fire Safety NOC & Factory License**: Mandatory industrial factory inspectorate clearance.\n• **ISO 14001 EMS & ESG Audits**: Environmental & Social Governance scoring for corporate & export readiness.`;
-        quickReplies = ['Pollution NOC Process', 'EPR License Details', 'ISO 14001 EMS', 'Request Callback'];
-      }
-      else if (msgLower.includes('27001') || msgLower.includes('cyber') || msgLower.includes('security') || msgLower.includes('soc 2') || msgLower.includes('soc2') || msgLower.includes('cmmi') || msgLower.includes('it security') || msgLower.includes('data protection')) {
-        detectedService = 'Cybersecurity & IT Certifications';
-        aiResponse = `🔒 **Information Security & IT Certifications**\n\n• **ISO 27001:2022 ISMS**: International Gold Standard for Cybersecurity & Data Protection.\n• **SOC 2 Type I & Type II**: Service Organization Control compliance report for SaaS & IT service providers.\n• **CMMI Maturity Appraisal**: Capability Maturity Model Integration appraisal (Level 3 / Level 5).\n• **ISO 20000-1**: IT Service Management System standard.`;
-        quickReplies = ['ISO 27001 ISMS Quote', 'SOC 2 Audit Prep', 'ISO 9001 Process', 'Call +91 74893 51297'];
-      }
-      else if (msgLower.includes('zed') || msgLower.includes('msme') || msgLower.includes('subsidy') || msgLower.includes('zero defect')) {
+
+      // ZED SCHEME
+      else if (msgLower.includes('zed') || msgLower.includes('zero defect')) {
         detectedService = 'ZED Certification';
-        aiResponse = `🏆 **ZED (Zero Defect Zero Effect) Scheme for MSMEs**\n\nPRV Consultancy is an accredited consultant for the Ministry of MSME ZED Certification Scheme.\n\n✨ **Key Benefits & Subsidies**:\n• **Bronze Level**: 80% Subsidy on Certification cost + ₹10,000 Handholding Support Grant.\n• **Silver Level**: 60% Subsidy + Up to ₹5 Lakhs Testing & Capital Subsidy.\n• **Gold Level**: 50% Subsidy + Freight & Concessional Bank Interest (0.5% lower interest).\n\n📋 **Process**: Udyam Registration -> Self-Assessment -> Handholding by PRV Experts -> Desktop Verification -> Final Audit & Subsidy Clearance.\n\nWould you like our senior consultant to guide your MSME unit?`;
-        quickReplies = ['Book ZED Consultation', 'ISO 9001 Process', 'NATS Apprenticeship', 'Call +91 74893 51297'];
+        aiResponse = `🏆 **ZED (Zero Defect Zero Effect) MSME Scheme & Subsidy Guide**\n\n• **What it is**: Ministry of MSME national scheme for zero-defect production.\n• **Why required**: Claim grants, lower bank loan rates, win tenders.\n• **Eligibility**: MSME manufacturing units with valid Udyam Registration.\n• **Subsidies**: 80% Bronze Subsidy, 60% Silver, 50% Gold + ₹10,000 grant + 0.5% lower bank interest rate.\n• **Timeline**: 2 to 4 weeks.\n• **How PRV Helps**: Complete portal registration, desktop verification & subsidy claim settlement.`;
+        quickReplies = ['ZED Subsidy Details', 'ISO vs ZED', 'Book Free Consultation'];
       }
-      else if (msgLower.includes('iso') || msgLower.includes('9001') || msgLower.includes('14001') || msgLower.includes('45001') || msgLower.includes('50001')) {
-        detectedService = 'ISO Certifications';
-        aiResponse = `📜 **ISO Certification Solutions by PRV Consultancy**\n\nWe provide end-to-end guidance for ISO Certifications across industries:\n\n• **ISO 9001:2015**: Quality Management System (QMS)\n• **ISO 14001:2015**: Environmental Management System (EMS)\n• **ISO 45001:2018**: Occupational Health & Safety (OH&S)\n• **ISO 27001:2022**: Information Security Management (ISMS)\n• **ISO 22000 / FSSAI**: Food Safety Management\n• **ISO 13485**: Medical Devices QMS\n\n⏱️ **Timeline**: 2 to 4 weeks (Includes gap analysis, documentation, internal audit & certification clearance).\n\nWould you like a customized quotation for your organization?`;
-        quickReplies = ['Get ISO Quote', 'ZED MSME Subsidy', 'SEDEX Audit', 'Book Consultation'];
+
+      // ISO 9001
+      else if (msgLower.includes('9001') || (msgLower.includes('iso') && msgLower.includes('quality'))) {
+        detectedService = 'ISO 9001 QMS';
+        aiResponse = `📘 **ISO 9001:2015 Quality Management System (QMS)**\n\n• **What it is**: International gold standard for Quality Management Systems.\n• **Why required**: Mandatory for Govt Tenders, OEM vendor approvals & corporate registration.\n• **Eligibility**: Any manufacturing, service, or IT company.\n• **Benefits**: 100% tender eligibility, zero shopfloor re-work, standardized SOPs.\n• **Timeline**: 10 to 20 business days.\n• **How PRV Helps**: SOP drafting, internal audit, staff training & guaranteed 100% audit clearance.`;
+        quickReplies = ['Get ISO 9001 Quote', 'ISO vs ZED', 'Book Free Consultation'];
       }
-      else if (msgLower.includes('sedex') || msgLower.includes('smeta') || msgLower.includes('social audit') || msgLower.includes('sa 8000') || msgLower.includes('sa8000') || msgLower.includes('bsci') || msgLower.includes('wrap') || msgLower.includes('ecovadis')) {
-        detectedService = 'SEDEX / SMETA Audit';
-        aiResponse = `🛡️ **Compliance & Social Audits (SEDEX, SMETA, SA 8000, EcoVadis)**\n\nPRV Consultancy prepares manufacturing & textile units for export & buyer compliance audits:\n\n• **SEDEX / SMETA 2-Pillar & 4-Pillar Audits**: Labor standards, Health & Safety, Environment, Business Ethics.\n• **SA 8000**: Social Accountability International Standard.\n• **BSCI / Amfori & WRAP**: Retail buyer vendor approval.\n• **EcoVadis**: Global supplier sustainability rating.`;
-        quickReplies = ['Prepare for SMETA Audit', 'ISO Certifications', 'Request Callback', 'Contact PRV Team'];
+
+      // IATF 16949
+      else if (msgLower.includes('iatf') || msgLower.includes('16949') || msgLower.includes('core tools')) {
+        detectedService = 'IATF 16949 Automotive';
+        aiResponse = `🚗 **IATF 16949:2016 Automotive Quality System & Core Tools**\n\n• **What it is**: Global automotive quality standard required by OEMs (Maruti, Tata, Hyundai).\n• **Core Tools**: APQP, PPAP, FMEA, MSA, SPC.\n• **Benefits**: Mandatory Tier-1/OEM vendor approval & zero defect quality.\n• **Timeline**: 2 to 3 months.\n• **How PRV Helps**: Hands-on shopfloor Core Tools implementation & Tier-1 audit clearance.`;
+        quickReplies = ['Core Tools Workshop', 'ISO vs IATF', 'Book Free Consultation'];
       }
-      else if (msgLower.includes('5s') || msgLower.includes('kaizen') || msgLower.includes('lean') || msgLower.includes('operational excellence')) {
-        detectedService = '5S & Kaizen';
-        aiResponse = `⚡ **5S & Kaizen Operational Excellence Program**\n\nTransform your shop-floor & office productivity with PRV's Master Business Excellence Blueprint:\n\n• **1S (Sort)**: Eliminate unnecessary tools & waste.\n• **2S (Set in Order)**: Organized layout & quick retrieval.\n• **3S (Shine)**: Clean, safe, and fault-free workplace.\n• **4S (Standardize)**: SOPs, visual control & checklists.\n• **5S (Sustain)**: Mindset shift, daily audits & continuous Kaizen.\n\n📈 **Results**: 25-40% increase in productivity, 50% defect reduction, and high workforce morale.`;
-        quickReplies = ['Book 5S Workshop', 'IATF 16949 Training', 'ZED Certification', 'Request Callback'];
+
+      // FSSAI
+      else if (msgLower.includes('fssai') || msgLower.includes('food license')) {
+        detectedService = 'FSSAI License';
+        aiResponse = `🥗 **FSSAI Food License & Statutory Clearance**\n\n• **What it is**: Mandatory Indian statutory food license under FSSAI Act.\n• **Slabs**: Basic (turnover < ₹12L), State (₹12L - ₹20Cr), Central (> ₹20Cr / Exporters).\n• **Timeline**: 7 to 15 days.\n• **How PRV Helps**: FoSCoS filing, department query resolution & fast-track license approval.`;
+        quickReplies = ['FSSAI License Quote', 'ISO 22000 FSMS', 'Book Free Consultation'];
       }
-      else if (msgLower.includes('nats') || msgLower.includes('naps') || msgLower.includes('apprentice') || msgLower.includes('stipend')) {
-        detectedService = 'NATS Apprenticeship';
-        aiResponse = `🎓 **NATS & NAPS Government Apprenticeship Scheme**\n\nReduce workforce payroll costs while onboarding trained talent under Central Government Schemes:\n\n• **Financial Support**: Direct stipend subsidy reimbursement up to ₹1,500/month per apprentice.\n• **Statutory Relief**: Exemption from ESI & PF obligations on apprentice stipends.\n• **Talent Pipeline**: Hire ITI, Diploma, and B.Tech/Degree freshers seamlessly.\n• **PRV Handholding**: Complete portal registration, contract creation, stipend claim submission, and monthly compliance management.`;
-        quickReplies = ['Onboard Apprentices', 'Corporate Training', 'ISO Certification', 'Call PRV Team'];
+
+      // SEDEX SMETA
+      else if (msgLower.includes('sedex') || msgLower.includes('smeta')) {
+        detectedService = 'SEDEX SMETA Audit';
+        aiResponse = `🛡️ **SEDEX SMETA Ethical & Social Compliance Audit**\n\n• **What it is**: World's leading ethical audit evaluating labor, health & safety, environment, ethics.\n• **Pillars**: 2-Pillar & 4-Pillar Audits.\n• **Benefits**: Mandatory for supplying to Walmart, Disney, Zara, Target, H&M.\n• **Timeline**: 1 to 3 weeks.\n• **How PRV Helps**: Mock audit, document verification & zero NC clearance guarantee.`;
+        quickReplies = ['Prepare for SMETA Audit', 'SEDEX vs Social Audit', 'Book Free Consultation'];
       }
-      else if (msgLower.includes('iatf') || msgLower.includes('16949') || msgLower.includes('automotive') || msgLower.includes('as9100') || msgLower.includes('vda') || msgLower.includes('core tools') || msgLower.includes('apqp') || msgLower.includes('ppap')) {
-        detectedService = 'IATF 16949';
-        aiResponse = `🚗 **IATF 16949 & Automotive Core Tools**\n\nAutomotive manufacturing consultancy & Core Tools practical training:\n\n• **APQP** (Advanced Product Quality Planning)\n• **PPAP** (Production Part Approval Process)\n• **FMEA** (Failure Mode and Effects Analysis - AIAG-VDA)\n• **MSA** (Measurement Systems Analysis)\n• **SPC** (Statistical Process Control)\n• **AS9100D**: Aerospace Quality System.\n\nEquip your engineers and clear Tier-1 / Tier-2 OEM supplier audits.`;
-        quickReplies = ['Core Tools Workshop', 'ISO 9001 QMS', 'ZED Scheme', 'Talk to Consultant'];
+
+      // NATS / NAPS
+      else if (msgLower.includes('nats') || msgLower.includes('naps') || msgLower.includes('apprentice')) {
+        detectedService = 'Apprenticeship Schemes';
+        aiResponse = `🎓 **NATS & NAPS Government Apprenticeship Schemes**\n\n• **NATS**: For Engineering/Diploma/Degree graduates (Govt reimburses up to ₹1,500/month per candidate).\n• **NAPS**: For ITI & non-technical floor operators.\n• **Statutory Relief**: 100% Exemption from PF & ESI contributions.\n• **How PRV Helps**: Portal registration, contract execution & monthly stipend claim filings.`;
+        quickReplies = ['NATS Scheme Info', 'NAPS Process', 'Book Free Consultation'];
       }
-      else if (msgLower.includes('price') || msgLower.includes('cost') || msgLower.includes('fee') || msgLower.includes('kharcha') || msgLower.includes('rate') || msgLower.includes('kitna')) {
-        detectedService = 'Pricing Inquiry';
-        aiResponse = `💰 **Pricing & Investment Overview**\n\nPRV Consultancy provides cost-optimized pricing tailored to your company's size, employee count, and certification scope:\n\n• **ZED Certification**: Up to 80% government subsidy available!\n• **NATS Apprenticeship**: Government stipend reimbursement reduces effective manpower cost.\n• **ISO & Audit Consultancies**: Milestone-based flexible pricing.\n\nType your phone number or email in chat to receive an instant detailed customized quotation!`;
-        quickReplies = ['Book Consultation', 'ZED Subsidy Details', 'ISO 9001 Quote', 'Call +91 74893 51297'];
+
+      // PROFIT MAXIMIZATION / 5S
+      else if (msgLower.includes('profit') || msgLower.includes('5s') || msgLower.includes('kaizen') || msgLower.includes('lean')) {
+        detectedService = 'Profit Maximization';
+        aiResponse = `⚡ **Profit Maximization & 5S Lean Kaizen Blueprint**\n\n• **Goal**: Expand net profit margin by 15-35% and eliminate shopfloor waste (7 Mudas).\n• **5S Pillars**: Sort, Set in Order, Shine, Standardize, Sustain.\n• **Results**: 20-30% productivity boost, 50% scrap reduction.\n• **How PRV Helps**: On-site consulting, value stream mapping & measurable ROI.`;
+        quickReplies = ['5S Kaizen Workshop', 'Profit Maximization Plan', 'Book Free Consultation'];
       }
-      else if (msgLower.includes('contact') || msgLower.includes('phone') || msgLower.includes('call') || msgLower.includes('number') || msgLower.includes('address') || msgLower.includes('email') || msgLower.includes('whatsapp') || msgLower.includes('samparak')) {
-        detectedService = 'Contact Request';
-        aiResponse = `📞 **PRV Consultancy Services - Contact Details**\n\n• **Phone / Mobile**: +91 74893 51297\n• **Email**: info@prvconsultancy.com\n• **Coverage**: Pan-India & Global Consultancy Services\n• **Headquarters**: Industrial Hub Consultancy Wing\n\nYou can share your phone number directly here in chat, and our senior consultant will reach out to you within 15 minutes!`;
-        quickReplies = ['Book Free Consultation', 'ZED Scheme', 'ISO Certification', 'WhatsApp Chat'];
-      }
-      else if (msgLower.includes('hi') || msgLower.includes('hello') || msgLower.includes('namaste') || msgLower.includes('madad') || msgLower.includes('help') || msgLower.includes('kaise')) {
-        detectedService = 'Greeting';
-        aiResponse = `🙏 **Namaste! Welcome to PRV Consultancy Services AI Assistant.**\n\nMain aapki ISO Certifications, ZED Govt Subsidies, CE Mark Export Compliance, BIS/ISI, FSSAI, SEDEX Audits, aur NATS Apprenticeship me full guidance de sakta hu.\n\nAap kisi bhi certificate ke bare me poochh sakte hain:\n\n• **ISO Certifications** (9001, 14001, 45001, 27001, 22000)\n• **Government Subsidies** (ZED 80% Subsidy, Udyam, GeM, Startup India)\n• **Export & Product Marks** (CE Mark, BIS/ISI, FDA, RoHS, HALAL)\n• **Licenses** (FSSAI Food License, Pollution Board NOC, EPR License)\n• **Social & Automotive** (SEDEX SMETA, IATF 16949, SA 8000)`;
-        quickReplies = ['All Certificates List', 'ZED MSME Subsidy', 'ISO 9001 Info', 'Book Consultation'];
-      }
+
+      // DEFAULT CONSULTANT RESPONSE
       else {
-        aiResponse = `🤖 Thank you for contacting **PRV Consultancy Services**!\n\nRegarding your query about: *"${userMessage}"*\n\nPRV Consultancy is your 1-Stop Partner for all Certificates:\n1. **ISO Certifications** (9001, 14001, 45001, 27001, 22000, 13485)\n2. **ZED Certification & MSME Subsidies** (Up to 80% grant)\n3. **Export & Product Standards** (CE Mark, BIS ISI, FDA, RoHS, HALAL)\n4. **SEDEX / SMETA & Buyer Compliance Audits**\n5. **Licenses & Permits** (FSSAI, Pollution Board NOC, EPR License)\n\nPlease select an option below or type your phone number for an immediate consultant callback!`;
-        quickReplies = ['All Certificates Directory', 'ISO Certifications', 'ZED Subsidy Scheme', 'Book Consultation'];
+        aiResponse = `🏢 **Welcome to PRV Consultancy Services**\n\nI am your **PRV Senior AI Business Consultant**. I specialize in:\n• **ISO Certifications** (9001, 14001, 45001, 27001, 22000, 13485)\n• **ZED MSME Subsidy** (Up to 80% Grant)\n• **IATF 16949 & Automotive Core Tools**\n• **FSSAI License & SEDEX SMETA Audits**\n• **NATS / NAPS Manpower Cost Optimization**\n\nPlease share your company's industry or goal, and I will recommend the best solution for your business!`;
+        quickReplies = ['Which certificate do I need?', 'ZED MSME Subsidy', 'ISO 9001 QMS', 'Book Free Consultation'];
       }
+
+      // ENFORCE MANDATORY CLOSING
+      aiResponse = enforceClosing(aiResponse);
 
       if (leadCaptured) {
         aiResponse += `\n\n✅ **Success**: Your contact info has been recorded! A PRV senior consultant will call you shortly.`;

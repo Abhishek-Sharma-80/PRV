@@ -606,111 +606,96 @@ const server = http.createServer(async (req, res) => {
         }
       }
 
-      const costDisclaimer = "\n\n💡 *Note on Pricing*: The cost depends on the size of your organization, number of employees, locations and project scope. Our consultant can provide a customized quotation.";
+      const MANDATORY_CLOSING = "Would you like me to arrange a FREE consultation with one of our PRV business experts, or is there anything else you'd like to know?";
 
-      // Helper function to build detailed guide answers according to Master Prompt rules
-      // Helper function to build detailed guide answers according to Master Prompt rules & user language
-      function buildGuideAnswer(guideKey, serviceName) {
+      function enforceClosing(text) {
+        const trimmed = (text || '').trim();
+        if (trimmed.endsWith(MANDATORY_CLOSING)) {
+          return trimmed;
+        }
+        return `${trimmed}\n\n${MANDATORY_CLOSING}`;
+      }
+
+      // Helper function to build detailed guide answers according to 9-point consultant structure
+      function buildGuideAnswer(guideKey) {
         const g = knowledgeBase.guides[guideKey];
         if (!g) return null;
 
-        // Multilingual Label Dictionary
-        const labels = {
-          hindi: {
-            what: 'यह क्या है',
-            why: 'कंपनियों के लिए क्यों आवश्यक है',
-            who: 'कौन आवेदन कर सकता है',
-            subsidies: 'सरकारी सब्सिडी और अनुदान',
-            core_tools: 'Automotive Core Tools शामिल',
-            benefits: 'मुख्य लाभ (Benefits)',
-            process: 'चरणबद्ध प्रक्रिया (Process)',
-            docs: 'आवश्यक दस्तावेज़ (Documents)',
-            time: 'लगने वाला समय',
-            cost: 'शुल्क एवं निवेश',
-            helps: 'PRV Consultancy आपकी कैसे मदद करता है'
-          },
-          hinglish: {
-            what: 'Yeh kya hai',
-            why: 'Kyun zaroori hai',
-            who: 'Kaun apply kar sakta hai',
-            subsidies: 'Subsidies & Govt Grants',
-            core_tools: 'Automotive Core Tools Included',
-            benefits: 'Key Benefits (Fayde)',
-            process: 'Step-by-Step Process',
-            docs: 'Zaroori Documents List',
-            time: 'Kitna Time Lagta hai',
-            cost: 'Cost & Investment Policy',
-            helps: 'PRV Consultancy Kaise Help Karta hai'
-          },
-          english: {
-            what: 'What it is',
-            why: 'Why companies need it',
-            who: 'Who should apply',
-            subsidies: 'Subsidies & Grants',
-            core_tools: 'Automotive Core Tools Included',
-            benefits: 'Key Benefits',
-            process: 'Process',
-            docs: 'Documents Required',
-            time: 'Time Required',
-            cost: 'Investment',
-            helps: 'How PRV Consultancy Helps'
-          }
-        };
-
-        const l = labels[userLang] || labels['english'];
-
-        let res = `📘 **${g.title || serviceName}**\n\n`;
-        if (g.what_it_is) res += `• **${l.what}**: ${g.what_it_is}\n`;
-        if (g.why_needed) res += `• **${l.why}**: ${g.why_needed}\n`;
-        if (g.who_should_apply) res += `• **${l.who}**: ${g.who_should_apply}\n\n`;
+        let res = `📘 **${g.title}**\n\n`;
         
+        // 1. What it is
+        if (g.introduction || g.what_it_is) {
+          res += `• **What it is**: ${g.introduction || g.what_it_is}\n`;
+        }
+        // 2. Why required
+        if (g.why_required || g.why_needed) {
+          res += `• **Why it is required**: ${g.why_required || g.why_needed}\n`;
+        }
+        // 3. Who should use it
+        if (g.eligibility || g.who_should_apply) {
+          res += `• **Who should use it**: ${g.eligibility || g.who_should_apply}\n\n`;
+        }
+        // Subsidies / Levels (if any)
         if (g.levels_and_subsidies) {
-          res += `💰 **${l.subsidies}**:\n`;
+          res += `💰 **Subsidies & Grants**:\n`;
           Object.entries(g.levels_and_subsidies).forEach(([lvl, detail]) => {
             res += `  - **${lvl}**: ${detail}\n`;
           });
           res += `\n`;
         }
-
+        // Core Tools (if any)
         if (g.core_tools && Array.isArray(g.core_tools)) {
-          res += `🛠️ **${l.core_tools}**:\n`;
+          res += `🛠️ **Automotive Core Tools Included**:\n`;
           g.core_tools.forEach(t => res += `  - ${t}\n`);
           res += `\n`;
         }
-
+        // 4. Business benefits
         if (g.benefits && Array.isArray(g.benefits)) {
-          res += `✨ **${l.benefits}**:\n`;
+          res += `✨ **Business Benefits**:\n`;
           g.benefits.forEach(b => res += `  - ${b}\n`);
           res += `\n`;
         }
-
+        // 5. Process
         if (g.process && Array.isArray(g.process)) {
-          res += `📋 **${l.process}**:\n`;
+          res += `📋 **Process**:\n`;
           g.process.forEach((p, idx) => res += `  ${idx + 1}. ${p}\n`);
           res += `\n`;
         }
-
+        // 6. Documents required
         if (g.documents_required && Array.isArray(g.documents_required)) {
-          res += `📄 **${l.docs}**:\n`;
+          res += `📄 **Documents Generally Required**:\n`;
           g.documents_required.forEach(d => res += `  - ${d}\n`);
           res += `\n`;
         }
+        // 7. Timeline
+        if (g.timeline || g.time_required) {
+          res += `⏱️ **Timeline**: ${g.timeline || g.time_required}\n`;
+        }
+        // 8. Frequently Asked Questions
+        if (g.faqs && Array.isArray(g.faqs) && g.faqs.length > 0) {
+          res += `\n❓ **Frequently Asked Questions**:\n`;
+          g.faqs.forEach(f => {
+            res += `  - **Q: ${f.question}**\n    *A: ${f.answer}*\n`;
+          });
+          res += `\n`;
+        }
+        // 9. How PRV Consultancy helps
+        if (g.prv_approach || g.how_prv_helps) {
+          res += `🤝 **How PRV Consultancy Helps**: ${g.prv_approach || g.how_prv_helps}\n\n`;
+        }
+        // Recommended solution / verdict
+        if (g.prv_recommended_solution) {
+          res += `🎯 **PRV Consultant Recommendation**: ${g.prv_recommended_solution}\n\n`;
+        }
 
-        if (g.time_required) res += `⏱️ **${l.time}**: ${g.time_required}\n`;
-        res += `💵 **${l.cost}**: ${g.cost_note || costDisclaimer}\n\n`;
-        if (g.how_prv_helps) res += `🤝 **${l.helps}**: ${g.how_prv_helps}\n\n`;
-
-        res += `👉 **Next Recommended Action**: Would you like to schedule a **FREE 15-Minute Consultation** with our senior expert to discuss your exact implementation roadmap?`;
-        
         return res;
       }
 
-      // Helper to build comparison tables
       function buildComparisonTable(compKey) {
         const c = knowledgeBase.comparisons[compKey];
         if (!c) return null;
 
-        let res = `📊 **${c.title} - Detailed Comparison Matrix**\n\n`;
+        let res = `📊 **${c.title} - Comparison Matrix**\n\n`;
         c.table.forEach((row, idx) => {
           if (idx === 0) {
             res += `| ${row[0]} | ${row[1]} | ${row[2]} |\n`;
@@ -719,287 +704,249 @@ const server = http.createServer(async (req, res) => {
             res += `| **${row[0]}** | ${row[1]} | ${row[2]} |\n`;
           }
         });
-        res += `\n🎯 **PRV Consultant Verdict**: ${c.verdict}`;
+        res += `\n🎯 **PRV Consultant Verdict**: ${c.verdict}\n\n`;
         return res;
       }
 
       // ------------------------------------------------------------------------
-      // PRV SYSTEM PROMPT RULES 1-15 ENGINE
+      // INTELLIGENT CONSULTING REASONING ENGINE
       // ------------------------------------------------------------------------
 
-      // ------------------------------------------------------------------------
-      // PRV 3-LAYER AI BUSINESS EXCELLENCE ADVISOR ENGINE
-      // ------------------------------------------------------------------------
-
-      const offTopicKeywords = ['cricket', 'ipl', 'match', 'movie', 'film', 'actor', 'actress', 'weather', 'politics', 'election', 'song', 'recipe', 'food recipe', 'game', 'football', 'joke', 'python code', 'java code', 'programming', 'who is president', 'who won'];
-      const isOffTopic = offTopicKeywords.some(kw => msgLower.includes(kw)) && !msgLower.includes('iso') && !msgLower.includes('zed') && !msgLower.includes('audit');
-
-      // WELCOME ACTION TRIGGER BUTTONS
-      if (msgLower.includes('get certified') || msgLower.includes('🏆 get certified')) {
-        detectedService = 'Qualification Step 1';
-        aiResponse = `🏆 **Let's find the right certification for your organization!**\n\nTo give you the exact recommendation and calculate government subsidies, please select your Industry:\n\n1️⃣ 🏭 Manufacturing & Engineering\n2️⃣ 🚗 Automotive & Components\n3️⃣ 🥗 Food & Beverage\n4️⃣ 💻 IT, Software & SaaS\n5️⃣ 🧵 Textile & Apparel\n6️⃣ 🏥 Healthcare & Pharma\n7️⃣ 📦 MSME / Startup`;
-        quickReplies = ['Manufacturing', 'Automobile', 'Food Industry', 'IT Company', 'Textile', 'MSME / Startup'];
-      }
-      else if (msgLower.includes('audit & compliance') || msgLower.includes('📋 audit & compliance')) {
-        detectedService = 'Audit & Compliance';
-        aiResponse = `📋 **PRV Audit & Compliance Solutions**:\n\n1️⃣ **SEDEX / SMETA Ethical Audit (2 & 4 Pillar)**: Global export & retail buyer compliance.\n2️⃣ **MACE Audit Prep**: Maruti Suzuki & Tier-1 OEM audit readiness.\n3️⃣ **FSSAI Food Safety Compliance**: Mandatory licensing, FoSTaC & Hygiene SOPs.\n4️⃣ **ISO Internal & Statutory Audits**: ISO 9001, 14001, 45001, 27001.\n\n*Which audit compliance do you need assistance with?*`;
-        quickReplies = ['SEDEX SMETA Audit', 'MACE Audit Prep', 'FSSAI License', 'Book Free Consultation'];
-      }
-      else if (msgLower.includes('improve productivity') || msgLower.includes('📈 improve productivity')) {
-        detectedService = 'Productivity Improvement';
-        aiResponse = `📈 **PRV Operational Excellence & Productivity Solutions**:\n\n1️⃣ **5S & Shopfloor Organization**: 20-30% shopfloor waste reduction.\n2️⃣ **Lean Kaizen & Capacity Optimization**: Eliminate bottleneck losses & increase throughput.\n3️⃣ **Profit Maximization Blueprint**: Cost reduction & margin enhancement.\n4️⃣ **Master Business Excellence Program**: 11 Excellence Pillars for business transformation.`;
-        quickReplies = ['5S Kaizen Workshop', 'Profit Maximization', 'Master Business Program', 'Book Free Consultation'];
-      }
-      else if (msgLower.includes('reduce costs') || msgLower.includes('💰 reduce costs')) {
-        detectedService = 'Cost Reduction & Subsidies';
-        aiResponse = `💰 **Financial Incentives & Cost Reduction Roadmap**:\n\n1️⃣ **ZED Scheme**: Claim up to **80% Govt Subsidy** on audit fees + **0.5% lower bank interest rate**.\n2️⃣ **NATS Scheme**: Central Govt stipend reimbursement up to **₹1,500/month per apprentice**.\n3️⃣ **Operational Waste Reduction**: Save lakhs annually through 5S Lean Kaizen.\n\n*Would you like to calculate exact subsidy eligibility for your unit?*`;
-        quickReplies = ['Calculate ZED Subsidy', 'NATS Stipend Info', 'Cost Reduction Plan', 'Book Free Consultation'];
-      }
-      else if (msgLower.includes('industrial training') || msgLower.includes('👨‍🏭 industrial training')) {
-        detectedService = 'Training Academy';
-        aiResponse = `👨‍🏭 **PRV Industrial & Corporate Training Academy**:\n\n• **Automotive Core Tools**: APQP, PPAP, FMEA (AIAG-VDA), MSA, SPC.\n• **Quality & Shopfloor Mastery**: 5S, Kaizen, Poka-Yoke, 7 QC Tools.\n• **Soft Skills & Leadership**: Supervisor to Leader transformation & managerial skills.\n• **Custom Corporate Workshops**: Tailored for your plant team.`;
-        quickReplies = ['Core Tools Workshop', '5S Kaizen Training', 'Leadership Program', 'Book Consultation'];
-      }
-      else if (msgLower.includes('nats / naps') || msgLower.includes('🎓 nats / naps')) {
-        detectedService = 'Apprenticeship Schemes';
-        aiResponse = `🎓 **NATS & NAPS Government Apprenticeship Schemes**:\n\n• **NATS (National Apprenticeship Training Scheme)**: For Diploma/Engineering graduates; Govt reimburses up to ₹1,500/month per apprentice stipend.\n• **NAPS (National Apprenticeship Promotion Scheme)**: For ITI & non-technical apprentices.\n• **PRV Handholding**: Portal registration, candidate placement, monthly claim submission.`;
-        quickReplies = ['NATS Registration', 'NAPS Process', 'NATS vs NAPS', 'Book Free Consultation'];
-      }
-      else if (msgLower.includes('book free consultation') || msgLower.includes('📅 book free consultation')) {
-        detectedService = 'Consultation Booking';
-        actionType = 'qualification_step_lead';
-        aiResponse = `📅 **Book Your FREE 15-Minute Strategy Session with Senior PRV Consultant**\n\nPlease share your details below so we can schedule a convenient time slot:\n\n• **Full Name**\n• **Company Name**\n• **Mobile Number**\n• **Work Email**\n• **City & Industry**\n• **Preferred Date & Time**\n\n*Or type your Mobile Number & Email directly in chat!*`;
-        quickReplies = ['Download PDF Brochure', 'WhatsApp Support', 'Call +91 74893 51297'];
+      // SCENARIO 1: AUTO PARTS MANUFACTURER QUERY ("My company manufactures auto parts. Which certification should I take?")
+      if (
+        (msgLower.includes('auto part') || msgLower.includes('auto component') || msgLower.includes('automotive') || msgLower.includes('car part') || msgLower.includes('oem supplier')) &&
+        (msgLower.includes('which') || msgLower.includes('recommend') || msgLower.includes('take') || msgLower.includes('need') || msgLower.includes('certificate') || msgLower.includes('certification'))
+      ) {
+        detectedService = 'Auto Parts Certification Reasoning';
+        aiResponse = `🚗 **PRV Consultant Strategic Analysis for Auto Parts Manufacturers**\n\nBased on your manufacturing profile as an automotive component producer, **you should NOT take generic certifications**. \n\nWe specifically recommend **IATF 16949:2016** (Automotive Quality Management System) along with the **5 Automotive Core Tools**.\n\n### Why IATF 16949 is Required for Your Business:\n1️⃣ **Mandatory OEM Empanelment**: Top automotive OEMs (Maruti Suzuki, Tata Motors, Hyundai, Mahindra, Hero MotoCorp) and Tier-1 suppliers strictly mandate IATF 16949 certification to award vendor purchase orders.\n2️⃣ **Zero-Defect Standard**: Automotive supply chains require zero PPM rejections, full traceability, and strict defect prevention.\n3️⃣ **5 Automotive Core Tools Mastery**:\n   - **APQP**: Advanced Product Quality Planning for new part development.\n   - **PPAP**: Production Part Approval Process for buyer sign-off.\n   - **FMEA**: Failure Mode & Effects Analysis to prevent shopfloor errors.\n   - **MSA**: Measurement Systems Analysis for gauge accuracy.\n   - **SPC**: Statistical Process Control to guarantee process capability (Cpk > 1.33).\n\n⏱️ **Timeline**: 2 to 3 months (includes shopfloor core tools implementation & audit handholding).\n🤝 **How PRV Helps**: PRV's automotive consultants implement Core Tools directly on your shopfloor and guarantee Tier-1/OEM audit clearance.`;
+        quickReplies = ['IATF 16949 Roadmap', 'Core Tools Workshop', 'MACE Audit Prep', 'Book Free Consultation'];
       }
 
-      // RULE 12: OFF-TOPIC SAFEGUARD
-      else if (isOffTopic) {
-        detectedService = 'Off-Topic Safeguard';
-        aiResponse = `I specialize in PRV Consultancy Services, including certifications, compliance, training, operational excellence, and business improvement. I'd be happy to help with those topics.`;
-        quickReplies = ['Which certificate do I need?', 'ZED MSME Subsidy', 'ISO 9001 Process', 'Book Free Consultation'];
+      // SCENARIO 2: EXPORT QUERY ("I want to export.")
+      else if (
+        msgLower === 'i want to export' || msgLower === 'i want to export.' || msgLower.includes('want to export') || msgLower.includes('exporting goods') || msgLower.includes('export certification')
+      ) {
+        detectedService = 'Export Certification Reasoning';
+        
+        if (msgLower.includes('food') || msgLower.includes('spices') || msgLower.includes('pharma') || msgLower.includes('cosmetics')) {
+          aiResponse = `🌍 **PRV Consultant Export Solution for Food, Pharma & Cosmetics**\n\nTo export food or pharmaceutical products internationally, you require specific international regulatory clearances:\n\n1️⃣ **FDA Registration & Approval**: Mandatory for exporting food, cosmetics, and pharmaceuticals to the United States.\n2️⃣ **ISO 22000 / HACCP**: Global food safety certification required by international supermarket chains & buyers.\n3️⃣ **HALAL & Kosher Certification**: Essential for exporting to Middle East, SEA, and European food markets.\n4️⃣ **FSSAI Central License**: Mandatory statutory Indian license for export-import food operators.\n\n⏱️ **Timeline**: 2 to 4 weeks.`;
+          quickReplies = ['FDA Approval Quote', 'ISO 22000 FSMS', 'HALAL Certification', 'Book Free Consultation'];
+        }
+        else if (msgLower.includes('machine') || msgLower.includes('electronic') || msgLower.includes('equipment') || msgLower.includes('device') || msgLower.includes('hardware')) {
+          aiResponse = `🌍 **PRV Consultant Export Solution for Machinery & Electronics**\n\nFor exporting machinery, electricals, or industrial hardware, buyer regions require conformity marks:\n\n1️⃣ **CE Marking**: Mandatory European Union conformity certification for selling industrial machinery, electronics, and hardware in Europe.\n2️⃣ **RoHS & REACH Compliance**: Hazardous substance & chemical safety verification required for EU & UK markets.\n3️⃣ **ISO 9001:2015**: Globally recognized baseline quality management system for international buyers.\n\n⏱️ **Timeline**: 2 to 3 weeks.`;
+          quickReplies = ['CE Marking Guide', 'RoHS Compliance', 'ISO 9001 Quote', 'Book Free Consultation'];
+        }
+        else if (msgLower.includes('textile') || msgLower.includes('garment') || msgLower.includes('apparel') || msgLower.includes('clothing')) {
+          aiResponse = `🌍 **PRV Consultant Export Solution for Textiles & Apparel**\n\nFor exporting garments and textiles to Western buyers (Walmart, Zara, Disney, Target):\n\n1️⃣ **SEDEX / SMETA Ethical Audit (2 & 4 Pillar)**: Mandatory social, labor, safety, and business ethics audit.\n2️⃣ **GOTS / OEKO-TEX**: Global Organic Textile Standard & eco-friendly fabric safety certification.\n\n⏱️ **Timeline**: 1 to 3 weeks.`;
+          quickReplies = ['Prepare for SMETA Audit', 'GOTS Certification', 'Book Free Consultation'];
+        }
+        else {
+          // Missing product context - ask follow-up questions!
+          aiResponse = `🌍 **PRV Consultant Export Certification Roadmap**\n\nExport certification requirements depend strictly on your **product category** and **target country**:\n\n• **Machinery & Electronics**: Require **CE Marking** & **RoHS/REACH** (European Union).\n• **Food, Pharma & Cosmetics**: Require **FDA Registration**, **ISO 22000 / HACCP**, and **HALAL**.\n• **Textiles & Consumer Goods**: Require **SEDEX / SMETA Ethical Audits** for global retail buyers.\n• **All Product Lines**: Require **ISO 9001:2015** as baseline quality assurance.\n\n👉 **To give you the exact export requirement**: What specific product does your company manufacture, and which country are you planning to export to?`;
+          quickReplies = ['Exporting Machinery', 'Exporting Food/Pharma', 'Exporting Textiles', 'Book Free Consultation'];
+        }
       }
 
-      // DISAMBIGUATION RULE FOR GENERIC ISO QUERY ("What is ISO" / "ISO kya hai")
-      else if (msgLower === 'what is iso' || msgLower === 'what is iso?' || msgLower === 'iso kya hai' || msgLower === 'iso kya hai?' || msgLower === 'iso' || msgLower.includes('tell me about iso')) {
-        detectedService = 'ISO Disambiguation';
-        aiResponse = `📜 Main aapki help karta hoon!\n\nKya aap kisi **specific ISO standard** (jaise ISO 9001 Quality, ISO 14001 Environment, ISO 27001 Cybersecurity, ISO 22000 Food Safety) ke baare me jaana chahte hain, ya main aapke business ke hisaab se sahi ISO recommend karun?`;
+      // SCENARIO 3: SUBSIDY QUERY ("I want government subsidy.")
+      else if (
+        msgLower === 'i want government subsidy' || msgLower === 'i want government subsidy.' || msgLower.includes('want subsidy') || msgLower.includes('government subsidy') || msgLower.includes('govt grant')
+      ) {
+        detectedService = 'Government Subsidy Reasoning';
+        aiResponse = `💰 **PRV Consultant Analysis of Applicable Government Subsidies**\n\nPRV Consultancy helps MSMEs and industrial units claim direct government financial subsidies:\n\n1️⃣ **ZED (Zero Defect Zero Effect) MSME Scheme**:\n   - **Up to 80% Subsidy** on audit & certification costs.\n   - **₹10,000 Handholding Support Grant** for consultancy.\n   - **0.5% Concessional Bank Interest Rate** on business loans.\n   - **Up to ₹5 Lakhs Capital Subsidy** for testing equipment.\n\n2️⃣ **NATS & NAPS Apprenticeship Schemes**:\n   - Central Government stipend reimbursement up to **₹1,500/month per candidate**.\n   - **100% Exemption from PF & ESI** liabilities on apprentice stipends.\n\n3️⃣ **GeM & Startup India Subsidies**:\n   - EMD waiver on government tenders & fast-track patent grants.\n\n📋 **Eligibility Check**: Do you hold an active **Udyam MSME Registration** for your unit?`;
+        quickReplies = ['ZED MSME Subsidy', 'NATS Stipend Subsidy', 'GeM Portal Info', 'Book Free Consultation'];
+      }
+
+      // SCENARIO 4: DISAMBIGUATION FOR GENERIC ISO QUERY ("What is ISO?" / "ISO kya hai?")
+      else if (
+        msgLower === 'what is iso' || msgLower === 'what is iso?' || msgLower === 'iso kya hai' || msgLower === 'iso kya hai?' || msgLower === 'iso' || msgLower === 'tell me about iso'
+      ) {
+        detectedService = 'ISO Professional Overview';
+        aiResponse = `📜 **Professional Overview of ISO (International Organization for Standardization)**\n\nISO is an independent, non-governmental international organization based in Geneva, Switzerland. It develops globally recognized standards for quality, safety, security, environmental protection, and operational efficiency.\n\n### Key ISO Standards for Businesses:\n• **ISO 9001:2015**: Quality Management System (QMS) - Standard for tenders & vendor onboarding.\n• **ISO 14001:2015**: Environmental Management System (EMS) - Standard for pollution compliance & ESG.\n• **ISO 45001:2018**: Occupational Health & Safety (OH&S) - Standard for worker safety & Factory Act compliance.\n• **ISO 27001:2022**: Information Security (ISMS) - Standard for IT companies & data protection.\n• **ISO 22000:2018**: Food Safety (FSMS) - Standard for food processors & exporters.\n• **ISO 50001:2018**: Energy Management (EnMS) - Standard for slacking factory power bills.\n\n👉 **Which industry or product does your company operate in?** Tell me your business type, and I will recommend the exact ISO standard that will bring you the highest business value.`;
         quickReplies = ['Recommend for my business', 'ISO 9001 QMS', 'ISO 27001 ISMS', 'ISO 22000 Food Safety'];
       }
 
-      // RULE 6: EXPLAIN ONLY ZED (DO NOT EXPLAIN ISO)
-      else if (msgLower === 'what is zed' || msgLower === 'what is zed?' || msgLower.includes('explain zed') || (msgLower.includes('what is zed') && !msgLower.includes('iso'))) {
-        detectedService = 'ZED Explanation Only';
-        aiResponse = `🏆 **What is ZED (Zero Defect Zero Effect) Scheme?**\n\nZED is an official national certification scheme launched by the Ministry of MSME, Government of India, to encourage MSME manufacturing units to produce high-quality goods with zero defects and zero environmental damage.\n\n💰 **Government Subsidies & Benefits**:\n- **Bronze Level**: 80% Subsidy on Certification cost + ₹10,000 Handholding Grant\n- **Silver Level**: 60% Subsidy + Up to ₹5 Lakhs Capital & Testing Subsidy\n- **Gold Level**: 50% Subsidy + 0.5% Concessional Bank Interest Rate on loans\n\n**Eligibility**: All MSME manufacturing units with a valid Udyam Registration.`;
-        quickReplies = ['Apply for ZED Subsidy', 'ZED Documents', 'Book Consultation'];
+      // SCENARIO 5: ZED QUERY ("What is ZED?")
+      else if (
+        msgLower === 'what is zed' || msgLower === 'what is zed?' || msgLower.includes('explain zed') || (msgLower.includes('what is zed') && !msgLower.includes('iso'))
+      ) {
+        detectedService = 'ZED Scheme Overview';
+        aiResponse = buildGuideAnswer('zed');
+        quickReplies = ['ZED Subsidy Application', 'ZED Documents', 'ISO vs ZED', 'Book Free Consultation'];
       }
 
-      // RULE 8: COST QUERY (EXACT WORDING REQUIREMENT)
-      else if (msgLower.includes('how much does it cost') || msgLower.includes('what is the cost') || msgLower.includes('price') || msgLower.includes('fee') || msgLower.includes('kharcha') || msgLower.includes('rate') || msgLower.includes('cost of certification')) {
-        detectedService = 'Pricing Policy';
-        aiResponse = `💰 **PRV Consultancy - Official Pricing Information**\n\nThe cost depends on your company size, number of employees, locations and project scope. Please share your details for an accurate quotation.\n\n✨ **Available Financial Incentives**:\n• **ZED Certification**: Up to 80% Government Subsidy on audit fees.\n• **NATS Scheme**: Central Govt stipend reimbursement up to ₹1,500/month per apprentice.\n• **ISO Certifications**: Milestone-based flexible payment options.\n\nPlease share your **Mobile Number, Email & City** for a customized formal quotation!`;
-        quickReplies = ['Book Free Consultation', 'ZED Subsidy Info', 'ISO 9001 Quote', 'WhatsApp Support'];
+      // TOPIC 1: ISO 9001
+      else if (msgLower.includes('9001') || (msgLower.includes('iso') && (msgLower.includes('quality') || msgLower.includes('qms')))) {
+        detectedService = 'ISO 9001 QMS';
+        aiResponse = buildGuideAnswer('iso_9001');
+        quickReplies = ['Get ISO 9001 Quote', 'ISO vs ZED', 'ISO 14001 EMS', 'Book Free Consultation'];
+      }
+      // TOPIC 2: ISO 14001
+      else if (msgLower.includes('14001') || (msgLower.includes('environment') && msgLower.includes('iso'))) {
+        detectedService = 'ISO 14001 EMS';
+        aiResponse = buildGuideAnswer('iso_14001');
+        quickReplies = ['Pollution Board NOC', 'ISO 45001 OH&S', 'Book Free Consultation'];
+      }
+      // TOPIC 3: ISO 45001
+      else if (msgLower.includes('45001') || (msgLower.includes('health') && msgLower.includes('safety'))) {
+        detectedService = 'ISO 45001 OH&S';
+        aiResponse = buildGuideAnswer('iso_45001');
+        quickReplies = ['ISO 45001 Process', 'ISO 9001 QMS', 'Book Free Consultation'];
+      }
+      // TOPIC 4: ISO 22000
+      else if (msgLower.includes('22000') || (msgLower.includes('food safety') && msgLower.includes('iso'))) {
+        detectedService = 'ISO 22000 FSMS';
+        aiResponse = buildGuideAnswer('iso_22000');
+        quickReplies = ['FSSAI License Info', 'FSSAI vs ISO 22000', 'Book Free Consultation'];
+      }
+      // TOPIC 5: ISO 27001
+      else if (msgLower.includes('27001') || msgLower.includes('isms') || msgLower.includes('cyber') || msgLower.includes('information security')) {
+        detectedService = 'ISO 27001 ISMS';
+        aiResponse = buildGuideAnswer('iso_27001');
+        quickReplies = ['ISO 27001 ISMS Quote', 'SOC 2 Audit Prep', 'Book Free Consultation'];
+      }
+      // TOPIC 6: ISO 22301
+      else if (msgLower.includes('22301') || msgLower.includes('business continuity') || msgLower.includes('bcms')) {
+        detectedService = 'ISO 22301 BCMS';
+        aiResponse = buildGuideAnswer('iso_22301');
+        quickReplies = ['ISO 22301 Info', 'ISO 27001 ISMS', 'Book Free Consultation'];
+      }
+      // TOPIC 7: ISO 50001
+      else if (msgLower.includes('50001') || msgLower.includes('energy management') || msgLower.includes('enms')) {
+        detectedService = 'ISO 50001 EnMS';
+        aiResponse = buildGuideAnswer('iso_50001');
+        quickReplies = ['ISO 50001 Info', 'Profit Maximization', 'Book Free Consultation'];
+      }
+      // TOPIC 8: IATF 16949
+      else if (msgLower.includes('iatf') || msgLower.includes('16949') || msgLower.includes('apqp') || msgLower.includes('ppap') || msgLower.includes('fmea') || msgLower.includes('core tools')) {
+        detectedService = 'IATF 16949 Automotive';
+        aiResponse = buildGuideAnswer('iatf');
+        quickReplies = ['Core Tools Workshop', 'ISO vs IATF', 'MACE Audit Prep', 'Book Free Consultation'];
+      }
+      // TOPIC 9: FSSAI
+      else if (msgLower.includes('fssai') || msgLower.includes('food license') || msgLower.includes('foscos')) {
+        detectedService = 'FSSAI License';
+        aiResponse = buildGuideAnswer('fssai');
+        quickReplies = ['FSSAI License Quote', 'FSSAI vs ISO 22000', 'Book Free Consultation'];
+      }
+      // TOPIC 10: SEDEX / SMETA
+      else if (msgLower.includes('sedex') || msgLower.includes('smeta')) {
+        detectedService = 'SEDEX SMETA Audit';
+        aiResponse = buildGuideAnswer('sedex');
+        quickReplies = ['SEDEX SMETA Audit', 'SEDEX vs Social Audit', 'Book Free Consultation'];
+      }
+      // TOPIC 11: MACE AUDIT
+      else if (msgLower.includes('mace') || msgLower.includes('maruti suzuki')) {
+        detectedService = 'MACE Audit';
+        aiResponse = buildGuideAnswer('mace');
+        quickReplies = ['MACE Audit Prep', 'IATF 16949 Roadmap', 'Book Free Consultation'];
+      }
+      // TOPIC 12: SOCIAL AUDIT
+      else if (msgLower.includes('social audit') || msgLower.includes('sa 8000') || msgLower.includes('sa8000') || msgLower.includes('bsci') || msgLower.includes('ecovadis')) {
+        detectedService = 'Social Audit';
+        aiResponse = buildGuideAnswer('social_audit');
+        quickReplies = ['Social Audit Info', 'SEDEX vs Social Audit', 'Book Free Consultation'];
+      }
+      // TOPIC 13: NATS
+      else if (msgLower.includes('nats') || msgLower.includes('national apprenticeship training')) {
+        detectedService = 'NATS Scheme';
+        aiResponse = buildGuideAnswer('nats');
+        quickReplies = ['NATS Registration', 'NATS vs NAPS', 'Book Free Consultation'];
+      }
+      // TOPIC 14: NAPS
+      else if (msgLower.includes('naps') || msgLower.includes('national apprenticeship promotion')) {
+        detectedService = 'NAPS Scheme';
+        aiResponse = buildGuideAnswer('naps');
+        quickReplies = ['NAPS Process', 'NATS vs NAPS', 'Book Free Consultation'];
+      }
+      // TOPIC 15: TRAINING
+      else if (msgLower.includes('training') || msgLower.includes('workshop') || msgLower.includes('seminar')) {
+        detectedService = 'Industrial Training';
+        aiResponse = buildGuideAnswer('training');
+        quickReplies = ['Core Tools Workshop', '5S Kaizen Workshop', 'Book Free Consultation'];
+      }
+      // TOPIC 16: PROFIT MAXIMIZATION
+      else if (msgLower.includes('profit') || msgLower.includes('cost reduction') || msgLower.includes('yield') || msgLower.includes('oee')) {
+        detectedService = 'Profit Maximization';
+        aiResponse = buildGuideAnswer('profit_maximization');
+        quickReplies = ['Profit Maximization Blueprint', '5S Kaizen Info', 'Book Free Consultation'];
+      }
+      // TOPIC 17: LEADERSHIP
+      else if (msgLower.includes('leadership') || msgLower.includes('supervisor') || msgLower.includes('managerial')) {
+        detectedService = 'Leadership Program';
+        aiResponse = buildGuideAnswer('leadership');
+        quickReplies = ['Leadership Workshop', 'Master Business Program', 'Book Free Consultation'];
+      }
+      // TOPIC 18: MASTER BUSINESS EXCELLENCE PROGRAM
+      else if (msgLower.includes('master program') || msgLower.includes('master business') || msgLower.includes('transformation')) {
+        detectedService = 'Master Business Excellence Program';
+        aiResponse = buildGuideAnswer('master_business_excellence');
+        quickReplies = ['Book Free Consultation', 'ZED MSME Subsidy', 'ISO 9001 QMS', 'WhatsApp Support'];
       }
 
-      // RULE 11: TIMELINE QUERY
-      else if (msgLower.includes('how long') || msgLower.includes('duration') || msgLower.includes('timeline') || msgLower.includes('time required') || msgLower.includes('kitna time') || msgLower.includes('kitne din')) {
-        detectedService = 'Timeline Information';
-        aiResponse = `⏱️ **Certification Timeline & Processing Duration**\n\n• **Standard ISO Certifications (ISO 9001, 14001, 45001)**: Typically completed within **10 to 20 business days**.\n• **ZED Certification (MSME Scheme)**: **2 to 4 weeks** (includes desktop verification & handholding).\n• **IATF 16949 & Automotive Core Tools**: **2 to 3 months** (includes shopfloor implementation & internal audits).\n• **SEDEX SMETA / Social Audits**: **1 to 3 weeks**.\n\n*Note: The exact duration depends on your organization's current readiness, documentation speed, and project scope.*`;
-        quickReplies = ['ISO 9001 Process', 'ZED MSME Subsidy', 'Book Free Consultation'];
-      }
-
-      // RULE 7: DOCUMENTS REQUIRED ONLY QUERY
-      else if (msgLower.includes('what documents') || msgLower.includes('document required') || msgLower.includes('documents needed') || msgLower.includes('kagaz') || msgLower.includes('document list')) {
-        detectedService = 'Document Requirements';
-        aiResponse = `📄 **Master Documents Required for Certification & Audits**\n\nTo apply for ISO, ZED, or statutory compliance through PRV Consultancy, you will generally need:\n\n1️⃣ **Basic Registration**: Udyam Registration Certificate / GST Certificate / PAN Card\n2️⃣ **Premises Proof**: Electricity bill, Factory lease agreement, or Premises ownership proof\n3️⃣ **Operational Data**: Process Flow Diagram, Organization Chart & Quality Policy\n4️⃣ **Product / Safety Logs**: Equipment calibration list, Safety logs, or Lab test reports (where applicable)\n\n*Which specific certification (ISO 9001, ZED, FSSAI, IATF) do you need the exact document checklist for?*`;
-        quickReplies = ['ISO 9001 Docs', 'ZED Subsidy Docs', 'FSSAI License Docs', 'IATF Docs'];
-      }
-
-      // RULE 10: COMPARISON TABLE GENERATION (ISO VS ZED)
-      else if (msgLower.includes('compare iso and zed') || msgLower.includes('iso vs zed') || msgLower.includes('zed vs iso') || msgLower.includes('difference between iso and zed')) {
+      // COMPARISON ENGINE
+      else if (msgLower.includes('iso vs zed') || msgLower.includes('zed vs iso') || msgLower.includes('difference between iso and zed')) {
         detectedService = 'Comparison: ISO vs ZED';
         aiResponse = buildComparisonTable('iso_vs_zed');
-        quickReplies = ['ZED Subsidy Details', 'ISO 9001 Process', 'Book Free Consultation', 'WhatsApp Support'];
+        quickReplies = ['ZED MSME Subsidy', 'ISO 9001 QMS', 'Book Free Consultation'];
       }
-
-      // SMART RECOMMENDATION LOGIC PER SECTOR
-      else if (msgLower.includes('food') || msgLower.includes('beverage') || msgLower.includes('restaurant') || msgLower.includes('hotel')) {
-        detectedService = 'Food Sector Smart Match';
-        aiResponse = `🥗 **PRV Smart Recommendation for Food Businesses**:\n\n1️⃣ **FSSAI License (Basic / State / Central)**: Mandatory statutory food license.\n2️⃣ **ISO 22000:2018 (FSMS)**: Global food safety management standard.\n3️⃣ **HACCP Support**: Hazard analysis critical control points for export buyers.\n4️⃣ **Food Hygiene Training**: Staff sanitation & GMP compliance.\n\n*May I know your City, Email & Phone to send a customized food safety checklist?*`;
-        quickReplies = ['FSSAI License Quote', 'ISO 22000 FSMS', 'Book Free Consultation'];
-      }
-      else if (msgLower.includes('automobile') || msgLower.includes('auto component') || msgLower.includes('oem vendor')) {
-        detectedService = 'Automobile Smart Match';
-        aiResponse = `🚗 **PRV Smart Recommendation for Automotive Manufacturers**:\n\n1️⃣ **IATF 16949:2016**: Mandatory automotive quality standard required by Tier-1 OEMs.\n2️⃣ **Automotive Core Tools Training**: Hands-on mastery of APQP, PPAP, FMEA (AIAG-VDA), MSA & SPC.\n3️⃣ **ISO 9001:2015**: Foundational Quality Management System.\n4️⃣ **Supplier Development & MACE Audit Prep**: Maruti Suzuki & OEM audit readiness.\n\n*Would you like our consultant to share an IATF implementation roadmap?*`;
-        quickReplies = ['IATF 16949 Roadmap', 'Core Tools Workshop', 'MACE Audit Prep', 'Book Consultation'];
-      }
-      else if (msgLower.includes('manufacturing') || msgLower.includes('engineering') || msgLower.includes('factory')) {
-        detectedService = 'Manufacturing Smart Match';
-        aiResponse = `🏭 **PRV Smart Recommendation for Manufacturing & MSME Units**:\n\n1️⃣ **ZED Certification**: Claim up to **80% Govt Subsidy** + **0.5% Concessional Bank Interest**.\n2️⃣ **ISO 9001:2015 (QMS)**: Mandatory for Govt Tenders & corporate vendor approvals.\n3️⃣ **ISO 14001 & ISO 45001**: EHS Environmental & Shopfloor Safety compliance.\n4️⃣ **5S & Lean Kaizen**: Reduce shopfloor waste by 20-30% and boost net profit.\n\n*May I know your Mobile & Email to calculate your exact ZED subsidy eligibility?*`;
-        quickReplies = ['Calculate ZED Subsidy', 'ISO 9001 Quote', '5S Kaizen Info', 'Book Free Consultation'];
-      }
-      else if (msgLower.includes('it company') || msgLower.includes('software') || msgLower.includes('saas') || msgLower.includes('tech')) {
-        detectedService = 'IT Sector Smart Match';
-        aiResponse = `💻 **PRV Smart Recommendation for IT & Software Companies**:\n\n1️⃣ **ISO/IEC 27001:2022 (ISMS)**: Gold standard for Information Security & Data Protection.\n2️⃣ **SOC 2 Type I & II Readiness**: Essential for US & European SaaS client contracts.\n3️⃣ **ISO/IEC 20000-1**: IT Service Management System standard.\n4️⃣ **ISO 9001:2015**: Quality assurance for software deliverables & IT client tenders.\n\n*Would you like a customized ISO 27001 audit proposal?*`;
-        quickReplies = ['ISO 27001 ISMS Quote', 'SOC 2 Audit Prep', 'Book Consultation'];
-      }
-      else if (msgLower.includes('textile') || msgLower.includes('apparel') || msgLower.includes('garment export')) {
-        detectedService = 'Textile Smart Match';
-        aiResponse = `🧵 **PRV Smart Recommendation for Textile & Apparel Exporters**:\n\n1️⃣ **SEDEX / SMETA Audit (2-Pillar & 4-Pillar)**: Ethical & Social audit required by global fashion brands (Zara, Walmart, Disney).\n2️⃣ **OEKO-TEX Support**: Eco-safe & organic textile standards.\n3️⃣ **Social Audit Compliance**: Labour standards, Health & Safety, EHS SOPs.\n\n*Please share your Mobile & Email for a mock SMETA audit checklist!*`;
-        quickReplies = ['Prepare for SMETA Audit', 'SEDEX vs Social Audit', 'Book Consultation'];
-      }
-
-      // OTHER COMPARISONS
       else if (msgLower.includes('iso vs iatf') || msgLower.includes('iatf vs iso')) {
         detectedService = 'Comparison: ISO vs IATF';
         aiResponse = buildComparisonTable('iso_vs_iatf');
-        quickReplies = ['IATF 16949 Guide', 'ISO 9001 Process', 'Book Free Consultation'];
+        quickReplies = ['IATF 16949 Roadmap', 'ISO 9001 QMS', 'Book Free Consultation'];
       }
       else if (msgLower.includes('nats vs naps') || msgLower.includes('naps vs nats')) {
         detectedService = 'Comparison: NATS vs NAPS';
         aiResponse = buildComparisonTable('nats_vs_naps');
-        quickReplies = ['NATS Scheme Guide', 'NAPS Registration', 'Book Free Consultation'];
+        quickReplies = ['NATS Scheme Info', 'NAPS Process', 'Book Free Consultation'];
       }
-      else if (msgLower.includes('sedex vs social') || msgLower.includes('social vs sedex') || msgLower.includes('smeta vs social')) {
+      else if (msgLower.includes('sedex vs social') || msgLower.includes('social vs sedex')) {
         detectedService = 'Comparison: SEDEX vs Social Audit';
         aiResponse = buildComparisonTable('sedex_vs_social_audit');
-        quickReplies = ['SEDEX SMETA Guide', 'Social Audit Info', 'Book Consultation'];
+        quickReplies = ['SEDEX SMETA Audit', 'Social Audit Info', 'Book Free Consultation'];
       }
-      else if (msgLower.includes('fssai vs iso') || msgLower.includes('iso 22000 vs fssai') || msgLower.includes('iso vs fssai')) {
+      else if (msgLower.includes('fssai vs iso') || msgLower.includes('iso vs fssai')) {
         detectedService = 'Comparison: FSSAI vs ISO 22000';
         aiResponse = buildComparisonTable('fssai_vs_iso_22000');
-        quickReplies = ['FSSAI License Info', 'ISO 22000 Guide', 'Book Consultation'];
+        quickReplies = ['FSSAI License Quote', 'ISO 22000 FSMS', 'Book Free Consultation'];
       }
 
-      // OBJECTION HANDLING
-      else if (msgLower.includes('expensive') || msgLower.includes('costly') || msgLower.includes('high price') || msgLower.includes('mehnga') || msgLower.includes('kam karo') || msgLower.includes('discount')) {
-        detectedService = 'Objection Handling - ROI';
-        aiResponse = `💼 **High Return on Investment (ROI) Guarantee**\n\nWe understand cost is important! Here is how PRV Consultancy ensures certification pays for itself:\n\n1️⃣ **ZED Scheme**: Up to 80% Govt Subsidy on certification cost + 0.5% lower interest rate on bank loans.\n2️⃣ **NATS Scheme**: Reimbursement of up to ₹1,500/month per apprentice stipend from Central Govt.\n3️⃣ **5S & Kaizen**: 20-30% shopfloor waste reduction directly increases your monthly net profits.\n4️⃣ **Tender Eligibility**: ISO 9001 unlocks high-value government tenders.\n\nWould you like our consultant to share a cost-benefit calculation for your plant?`;
-        quickReplies = ['Book Free Consultation', 'ZED Subsidy Info', 'WhatsApp Support'];
-      }
-      else if (msgLower.includes('discuss') || msgLower.includes('pooch kar') || msgLower.includes('think about it') || msgLower.includes('later') || msgLower.includes('baad me')) {
-        detectedService = 'Objection Handling - Consultation';
-        aiResponse = `👍 Absolutely! Take your time to discuss with your management team.\n\nTo make your decision easier, we offer a **FREE 15-Minute Expert Strategy Session** with zero obligation. Our senior consultant will review your plant requirements and share exact subsidy eligibility.\n\nWould you like to book a convenient time slot?`;
-        quickReplies = ['Book Free Consultation', 'Download PDF Brochure', 'WhatsApp Support'];
-      }
-      else if (msgLower.includes('not interested') || msgLower.includes('nahi chahiye') || msgLower.includes('no need')) {
-        detectedService = 'Objection Handling - Future Info';
-        aiResponse = `Thank you for letting us know! If you ever need guidance in the future regarding **ISO Certifications, ZED MSME Subsidies, SEDEX Audits, or NATS Apprenticeships**, PRV Consultancy will be glad to support you.\n\nYou can download our **Official Services Brochure PDF** for future reference. Have a great day!`;
-        quickReplies = ['Download PDF Brochure', 'All Certificates Directory', 'Contact PRV Team'];
+      // COST QUERY
+      else if (msgLower.includes('cost') || msgLower.includes('price') || msgLower.includes('fee') || msgLower.includes('kharcha') || msgLower.includes('rate')) {
+        detectedService = 'Pricing Policy';
+        aiResponse = `💰 **PRV Consultancy Investment & Financial Policy**\n\nThe exact investment depends on your company size, number of employees, plant locations, and project scope.\n\n✨ **Government Financial Grants Available**:\n• **ZED Scheme**: Up to **80% Government Subsidy** on audit costs + **0.5% lower loan interest rate**.\n• **NATS Scheme**: Central Government stipend reimbursement up to **₹1,500/month per apprentice**.\n• **ISO Consultancies**: Flexible milestone-based payment options.\n\nPlease share your **Mobile Number & Email** in chat to receive an instant, customized formal quotation!`;
+        quickReplies = ['Book Free Consultation', 'ZED Subsidy Info', 'ISO 9001 Quote', 'WhatsApp Support'];
       }
 
-      // KNOWLEDGE BASE SPECIFIC GUIDES
-      else if (msgLower.includes('zed') || msgLower.includes('zero defect')) {
-        detectedService = 'ZED Certification';
-        aiResponse = buildGuideAnswer('zed', 'ZED Certification');
-        quickReplies = ['Book Free Consultation', 'ISO vs ZED', 'NATS Scheme', 'WhatsApp Support'];
-      }
-      else if (msgLower.includes('9001') || (msgLower.includes('iso') && msgLower.includes('quality'))) {
-        detectedService = 'ISO 9001 QMS';
-        aiResponse = buildGuideAnswer('iso_9001', 'ISO 9001');
-        quickReplies = ['Get ISO 9001 Quote', 'ISO 14001 Info', 'ISO vs ZED', 'Book Free Consultation'];
-      }
-      else if (msgLower.includes('14001') || msgLower.includes('environment')) {
-        detectedService = 'ISO 14001 EMS';
-        aiResponse = buildGuideAnswer('iso_14001', 'ISO 14001');
-        quickReplies = ['ISO 14001 Process', 'Pollution Board NOC', 'ISO 45001 Info', 'Book Consultation'];
-      }
-      else if (msgLower.includes('45001') || msgLower.includes('safety') || msgLower.includes('health and safety')) {
-        detectedService = 'ISO 45001 OH&S';
-        aiResponse = buildGuideAnswer('iso_45001', 'ISO 45001');
-        quickReplies = ['ISO 45001 Process', 'ISO 9001 Process', 'Book Free Consultation'];
-      }
-      else if (msgLower.includes('27001') || msgLower.includes('cyber') || msgLower.includes('isms') || msgLower.includes('data protection')) {
-        detectedService = 'ISO 27001 ISMS';
-        aiResponse = buildGuideAnswer('iso_27001', 'ISO 27001');
-        quickReplies = ['ISO 27001 Process', 'SOC 2 Audit Prep', 'Book Free Consultation'];
-      }
-      else if (msgLower.includes('22000') || msgLower.includes('haccp') || msgLower.includes('food safety')) {
-        detectedService = 'ISO 22000 FSMS';
-        aiResponse = buildGuideAnswer('iso_22000', 'ISO 22000');
-        quickReplies = ['ISO 22000 Process', 'FSSAI License Info', 'FSSAI vs ISO 22000', 'Book Consultation'];
-      }
-      else if (msgLower.includes('22301') || msgLower.includes('business continuity') || msgLower.includes('bcms')) {
-        detectedService = 'ISO 22301 BCMS';
-        aiResponse = buildGuideAnswer('iso_22301', 'ISO 22301');
-        quickReplies = ['ISO 22301 Info', 'ISO 27001 Info', 'Book Consultation'];
-      }
-      else if (msgLower.includes('50001') || msgLower.includes('energy management') || msgLower.includes('enms')) {
-        detectedService = 'ISO 50001 EnMS';
-        aiResponse = buildGuideAnswer('iso_50001', 'ISO 50001');
-        quickReplies = ['ISO 50001 Info', 'Profit Maximization', 'Book Consultation'];
-      }
-      else if (msgLower.includes('13485') || msgLower.includes('medical device')) {
-        detectedService = 'ISO 13485 Medical';
-        aiResponse = buildGuideAnswer('iso_13485', 'ISO 13485');
-        quickReplies = ['ISO 13485 Info', 'CE Mark Export', 'Book Consultation'];
-      }
-      else if (msgLower.includes('iatf') || msgLower.includes('16949') || msgLower.includes('apqp') || msgLower.includes('ppap') || msgLower.includes('fmea') || msgLower.includes('automotive core tools')) {
-        detectedService = 'IATF 16949';
-        aiResponse = buildGuideAnswer('iatf_16949', 'IATF 16949');
-        quickReplies = ['Core Tools Training', 'ISO vs IATF', 'MACE Audit Info', 'Book Consultation'];
-      }
-      else if (msgLower.includes('sedex') || msgLower.includes('smeta') || msgLower.includes('social audit')) {
-        detectedService = 'SEDEX / SMETA Audit';
-        aiResponse = buildGuideAnswer('sedex_smeta', 'SEDEX / SMETA');
-        quickReplies = ['SEDEX SMETA Audit', 'SEDEX vs Social Audit', 'Book Free Consultation'];
-      }
-      else if (msgLower.includes('mace') || msgLower.includes('maruti')) {
-        detectedService = 'MACE Audit';
-        aiResponse = buildGuideAnswer('mace_audit', 'MACE Audit');
-        quickReplies = ['MACE Audit Prep', 'IATF 16949 Guide', 'Book Consultation'];
-      }
-      else if (msgLower.includes('fssai') || msgLower.includes('food license')) {
-        detectedService = 'FSSAI License';
-        aiResponse = buildGuideAnswer('fssai', 'FSSAI');
-        quickReplies = ['FSSAI License Quote', 'FSSAI vs ISO 22000', 'ISO 22000 Guide', 'Book Consultation'];
-      }
-      else if (msgLower.includes('nats') || msgLower.includes('apprentice scheme')) {
-        detectedService = 'NATS Scheme';
-        aiResponse = buildGuideAnswer('nats', 'NATS');
-        quickReplies = ['NATS Scheme Info', 'NATS vs NAPS', 'Book Free Consultation'];
-      }
-      else if (msgLower.includes('naps') || msgLower.includes('promotion scheme')) {
-        detectedService = 'NAPS Scheme';
-        aiResponse = buildGuideAnswer('naps', 'NAPS');
-        quickReplies = ['NAPS Scheme Info', 'NATS vs NAPS', 'Book Free Consultation'];
-      }
-      else if (msgLower.includes('profit') || msgLower.includes('cost reduction') || msgLower.includes('capacity improvement')) {
-        detectedService = 'Profit Maximization';
-        aiResponse = buildGuideAnswer('profit_maximization', 'Profit Maximization');
-        quickReplies = ['Profit Maximization Blueprint', '5S Kaizen Workshop', 'Book Free Consultation'];
-      }
-      else if (msgLower.includes('5s') || msgLower.includes('kaizen') || msgLower.includes('lean')) {
-        detectedService = '5S & Lean Kaizen';
-        aiResponse = buildGuideAnswer('lean_5s', '5S & Lean');
-        quickReplies = ['5S Kaizen Workshop', 'Profit Maximization', 'ZED Scheme', 'Book Free Consultation'];
-      }
-      else if (msgLower.includes('training') || msgLower.includes('industrial training') || msgLower.includes('placement') || msgLower.includes('leadership')) {
-        detectedService = 'Industrial Training';
-        aiResponse = buildGuideAnswer('industrial_training', 'Industrial Training');
-        quickReplies = ['Industrial Training Program', 'Core Tools Workshop', 'Book Consultation'];
-      }
-      else if (msgLower.includes('master program') || msgLower.includes('master business excellence') || msgLower.includes('business transformation')) {
-        detectedService = 'Master Business Excellence Program';
-        aiResponse = `🏆 **PRV Master Business Excellence Program (Complete Transformation Blueprint)**\n\nOur flagship Senior Executive Consulting Program is designed to transform your manufacturing or service organization across 9 core pillars:\n\n1️⃣ **Business Assessment**: In-depth audit of current systems & operational bottlenecks.\n2️⃣ **Gap Analysis**: Detailed benchmark analysis against global standards.\n3️⃣ **Certification Roadmap**: Customized ISO, ZED & sector compliance planning.\n4️⃣ **Operational Excellence**: Shopfloor 5S, Lean Kaizen & waste reduction.\n5️⃣ **Staff Training**: Leadership, Core Tools & supervisory skill workshops.\n6️⃣ **System Implementation**: SOP drafting & process standardization.\n7️⃣ **Audit Support**: 100% audit clearance & certification handholding.\n8️⃣ **Continuous Improvement**: Post-certification performance monitoring.\n9️⃣ **Business Transformation**: Sustainable ROI, profit growth & market expansion.\n\n*Would you like to schedule a FREE consultation with one of our senior business experts?*`;
-        quickReplies = ['Book Free Consultation', 'ZED MSME Subsidy', 'ISO 9001 Guide', 'WhatsApp Support'];
+      // TIMELINE QUERY
+      else if (msgLower.includes('timeline') || msgLower.includes('duration') || msgLower.includes('how long') || msgLower.includes('kitna time')) {
+        detectedService = 'Timeline Overview';
+        aiResponse = `⏱️ **Certification & Project Timelines**\n\n• **ISO 9001 / 14001 / 45001**: 10 to 20 business days.\n• **ZED MSME Subsidy Certification**: 2 to 4 weeks.\n• **IATF 16949 & Core Tools**: 2 to 3 months.\n• **SEDEX SMETA / Social Audits**: 1 to 3 weeks.\n• **FSSAI License Approval**: 7 to 15 days.\n• **NATS / NAPS Onboarding**: 1 to 2 weeks.\n\n*Durations are guaranteed under PRV fast-track consulting project management.*`;
+        quickReplies = ['ISO 9001 Process', 'ZED MSME Subsidy', 'Book Free Consultation'];
       }
 
-      // GREETINGS & DIRECTORY
-      else if (msgLower.includes('certificate') || msgLower.includes('certifications') || msgLower.includes('all services') || msgLower.includes('list')) {
-        detectedService = 'Services Directory';
-        aiResponse = `📜 **PRV Consultancy Services - Complete Expertise Hub**\n\nWe provide end-to-end consulting for:\n\n1️⃣ **ISO Certifications**: ISO 9001, 14001, 45001, 27001, 22000, 22301, 50001, 13485, 17025\n2️⃣ **Government Schemes**: ZED (80% Subsidy), NATS, NAPS, Udyam, GeM, Startup India\n3️⃣ **Automotive & Core Tools**: IATF 16949, APQP, PPAP, FMEA, MSA, SPC, MACE Audit\n4️⃣ **Ethical & Social Compliance**: SEDEX SMETA (2/4 Pillar), SA 8000, Social Audits\n5️⃣ **Operational Excellence**: 5S, Lean, Kaizen, Cost Reduction, Profit Maximization\n6️⃣ **Industrial & Leadership Training**: Skill workshops & Master Excellence programs\n\n*Which service would you like to explore? Type any query in Hindi, English, or Hinglish!*`;
-        quickReplies = ['Which certificate do I need?', 'ZED MSME Subsidy', 'ISO 9001 Guide', 'Book Consultation'];
+      // DOCUMENTS QUERY
+      else if (msgLower.includes('documents') || msgLower.includes('kagaz') || msgLower.includes('document required')) {
+        detectedService = 'Document Checklists';
+        aiResponse = `📄 **Master Document Checklist for Certification & Audits**\n\nGenerally required records include:\n1️⃣ **Legal Entity Proof**: Udyam Registration Certificate / GST Certificate / PAN Card\n2️⃣ **Premises Proof**: Electricity bill, Factory lease agreement, or Land ownership deed\n3️⃣ **Operational SOPs**: Process Flowchart, Quality Policy & Organization Chart\n4️⃣ **Safety/Quality Logs**: Calibration records, Water/Pollution NOC logs (where applicable)\n\n👉 Which specific certification (ISO 9001, ZED, FSSAI, IATF) do you need the exact document checklist for?`;
+        quickReplies = ['ISO 9001 Docs', 'ZED Subsidy Docs', 'FSSAI License Docs', 'IATF Docs'];
       }
-      else if (userLang === 'hindi' && (msgLower.includes('hindi') || msgLower.includes('हिंदी'))) {
-        detectedService = 'Language Switch to Hindi';
-        aiResponse = `🙏 **नमस्ते! मैं PRV AI Consultant हूँ।**\n\nमैं आपकी भाषा (हिन्दी) में सहायता करूँगा।\n\nआप PRV Consultancy Services से निम्नलिखित विषयों पर जानकारी प्राप्त कर सकते हैं:\n1️⃣ **ZED Certification** (80% तक सरकारी सब्सिडी)\n2️⃣ **ISO 9001 / 14001 / 45001 / 27001 / 22000**\n3️⃣ **IATF 16949 & Automotive Core Tools**\n4️⃣ **SEDEX SMETA Audits & FSSAI Compliance**\n5️⃣ **NATS & NAPS सरकारी योजनाएं**\n\n*आप किस सेवा के बारे में जानना चाहते हैं?*`;
+
+      // GREETINGS & HINDI / MULTILINGUAL
+      else if (userLang === 'hindi' || msgLower.includes('namaste') || msgLower.includes('hindi')) {
+        detectedService = 'Multilingual Hindi';
+        aiResponse = `🙏 **नमस्ते! मैं PRV AI Business Consultant हूँ।**\n\nमैं आपकी व्यावसायिक आवश्यकताओं (ISO सर्टिफिकेशन, ZED सरकारी सब्सिडी, IATF 16949, FSSAI, SEDEX, NATS) का समाधान प्रदान करूँगा।\n\nआप अपने व्यवसाय की जानकारी साझा करें, और मैं आपको सर्वोत्तम समाधान की सलाह दूंगा!`;
         quickReplies = ['ZED Subsidy', 'ISO 9001 Info', 'FSSAI License', 'Book Free Consultation'];
       }
+
+      // GENERAL DEFAULT CONSULTANT RESPONSE
       else {
         detectedService = 'General Assistance';
-        aiResponse = `🤖 Thank you for consulting **PRV Consultancy Services**!\n\nRegarding your query about: *"${userMessage}"*\n\nPRV Consultancy provides expert consultation across:\n• **ZED MSME Subsidy** (Up to 80% Grant)\n• **ISO Certifications** (9001, 14001, 45001, 27001, 22000, 13485)\n• **IATF 16949 & Core Tools** (Automotive)\n• **SEDEX SMETA & Social Compliance Audits**\n• **NATS & NAPS Apprenticeship Schemes**\n• **5S, Lean & Profit Maximization**\n\nWould you like to speak directly with our senior consultant or schedule a FREE appointment?`;
-        quickReplies = ['Which certificate do I need?', 'Book Free Consultation', 'ZED MSME Subsidy', 'WhatsApp Support'];
+        aiResponse = `🏢 **Welcome to PRV Consultancy Services - Enterprise AI Consulting**\n\nI am your **PRV Senior AI Business Consultant**. I can assist you with:\n\n1️⃣ **ISO Certifications**: ISO 9001, 14001, 45001, 27001, 22000, 22301, 50001\n2️⃣ **Government Schemes**: ZED (80% Subsidy), NATS, NAPS, Udyam, GeM\n3️⃣ **Automotive & Core Tools**: IATF 16949, APQP, PPAP, FMEA, MSA, SPC, MACE Audit\n4️⃣ **Ethical & Social Compliance**: SEDEX SMETA (2/4 Pillar), SA 8000\n5️⃣ **Operational Excellence**: 5S, Lean, Kaizen, Profit Maximization\n\nPlease tell me about your company's industry or goal, and I will recommend the best solution for your business!`;
+        quickReplies = ['Which certificate do I need?', 'ZED MSME Subsidy', 'ISO 9001 QMS', 'Book Free Consultation'];
       }
+
+      // ENFORCE MANDATORY CLOSING FOR EVERY RESPONSE
+      aiResponse = enforceClosing(aiResponse);
 
       if (leadCaptured) {
         aiResponse += `\n\n✅ **Success**: Your contact info has been recorded in PRV CRM! A senior consultant will reach out to you shortly.`;
