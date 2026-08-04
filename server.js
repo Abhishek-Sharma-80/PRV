@@ -562,8 +562,8 @@ const server = http.createServer(async (req, res) => {
           return 'urdu';
         }
 
-        // 3. Hinglish Keyword Pattern Matching
-        const hinglishKeywords = ['kya', 'kaise', 'hai', 'hain', 'hu', 'hoo', 'batao', 'chahiye', 'kitna', 'lagela', 'lagta', 'kare', 'kaun', 'ho', 'mujhko', 'mujhe', 'aapka', 'aapki', 'ko', 'se', 'me', 'mein', 'par'];
+        // 3. Hinglish Keyword Pattern Matching (Refined to eliminate false positive English triggers like 'tell me')
+        const hinglishKeywords = ['kya', 'kaise', 'hai', 'hain', 'hoo', 'batao', 'chahiye', 'kitna', 'lagela', 'lagta', 'kare', 'kaun', 'mujhko', 'mujhe', 'aapka', 'aapki', 'mein', 'hoga', 'hogi', 'karo', 'karenge', 'baare', 'samjhao'];
         const words = txt.replace(/[^a-z0-9\s]/g, '').split(/\s+/);
         const matchCount = words.filter(w => hinglishKeywords.includes(w)).length;
 
@@ -609,17 +609,63 @@ const server = http.createServer(async (req, res) => {
       const costDisclaimer = "\n\n💡 *Note on Pricing*: The cost depends on the size of your organization, number of employees, locations and project scope. Our consultant can provide a customized quotation.";
 
       // Helper function to build detailed guide answers according to Master Prompt rules
+      // Helper function to build detailed guide answers according to Master Prompt rules & user language
       function buildGuideAnswer(guideKey, serviceName) {
         const g = knowledgeBase.guides[guideKey];
         if (!g) return null;
 
+        // Multilingual Label Dictionary
+        const labels = {
+          hindi: {
+            what: 'यह क्या है',
+            why: 'कंपनियों के लिए क्यों आवश्यक है',
+            who: 'कौन आवेदन कर सकता है',
+            subsidies: 'सरकारी सब्सिडी और अनुदान',
+            core_tools: 'Automotive Core Tools शामिल',
+            benefits: 'मुख्य लाभ (Benefits)',
+            process: 'चरणबद्ध प्रक्रिया (Process)',
+            docs: 'आवश्यक दस्तावेज़ (Documents)',
+            time: 'लगने वाला समय',
+            cost: 'शुल्क एवं निवेश',
+            helps: 'PRV Consultancy आपकी कैसे मदद करता है'
+          },
+          hinglish: {
+            what: 'Yeh kya hai',
+            why: 'Kyun zaroori hai',
+            who: 'Kaun apply kar sakta hai',
+            subsidies: 'Subsidies & Govt Grants',
+            core_tools: 'Automotive Core Tools Included',
+            benefits: 'Key Benefits (Fayde)',
+            process: 'Step-by-Step Process',
+            docs: 'Zaroori Documents List',
+            time: 'Kitna Time Lagta hai',
+            cost: 'Cost & Investment Policy',
+            helps: 'PRV Consultancy Kaise Help Karta hai'
+          },
+          english: {
+            what: 'What it is',
+            why: 'Why companies need it',
+            who: 'Who should apply',
+            subsidies: 'Subsidies & Grants',
+            core_tools: 'Automotive Core Tools Included',
+            benefits: 'Key Benefits',
+            process: 'Process',
+            docs: 'Documents Required',
+            time: 'Time Required',
+            cost: 'Investment',
+            helps: 'How PRV Consultancy Helps'
+          }
+        };
+
+        const l = labels[userLang] || labels['english'];
+
         let res = `📘 **${g.title || serviceName}**\n\n`;
-        if (g.what_it_is) res += `• **What it is**: ${g.what_it_is}\n`;
-        if (g.why_needed) res += `• **Why companies need it**: ${g.why_needed}\n`;
-        if (g.who_should_apply) res += `• **Who should apply**: ${g.who_should_apply}\n\n`;
+        if (g.what_it_is) res += `• **${l.what}**: ${g.what_it_is}\n`;
+        if (g.why_needed) res += `• **${l.why}**: ${g.why_needed}\n`;
+        if (g.who_should_apply) res += `• **${l.who}**: ${g.who_should_apply}\n\n`;
         
         if (g.levels_and_subsidies) {
-          res += `💰 **Subsidies & Grants**:\n`;
+          res += `💰 **${l.subsidies}**:\n`;
           Object.entries(g.levels_and_subsidies).forEach(([lvl, detail]) => {
             res += `  - **${lvl}**: ${detail}\n`;
           });
@@ -627,32 +673,34 @@ const server = http.createServer(async (req, res) => {
         }
 
         if (g.core_tools && Array.isArray(g.core_tools)) {
-          res += `🛠️ **Automotive Core Tools Included**:\n`;
+          res += `🛠️ **${l.core_tools}**:\n`;
           g.core_tools.forEach(t => res += `  - ${t}\n`);
           res += `\n`;
         }
 
         if (g.benefits && Array.isArray(g.benefits)) {
-          res += `✨ **Key Benefits**:\n`;
+          res += `✨ **${l.benefits}**:\n`;
           g.benefits.forEach(b => res += `  - ${b}\n`);
           res += `\n`;
         }
 
         if (g.process && Array.isArray(g.process)) {
-          res += `📋 **Process**:\n`;
+          res += `📋 **${l.process}**:\n`;
           g.process.forEach((p, idx) => res += `  ${idx + 1}. ${p}\n`);
           res += `\n`;
         }
 
         if (g.documents_required && Array.isArray(g.documents_required)) {
-          res += `📄 **Documents Required**:\n`;
+          res += `📄 **${l.docs}**:\n`;
           g.documents_required.forEach(d => res += `  - ${d}\n`);
           res += `\n`;
         }
 
-        if (g.time_required) res += `⏱️ **Time Required**: ${g.time_required}\n`;
-        res += `💵 **Investment**: ${g.cost_note || costDisclaimer}\n\n`;
-        if (g.how_prv_helps) res += `🤝 **How PRV Consultancy Helps**: ${g.how_prv_helps}`;
+        if (g.time_required) res += `⏱️ **${l.time}**: ${g.time_required}\n`;
+        res += `💵 **${l.cost}**: ${g.cost_note || costDisclaimer}\n\n`;
+        if (g.how_prv_helps) res += `🤝 **${l.helps}**: ${g.how_prv_helps}\n\n`;
+
+        res += `👉 **Next Recommended Action**: Would you like to schedule a **FREE 15-Minute Consultation** with our senior expert to discuss your exact implementation roadmap?`;
         
         return res;
       }
@@ -929,6 +977,11 @@ const server = http.createServer(async (req, res) => {
         detectedService = 'Industrial Training';
         aiResponse = buildGuideAnswer('industrial_training', 'Industrial Training');
         quickReplies = ['Industrial Training Program', 'Core Tools Workshop', 'Book Consultation'];
+      }
+      else if (msgLower.includes('master program') || msgLower.includes('master business excellence') || msgLower.includes('business transformation')) {
+        detectedService = 'Master Business Excellence Program';
+        aiResponse = `🏆 **PRV Master Business Excellence Program (Complete Transformation Blueprint)**\n\nOur flagship Senior Executive Consulting Program is designed to transform your manufacturing or service organization across 9 core pillars:\n\n1️⃣ **Business Assessment**: In-depth audit of current systems & operational bottlenecks.\n2️⃣ **Gap Analysis**: Detailed benchmark analysis against global standards.\n3️⃣ **Certification Roadmap**: Customized ISO, ZED & sector compliance planning.\n4️⃣ **Operational Excellence**: Shopfloor 5S, Lean Kaizen & waste reduction.\n5️⃣ **Staff Training**: Leadership, Core Tools & supervisory skill workshops.\n6️⃣ **System Implementation**: SOP drafting & process standardization.\n7️⃣ **Audit Support**: 100% audit clearance & certification handholding.\n8️⃣ **Continuous Improvement**: Post-certification performance monitoring.\n9️⃣ **Business Transformation**: Sustainable ROI, profit growth & market expansion.\n\n*Would you like to schedule a FREE consultation with one of our senior business experts?*`;
+        quickReplies = ['Book Free Consultation', 'ZED MSME Subsidy', 'ISO 9001 Guide', 'WhatsApp Support'];
       }
 
       // GREETINGS & DIRECTORY
