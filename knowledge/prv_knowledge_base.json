@@ -16,15 +16,22 @@
       "ISO 27001",
       "ISO 22301",
       "ISO 50001",
+      "ISO 13485",
+      "ISO 17025",
       "ZED Certification",
       "IATF 16949",
       "FSSAI",
       "SEDEX",
       "MACE",
       "Social Audit",
+      "Lean Manufacturing",
+      "5S",
+      "Kaizen",
       "NATS",
       "NAPS",
       "Training",
+      "Placement Preparation",
+      "Future Guidance",
       "Profit Maximization",
       "Leadership",
       "Master Business Excellence Program"
@@ -711,6 +718,234 @@
       "comparison": "Instead of hiring separate consultants for ISO, ZED, 5S, and training, the Master Program delivers everything under one unified strategic umbrella.",
       "prv_approach": "PRV master consultants partner directly with your leadership team to drive total business excellence with guaranteed ROI.",
       "prv_recommended_solution": "If your goal is complete organizational transformation and exponential business growth, enroll in the Master Business Excellence Program."
+    },
+    "iso_13485": {
+      "title": "ISO 13485:2016 Medical Devices Quality Management System",
+      "introduction": "ISO 13485:2016 specifies requirements for a quality management system where an organization needs to demonstrate its ability to provide medical devices and related services that consistently meet customer and applicable regulatory requirements.",
+      "why_required": "Mandatory statutory and market access requirement for medical device manufacturers, exporters, and distributors supplying to CDSCO, European CE (MDR), or US FDA compliant markets.",
+      "eligibility": "Medical device manufacturers, surgical equipment makers, diagnostic kit producers, hospital device packagers, and healthcare component suppliers.",
+      "benefits": [
+        "Ensures full compliance with CDSCO Medical Device Rules (MDR) & global health regulations",
+        "Mandatory baseline for CE Medical Device marking & international export orders",
+        "Drastic reduction in device defect risk, contamination, and product recall liabilities",
+        "Builds high trust with hospitals, distributors, and government healthcare procurements"
+      ],
+      "process": [
+        "Device Risk Management (ISO 14971) & Gap Assessment",
+        "Cleanroom SOPs, Traceability & Design Control documentation",
+        "Quality Manual & Device Master Record (DMR) creation",
+        "Internal Medical Quality Audit & Mock Recall execution",
+        "Final Accreditation Certification Audit by notified body"
+      ],
+      "documents_required": [
+        "Device Master Record (DMR) & Technical File",
+        "Risk Management File (ISO 14971 compliant)",
+        "Cleanroom Environmental Monitoring Logs & Sterilization Records",
+        "CDSCO Manufacturing License / Registration Details"
+      ],
+      "timeline": "3 to 6 weeks.",
+      "faqs": [
+        {
+          "question": "Is ISO 13485 different from ISO 9001?",
+          "answer": "Yes. ISO 9001 is a general QMS standard, whereas ISO 13485 strictly focuses on medical device safety, risk management (ISO 14971), cleanroom controls, and regulatory compliance."
+        }
+      ],
+      "comparison": "ISO 9001 applies to generic manufacturing; ISO 13485 is strictly engineered for medical devices with stringent risk management.",
+      "prv_approach": "PRV medical device consultants build complete Technical Files, Risk Registers, Cleanroom Protocols, and lead audit defense for CDSCO & Notified Body audits.",
+      "prv_recommended_solution": "If you manufacture or package medical instruments, ISO 13485 is non-negotiable for domestic legal compliance and global export clearance."
+    },
+    "iso_17025": {
+      "title": "ISO/IEC 17025:2017 Testing & Calibration Laboratories (NABL Accreditation)",
+      "introduction": "ISO/IEC 17025:2017 enables laboratories to demonstrate that they operate competently and generate valid results, thereby promoting confidence in their work both nationally and around the world.",
+      "why_required": "Essential for testing and calibration laboratories seeking NABL (National Accreditation Board for Testing and Calibration Laboratories) accreditation.",
+      "eligibility": "Chemical, mechanical, electrical, biological, medical testing labs, environmental testing facilities, and industrial calibration labs.",
+      "benefits": [
+        "Official NABL Accreditation recognizing technical competence",
+        "Test certificates globally accepted under ILAC / MRA agreements",
+        "Mandatory eligibility for government testing tenders & OEM vendor lab approval",
+        "Guarantees measurement accuracy, repeatability, and zero calibration errors"
+      ],
+      "process": [
+        "Measurement Uncertainty calculation & Method Validation",
+        "Quality Manual & NABL Specific Criteria documentation",
+        "Proficiency Testing (PT) / Inter-Laboratory Comparison (ILC) participation",
+        "Internal Audit & Management Review",
+        "NABL On-site Assessment & Accreditation approval"
+      ],
+      "documents_required": [
+        "Quality Manual & SOPs for all Test Methods",
+        "Measurement Uncertainty Budget Worksheets",
+        "Equipment Calibration Certificates & Master Traceability Logs",
+        "Proficiency Testing (PT) / ILC Results"
+      ],
+      "timeline": "1 to 3 months.",
+      "faqs": [
+        {
+          "question": "Does ISO 17025 grant NABL accreditation?",
+          "answer": "ISO 17025 is the international standard basis upon which NABL awards laboratory accreditation."
+        }
+      ],
+      "comparison": "ISO 9001 certifies business quality processes; ISO 17025 certifies the specific technical competence and measurement accuracy of testing laboratories.",
+      "prv_approach": "PRV lab consultants design uncertainty budgets, method validations, NABL documentation, and guide staff through NABL technical audits.",
+      "prv_recommended_solution": "If you run an internal or commercial testing lab, securing ISO/IEC 17025 (NABL) is mandatory to issue legally valid test reports."
+    },
+    "lean_manufacturing": {
+      "title": "Lean Manufacturing & Operational Excellence Blueprint",
+      "introduction": "Lean Manufacturing is a systematic operational strategy focused on relentless elimination of non-value-added activities (7 Mudas: Overproduction, Waiting, Transport, Overprocessing, Inventory, Motion, Defects) while maximizing customer value.",
+      "why_required": "Crucial for plants looking to cut lead times, optimize throughput, lower shopfloor inventory, and achieve operational excellence.",
+      "eligibility": "All discrete manufacturing, process plants, automotive components, textile mills, and assembly operations.",
+      "benefits": [
+        "30% to 50% reduction in manufacturing lead times and WIP inventory",
+        "Massive elimination of 7 Mudas waste across the value chain",
+        "Significant boost in Overall Equipment Effectiveness (OEE) & line productivity",
+        "Transformative shift toward a continuous improvement culture"
+      ],
+      "process": [
+        "Current State Value Stream Mapping (VSM)",
+        "Waste identification & Kaizen event execution",
+        "Kanban, Cellular Layout & Single Minute Exchange of Die (SMED) setup",
+        "Future State VSM implementation & KPI tracking"
+      ],
+      "documents_required": [
+        "Plant Value Stream Map & Cycle Time logs",
+        "Line balancing worksheets & OEE tracking charts"
+      ],
+      "timeline": "1 to 3 months consulting engagement.",
+      "faqs": [
+        {
+          "question": "How quickly can Lean show results?",
+          "answer": "Initial shopfloor waste reduction and flow improvements are visible within 2 to 4 weeks of implementation."
+        }
+      ],
+      "comparison": "ISO sets compliance documentation; Lean Manufacturing transforms shopfloor physical flow, speed, and profitability.",
+      "prv_approach": "PRV lean masters conduct on-site VSM workshops, SMED line balancing, and embed Lean culture directly into your plant floor.",
+      "prv_recommended_solution": "Implement Lean Manufacturing alongside 5S & Kaizen to maximize plant output and reduce production costs."
+    },
+    "five_s": {
+      "title": "5S Workplace Management & Visual Control System",
+      "introduction": "5S is a fundamental Japanese methodology for workplace organization, standardization, and cleanliness consisting of 5 steps: Seiri (Sort), Seiton (Set in Order), Seiso (Shine), Seiketsu (Standardize), and Shitsuke (Sustain).",
+      "why_required": "Foundation for operational excellence, shopfloor safety, error prevention, and clearing OEM supplier audits.",
+      "eligibility": "Factories, warehouses, offices, laboratories, and repair centers.",
+      "benefits": [
+        "Instant visual transformation of plant floor, tools, and storage",
+        "Drastic reduction in searching time for tools, dies, and materials",
+        "Prevents safety hazards, slip/trip accidents, and machine breakdowns",
+        "Impresses visiting OEM auditors and global buyer teams on first glance"
+      ],
+      "process": [
+        "1S Red-Tagging campaign & unnecessary item removal",
+        "2S Shadow boards, line markings & visual controls setup",
+        "3S Deep cleaning & autonomous machine maintenance routine",
+        "4S Standard Operating Sheets & 5S scorecards development",
+        "5S Monthly audit competition & recognition culture"
+      ],
+      "documents_required": [
+        "5S Red Tag Register",
+        "5S Zone Ownership Map & Daily Scorecard checklists"
+      ],
+      "timeline": "1 to 3 weeks.",
+      "faqs": [
+        {
+          "question": "Why is 5S necessary before implementing ISO or Lean?",
+          "answer": "5S cleanses and organizes the workplace environment, making process flaws, safety hazards, and waste immediately visible."
+        }
+      ],
+      "comparison": "5S organizes the physical space; Kaizen continuously improves shopfloor processes.",
+      "prv_approach": "PRV 5S specialists conduct red-tag events, install shadow boards, build visual scorecards, and institutionalize 5S audit scoring.",
+      "prv_recommended_solution": "Every plant must start its business excellence journey with 5S implementation."
+    },
+    "kaizen": {
+      "title": "Kaizen Continuous Improvement & Gemba Problem Solving",
+      "introduction": "Kaizen (Japanese for 'change for better') is a philosophy of continuous micro-improvements involving every employee, from senior management to shopfloor operators, to eliminate defects and boost efficiency daily.",
+      "why_required": "Fosters an employee-driven culture where small, low-cost daily improvements compound into massive financial savings and quality upgrades.",
+      "eligibility": "All manufacturing units, service companies, logistics hubs, and corporate organizations.",
+      "benefits": [
+        "Engages 100% of shopfloor workers in active problem solving",
+        "Hundreds of low-cost micro-ideas implemented annually",
+        "Immediate reduction in re-work, scrap, cycle time, and energy waste",
+        "Sustains high worker morale and continuous innovation"
+      ],
+      "process": [
+        "Gemba walk & loss identification",
+        "Kaizen suggestion box system & reward policy setup",
+        "7 QC Tools training for shopfloor operators",
+        "Weekly Kaizen review & implementation mapping"
+      ],
+      "documents_required": [
+        "Kaizen Idea Sheets (Before vs After photos)",
+        "Kaizen Tracking Log & Benefit Calculation Sheets"
+      ],
+      "timeline": "Ongoing / 2 to 4 weeks initial rollout.",
+      "faqs": [
+        {
+          "question": "What is a Kaizen Event?",
+          "answer": "A focused 3-to-5 day intensive workshop where a cross-functional team solves a specific shopfloor bottleneck or defect issue."
+        }
+      ],
+      "comparison": "Kaizen focuses on continuous small daily improvements; Lean focuses on overall system flow and value stream optimization.",
+      "prv_approach": "PRV trains floor supervisors in Kaizen techniques, sets up recognition reward models, and ensures measurable ROI.",
+      "prv_recommended_solution": "Combine Kaizen with 5S and Lean to build a world-class shopfloor culture."
+    },
+    "placement_prep": {
+      "title": "Placement Preparation & Campus-to-Corporate Seminars",
+      "introduction": "PRV Placement Preparation Academy equips engineering, diploma, management, and degree students with essential technical skills, resume readiness, group discussion strategies, and mock interview mastery.",
+      "why_required": "Bridge the gap between academic education and industrial expectations, guaranteeing high campus placement rates for institutions and career success for candidates.",
+      "eligibility": "Engineering colleges, polytechnic institutes, management universities, and individual job seekers.",
+      "benefits": [
+        "Drastic improvement in student placement selection percentages",
+        "Hands-on exposure to industry standards (ISO, 5S, Core Tools, Compliance)",
+        "Flawless corporate resume building, LinkedIn optimization & mock interview defense",
+        "Confidence boost for technical & HR interview rounds"
+      ],
+      "process": [
+        "Student baseline assessment & resume restructuring",
+        "Industry awareness modules (ISO, Quality Core Tools, Corporate Ethics)",
+        "Aptitude, GD & Technical interview masterclasses",
+        "1-on-1 Mock Interviews with PRV Industry Veteran Consultants"
+      ],
+      "documents_required": [
+        "Candidate Student Profiles / Academic Transcripts"
+      ],
+      "timeline": "3-day bootcamps to 4-week intensive modules.",
+      "faqs": [
+        {
+          "question": "Can PRV conduct campus training directly at our college?",
+          "answer": "Yes! PRV veteran trainers conduct both on-campus physical workshops and interactive virtual masterclasses."
+        }
+      ],
+      "comparison": "Generic soft-skills courses teach basic communication; PRV Placement Prep teaches real industrial quality & compliance concepts that impress corporate recruiters.",
+      "prv_approach": "PRV senior corporate leaders train students with real interview scenarios and industrial case studies.",
+      "prv_recommended_solution": "Educational institutions should partner with PRV to boost student placement statistics and recruiter feedback."
+    },
+    "future_guidance": {
+      "title": "Future Career Guidance & Executive Skill Development",
+      "introduction": "A strategic advisory service guiding working professionals, engineers, plant heads, and young graduates on career roadmaps, domain certifications (ISO Lead Auditor, Six Sigma, IATF), and leadership elevation.",
+      "why_required": "Helps professionals navigate industrial evolution, upgrade technical competencies, and accelerate career promotion into senior executive roles.",
+      "eligibility": "Working engineers, quality managers, EHS officers, HR professionals, and fresh graduates.",
+      "benefits": [
+        "Clear step-by-step career path mapping for 3, 5, and 10-year goals",
+        "Guidance on high-value certifications (ISO Lead Auditor, Six Sigma Black Belt, PMP)",
+        "Salary elevation and executive leadership positioning strategy",
+        "Direct mentorship from senior industry veterans"
+      ],
+      "process": [
+        "1-on-1 Career Evaluation & Skill Inventory Assessment",
+        "Personalized Career Roadmap & Certification Matrix planning",
+        "Mentorship sessions & industry networking guidance"
+      ],
+      "documents_required": [
+        "Current CV / Resume & Career Aspiration Goals"
+      ],
+      "timeline": "Personalized consultation sessions.",
+      "faqs": [
+        {
+          "question": "Which certification is best for Quality Engineers?",
+          "answer": "ISO 9001 Lead Auditor, Six Sigma Green/Black Belt, and Automotive Core Tools (APQP, PPAP, FMEA) provide the highest career growth."
+        }
+      ],
+      "comparison": "General career counseling gives basic job advice; PRV Future Guidance provides domain-specific industrial career strategies.",
+      "prv_approach": "PRV executive advisors deliver personalized career roadmaps and certification pathways.",
+      "prv_recommended_solution": "Book a 1-on-1 Future Career Guidance session with PRV senior advisors to accelerate your professional growth."
     }
   },
   "comparisons": {
@@ -737,6 +972,48 @@
         ["OEM Acceptance", "General corporate requirement", "Mandatory for Tier-1/2 Automotive OEMs"]
       ],
       "verdict": "If your plant manufactures automotive parts, IATF 16949 is mandatory. For general manufacturing, ISO 9001 is sufficient."
+    },
+    "iso_9001_vs_13485": {
+      "title": "ISO 9001 vs ISO 13485 Medical Devices",
+      "table": [
+        ["Parameter", "ISO 9001:2015", "ISO 13485:2016"],
+        ["Target Sector", "General manufacturing, services & IT", "Medical devices & healthcare hardware"],
+        ["Regulatory Focus", "Customer satisfaction & business SOPs", "Device safety, cleanroom & CDSCO/FDA regulations"],
+        ["Risk Management", "General business risk assessment", "Mandatory Risk Management (ISO 14971 compliant)"],
+        ["Sterilization & Traceability", "Standard batch logs", "Stringent cleanroom, sterile & batch traceability logs"]
+      ],
+      "verdict": "Medical device manufacturers MUST obtain ISO 13485 to satisfy legal health regulations and CDSCO requirements; ISO 9001 alone is insufficient."
+    },
+    "iso_9001_vs_17025": {
+      "title": "ISO 9001 vs ISO/IEC 17025 (NABL Accreditation)",
+      "table": [
+        ["Parameter", "ISO 9001:2015 Certification", "ISO/IEC 17025:2017 Accreditation"],
+        ["Focus", "Management system quality & process control", "Technical competence & measurement accuracy of labs"],
+        ["Evaluation", "Quality Management Audit", "NABL Peer Assessment of test methods & uncertainty"],
+        ["Output Certificate", "QMS Certificate", "Official NABL Accredited Test / Calibration Reports"],
+        ["Target Entity", "Entire business enterprise", "Testing or Calibration Laboratory specifically"]
+      ],
+      "verdict": "Testing labs need ISO/IEC 17025 (NABL) to issue legally recognized test reports. ISO 9001 certifies business management only."
+    },
+    "lean_vs_5s_kaizen": {
+      "title": "5S vs Kaizen vs Lean Manufacturing",
+      "table": [
+        ["Parameter", "5S Workplace Management", "Kaizen Continuous Improvement", "Lean Manufacturing"],
+        ["Primary Focus", "Shopfloor organization & visual cleanliness", "Daily micro-improvements by workers", "Total value stream flow & waste removal"],
+        ["Typical Timeline", "1 to 3 weeks", "Continuous daily habit", "1 to 3 months strategic transformation"],
+        ["Key Outcome", "Clean, organized, safe workplace", "Hundreds of small problem solutions", "50% lead time cut & maximum ROI"]
+      ],
+      "verdict": "Start with 5S to clean the plant, build Kaizen habits among workers, and execute Lean Manufacturing to maximize profits!"
+    },
+    "corporate_vs_industrial_training": {
+      "title": "Industrial Training vs Corporate Leadership vs Placement Prep",
+      "table": [
+        ["Parameter", "Industrial Training Workshops", "Corporate Leadership Program", "Placement Preparation Bootcamp"],
+        ["Target Audience", "Engineers, supervisors & shopfloor staff", "Plant heads, managers & supervisors", "Engineering & diploma college students"],
+        ["Core Content", "Automotive Core Tools, 5S, ISO SOPs", "Managerial coaching, conflict resolution", "Aptitude, resume, GD, mock interviews"],
+        ["Primary Goal", "Shopfloor skill mastery & zero defects", "Supervisory leadership & team ownership", "High campus placement selection rates"]
+      ],
+      "verdict": "PRV delivers customized academy programs tailored specifically for shopfloor operators, plant leaders, or graduating students."
     },
     "nats_vs_naps": {
       "title": "NATS Scheme vs NAPS Scheme",

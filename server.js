@@ -774,6 +774,53 @@ const server = http.createServer(async (req, res) => {
         quickReplies = ['ZED Subsidy Application', 'ZED Documents', 'ISO vs ZED', 'Book Free Consultation'];
       }
 
+      // COMPARISON ENGINE (Checked first so comparison queries match formatted matrices)
+      else if (msgLower.includes('iso vs zed') || msgLower.includes('zed vs iso') || msgLower.includes('difference between iso and zed')) {
+        detectedService = 'Comparison: ISO vs ZED';
+        aiResponse = buildComparisonTable('iso_vs_zed');
+        quickReplies = ['ZED MSME Subsidy', 'ISO 9001 QMS', 'Book Free Consultation'];
+      }
+      else if (msgLower.includes('iso vs iatf') || msgLower.includes('iatf vs iso')) {
+        detectedService = 'Comparison: ISO vs IATF';
+        aiResponse = buildComparisonTable('iso_vs_iatf');
+        quickReplies = ['IATF 16949 Roadmap', 'ISO 9001 QMS', 'Book Free Consultation'];
+      }
+      else if (msgLower.includes('9001 vs 13485') || msgLower.includes('13485 vs 9001') || (msgLower.includes('medical') && msgLower.includes('iso 9001'))) {
+        detectedService = 'Comparison: ISO 9001 vs ISO 13485';
+        aiResponse = buildComparisonTable('iso_9001_vs_13485');
+        quickReplies = ['ISO 13485 Quote', 'ISO 9001 QMS', 'Book Free Consultation'];
+      }
+      else if (msgLower.includes('9001 vs 17025') || msgLower.includes('17025 vs 9001') || (msgLower.includes('lab') && msgLower.includes('iso 9001'))) {
+        detectedService = 'Comparison: ISO 9001 vs ISO 17025';
+        aiResponse = buildComparisonTable('iso_9001_vs_17025');
+        quickReplies = ['NABL Audit Prep', 'ISO 9001 QMS', 'Book Free Consultation'];
+      }
+      else if (msgLower.includes('5s vs kaizen') || msgLower.includes('lean vs 5s') || msgLower.includes('kaizen vs lean')) {
+        detectedService = 'Comparison: 5S vs Kaizen vs Lean';
+        aiResponse = buildComparisonTable('lean_vs_5s_kaizen');
+        quickReplies = ['5S Workshop', 'Lean Transformation', 'Book Free Consultation'];
+      }
+      else if (msgLower.includes('corporate vs industrial') || msgLower.includes('training comparison')) {
+        detectedService = 'Comparison: Training Programs';
+        aiResponse = buildComparisonTable('corporate_vs_industrial_training');
+        quickReplies = ['Core Tools Workshop', 'Placement Prep', 'Book Free Consultation'];
+      }
+      else if (msgLower.includes('nats vs naps') || msgLower.includes('naps vs nats')) {
+        detectedService = 'Comparison: NATS vs NAPS';
+        aiResponse = buildComparisonTable('nats_vs_naps');
+        quickReplies = ['NATS Scheme Info', 'NAPS Process', 'Book Free Consultation'];
+      }
+      else if (msgLower.includes('sedex vs social') || msgLower.includes('social vs sedex')) {
+        detectedService = 'Comparison: SEDEX vs Social Audit';
+        aiResponse = buildComparisonTable('sedex_vs_social_audit');
+        quickReplies = ['SEDEX SMETA Audit', 'Social Audit Info', 'Book Free Consultation'];
+      }
+      else if (msgLower.includes('fssai vs iso') || msgLower.includes('iso vs fssai')) {
+        detectedService = 'Comparison: FSSAI vs ISO 22000';
+        aiResponse = buildComparisonTable('fssai_vs_iso_22000');
+        quickReplies = ['FSSAI License Quote', 'ISO 22000 FSMS', 'Book Free Consultation'];
+      }
+
       // TOPIC 1: ISO 9001
       else if (msgLower.includes('9001') || (msgLower.includes('iso') && (msgLower.includes('quality') || msgLower.includes('qms')))) {
         detectedService = 'ISO 9001 QMS';
@@ -816,104 +863,119 @@ const server = http.createServer(async (req, res) => {
         aiResponse = buildGuideAnswer('iso_50001');
         quickReplies = ['ISO 50001 Info', 'Profit Maximization', 'Book Free Consultation'];
       }
-      // TOPIC 8: IATF 16949
+      // TOPIC 8: ISO 13485 (Medical Devices)
+      else if (msgLower.includes('13485') || msgLower.includes('medical device') || msgLower.includes('surgical') || msgLower.includes('cdsco')) {
+        detectedService = 'ISO 13485 Medical QMS';
+        aiResponse = buildGuideAnswer('iso_13485');
+        quickReplies = ['ISO 13485 Quote', 'ISO 9001 vs 13485', 'Book Free Consultation'];
+      }
+      // TOPIC 9: ISO 17025 (Testing & Calibration Lab / NABL)
+      else if (msgLower.includes('17025') || msgLower.includes('nabl') || msgLower.includes('calibration lab') || msgLower.includes('testing lab')) {
+        detectedService = 'ISO 17025 NABL Accreditation';
+        aiResponse = buildGuideAnswer('iso_17025');
+        quickReplies = ['NABL Audit Prep', 'ISO 9001 vs 17025', 'Book Free Consultation'];
+      }
+      // TOPIC 10: IATF 16949
       else if (msgLower.includes('iatf') || msgLower.includes('16949') || msgLower.includes('apqp') || msgLower.includes('ppap') || msgLower.includes('fmea') || msgLower.includes('core tools')) {
         detectedService = 'IATF 16949 Automotive';
         aiResponse = buildGuideAnswer('iatf');
         quickReplies = ['Core Tools Workshop', 'ISO vs IATF', 'MACE Audit Prep', 'Book Free Consultation'];
       }
-      // TOPIC 9: FSSAI
+      // TOPIC 11: FSSAI
       else if (msgLower.includes('fssai') || msgLower.includes('food license') || msgLower.includes('foscos')) {
         detectedService = 'FSSAI License';
         aiResponse = buildGuideAnswer('fssai');
         quickReplies = ['FSSAI License Quote', 'FSSAI vs ISO 22000', 'Book Free Consultation'];
       }
-      // TOPIC 10: SEDEX / SMETA
+      // TOPIC 12: SEDEX / SMETA
       else if (msgLower.includes('sedex') || msgLower.includes('smeta')) {
         detectedService = 'SEDEX SMETA Audit';
         aiResponse = buildGuideAnswer('sedex');
         quickReplies = ['SEDEX SMETA Audit', 'SEDEX vs Social Audit', 'Book Free Consultation'];
       }
-      // TOPIC 11: MACE AUDIT
+      // TOPIC 13: MACE AUDIT
       else if (msgLower.includes('mace') || msgLower.includes('maruti suzuki')) {
         detectedService = 'MACE Audit';
         aiResponse = buildGuideAnswer('mace');
         quickReplies = ['MACE Audit Prep', 'IATF 16949 Roadmap', 'Book Free Consultation'];
       }
-      // TOPIC 12: SOCIAL AUDIT
+      // TOPIC 14: SOCIAL AUDIT
       else if (msgLower.includes('social audit') || msgLower.includes('sa 8000') || msgLower.includes('sa8000') || msgLower.includes('bsci') || msgLower.includes('ecovadis')) {
         detectedService = 'Social Audit';
         aiResponse = buildGuideAnswer('social_audit');
         quickReplies = ['Social Audit Info', 'SEDEX vs Social Audit', 'Book Free Consultation'];
       }
-      // TOPIC 13: NATS
+      // TOPIC 15: LEAN MANUFACTURING
+      else if (msgLower.includes('lean') || msgLower.includes('vsm') || msgLower.includes('value stream') || msgLower.includes('smed')) {
+        detectedService = 'Lean Manufacturing';
+        aiResponse = buildGuideAnswer('lean_manufacturing');
+        quickReplies = ['Lean Transformation', '5S vs Kaizen vs Lean', 'Book Free Consultation'];
+      }
+      // TOPIC 16: 5S WORKPLACE
+      else if (msgLower.includes('5s') || msgLower.includes('seiri') || msgLower.includes('shadow board')) {
+        detectedService = '5S Workplace Management';
+        aiResponse = buildGuideAnswer('five_s');
+        quickReplies = ['5S Workshop', '5S vs Kaizen vs Lean', 'Book Free Consultation'];
+      }
+      // TOPIC 17: KAIZEN
+      else if (msgLower.includes('kaizen') || msgLower.includes('gemba') || msgLower.includes('continuous improvement')) {
+        detectedService = 'Kaizen Improvement';
+        aiResponse = buildGuideAnswer('kaizen');
+        quickReplies = ['Kaizen Event', '5S vs Kaizen vs Lean', 'Book Free Consultation'];
+      }
+      // TOPIC 18: NATS
       else if (msgLower.includes('nats') || msgLower.includes('national apprenticeship training')) {
         detectedService = 'NATS Scheme';
         aiResponse = buildGuideAnswer('nats');
         quickReplies = ['NATS Registration', 'NATS vs NAPS', 'Book Free Consultation'];
       }
-      // TOPIC 14: NAPS
+      // TOPIC 19: NAPS
       else if (msgLower.includes('naps') || msgLower.includes('national apprenticeship promotion')) {
         detectedService = 'NAPS Scheme';
         aiResponse = buildGuideAnswer('naps');
         quickReplies = ['NAPS Process', 'NATS vs NAPS', 'Book Free Consultation'];
       }
-      // TOPIC 15: TRAINING
+      // TOPIC 20: PLACEMENT PREPARATION
+      else if (msgLower.includes('placement') || msgLower.includes('campus') || msgLower.includes('mock interview') || msgLower.includes('gd prep')) {
+        detectedService = 'Placement Preparation';
+        aiResponse = buildGuideAnswer('placement_prep');
+        quickReplies = ['Campus Bootcamp', 'Training Comparison', 'Book Free Consultation'];
+      }
+      // TOPIC 21: FUTURE GUIDANCE
+      else if (msgLower.includes('future guidance') || msgLower.includes('career guidance') || msgLower.includes('career roadmap') || msgLower.includes('lead auditor course')) {
+        detectedService = 'Future Career Guidance';
+        aiResponse = buildGuideAnswer('future_guidance');
+        quickReplies = ['1-on-1 Mentorship', 'ISO Lead Auditor Info', 'Book Free Consultation'];
+      }
+      // TOPIC 22: TRAINING
       else if (msgLower.includes('training') || msgLower.includes('workshop') || msgLower.includes('seminar')) {
         detectedService = 'Industrial Training';
         aiResponse = buildGuideAnswer('training');
-        quickReplies = ['Core Tools Workshop', '5S Kaizen Workshop', 'Book Free Consultation'];
+        quickReplies = ['Core Tools Workshop', '5S Kaizen Workshop', 'Placement Prep', 'Book Free Consultation'];
       }
-      // TOPIC 16: PROFIT MAXIMIZATION
+      // TOPIC 23: PROFIT MAXIMIZATION
       else if (msgLower.includes('profit') || msgLower.includes('cost reduction') || msgLower.includes('yield') || msgLower.includes('oee')) {
         detectedService = 'Profit Maximization';
         aiResponse = buildGuideAnswer('profit_maximization');
         quickReplies = ['Profit Maximization Blueprint', '5S Kaizen Info', 'Book Free Consultation'];
       }
-      // TOPIC 17: LEADERSHIP
+      // TOPIC 24: LEADERSHIP
       else if (msgLower.includes('leadership') || msgLower.includes('supervisor') || msgLower.includes('managerial')) {
         detectedService = 'Leadership Program';
         aiResponse = buildGuideAnswer('leadership');
         quickReplies = ['Leadership Workshop', 'Master Business Program', 'Book Free Consultation'];
       }
-      // TOPIC 18: MASTER BUSINESS EXCELLENCE PROGRAM
+      // TOPIC 25: MASTER BUSINESS EXCELLENCE PROGRAM
       else if (msgLower.includes('master program') || msgLower.includes('master business') || msgLower.includes('transformation')) {
         detectedService = 'Master Business Excellence Program';
         aiResponse = buildGuideAnswer('master_business_excellence');
         quickReplies = ['Book Free Consultation', 'ZED MSME Subsidy', 'ISO 9001 QMS', 'WhatsApp Support'];
       }
 
-      // COMPARISON ENGINE
-      else if (msgLower.includes('iso vs zed') || msgLower.includes('zed vs iso') || msgLower.includes('difference between iso and zed')) {
-        detectedService = 'Comparison: ISO vs ZED';
-        aiResponse = buildComparisonTable('iso_vs_zed');
-        quickReplies = ['ZED MSME Subsidy', 'ISO 9001 QMS', 'Book Free Consultation'];
-      }
-      else if (msgLower.includes('iso vs iatf') || msgLower.includes('iatf vs iso')) {
-        detectedService = 'Comparison: ISO vs IATF';
-        aiResponse = buildComparisonTable('iso_vs_iatf');
-        quickReplies = ['IATF 16949 Roadmap', 'ISO 9001 QMS', 'Book Free Consultation'];
-      }
-      else if (msgLower.includes('nats vs naps') || msgLower.includes('naps vs nats')) {
-        detectedService = 'Comparison: NATS vs NAPS';
-        aiResponse = buildComparisonTable('nats_vs_naps');
-        quickReplies = ['NATS Scheme Info', 'NAPS Process', 'Book Free Consultation'];
-      }
-      else if (msgLower.includes('sedex vs social') || msgLower.includes('social vs sedex')) {
-        detectedService = 'Comparison: SEDEX vs Social Audit';
-        aiResponse = buildComparisonTable('sedex_vs_social_audit');
-        quickReplies = ['SEDEX SMETA Audit', 'Social Audit Info', 'Book Free Consultation'];
-      }
-      else if (msgLower.includes('fssai vs iso') || msgLower.includes('iso vs fssai')) {
-        detectedService = 'Comparison: FSSAI vs ISO 22000';
-        aiResponse = buildComparisonTable('fssai_vs_iso_22000');
-        quickReplies = ['FSSAI License Quote', 'ISO 22000 FSMS', 'Book Free Consultation'];
-      }
-
-      // COST QUERY
+      // COST / PRICE QUERY
       else if (msgLower.includes('cost') || msgLower.includes('price') || msgLower.includes('fee') || msgLower.includes('kharcha') || msgLower.includes('rate')) {
         detectedService = 'Pricing Policy';
-        aiResponse = `💰 **PRV Consultancy Investment & Financial Policy**\n\nThe exact investment depends on your company size, number of employees, plant locations, and project scope.\n\n✨ **Government Financial Grants Available**:\n• **ZED Scheme**: Up to **80% Government Subsidy** on audit costs + **0.5% lower loan interest rate**.\n• **NATS Scheme**: Central Government stipend reimbursement up to **₹1,500/month per apprentice**.\n• **ISO Consultancies**: Flexible milestone-based payment options.\n\nPlease share your **Mobile Number & Email** in chat to receive an instant, customized formal quotation!`;
+        aiResponse = `💰 **PRV Consultancy Investment & Financial Policy**\n\nInvestment for enterprise consultancy and certification depends on:\n1️⃣ **Plant Scope & Locations**: Single vs multi-unit manufacturing facilities.\n2️⃣ **Workforce Size**: Total employee headcount and shopfloor shifts.\n3️⃣ **Certification Standard**: ISO 9001, IATF 16949, ZED, SEDEX, etc.\n4️⃣ **Government Subsidies & Grants**:\n   - **ZED MSME Scheme**: Up to **80% Government Subsidy** on audit fees + **₹10,000 Handholding Grant** + **0.5% lower loan interest**.\n   - **NATS / NAPS**: Central Govt stipend reimbursement up to **₹1,500/month per candidate** + 100% PF/ESI exemption.\n\n⚠️ *Disclaimer*: PRV does not charge arbitrary rates. We provide milestone-based pricing and maximize government financial subsidy claims for your business.\n\n👉 **To receive a formal customized proposal**: Please share your Name, Company, Mobile Number, Email, and City in chat!`;
         quickReplies = ['Book Free Consultation', 'ZED Subsidy Info', 'ISO 9001 Quote', 'WhatsApp Support'];
       }
 

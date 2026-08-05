@@ -506,53 +506,75 @@
         quickReplies = ['Recommend for my business', 'ISO 9001 QMS', 'ISO 27001 ISMS', 'ISO 22000 Food Safety'];
       }
 
-      // ZED SCHEME
-      else if (msgLower.includes('zed') || msgLower.includes('zero defect')) {
-        detectedService = 'ZED Certification';
-        aiResponse = `🏆 **ZED (Zero Defect Zero Effect) MSME Scheme & Subsidy Guide**\n\n• **What it is**: Ministry of MSME national scheme for zero-defect production.\n• **Why required**: Claim grants, lower bank loan rates, win tenders.\n• **Eligibility**: MSME manufacturing units with valid Udyam Registration.\n• **Subsidies**: 80% Bronze Subsidy, 60% Silver, 50% Gold + ₹10,000 grant + 0.5% lower bank interest rate.\n• **Timeline**: 2 to 4 weeks.\n• **How PRV Helps**: Complete portal registration, desktop verification & subsidy claim settlement.`;
-        quickReplies = ['ZED Subsidy Details', 'ISO vs ZED', 'Book Free Consultation'];
+      // ISO 13485 (Medical Devices)
+      else if (msgLower.includes('13485') || msgLower.includes('medical device') || msgLower.includes('surgical') || msgLower.includes('cdsco')) {
+        detectedService = 'ISO 13485 Medical QMS';
+        aiResponse = `🩺 **ISO 13485:2016 Medical Devices Quality System**\n\n• **What it is**: Mandatory international QMS standard for medical device manufacturers.\n• **Why required**: Compliance with CDSCO MDR regulations, CE marking, FDA export access.\n• **Key Features**: ISO 14971 Risk Management, Cleanroom environmental controls, batch traceability.\n• **Timeline**: 3 to 6 weeks.\n• **How PRV Helps**: Complete Technical File drafting, Risk Management File creation & CDSCO/Notified Body audit handholding.`;
+        quickReplies = ['ISO 13485 Quote', 'ISO 9001 vs 13485', 'Book Free Consultation'];
       }
 
-      // ISO 9001
-      else if (msgLower.includes('9001') || (msgLower.includes('iso') && msgLower.includes('quality'))) {
-        detectedService = 'ISO 9001 QMS';
-        aiResponse = `📘 **ISO 9001:2015 Quality Management System (QMS)**\n\n• **What it is**: International gold standard for Quality Management Systems.\n• **Why required**: Mandatory for Govt Tenders, OEM vendor approvals & corporate registration.\n• **Eligibility**: Any manufacturing, service, or IT company.\n• **Benefits**: 100% tender eligibility, zero shopfloor re-work, standardized SOPs.\n• **Timeline**: 10 to 20 business days.\n• **How PRV Helps**: SOP drafting, internal audit, staff training & guaranteed 100% audit clearance.`;
-        quickReplies = ['Get ISO 9001 Quote', 'ISO vs ZED', 'Book Free Consultation'];
+      // ISO 17025 (Testing & Calibration Labs / NABL)
+      else if (msgLower.includes('17025') || msgLower.includes('nabl') || msgLower.includes('calibration lab') || msgLower.includes('testing lab')) {
+        detectedService = 'ISO 17025 NABL Accreditation';
+        aiResponse = `🔬 **ISO/IEC 17025:2017 Testing & Calibration Lab (NABL)**\n\n• **What it is**: Global standard certifying technical competence & measurement accuracy of laboratories.\n• **Why required**: Official NABL Accreditation, tender eligibility, globally valid test reports under ILAC MRA.\n• **Timeline**: 1 to 3 months.\n• **How PRV Helps**: Measurement uncertainty budget calculation, method validation & NABL audit defense.`;
+        quickReplies = ['NABL Audit Prep', 'ISO 9001 vs 17025', 'Book Free Consultation'];
       }
 
-      // IATF 16949
-      else if (msgLower.includes('iatf') || msgLower.includes('16949') || msgLower.includes('core tools')) {
-        detectedService = 'IATF 16949 Automotive';
-        aiResponse = `🚗 **IATF 16949:2016 Automotive Quality System & Core Tools**\n\n• **What it is**: Global automotive quality standard required by OEMs (Maruti, Tata, Hyundai).\n• **Core Tools**: APQP, PPAP, FMEA, MSA, SPC.\n• **Benefits**: Mandatory Tier-1/OEM vendor approval & zero defect quality.\n• **Timeline**: 2 to 3 months.\n• **How PRV Helps**: Hands-on shopfloor Core Tools implementation & Tier-1 audit clearance.`;
-        quickReplies = ['Core Tools Workshop', 'ISO vs IATF', 'Book Free Consultation'];
+      // LEAN MANUFACTURING
+      else if (msgLower.includes('lean') || msgLower.includes('vsm') || msgLower.includes('value stream') || msgLower.includes('smed')) {
+        detectedService = 'Lean Manufacturing';
+        aiResponse = `🏭 **Lean Manufacturing & Operational Excellence Blueprint**\n\n• **What it is**: Systematic strategy to eliminate 7 Mudas waste & cut manufacturing lead times.\n• **Benefits**: 30%-50% WIP reduction, higher OEE, zero bottleneck delays.\n• **Timeline**: 1 to 3 months.\n• **How PRV Helps**: On-site Value Stream Mapping, SMED line balancing & lean transformation.`;
+        quickReplies = ['Lean Transformation', '5S vs Kaizen vs Lean', 'Book Free Consultation'];
       }
 
-      // FSSAI
-      else if (msgLower.includes('fssai') || msgLower.includes('food license')) {
-        detectedService = 'FSSAI License';
-        aiResponse = `🥗 **FSSAI Food License & Statutory Clearance**\n\n• **What it is**: Mandatory Indian statutory food license under FSSAI Act.\n• **Slabs**: Basic (turnover < ₹12L), State (₹12L - ₹20Cr), Central (> ₹20Cr / Exporters).\n• **Timeline**: 7 to 15 days.\n• **How PRV Helps**: FoSCoS filing, department query resolution & fast-track license approval.`;
-        quickReplies = ['FSSAI License Quote', 'ISO 22000 FSMS', 'Book Free Consultation'];
+      // 5S WORKPLACE MANAGEMENT
+      else if (msgLower.includes('5s') || msgLower.includes('seiri') || msgLower.includes('shadow board')) {
+        detectedService = '5S Workplace Management';
+        aiResponse = `✨ **5S Workplace Management & Visual Control System**\n\n• **What it is**: 5-step Japanese methodology: Sort, Set in Order, Shine, Standardize, Sustain.\n• **Benefits**: Organizes plant floor, eliminates search time, clears OEM audits.\n• **Timeline**: 1 to 3 weeks.\n• **How PRV Helps**: Red-tagging campaigns, shadow board installation & monthly 5S scorecards.`;
+        quickReplies = ['5S Workshop', '5S vs Kaizen vs Lean', 'Book Free Consultation'];
       }
 
-      // SEDEX SMETA
-      else if (msgLower.includes('sedex') || msgLower.includes('smeta')) {
-        detectedService = 'SEDEX SMETA Audit';
-        aiResponse = `🛡️ **SEDEX SMETA Ethical & Social Compliance Audit**\n\n• **What it is**: World's leading ethical audit evaluating labor, health & safety, environment, ethics.\n• **Pillars**: 2-Pillar & 4-Pillar Audits.\n• **Benefits**: Mandatory for supplying to Walmart, Disney, Zara, Target, H&M.\n• **Timeline**: 1 to 3 weeks.\n• **How PRV Helps**: Mock audit, document verification & zero NC clearance guarantee.`;
-        quickReplies = ['Prepare for SMETA Audit', 'SEDEX vs Social Audit', 'Book Free Consultation'];
+      // KAIZEN
+      else if (msgLower.includes('kaizen') || msgLower.includes('gemba') || msgLower.includes('continuous improvement')) {
+        detectedService = 'Kaizen Continuous Improvement';
+        aiResponse = `🔄 **Kaizen Continuous Improvement & Gemba Problem Solving**\n\n• **What it is**: Employee-driven philosophy of daily micro-improvements.\n• **Benefits**: Solves shopfloor defects, cuts scrap, sustains high workforce morale.\n• **Timeline**: 2 to 4 weeks rollout.\n• **How PRV Helps**: Gemba walks, operator 7 QC tools training & suggestion reward system.`;
+        quickReplies = ['Kaizen Event', '5S vs Kaizen vs Lean', 'Book Free Consultation'];
       }
 
-      // NATS / NAPS
-      else if (msgLower.includes('nats') || msgLower.includes('naps') || msgLower.includes('apprentice')) {
-        detectedService = 'Apprenticeship Schemes';
-        aiResponse = `🎓 **NATS & NAPS Government Apprenticeship Schemes**\n\n• **NATS**: For Engineering/Diploma/Degree graduates (Govt reimburses up to ₹1,500/month per candidate).\n• **NAPS**: For ITI & non-technical floor operators.\n• **Statutory Relief**: 100% Exemption from PF & ESI contributions.\n• **How PRV Helps**: Portal registration, contract execution & monthly stipend claim filings.`;
-        quickReplies = ['NATS Scheme Info', 'NAPS Process', 'Book Free Consultation'];
+      // PLACEMENT PREPARATION
+      else if (msgLower.includes('placement') || msgLower.includes('campus') || msgLower.includes('mock interview') || msgLower.includes('gd prep')) {
+        detectedService = 'Placement Preparation';
+        aiResponse = `🎓 **Placement Preparation & Campus-to-Corporate Seminars**\n\n• **What it is**: Practical academy training for engineering/polytechnic students.\n• **Benefits**: Maximizes campus placement selection rate & candidate interview confidence.\n• **Timeline**: 3-day bootcamps to 4-week modules.\n• **How PRV Helps**: Resume restructuring, industrial SOP exposure & 1-on-1 mock interviews.`;
+        quickReplies = ['Campus Bootcamp', 'Training Comparison', 'Book Free Consultation'];
       }
 
-      // PROFIT MAXIMIZATION / 5S
-      else if (msgLower.includes('profit') || msgLower.includes('5s') || msgLower.includes('kaizen') || msgLower.includes('lean')) {
-        detectedService = 'Profit Maximization';
-        aiResponse = `⚡ **Profit Maximization & 5S Lean Kaizen Blueprint**\n\n• **Goal**: Expand net profit margin by 15-35% and eliminate shopfloor waste (7 Mudas).\n• **5S Pillars**: Sort, Set in Order, Shine, Standardize, Sustain.\n• **Results**: 20-30% productivity boost, 50% scrap reduction.\n• **How PRV Helps**: On-site consulting, value stream mapping & measurable ROI.`;
-        quickReplies = ['5S Kaizen Workshop', 'Profit Maximization Plan', 'Book Free Consultation'];
+      // FUTURE GUIDANCE
+      else if (msgLower.includes('future guidance') || msgLower.includes('career guidance') || msgLower.includes('career roadmap') || msgLower.includes('lead auditor course')) {
+        detectedService = 'Future Career Guidance';
+        aiResponse = `🚀 **Future Career Guidance & Executive Mentorship**\n\n• **What it is**: Career roadmap strategy for engineers, quality heads & fresh graduates.\n• **Benefits**: Clear certification path (ISO Lead Auditor, Six Sigma, IATF) & salary elevation.\n• **How PRV Helps**: 1-on-1 career evaluation with senior industry consultants.`;
+        quickReplies = ['1-on-1 Mentorship', 'ISO Lead Auditor Info', 'Book Free Consultation'];
+      }
+
+      // COMPARISONS
+      else if (msgLower.includes('iso vs zed') || msgLower.includes('zed vs iso')) {
+        detectedService = 'Comparison: ISO vs ZED';
+        aiResponse = `📊 **ISO 9001 vs ZED MSME Scheme Matrix**\n\n| Parameter | ISO 9001:2015 | ZED MSME Scheme |\n| --- | --- | --- |\n| **Origin** | International Standard (Geneva) | Ministry of MSME, Govt of India |\n| **Govt Subsidy** | No direct subsidy | Up to 80% Subsidy + ₹10,000 Grant |\n| **Bank Benefit** | Corporate tender eligibility | 0.5% lower loan interest rate |\n| **Scope** | Quality Management SOPs | Zero Defect + Zero Effect |\n\n🎯 **PRV Verdict**: Apply for ZED to claim 80% Govt grant & loan discounts, while retaining ISO 9001 for buyer tenders!`;
+        quickReplies = ['ZED MSME Subsidy', 'ISO 9001 QMS', 'Book Free Consultation'];
+      }
+      else if (msgLower.includes('iso vs iatf') || msgLower.includes('iatf vs iso')) {
+        detectedService = 'Comparison: ISO vs IATF';
+        aiResponse = `📊 **ISO 9001 vs IATF 16949 Matrix**\n\n| Parameter | ISO 9001 | IATF 16949:2016 |\n| --- | --- | --- |\n| **Focus** | General manufacturing & service | Automotive component suppliers |\n| **Core Tools** | Optional | Mandatory (APQP, PPAP, FMEA, MSA, SPC) |\n| **OEM Status** | General corporate standard | Mandatory for Maruti, Tata, Hyundai, etc. |\n\n🎯 **PRV Verdict**: If you supply auto parts, go directly for IATF 16949!`;
+        quickReplies = ['IATF 16949 Roadmap', 'ISO 9001 QMS', 'Book Free Consultation'];
+      }
+      else if (msgLower.includes('9001 vs 13485') || msgLower.includes('13485 vs 9001')) {
+        detectedService = 'Comparison: ISO 9001 vs ISO 13485';
+        aiResponse = `📊 **ISO 9001 vs ISO 13485 Medical Devices Matrix**\n\n| Parameter | ISO 9001 | ISO 13485:2016 |\n| --- | --- | --- |\n| **Sector** | General manufacturing | Medical devices & healthcare |\n| **Risk Control** | Basic business risk | Mandatory ISO 14971 Risk Management |\n| **Cleanroom** | Standard shopfloor | Strict cleanroom & sterile traceability |\n\n🎯 **PRV Verdict**: Medical device companies MUST take ISO 13485 to clear CDSCO & FDA regulations.`;
+        quickReplies = ['ISO 13485 Quote', 'ISO 9001 QMS', 'Book Free Consultation'];
+      }
+      else if (msgLower.includes('5s vs kaizen') || msgLower.includes('lean vs 5s')) {
+        detectedService = 'Comparison: 5S vs Kaizen vs Lean';
+        aiResponse = `📊 **5S vs Kaizen vs Lean Manufacturing Matrix**\n\n| Parameter | 5S | Kaizen | Lean Manufacturing |\n| --- | --- | --- | --- |\n| **Focus** | Physical organization | Daily worker micro-ideas | Total value stream flow |\n| **Timeline** | 1 to 3 weeks | Daily continuous habit | 1 to 3 months |\n| **Result** | Clean & safe plant | Micro defect reduction | 50% lead time reduction |\n\n🎯 **PRV Verdict**: Implement 5S first, cultivate Kaizen habits, and execute Lean Manufacturing!`;
+        quickReplies = ['5S Workshop', 'Lean Transformation', 'Book Free Consultation'];
       }
 
       // DEFAULT CONSULTANT RESPONSE
