@@ -284,6 +284,19 @@
           </div>
         </div>
 
+        <div class="table-wrapper" style="padding: 20px; margin-bottom: 20px;">
+          <h3 style="margin: 0 0 8px;">Train the AI Assistant</h3>
+          <p style="margin: 0 0 16px; color: var(--admin-muted);">Add verified answers. The assistant checks these before its default replies.</p>
+          <form id="ai-training-form" style="display: grid; gap: 10px;">
+            <input id="ai-training-question" class="search-input" required placeholder="Customer question, e.g. What is your office address?">
+            <textarea id="ai-training-answer" class="search-input" required rows="4" placeholder="Approved answer the assistant should give"></textarea>
+            <input id="ai-training-keywords" class="search-input" placeholder="Optional matching keywords, comma separated">
+            <button type="submit" class="btn-primary" style="width: fit-content;"><i class="fa-solid fa-brain"></i> Save training answer</button>
+          </form>
+          <div id="ai-training-status" style="margin-top: 10px; font-size: .85rem;"></div>
+          <div id="ai-training-list" style="margin-top: 14px;"></div>
+        </div>
+
         <div class="table-wrapper">
           <table class="crm-table">
             <thead>
@@ -791,6 +804,32 @@
       renderAiLogsTable([]);
     }
 
+    async function fetchTrainingExamples() {
+      const list = document.getElementById('ai-training-list');
+      try {
+        const res = await fetch('/api/ai/training');
+        const data = await res.json();
+        const examples = data.data || [];
+        list.innerHTML = examples.length ? examples.map(item => `<div style="display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-top:1px solid #e2e8f0;"><div><strong>${escapeHtml(item.question)}</strong><br><span style="color:var(--admin-muted); font-size:.85rem;">${escapeHtml(item.answer)}</span></div><button class="btn-secondary delete-training" data-id="${item.id}" title="Delete answer"><i class="fa-solid fa-trash"></i></button></div>`).join('') : '<span style="color:var(--admin-muted);">No custom training answers yet.</span>';
+      } catch (err) {
+        list.innerHTML = '<span style="color:#b91c1c;">Could not load training answers.</span>';
+      }
+    }
+
+    async function saveTrainingExample(event) {
+      event.preventDefault();
+      const status = document.getElementById('ai-training-status');
+      const payload = {
+        question: document.getElementById('ai-training-question').value.trim(),
+        answer: document.getElementById('ai-training-answer').value.trim(),
+        keywords: document.getElementById('ai-training-keywords').value.trim()
+      };
+      const res = await fetch('/api/ai/training', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      if (res.ok) {
+        event.target.reset(); status.style.color = '#047857'; status.textContent = 'Training answer saved and active.'; fetchTrainingExamples();
+      } else { status.style.color = '#b91c1c'; status.textContent = 'Could not save the training answer.'; }
+    }
+
     function renderAiLogsTable(items) {
       const tbody = document.getElementById('ai-logs-table-body');
       tbody.innerHTML = '';
@@ -839,6 +878,7 @@
 
           if (view === 'ai-logs') {
             fetchAiLogs();
+            fetchTrainingExamples();
           }
         });
       });
@@ -851,6 +891,13 @@
         document.getElementById('service-filter').value = '';
         document.getElementById('status-filter').value = '';
         fetchEnquiries();
+      });
+      document.getElementById('ai-training-form').addEventListener('submit', saveTrainingExample);
+      document.getElementById('ai-training-list').addEventListener('click', async (event) => {
+        const button = event.target.closest('.delete-training');
+        if (!button) return;
+        await fetch(`/api/ai/training/${button.dataset.id}`, { method: 'DELETE' });
+        fetchTrainingExamples();
       });
     }
   </script>

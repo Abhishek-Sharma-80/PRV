@@ -84,6 +84,20 @@ db.exec(`
   );
 `);
 
+// Approved question-and-answer pairs supplied by the PRV team.  These are
+// checked before the built-in rules so the assistant can be trained without a
+// code deployment.
+db.exec(`
+  CREATE TABLE IF NOT EXISTS ai_training_examples (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    question TEXT NOT NULL,
+    answer TEXT NOT NULL,
+    keywords TEXT DEFAULT '',
+    active INTEGER DEFAULT 1
+  );
+`);
+
 // Create Table 4: appointments
 db.exec(`
   CREATE TABLE IF NOT EXISTS appointments (
@@ -463,6 +477,43 @@ const server = http.createServer(async (req, res) => {
   // AI ASSISTANT API ROUTES
   // ------------------------------------------------------------------------
 
+  // GET /api/ai/training - list approved training examples for the admin.
+  if (pathname === '/api/ai/training' && method === 'GET') {
+    const rows = db.prepare('SELECT * FROM ai_training_examples ORDER BY created_at DESC').all();
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ success: true, data: rows }));
+    return;
+  }
+
+  // POST /api/ai/training - add a verified answer the assistant can use.
+  if (pathname === '/api/ai/training' && method === 'POST') {
+    try {
+      const { question, answer, keywords = '' } = await parseJsonBody(req);
+      if (!question || !answer) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, message: 'Question and answer are required.' }));
+        return;
+      }
+      const result = db.prepare('INSERT INTO ai_training_examples (question, answer, keywords) VALUES (?, ?, ?)')
+        .run(question.trim(), answer.trim(), keywords.trim());
+      res.writeHead(201, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true, id: Number(result.lastInsertRowid) }));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: false, message: 'Could not save the training example.' }));
+    }
+    return;
+  }
+
+  // DELETE /api/ai/training/:id - remove an approved answer.
+  const trainingDeleteMatch = pathname.match(/^\/api\/ai\/training\/(\d+)$/);
+  if (trainingDeleteMatch && method === 'DELETE') {
+    db.prepare('DELETE FROM ai_training_examples WHERE id = ?').run(Number(trainingDeleteMatch[1]));
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ success: true }));
+    return;
+  }
+
   // POST /api/ai/book-consultation - Schedule FREE Consultation
   if (pathname === '/api/ai/book-consultation' && method === 'POST') {
     try {
@@ -624,6 +675,25 @@ const server = http.createServer(async (req, res) => {
 
       const userLang = detectLanguage(userMessage, sessionId);
 
+      // Use the closest approved training example.  Requiring two matching
+      // meaningful words prevents a broad keyword from hijacking a response.
+      const normaliseTerms = (value) => [...new Set(String(value).toLowerCase()
+        .replace(/[^a-z0-9\s]/g, ' ').split(/\s+/)
+        .filter(term => term.length > 2 && !['what', 'which', 'with', 'about', 'your', 'have', 'need', 'please'].includes(term)))];
+      const messageTerms = normaliseTerms(userMessage);
+      const trainedExamples = db.prepare('SELECT * FROM ai_training_examples WHERE active = 1').all();
+      let trainedMatch = null;
+      let trainedScore = 0;
+      trainedExamples.forEach(example => {
+        const exampleTerms = normaliseTerms(`${example.question} ${example.keywords || ''}`);
+        const overlap = messageTerms.filter(term => exampleTerms.includes(term)).length;
+        const score = overlap / Math.max(1, Math.min(messageTerms.length, exampleTerms.length));
+        if (overlap >= 2 && score > trainedScore) {
+          trainedScore = score;
+          trainedMatch = example;
+        }
+      });
+
       // Extract phone number or email from message for auto-lead generation
       const phoneMatch = userMessage.match(/(?:\+91[\s-]?)?[6-9]\d{9}/);
       const emailMatch = userMessage.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
@@ -758,7 +828,12 @@ const server = http.createServer(async (req, res) => {
       // ------------------------------------------------------------------------
 
       // SCENARIO 1: AUTO PARTS MANUFACTURER QUERY ("My company manufactures auto parts. Which certification should I take?")
-      if (
+      if (trainedMatch) {
+        detectedService = 'Trained Answer';
+        aiResponse = trainedMatch.answer;
+        quickReplies = ['Ask another question', 'Book Free Consultation', 'WhatsApp Support'];
+      }
+      else if (
         (msgLower.includes('auto part') || msgLower.includes('auto component') || msgLower.includes('automotive') || msgLower.includes('car part') || msgLower.includes('oem supplier')) &&
         (msgLower.includes('which') || msgLower.includes('recommend') || msgLower.includes('take') || msgLower.includes('need') || msgLower.includes('certificate') || msgLower.includes('certification'))
       ) {
