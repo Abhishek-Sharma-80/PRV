@@ -84,7 +84,27 @@ db.exec(`
   );
 `);
 
-console.log('PRV Consultancy Databases (client_enquiries, seminar_registrations & ai_conversations) initialized successfully.');
+// Create Table 4: appointments
+db.exec(`
+  CREATE TABLE IF NOT EXISTS appointments (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    full_name TEXT NOT NULL,
+    company_name TEXT,
+    mobile_number TEXT NOT NULL,
+    email TEXT NOT NULL,
+    city TEXT,
+    industry TEXT,
+    service_required TEXT NOT NULL,
+    preferred_date TEXT,
+    preferred_time TEXT,
+    status TEXT DEFAULT 'Scheduled',
+    consultant TEXT DEFAULT 'Unassigned',
+    notes TEXT
+  );
+`);
+
+console.log('PRV Consultancy Databases (client_enquiries, seminar_registrations, ai_conversations & appointments) initialized successfully.');
 
 // Insert Sample Data if Empty for Demonstration & Immediate CRM Dashboard Visuals
 const countStmt = db.prepare('SELECT COUNT(*) as count FROM client_enquiries');
@@ -473,6 +493,17 @@ const server = http.createServer(async (req, res) => {
         `Preferred Slot: ${preferred_date || 'TBD'} ${preferred_time || ''}`
       );
 
+      // Save to appointments table as well
+      try {
+        const apptStmt = db.prepare(`
+          INSERT INTO appointments (full_name, company_name, mobile_number, email, industry, service_required, preferred_date, preferred_time, notes)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `);
+        apptStmt.run(full_name, company_name || '', mobile_number, email || '', industry || 'General', service_required || 'FREE Consultation', preferred_date || '', preferred_time || '', notes || '');
+      } catch (eAppt) {
+        console.error('Error logging appointment:', eAppt);
+      }
+
       res.writeHead(201, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({
         success: true,
@@ -483,6 +514,20 @@ const server = http.createServer(async (req, res) => {
       console.error('Error booking consultation:', err);
       res.writeHead(500, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: false, message: 'Database error booking consultation.' }));
+    }
+    return;
+  }
+
+  // GET /api/appointments - Retrieve Scheduled Appointments
+  if (pathname === '/api/appointments' && method === 'GET') {
+    try {
+      const rows = db.prepare(`SELECT * FROM appointments ORDER BY created_at DESC`).all();
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true, count: rows.length, data: rows }));
+    } catch (err) {
+      console.error('Error fetching appointments:', err);
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: false, message: 'Database error fetching appointments.' }));
     }
     return;
   }

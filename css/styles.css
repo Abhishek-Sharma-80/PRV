@@ -2677,17 +2677,75 @@ button {
 }
 
 /* Media Queries for Finder Section */
-@media (max-width: 992px) {
-  .finder-form {
-    grid-template-columns: 1fr;
-  }
-  .finder-box {
-    padding: 24px 20px;
-  }
-  .finder-result-card {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+/* Universal Primary Section Call-to-Action Banner */
+.universal-section-cta {
+  margin-top: 45px;
+  background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-navy-dark) 100%);
+  border: 1px solid rgba(0, 201, 167, 0.25);
+  border-radius: var(--radius-md);
+  padding: 24px 32px;
+  box-shadow: var(--shadow-md);
+}
+
+.universal-section-cta .cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.universal-section-cta .cta-text h4 {
+  font-size: 1.25rem;
+  color: #FFFFFF;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.universal-section-cta .cta-text p {
+  font-size: 0.95rem;
+  color: #94A3B8;
+}
+
+.universal-section-cta .cta-btns {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-ai-cta {
+  background: var(--gradient-accent);
+  color: #0F172A;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition-fast);
+}
+
+.btn-ai-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+.btn-consult-cta {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition-fast);
+}
+
+.btn-consult-cta:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
 }
 
 

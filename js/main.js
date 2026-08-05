@@ -459,3 +459,47 @@ function initInstantFinder() {
     resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   });
 }
+
+/* --------------------------------------------------------------------------
+   9. AI ASSISTANT & QUICK CHIP LAUNCHERS
+   -------------------------------------------------------------------------- */
+document.addEventListener('DOMContentLoaded', () => {
+  initAiLaunchers();
+});
+
+function initAiLaunchers() {
+  const aiWindow = document.getElementById('ai-chat-window');
+  const aiToggleBtn = document.getElementById('ai-chat-toggle-btn');
+  const aiInput = document.getElementById('ai-chat-input');
+  const aiSendBtn = document.getElementById('ai-chat-send-btn');
+
+  // Open AI Chat Window Triggers
+  document.querySelectorAll('.open-ai-trigger').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (aiWindow) {
+        aiWindow.classList.add('active');
+        if (aiToggleBtn) aiToggleBtn.setAttribute('aria-expanded', 'true');
+        if (aiInput) aiInput.focus();
+      }
+    });
+  });
+
+  // Quick Action Buttons (Hero & AI Widgets)
+  document.querySelectorAll('.ai-quick-trigger').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const query = btn.getAttribute('data-query') || btn.textContent.trim();
+      if (aiWindow) {
+        aiWindow.classList.add('active');
+        if (aiToggleBtn) aiToggleBtn.setAttribute('aria-expanded', 'true');
+        if (aiInput) {
+          aiInput.value = query;
+          if (aiSendBtn) {
+            setTimeout(() => aiSendBtn.click(), 100);
+          }
+        }
+      }
+    });
+  });
+}
