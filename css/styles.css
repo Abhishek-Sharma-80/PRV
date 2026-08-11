@@ -4320,28 +4320,44 @@ body {
 
 
 
-/* Scroll Reveal Animation */
-.scroll-reveal {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+
+/* ==========================================================================
+   PAGE ENTRANCE ANIMATION SYSTEM
+   Works with SPA hash routing (display:none → display:block)
+   Content is VISIBLE by default; entrance animation is opt-in via JS
+   ========================================================================== */
+
+/* Default state: always visible (prevents blank pages) */
+.page-view .glass-panel,
+.page-view .home-service-card,
+.page-view section > div > * {
+  opacity: 1;
+  transform: none;
 }
 
-.scroll-reveal.in-view {
+/* When JS marks an element for entrance animation */
+.page-enter-item {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.page-enter-item.entered {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* CRITICAL: Never apply scroll-reveal invisibility to modals, floating widgets, or overlays.
-   These must always be fully visible when opened, regardless of IntersectionObserver state. */
-#consultation-modal .glass-panel,
-#seminar-modal .glass-panel,
+/* Ensure modals and overlays are ALWAYS visible regardless of any animation state */
+#consultation-modal,
+#consultation-modal *,
+#seminar-modal,
+#seminar-modal *,
 #ai-chat-window,
-#ai-chat-window .glass-panel,
-nav .glass-panel,
-footer .glass-panel {
+#ai-chat-window * {
   opacity: 1 !important;
   transform: none !important;
+  transition: none !important;
 }
 
 /* Counter stat elements */
@@ -4349,6 +4365,7 @@ footer .glass-panel {
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
 }
+
 
 
 

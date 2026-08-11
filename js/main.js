@@ -430,11 +430,17 @@ function initPageRouting() {
       hash = '#home';
     }
 
-    pageViews.forEach(v => v.classList.remove('active'));
+    pageViews.forEach(v => {
+      v.classList.remove('active');
+      // Reset entrance animations on hidden pages
+      v.querySelectorAll('.page-enter-item').forEach(el => el.classList.remove('entered'));
+    });
     targetView.classList.add('active');
-
     updateNavHighlight(hash);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Trigger staggered entrance animation for the newly active page
+    triggerPageEntrance(targetView);
   }
 
   function updateNavHighlight(activeHash) {
@@ -1095,43 +1101,36 @@ function showToast(message) {
 }
 
 /* --------------------------------------------------------------------------
-   8. SCROLL ANIMATIONS (IntersectionObserver)
+   8. PAGE ENTRANCE ANIMATION ENGINE
+   (IntersectionObserver won't work for SPA display:none → block switches,
+    so we use a staggered entrance triggered directly in handleRoute)
    -------------------------------------------------------------------------- */
-function initScrollAnimations() {
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -40px 0px'
-  };
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
+function triggerPageEntrance(pageEl) {
+  if (!pageEl) return;
 
-  // IMPORTANT: Only observe glass-panels inside .page-view sections (main content).
-  // Exclude modals, overlays, AI chat window, floating widgets and fixed UI elements
-  // to prevent them from being hidden by scroll-reveal's initial opacity:0.
-  const EXCLUDED_PARENTS = [
-    '#consultation-modal',
-    '#seminar-modal',
-    '#ai-chat-window',
-    '#ai-chat-toggle-btn',
-    '#toast-container',
-    'nav',
-    'footer'
-  ].join(', ');
+  // Select all cards, panels, headings inside this page view
+  const items = pageEl.querySelectorAll(
+    '.glass-panel, .home-service-card, .pipeline-step, section > div > *, .hero-cert-tag, .hero-stat'
+  );
 
-  document.querySelectorAll('.page-view .glass-panel, .animate-on-scroll').forEach(el => {
-    // Skip if inside an excluded parent (modals, overlays, nav, footer)
-    if (el.closest(EXCLUDED_PARENTS)) return;
+  items.forEach((el, i) => {
+    // Mark for animation
+    el.classList.add('page-enter-item');
+    el.classList.remove('entered');
 
-    el.classList.add('scroll-reveal');
-    observer.observe(el);
+    // Stagger: cap delay at 600ms so it doesn't feel slow
+    const delay = Math.min(i * 40, 600);
+    setTimeout(() => {
+      el.classList.add('entered');
+    }, delay);
   });
+}
+
+function initScrollAnimations() {
+  // Trigger entrance on the initially active page (home)
+  const activePage = document.querySelector('.page-view.active');
+  if (activePage) triggerPageEntrance(activePage);
 }
 
 
