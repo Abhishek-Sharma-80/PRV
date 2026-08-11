@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initFormHandlers();
   initMobileNav();
   initHeroActions();
+  initScrollAnimations();
+  initCounterAnimation();
 });
 
 /* --------------------------------------------------------------------------
@@ -1023,7 +1025,7 @@ function initMobileNav() {
 }
 
 function initHeroActions() {
-  // Modal consultation triggers
+  // Modal consultation triggers (delegate — works for dynamically rendered service detail buttons too)
   document.addEventListener('click', (e) => {
     const trigger = e.target.closest('.open-modal-trigger');
     if (trigger) {
@@ -1035,13 +1037,27 @@ function initHeroActions() {
       if (serviceHeader) serviceHeader.textContent = serviceName;
       if (selectElem) {
         for (let opt of selectElem.options) {
-          if (opt.value === serviceName) {
-            opt.selected = true;
-            break;
-          }
+          if (opt.value === serviceName) { opt.selected = true; break; }
         }
       }
       if (modal) modal.classList.remove('hidden');
+    }
+  });
+
+  // Open seminar modal delegate (works on Training page & Master Excellence page buttons)
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('.open-seminar-trigger');
+    if (trigger) {
+      const modal = document.getElementById('seminar-modal');
+      if (modal) modal.classList.remove('hidden');
+    }
+  });
+
+  // Detail page AI button — navigate to #ai-consultant
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('#detail-ai-btn');
+    if (trigger) {
+      window.location.hash = '#ai-consultant';
     }
   });
 
@@ -1054,6 +1070,14 @@ function initHeroActions() {
   seminarClose.forEach(b => b.addEventListener('click', () => {
     document.getElementById('seminar-modal').classList.add('hidden');
   }));
+
+  // Close modals on backdrop click
+  document.addEventListener('click', (e) => {
+    const consultModal = document.getElementById('consultation-modal');
+    const semModal = document.getElementById('seminar-modal');
+    if (e.target === consultModal) consultModal.classList.add('hidden');
+    if (e.target === semModal) semModal.classList.add('hidden');
+  });
 }
 
 function showToast(message) {
@@ -1068,4 +1092,70 @@ function showToast(message) {
   setTimeout(() => {
     toast.remove();
   }, 4000);
+}
+
+/* --------------------------------------------------------------------------
+   8. SCROLL ANIMATIONS (IntersectionObserver)
+   -------------------------------------------------------------------------- */
+function initScrollAnimations() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -40px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // IMPORTANT: Only observe glass-panels inside .page-view sections (main content).
+  // Exclude modals, overlays, AI chat window, floating widgets and fixed UI elements
+  // to prevent them from being hidden by scroll-reveal's initial opacity:0.
+  const EXCLUDED_PARENTS = [
+    '#consultation-modal',
+    '#seminar-modal',
+    '#ai-chat-window',
+    '#ai-chat-toggle-btn',
+    '#toast-container',
+    'nav',
+    'footer'
+  ].join(', ');
+
+  document.querySelectorAll('.page-view .glass-panel, .animate-on-scroll').forEach(el => {
+    // Skip if inside an excluded parent (modals, overlays, nav, footer)
+    if (el.closest(EXCLUDED_PARENTS)) return;
+
+    el.classList.add('scroll-reveal');
+    observer.observe(el);
+  });
+}
+
+
+/* --------------------------------------------------------------------------
+   9. HERO STAT COUNTER ANIMATION
+   -------------------------------------------------------------------------- */
+function initCounterAnimation() {
+  const statEls = document.querySelectorAll('[data-count-to]');
+  if (statEls.length === 0) return; // skip if no explicit data-count-to elements
+
+  statEls.forEach(el => {
+    const target = parseFloat(el.getAttribute('data-count-to'));
+    const suffix = el.getAttribute('data-count-suffix') || '';
+    const duration = 1800;
+    const start = performance.now();
+
+    function update(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      const value = Math.round(target * ease);
+      el.textContent = value + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  });
 }

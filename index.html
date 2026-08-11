@@ -119,136 +119,269 @@
          PAGE VIEW 1: HOME PAGE (#view-home)
          ========================================================================== -->
     <div class="page-view active" id="view-home">
-      <!-- Animated Hero Section -->
-      <section class="relative min-h-[85vh] flex items-center justify-center pt-16 pb-20 overflow-hidden">
-        <div class="absolute inset-0 w-full h-full -z-20 opacity-30">
-          <canvas id="shader-canvas-ANIMATION_7" class="w-full h-full block"></canvas>
+
+      <!-- ===================== PREMIUM HERO SECTION ===================== -->
+      <section class="relative min-h-screen flex items-center overflow-hidden" id="hero-section">
+
+        <!-- Animated Background: Glowing Orbs -->
+        <div class="absolute inset-0 -z-10 overflow-hidden">
+          <div class="hero-orb hero-orb-1"></div>
+          <div class="hero-orb hero-orb-2"></div>
+          <div class="hero-orb hero-orb-3"></div>
+          <!-- Grid Lines -->
+          <div class="hero-grid-lines"></div>
         </div>
 
-        <div class="w-full max-w-7xl mx-auto px-4 md:px-12 z-10">
-          <div class="max-w-3xl animate-fade-up">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel mb-6 border border-primary-container/30">
-              <span class="material-symbols-outlined text-primary-container text-sm">verified</span>
-              <span class="text-xs font-bold text-secondary uppercase tracking-widest">ISO • ZED • Compliance • Operational Excellence</span>
-            </div>
-            
-            <!-- Exact Required Headline -->
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight text-on-surface font-heading">
-              Transform Your Business.<br/>
-              <span class="text-primary-container">Build Excellence.</span><br/>
-              Achieve Growth.
-            </h1>
+        <div class="w-full max-w-7xl mx-auto px-6 md:px-12 py-24 z-10">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-            <!-- Exact Required Subheading -->
-            <p class="text-lg text-on-surface-variant mb-8 max-w-2xl leading-relaxed">
-              PRV Consultancy Services helps organizations improve quality, achieve certifications, strengthen compliance, increase productivity and build sustainable business growth.
-            </p>
+            <!-- LEFT: Text Content -->
+            <div class="order-2 lg:order-1">
 
-            <!-- Exact Required Buttons -->
-            <div class="flex flex-wrap items-center gap-4 mb-14">
-              <button class="bg-primary-container text-on-primary-container font-bold px-8 py-3.5 rounded-full hover:shadow-[0_0_25px_rgba(0,242,195,0.5)] transition-all flex items-center gap-2 open-modal-trigger" data-service="General Consultation">
-                <span class="material-symbols-outlined text-lg">calendar_today</span>
-                Get Free Consultation
-              </button>
-              <button id="hero-talk-ai-btn" class="glass-panel text-on-surface font-bold px-8 py-3.5 rounded-full hover:bg-white/10 transition-all flex items-center gap-2 border border-border-glass text-secondary">
-                <span class="material-symbols-outlined text-primary-container text-lg">smart_toy</span>
-                Talk to AI Consultant
-              </button>
+              <!-- Trust Badge -->
+              <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary-container/40 bg-primary-container/8 mb-8 hero-badge-pill">
+                <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse inline-block"></span>
+                <span class="text-xs font-bold text-primary-container uppercase tracking-[0.15em]">India's Premier Business Consulting Firm</span>
+              </div>
+
+              <!-- Headline -->
+              <h1 class="font-heading font-extrabold leading-[1.08] mb-6 text-on-surface">
+                <span class="block text-4xl md:text-5xl xl:text-6xl mb-1">Transform Your</span>
+                <span class="block text-4xl md:text-5xl xl:text-6xl mb-1">
+                  Business.
+                  <span class="hero-gradient-text">Build</span>
+                </span>
+                <span class="block text-4xl md:text-5xl xl:text-6xl">
+                  <span class="hero-gradient-text">Excellence.</span>
+                  Achieve
+                </span>
+                <span class="block text-4xl md:text-5xl xl:text-6xl text-primary-container">Growth.</span>
+              </h1>
+
+              <!-- Subheadline -->
+              <p class="text-base md:text-lg text-on-surface-variant leading-relaxed mb-8 max-w-xl">
+                PRV Consultancy Services helps organizations improve quality, achieve certifications, strengthen compliance, increase productivity and build <strong class="text-on-surface font-semibold">sustainable business growth.</strong>
+              </p>
+
+              <!-- Certification Tags -->
+              <div class="flex flex-wrap gap-2 mb-10">
+                <span class="hero-cert-tag"><i class="fa-solid fa-certificate"></i> ISO 9001</span>
+                <span class="hero-cert-tag"><i class="fa-solid fa-award"></i> ZED MSME</span>
+                <span class="hero-cert-tag"><i class="fa-solid fa-car"></i> IATF 16949</span>
+                <span class="hero-cert-tag"><i class="fa-solid fa-shield-halved"></i> SEDEX SMETA</span>
+                <span class="hero-cert-tag"><i class="fa-solid fa-leaf"></i> ISO 14001</span>
+                <span class="hero-cert-tag"><i class="fa-solid fa-hard-hat"></i> ISO 45001</span>
+              </div>
+
+              <!-- CTA Buttons -->
+              <div class="flex flex-wrap gap-4 mb-12">
+                <button class="hero-btn-primary open-modal-trigger" data-service="General Consultation">
+                  <i class="fa-solid fa-calendar-check"></i>
+                  Get Free Consultation
+                </button>
+                <button id="hero-talk-ai-btn" class="hero-btn-secondary">
+                  <i class="fa-solid fa-robot text-primary-container"></i>
+                  Talk to AI Consultant
+                </button>
+              </div>
+
+              <!-- Stat Row -->
+              <div class="flex flex-wrap gap-8 pt-8 border-t border-white/8">
+                <div class="hero-stat">
+                  <div class="hero-stat-num stat-number" data-count-to="500" data-count-suffix="+">500+</div>
+                  <div class="hero-stat-label">Clients Certified</div>
+                </div>
+                <div class="hero-stat">
+                  <div class="hero-stat-num">99.8%</div>
+                  <div class="hero-stat-label">Audit Success Rate</div>
+                </div>
+                <div class="hero-stat">
+                  <div class="hero-stat-num stat-number" data-count-to="15" data-count-suffix="+">15+</div>
+                  <div class="hero-stat-label">Years Excellence</div>
+                </div>
+                <div class="hero-stat">
+                  <div class="hero-stat-num stat-number" data-count-to="50" data-count-suffix="+">50+</div>
+                  <div class="hero-stat-label">Domain Experts</div>
+                </div>
+              </div>
             </div>
+
+            <!-- RIGHT: Visual Panel -->
+            <div class="order-1 lg:order-2 relative">
+
+              <!-- Main Visual Card -->
+              <div class="hero-visual-card">
+                <div class="text-center mb-5">
+                  <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-container/15 border border-primary-container/30 mb-3">
+                    <span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+                    <span class="text-[10px] font-bold text-primary-container uppercase tracking-widest">PRV Strategic Execution Pipeline</span>
+                  </div>
+                  <h3 class="text-sm font-bold text-on-surface-variant">End-to-End Organizational Transformation</h3>
+                </div>
+
+                <!-- Pipeline Steps -->
+                <div class="flex flex-col gap-2" id="hero-pipeline">
+                  <div class="pipeline-step pipeline-step-active" style="--delay: 0s">
+                    <div class="pipeline-step-icon"><i class="fa-solid fa-building text-xs"></i></div>
+                    <div class="pipeline-step-content">
+                      <div class="pipeline-step-title">Business Assessment</div>
+                      <div class="pipeline-step-sub">Current State Evaluation</div>
+                    </div>
+                    <div class="pipeline-step-arrow"><i class="fa-solid fa-chevron-right text-[10px]"></i></div>
+                  </div>
+                  <div class="pipeline-step" style="--delay: 0.1s">
+                    <div class="pipeline-step-icon"><i class="fa-solid fa-magnifying-glass-chart text-xs"></i></div>
+                    <div class="pipeline-step-content">
+                      <div class="pipeline-step-title">Gap Analysis</div>
+                      <div class="pipeline-step-sub">Compliance Audit</div>
+                    </div>
+                    <div class="pipeline-step-arrow"><i class="fa-solid fa-chevron-right text-[10px]"></i></div>
+                  </div>
+                  <div class="pipeline-step" style="--delay: 0.2s">
+                    <div class="pipeline-step-icon"><i class="fa-solid fa-certificate text-xs"></i></div>
+                    <div class="pipeline-step-content">
+                      <div class="pipeline-step-title">Certification</div>
+                      <div class="pipeline-step-sub">ISO / ZED / IATF Standards</div>
+                    </div>
+                    <div class="pipeline-step-arrow"><i class="fa-solid fa-chevron-right text-[10px]"></i></div>
+                  </div>
+                  <div class="pipeline-step" style="--delay: 0.3s">
+                    <div class="pipeline-step-icon"><i class="fa-solid fa-gears text-xs"></i></div>
+                    <div class="pipeline-step-content">
+                      <div class="pipeline-step-title">Implementation</div>
+                      <div class="pipeline-step-sub">SOPs & 5S/Kaizen Rollout</div>
+                    </div>
+                    <div class="pipeline-step-arrow"><i class="fa-solid fa-chevron-right text-[10px]"></i></div>
+                  </div>
+                  <div class="pipeline-step" style="--delay: 0.4s">
+                    <div class="pipeline-step-icon"><i class="fa-solid fa-chart-line text-xs"></i></div>
+                    <div class="pipeline-step-content">
+                      <div class="pipeline-step-title">Operational Excellence</div>
+                      <div class="pipeline-step-sub">Productivity & Cost Optimization</div>
+                    </div>
+                    <div class="pipeline-step-arrow"><i class="fa-solid fa-chevron-right text-[10px]"></i></div>
+                  </div>
+                  <div class="pipeline-step pipeline-step-final" style="--delay: 0.5s">
+                    <div class="pipeline-step-icon pipeline-step-icon-final"><i class="fa-solid fa-rocket text-xs"></i></div>
+                    <div class="pipeline-step-content">
+                      <div class="pipeline-step-title text-primary-container">Sustainable Growth</div>
+                      <div class="pipeline-step-sub">Profit Expansion & Global Reach</div>
+                    </div>
+                    <div class="pipeline-step-badge">GOAL</div>
+                  </div>
+                </div>
+
+                <!-- Bottom Mini Stats -->
+                <div class="grid grid-cols-3 gap-3 mt-5 pt-5 border-t border-white/8">
+                  <div class="text-center">
+                    <div class="text-lg font-extrabold text-primary-container">80%</div>
+                    <div class="text-[10px] text-on-surface-variant">ZED Subsidy</div>
+                  </div>
+                  <div class="text-center border-x border-white/8">
+                    <div class="text-lg font-extrabold text-primary-container">20</div>
+                    <div class="text-[10px] text-on-surface-variant">Days Avg.</div>
+                  </div>
+                  <div class="text-center">
+                    <div class="text-lg font-extrabold text-primary-container">27+</div>
+                    <div class="text-[10px] text-on-surface-variant">Services</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Floating Accent Cards -->
+              <div class="hero-float-card hero-float-card-1">
+                <i class="fa-solid fa-circle-check text-primary-container text-sm"></i>
+                <span class="text-xs font-bold">ZED Certified</span>
+              </div>
+              <div class="hero-float-card hero-float-card-2">
+                <i class="fa-solid fa-star text-yellow-400 text-sm"></i>
+                <span class="text-xs font-bold">ISO 9001 Ready</span>
+              </div>
+            </div>
+
           </div>
+        </div>
 
-          <!-- Animated Visual Diagram: Business → Assessment → Certification → Implementation → Operational Excellence → Growth -->
-          <div class="glass-panel p-8 rounded-2xl border border-primary-container/20 mt-6 shadow-2xl backdrop-blur-2xl">
-            <div class="text-center mb-6">
-              <span class="text-xs font-bold uppercase tracking-widest text-primary-container">PRV Strategic Execution Pipeline</span>
-              <h3 class="text-xl font-bold text-on-surface mt-1">End-to-End Organizational Transformation Journey</h3>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-6 gap-4 text-center relative">
-              <div class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-primary-container transition-all">
-                <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center font-bold text-sm">1</div>
-                <div class="font-bold text-sm text-on-surface">Business</div>
-                <div class="text-xs text-on-surface-variant mt-1">Current State Evaluation</div>
-              </div>
-              <div class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-primary-container transition-all">
-                <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center font-bold text-sm">2</div>
-                <div class="font-bold text-sm text-on-surface">Assessment</div>
-                <div class="text-xs text-on-surface-variant mt-1">Gap & Compliance Audit</div>
-              </div>
-              <div class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-primary-container transition-all">
-                <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center font-bold text-sm">3</div>
-                <div class="font-bold text-sm text-on-surface">Certification</div>
-                <div class="text-xs text-on-surface-variant mt-1">ISO / ZED / Audit Standards</div>
-              </div>
-              <div class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-primary-container transition-all">
-                <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center font-bold text-sm">4</div>
-                <div class="font-bold text-sm text-on-surface">Implementation</div>
-                <div class="text-xs text-on-surface-variant mt-1">SOPs & 5S/Kaizen Handholding</div>
-              </div>
-              <div class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-primary-container transition-all">
-                <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center font-bold text-sm">5</div>
-                <div class="font-bold text-sm text-on-surface">Operational Excellence</div>
-                <div class="text-xs text-on-surface-variant mt-1">Productivity & Cost Optimization</div>
-              </div>
-              <div class="p-4 rounded-xl bg-primary-container/20 border border-primary-container text-primary-container transition-all pulse-glow">
-                <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm">6</div>
-                <div class="font-bold text-sm text-on-surface">Growth</div>
-                <div class="text-xs text-on-surface-variant mt-1">Sustainable Profit Expansion</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Real Data Stat Cards -->
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
-            <div class="glass-panel p-6 rounded-xl border border-border-glass">
-              <div class="text-3xl md:text-4xl font-extrabold text-primary-container mb-1">500+</div>
-              <div class="text-sm text-on-surface-variant font-medium">Clients Certified</div>
-            </div>
-            <div class="glass-panel p-6 rounded-xl border border-border-glass">
-              <div class="text-3xl md:text-4xl font-extrabold text-primary-container mb-1">99.8%</div>
-              <div class="text-sm text-on-surface-variant font-medium">Audit Success Rate</div>
-            </div>
-            <div class="glass-panel p-6 rounded-xl border border-border-glass">
-              <div class="text-3xl md:text-4xl font-extrabold text-primary-container mb-1">50+</div>
-              <div class="text-sm text-on-surface-variant font-medium">Domain Experts</div>
-            </div>
-            <div class="glass-panel p-6 rounded-xl border border-border-glass">
-              <div class="text-3xl md:text-4xl font-extrabold text-primary-container mb-1">15+</div>
-              <div class="text-sm text-on-surface-variant font-medium">Years Excellence</div>
-            </div>
-          </div>
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
+          <span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Scroll</span>
+          <div class="scroll-indicator-dot"></div>
         </div>
       </section>
 
-      <!-- Quick Services Preview Section -->
-      <section class="py-20 px-4 md:px-12 max-w-7xl mx-auto">
-        <div class="text-center mb-12">
-          <span class="text-xs font-bold text-secondary uppercase tracking-widest block mb-2">Our Core Offerings</span>
-          <h2 class="text-3xl md:text-4xl font-bold">Six Pillars of <span class="text-primary-container">Business Consulting</span></h2>
+      <!-- ===================== SERVICES PREVIEW SECTION ===================== -->
+      <section class="py-20 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="text-center mb-14">
+          <span class="text-xs font-bold text-secondary uppercase tracking-[0.18em] block mb-3">Our Core Offerings</span>
+          <h2 class="text-3xl md:text-4xl font-bold font-heading">
+            Six Pillars of <span class="text-primary-container">Business Excellence</span>
+          </h2>
+          <p class="text-on-surface-variant mt-3 max-w-xl mx-auto text-sm">Click any card to explore the complete implementation blueprint.</p>
         </div>
+
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="glass-panel p-6 rounded-xl border border-border-glass hover:border-primary-container transition-all cursor-pointer explore-service-btn" data-service-id="zed">
-            <div class="w-12 h-12 rounded-lg bg-surface-variant flex items-center justify-center mb-4 text-primary-container text-2xl"><i class="fa-solid fa-award"></i></div>
-            <h3 class="text-xl font-bold mb-2">ZED & ISO Certifications</h3>
-            <p class="text-sm text-on-surface-variant mb-4">MSME ZED Rating (Bronze/Silver/Gold) with up to 80% subsidy, plus ISO 9001, 14001, 45001, 27001 & IATF 16949.</p>
-            <span class="text-xs font-bold text-primary-container flex items-center gap-1">Explore Service <i class="fa-solid fa-arrow-right text-xs"></i></span>
+
+          <div class="home-service-card explore-service-btn" data-service-id="zed">
+            <div class="home-service-card-icon"><i class="fa-solid fa-award"></i></div>
+            <div class="home-service-card-glow"></div>
+            <div class="text-xs font-bold text-primary-container uppercase tracking-wider mb-2">ZED • ISO • IATF</div>
+            <h3 class="text-lg font-bold mb-2 text-on-surface">Certifications</h3>
+            <p class="text-xs text-on-surface-variant leading-relaxed mb-4">MSME ZED Rating with up to 80% Govt subsidy. ISO 9001, 14001, 45001, 27001 & IATF 16949 for global eligibility.</p>
+            <span class="text-xs font-bold text-primary-container flex items-center gap-1.5 group-hover:gap-2.5 transition-all">Explore Blueprint <i class="fa-solid fa-arrow-right text-xs"></i></span>
           </div>
 
-          <div class="glass-panel p-6 rounded-xl border border-border-glass hover:border-primary-container transition-all cursor-pointer explore-service-btn" data-service-id="sedex">
-            <div class="w-12 h-12 rounded-lg bg-surface-variant flex items-center justify-center mb-4 text-primary-container text-2xl"><i class="fa-solid fa-shield-halved"></i></div>
-            <h3 class="text-xl font-bold mb-2">Compliance & Social Audits</h3>
-            <p class="text-sm text-on-surface-variant mb-4">SEDEX, SMETA 2/4-Pillar ethical audits, MACE Audit, Social Audits, and FSSAI Licensing.</p>
-            <span class="text-xs font-bold text-primary-container flex items-center gap-1">Explore Service <i class="fa-solid fa-arrow-right text-xs"></i></span>
+          <div class="home-service-card explore-service-btn" data-service-id="sedex">
+            <div class="home-service-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="home-service-card-glow"></div>
+            <div class="text-xs font-bold text-primary-container uppercase tracking-wider mb-2">SEDEX • SMETA • FSSAI</div>
+            <h3 class="text-lg font-bold mb-2 text-on-surface">Compliance & Audits</h3>
+            <p class="text-xs text-on-surface-variant leading-relaxed mb-4">SEDEX SMETA 2/4-Pillar ethical audits for international buyers. FSSAI food licensing and MACE social audits.</p>
+            <span class="text-xs font-bold text-primary-container flex items-center gap-1.5">Explore Blueprint <i class="fa-solid fa-arrow-right text-xs"></i></span>
           </div>
 
-          <div class="glass-panel p-6 rounded-xl border border-border-glass hover:border-primary-container transition-all cursor-pointer explore-service-btn" data-service-id="lean">
-            <div class="w-12 h-12 rounded-lg bg-surface-variant flex items-center justify-center mb-4 text-primary-container text-2xl"><i class="fa-solid fa-chart-line"></i></div>
-            <h3 class="text-xl font-bold mb-2">Operational Excellence</h3>
-            <p class="text-sm text-on-surface-variant mb-4">5S Shopfloor Organization, Kaizen micro-improvements, Lean Manufacturing, and Cost Reduction.</p>
-            <span class="text-xs font-bold text-primary-container flex items-center gap-1">Explore Service <i class="fa-solid fa-arrow-right text-xs"></i></span>
+          <div class="home-service-card explore-service-btn" data-service-id="lean">
+            <div class="home-service-card-icon"><i class="fa-solid fa-chart-line"></i></div>
+            <div class="home-service-card-glow"></div>
+            <div class="text-xs font-bold text-primary-container uppercase tracking-wider mb-2">5S • KAIZEN • LEAN</div>
+            <h3 class="text-lg font-bold mb-2 text-on-surface">Operational Excellence</h3>
+            <p class="text-xs text-on-surface-variant leading-relaxed mb-4">5S Shopfloor Organization, Kaizen micro-improvements, Lean Manufacturing, and systematic Cost Reduction programs.</p>
+            <span class="text-xs font-bold text-primary-container flex items-center gap-1.5">Explore Blueprint <i class="fa-solid fa-arrow-right text-xs"></i></span>
           </div>
+
+          <div class="home-service-card explore-service-btn" data-service-id="nats">
+            <div class="home-service-card-icon"><i class="fa-solid fa-user-graduate"></i></div>
+            <div class="home-service-card-glow"></div>
+            <div class="text-xs font-bold text-primary-container uppercase tracking-wider mb-2">NATS • NAPS</div>
+            <h3 class="text-lg font-bold mb-2 text-on-surface">Apprenticeship Schemes</h3>
+            <p class="text-xs text-on-surface-variant leading-relaxed mb-4">Onboard apprentices under Govt schemes and receive ₹1,500/month per apprentice stipend reimbursement from the Govt of India.</p>
+            <span class="text-xs font-bold text-primary-container flex items-center gap-1.5">Explore Blueprint <i class="fa-solid fa-arrow-right text-xs"></i></span>
+          </div>
+
+          <div class="home-service-card explore-service-btn" data-service-id="iatf_16949">
+            <div class="home-service-card-icon"><i class="fa-solid fa-car"></i></div>
+            <div class="home-service-card-glow"></div>
+            <div class="text-xs font-bold text-primary-container uppercase tracking-wider mb-2">IATF • APQP • PPAP</div>
+            <h3 class="text-lg font-bold mb-2 text-on-surface">Automotive Quality</h3>
+            <p class="text-xs text-on-surface-variant leading-relaxed mb-4">IATF 16949 QMS & all 5 Core Tools for Tier-1, Tier-2 OEM suppliers. Mandatory for Maruti, Tata, Hyundai empanelment.</p>
+            <span class="text-xs font-bold text-primary-container flex items-center gap-1.5">Explore Blueprint <i class="fa-solid fa-arrow-right text-xs"></i></span>
+          </div>
+
+          <!-- CTA Card -->
+          <div class="home-service-card home-service-cta-card open-modal-trigger" data-service="General Consultation">
+            <div class="home-service-card-glow home-service-cta-glow"></div>
+            <i class="fa-solid fa-headset text-4xl text-primary-container mb-4"></i>
+            <h3 class="text-lg font-bold mb-2 text-on-surface">Free Consultation</h3>
+            <p class="text-xs text-on-surface-variant leading-relaxed mb-5">Not sure which service is right for you? Talk to a PRV Senior Advisor and get a customized roadmap in 30 minutes.</p>
+            <div class="inline-flex items-center gap-2 bg-primary-container text-on-primary-container font-bold text-xs px-5 py-2.5 rounded-full">
+              <i class="fa-solid fa-calendar-check"></i> Book Now — Free
+            </div>
+          </div>
+
         </div>
       </section>
+
     </div>
+
 
     <!-- ==========================================================================
          PAGE VIEW 2: ABOUT PAGE (#view-about)
@@ -990,6 +1123,14 @@
          PAGE VIEW 14: DYNAMIC SERVICE DETAIL CONTAINER (#view-service-detail)
          ========================================================================== -->
     <div class="page-view" id="view-service-detail">
+      <!-- Back Button Bar -->
+      <div class="sticky top-[56px] z-40 bg-surface/90 backdrop-blur-xl border-b border-border-glass px-4 md:px-12 py-3 flex items-center gap-4">
+        <button onclick="window.location.hash='#services'" class="flex items-center gap-2 text-xs font-bold text-on-surface-variant hover:text-primary-container transition-colors">
+          <i class="fa-solid fa-arrow-left"></i> Back to Services
+        </button>
+        <span class="text-border-glass">|</span>
+        <span class="text-xs text-on-surface-variant">PRV Executive Service Guide</span>
+      </div>
       <section class="py-12 px-4 md:px-12 max-w-6xl mx-auto" id="service-detail-render-target">
         <!-- Rendered dynamically by js/main.js with all 11 required detail page sections -->
       </section>
