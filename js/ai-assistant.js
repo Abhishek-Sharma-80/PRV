@@ -666,6 +666,69 @@
       const typing = document.getElementById('ai-typing-indicator');
       if (typing) typing.remove();
     }
+
+    // ------------------------------------------------------------------------
+    // FULL PAGE AI CONSULTANT FORM HANDLER (#view-ai-consultant)
+    // ------------------------------------------------------------------------
+    const fullForm = document.getElementById('full-ai-chat-form');
+    const fullInput = document.getElementById('full-ai-input');
+    const fullBox = document.getElementById('full-ai-chat-messages');
+
+    if (fullForm && fullInput && fullBox) {
+      fullForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const text = fullInput.value.trim();
+        if (!text) return;
+
+        fullInput.value = '';
+
+        // Render User Msg
+        const userDiv = document.createElement('div');
+        userDiv.className = 'flex justify-end gap-3';
+        userDiv.innerHTML = `<div class="glass-panel p-4 rounded-2xl max-w-xl text-sm leading-relaxed border border-primary-container/30 bg-primary-container/10 text-primary-container font-semibold">${text}</div>`;
+        fullBox.appendChild(userDiv);
+        fullBox.scrollTop = fullBox.scrollHeight;
+
+        // Process response
+        try {
+          const res = await fetch('/api/ai/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: text, sessionId })
+          });
+
+          if (res.ok) {
+            const data = await res.json();
+            const botDiv = document.createElement('div');
+            botDiv.className = 'flex gap-3';
+            botDiv.innerHTML = `<div class="w-8 h-8 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center text-xs flex-shrink-0"><i class="fa-solid fa-robot"></i></div><div class="glass-panel p-4 rounded-2xl max-w-xl text-sm leading-relaxed border border-border-glass">${parseMarkdown(data.reply)}</div>`;
+            fullBox.appendChild(botDiv);
+            fullBox.scrollTop = fullBox.scrollHeight;
+            return;
+          }
+        } catch (err) {}
+
+        const offlineResult = generateOfflineAiResponse(text);
+        const botDiv = document.createElement('div');
+        botDiv.className = 'flex gap-3';
+        botDiv.innerHTML = `<div class="w-8 h-8 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center text-xs flex-shrink-0"><i class="fa-solid fa-robot"></i></div><div class="glass-panel p-4 rounded-2xl max-w-xl text-sm leading-relaxed border border-border-glass">${parseMarkdown(offlineResult.response)}</div>`;
+        fullBox.appendChild(botDiv);
+        fullBox.scrollTop = fullBox.scrollHeight;
+      });
+
+      // Dedicated Page Quick Chips
+      const fullChipBtns = document.querySelectorAll('#full-ai-chips .chip-btn');
+      fullChipBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const prompt = btn.getAttribute('data-prompt');
+          if (prompt && fullInput) {
+            fullInput.value = prompt;
+            fullForm.dispatchEvent(new Event('submit'));
+          }
+        });
+      });
+    }
   }
 
 })();
+

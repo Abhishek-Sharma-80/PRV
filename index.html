@@ -1,1801 +1,1192 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark scroll-smooth">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PRV Consultancy Services - One Partner. Complete Business Excellence.</title>
+  <title>PRV Consultancy Services - International Business & AI Consultancy</title>
   <meta name="description"
-    content="PRV Consultancy Services provides ISO Certifications, ZED Certification, Industrial Compliance, 5S/Kaizen Operational Excellence, NATS/NAPS Apprenticeship, and Master Business Excellence Programs.">
+    content="PRV Consultancy Services provides ISO Certifications, ZED Certification, Industrial Compliance, 5S/Kaizen Operational Excellence, NATS/NAPS Apprenticeship, and Strategic Enterprise AI Business Consulting.">
 
-  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+  <!-- Google Fonts: Montserrat, Inter, Outfit, Geist -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600&family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 
-  <!-- FontAwesome Icons -->
+  <!-- FontAwesome Icons & Three.js 3D Library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "border-glass": "rgba(255, 255, 255, 0.15)",
+            "secondary": "#86d4d3",
+            "surface-tint": "#00e0b4",
+            "background": "#0a192f",
+            "primary-container": "#00f2c3",
+            "surface-variant": "#1c2541",
+            "on-surface": "#e2e2e2",
+            "surface": "#0f172a",
+            "on-surface-variant": "#b9cac2",
+            "on-primary-container": "#00382b"
+          },
+          "fontFamily": {
+            "sans": ["Outfit", "Inter", "sans-serif"],
+            "heading": ["Outfit", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
 
   <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body>
+<body class="antialiased min-h-screen flex flex-col bg-background text-on-surface">
 
   <!-- ==========================================================================
-       1. TOP INFORMATION BAR
+       TOP NAVIGATION BAR
        ========================================================================== -->
-  <div class="top-bar">
-    <div class="container top-bar-content">
-      <div class="top-contacts">
-        <a href="https://wa.me/917489351297?text=Hi%20PRV%20Consultancy,%20I%20want%20to%20inquire%20about%20your%20services." target="_blank"><i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> +91 7489 351 297</a>
-        <a href="tel:+917489351297"><i class="fa-solid fa-phone"></i> Call</a>
-        <a href="mailto:info@prvconsultancy.com"><i class="fa-solid fa-envelope"></i> info@prvconsultancy.com</a>
-        <span><i class="fa-solid fa-location-dot"></i> Pan-India & Global Consultancy</span>
-      </div>
-      <div class="top-actions">
-        <a href="#journey" class="top-action-btn"><i class="fa-solid fa-route"></i> User Journey Flow</a>
-        <a href="#" class="top-action-btn open-seminar-trigger"><i class="fa-solid fa-user-graduate"></i> Register
-          Seminar</a>
-        <a href="admin.html" target="_blank" class="top-action-btn"
-          style="background: var(--accent-green); color: #FFF;">
-          <i class="fa-solid fa-lock"></i> CRM Login
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==========================================================================
-       2. MAIN NAVIGATION & MEGA MENU
-       ========================================================================== -->
-  <header class="main-header">
-    <div class="container nav-wrapper">
-      <!-- Brand Logo -->
-      <a href="#" class="brand-logo">
-        <div class="logo-badge">
-          PRV
-        </div>
-        <div class="logo-text-wrapper">
-          <div class="brand-name">PRV <span>CONSULTANCY</span></div>
-          <div class="brand-tagline">One Partner. Complete Business Excellence.</div>
-        </div>
+  <nav class="w-full top-0 sticky border-b border-border-glass shadow-lg backdrop-blur-xl bg-surface/80 z-50">
+    <div class="flex justify-between items-center px-4 md:px-8 py-3 w-full max-w-7xl mx-auto">
+      <!-- Brand -->
+      <a href="#home" class="font-heading text-2xl font-bold text-on-surface flex items-center gap-2 tracking-tight">
+        <span class="material-symbols-outlined text-primary-container text-3xl" style="font-variation-settings: 'FILL' 1;">hexagon</span>
+        <span>PRV <span class="text-primary-container font-light">Consultancy</span></span>
       </a>
 
-      <!-- Navigation Menu -->
-      <nav>
-        <ul class="nav-menu">
-          <li class="nav-item active"><a href="#" class="nav-link">Home</a></li>
+      <!-- Desktop Links (All 12 Pages Navigation) -->
+      <div class="hidden lg:flex items-center gap-4 text-xs font-semibold uppercase tracking-wider">
+        <a class="nav-link px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:text-primary-container hover:bg-white/5 transition-all" href="#home">Home</a>
+        <a class="nav-link px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:text-primary-container hover:bg-white/5 transition-all" href="#about">About</a>
+        <a class="nav-link px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:text-primary-container hover:bg-white/5 transition-all" href="#services">Services</a>
+        <a class="nav-link px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:text-primary-container hover:bg-white/5 transition-all" href="#certifications">Certifications</a>
+        <a class="nav-link px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:text-primary-container hover:bg-white/5 transition-all" href="#compliance">Compliance</a>
+        <a class="nav-link px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:text-primary-container hover:bg-white/5 transition-all" href="#business-excellence">Excellence</a>
+        <a class="nav-link px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:text-primary-container hover:bg-white/5 transition-all" href="#master-excellence">Master Program</a>
+        <a class="nav-link px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:text-primary-container hover:bg-white/5 transition-all" href="#training">Training</a>
+        <a class="nav-link px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:text-primary-container hover:bg-white/5 transition-all" href="#government">Govt Schemes</a>
+        <a class="nav-link px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:text-primary-container hover:bg-white/5 transition-all" href="#industries">Industries</a>
+        <a class="nav-link px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:text-primary-container hover:bg-white/5 transition-all" href="#ai-consultant">AI Consultant</a>
+        <a class="nav-link px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:text-primary-container hover:bg-white/5 transition-all" href="#resources">Resources</a>
+        <a class="nav-link px-2.5 py-1.5 rounded-lg text-primary-container border border-primary-container/30 bg-primary-container/10" href="#contact">Contact</a>
+      </div>
 
-          <!-- MEGA MENU TRIGGER -->
-          <li class="nav-item has-mega">
-            <a href="#solutions" class="nav-link">
-              Solutions <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem;"></i>
-            </a>
-
-            <div class="mega-menu">
-              <!-- Pillar 1: Certifications -->
-              <div class="mega-col">
-                <div class="mega-col-title">
-                  <i class="fa-solid fa-award"></i> Certifications
-                </div>
-                <div class="mega-list">
-                  <a href="#key-services">ZED Certification <i class="fa-solid fa-arrow-right"></i></a>
-                  <a href="#key-services">ISO Certifications <i class="fa-solid fa-arrow-right"></i></a>
-                  <a href="#key-services">IATF 16949 Automotive <i class="fa-solid fa-arrow-right"></i></a>
-                  <a href="#key-services">IT Certifications <i class="fa-solid fa-arrow-right"></i></a>
-                  <a href="#key-services">Food Certifications <i class="fa-solid fa-arrow-right"></i></a>
-                  <a href="#key-services">Other Certifications <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-              </div>
-
-              <!-- Pillar 2: Compliance -->
-              <div class="mega-col">
-                <div class="mega-col-title">
-                  <i class="fa-solid fa-shield-halved"></i> Compliance
-                </div>
-                <div class="mega-list">
-                  <a href="#key-services">SEDEX / SMETA Audit <i class="fa-solid fa-arrow-right"></i></a>
-                  <a href="#key-services">Social Audits <i class="fa-solid fa-arrow-right"></i></a>
-                  <a href="#key-services">MACE Audit <i class="fa-solid fa-arrow-right"></i></a>
-                  <a href="#key-services">FSSAI Compliance <i class="fa-solid fa-arrow-right"></i></a>
-                  <a href="#key-services">OEKO-TEX Certification <i class="fa-solid fa-arrow-right"></i></a>
-                  <a href="#key-services">Other Compliance <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-              </div>
-
-              <!-- Pillar 3: Business Improvement -->
-              <div class="mega-col">
-                <div class="mega-col-title">
-                  <i class="fa-solid fa-chart-line"></i> Business Improvement
-                </div>
-                <div class="mega-list">
-                  <a href="#key-services">Quality Improvement <i class="fa-solid fa-arrow-right"></i></a>
-                  <a href="#key-services">Productivity Improvement <i class="fa-solid fa-arrow-right"></i></a>
-                  <a href="#key-services">5S / Kaizen Mastery <i class="fa-solid fa-arrow-right"></i></a>
-                  <a href="#key-services">Capacity Optimization <i class="fa-solid fa-arrow-right"></i></a>
-                  <a href="#key-services">Cost Reduction <i class="fa-solid fa-arrow-right"></i></a>
-                  <a href="#key-services">Operational Excellence <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-              </div>
-
-              <!-- Pillar 4: People & Growth -->
-              <div class="mega-col">
-                <div class="mega-col-title">
-                  <i class="fa-solid fa-users-gear"></i> People & Growth
-                </div>
-                <div class="mega-list">
-                  <a href="#programs">NATS (Apprenticeship) <i class="fa-solid fa-arrow-right"></i></a>
-                  <a href="#programs">NAPS (Apprenticeship) <i class="fa-solid fa-arrow-right"></i></a>
-                  <a href="#programs">Industrial Training <i class="fa-solid fa-arrow-right"></i></a>
-                  <a href="#programs">Placement Prep <i class="fa-solid fa-arrow-right"></i></a>
-                  <a href="#programs">Future Career Guidance <i class="fa-solid fa-arrow-right"></i></a>
-                  <a href="#programs">Leadership Development <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <li class="nav-item"><a href="#industries" class="nav-link">Industries</a></li>
-          <li class="nav-item"><a href="#programs" class="nav-link">Master Program</a></li>
-          <li class="nav-item"><a href="#programs" class="nav-link">Training & Careers</a></li>
-          <li class="nav-item"><a href="#about" class="nav-link">About Us</a></li>
-          <li class="nav-item"><a href="#resources" class="nav-link">Insights</a></li>
-          <li class="nav-item"><a href="#contact" class="nav-link">Contact Us</a></li>
-        </ul>
-      </nav>
-
-      <!-- Nav Actions -->
-      <div class="nav-actions">
-        <a href="#contact" class="btn btn-primary open-modal-trigger" data-service="General Consultation">
-          <i class="fa-solid fa-calendar-check"></i> Book Consultation
+      <!-- Action Buttons -->
+      <div class="hidden lg:flex items-center gap-3">
+        <button class="bg-primary-container text-on-primary-container font-bold text-xs px-5 py-2.5 rounded-full hover:shadow-[0_0_15px_rgba(0,242,195,0.4)] transition-all active:scale-95 open-modal-trigger" data-service="General Consultation">
+          Get Consultation
+        </button>
+        <a href="admin.html" target="_blank" class="glass-panel text-on-surface text-xs font-semibold px-4 py-2 rounded-full hover:bg-white/10 transition-all flex items-center gap-1.5 border border-border-glass">
+          <i class="fa-solid fa-shield-halved text-primary-container"></i> Admin CRM
         </a>
-        <button class="mobile-toggle" aria-label="Toggle Navigation Menu"><i class="fa-solid fa-bars"></i></button>
       </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="lg:hidden text-on-surface p-2 mobile-toggle" id="mobile-menu-btn">
+        <span class="material-symbols-outlined text-3xl">menu</span>
+      </button>
     </div>
-  </header>
 
-  <!-- ==========================================================================
-       3. HERO SECTION
-       ========================================================================== -->
-  <section class="hero-section">
-    <div class="hero-bg-pattern"></div>
-    <div class="container hero-grid">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <i class="fa-solid fa-circle-check"></i> ISO, ZED, Compliance & Growth Experts
-        </div>
-        <h1 class="hero-title">
-          One Partner. <span>Complete Business Excellence.</span>
-        </h1>
-        <p class="hero-subtitle">
-          Empowering industries with ZED & ISO Certifications, Industrial Compliance, 5S/Kaizen Operational Excellence,
-          and NATS/NAPS Apprenticeship solutions.
-        </p>
-
-        <div class="hero-buttons">
-          <a href="#solutions" class="btn btn-primary btn-hero-lg">
-            <i class="fa-solid fa-layer-group"></i> Explore All Solutions
-          </a>
-          <a href="#journey" class="btn btn-outline btn-hero-lg"
-            style="color: #FFF; border-color: rgba(255,255,255,0.4);">
-            <i class="fa-solid fa-diagram-project"></i> View User Journey
-          </a>
-        </div>
-
-        <div class="hero-stats">
-          <div class="stat-item">
-            <div class="stat-number">500+</div>
-            <div class="stat-label">Clients Certified</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">99.8%</div>
-            <div class="stat-label">Audit Success Rate</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">50+</div>
-            <div class="stat-label">Domain Experts</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">15+</div>
-            <div class="stat-label">Years Excellence</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Hero Visual Interactive Card -->
-      <div class="hero-card">
-        <div class="hero-card-header">
-          <div class="hero-card-title">
-            <i class="fa-solid fa-bolt" style="color: var(--accent-green);"></i> Quick Access Portals
-          </div>
-          <span style="font-size: 0.75rem; color: #94A3B8;">Flowchart Aligned</span>
-        </div>
-
-        <div class="service-quick-pills">
-          <a href="#key-services" class="quick-pill">
-            <div class="quick-pill-left">
-              <div class="quick-pill-icon"><i class="fa-solid fa-certificate"></i></div>
-              <div class="quick-pill-text">ZED & ISO Certifications</div>
-            </div>
-            <i class="fa-solid fa-arrow-right" style="color: var(--accent-green);"></i>
-          </a>
-
-          <a href="#key-services" class="quick-pill">
-            <div class="quick-pill-left">
-              <div class="quick-pill-icon"><i class="fa-solid fa-clipboard-check"></i></div>
-              <div class="quick-pill-text">SEDEX / SMETA & Social Audits</div>
-            </div>
-            <i class="fa-solid fa-arrow-right" style="color: var(--accent-green);"></i>
-          </a>
-
-          <a href="#key-services" class="quick-pill">
-            <div class="quick-pill-left">
-              <div class="quick-pill-icon"><i class="fa-solid fa-chart-pie"></i></div>
-              <div class="quick-pill-text">5S, Kaizen & Cost Reduction</div>
-            </div>
-            <i class="fa-solid fa-arrow-right" style="color: var(--accent-green);"></i>
-          </a>
-
-          <a href="#programs" class="quick-pill">
-            <div class="quick-pill-left">
-              <div class="quick-pill-icon"><i class="fa-solid fa-user-graduate"></i></div>
-              <div class="quick-pill-text">NATS / NAPS Apprenticeship</div>
-            </div>
-            <i class="fa-solid fa-arrow-right" style="color: var(--accent-green);"></i>
-          </a>
-        </div>
-      </div>
+    <!-- Mobile Drawer Navigation -->
+    <div id="mobile-menu-drawer" class="hidden lg:hidden border-t border-border-glass bg-surface/95 px-6 py-6 space-y-3">
+      <a class="block py-2 text-sm font-semibold text-on-surface hover:text-primary-container" href="#home">Home</a>
+      <a class="block py-2 text-sm font-semibold text-on-surface hover:text-primary-container" href="#about">About PRV</a>
+      <a class="block py-2 text-sm font-semibold text-on-surface hover:text-primary-container" href="#services">Services Ecosystem</a>
+      <a class="block py-2 text-sm font-semibold text-on-surface hover:text-primary-container" href="#certifications">Certifications</a>
+      <a class="block py-2 text-sm font-semibold text-on-surface hover:text-primary-container" href="#compliance">Compliance & Audits</a>
+      <a class="block py-2 text-sm font-semibold text-on-surface hover:text-primary-container" href="#business-excellence">Business Excellence</a>
+      <a class="block py-2 text-sm font-semibold text-on-surface hover:text-primary-container" href="#master-excellence">Master Program</a>
+      <a class="block py-2 text-sm font-semibold text-on-surface hover:text-primary-container" href="#training">Training & Placement</a>
+      <a class="block py-2 text-sm font-semibold text-on-surface hover:text-primary-container" href="#government">NATS / NAPS Schemes</a>
+      <a class="block py-2 text-sm font-semibold text-on-surface hover:text-primary-container" href="#industries">Industries</a>
+      <a class="block py-2 text-sm font-semibold text-on-surface hover:text-primary-container" href="#ai-consultant">AI Business Advisor</a>
+      <a class="block py-2 text-sm font-semibold text-on-surface hover:text-primary-container" href="#resources">Resources & FAQs</a>
+      <a class="block py-2 text-sm font-semibold text-primary-container" href="#contact">Contact Consultation</a>
     </div>
-  </section>
+  </nav>
 
-  <!-- ==========================================================================
-       3.5 INSTANT CERTIFICATION & SUBSIDY FINDER (PREMIUM INTERACTIVE WIDGET)
-       ========================================================================== -->
-  <section class="finder-section">
-    <div class="container">
-      <div class="finder-box">
-        <div class="finder-header">
-          <div class="finder-title-group">
-            <span class="finder-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Powered Matcher</span>
-            <h3 class="finder-title">Instant Certification & Govt Subsidy Finder</h3>
-          </div>
-          <p class="finder-subtitle">Select your Industry & Goal to calculate applicable Govt Grants & Certifications
-          </p>
+  <main class="flex-grow">
+
+    <!-- ==========================================================================
+         PAGE VIEW 1: HOME PAGE (#view-home)
+         ========================================================================== -->
+    <div class="page-view active" id="view-home">
+      <!-- Animated Hero Section -->
+      <section class="relative min-h-[85vh] flex items-center justify-center pt-16 pb-20 overflow-hidden">
+        <div class="absolute inset-0 w-full h-full -z-20 opacity-30">
+          <canvas id="shader-canvas-ANIMATION_7" class="w-full h-full block"></canvas>
         </div>
 
-        <form id="instant-finder-form" class="finder-form">
-          <div class="finder-field">
-            <label><i class="fa-solid fa-industry"></i> Industry Sector</label>
-            <select id="finder-industry">
-              <option value="manufacturing">🏭 Manufacturing & Engineering</option>
-              <option value="food">🥗 Food & Beverage Processing</option>
-              <option value="automobile">🚗 Automotive & Components</option>
-              <option value="it">💻 IT, Software & Tech SaaS</option>
-              <option value="textile">🧵 Textile & Apparel Export</option>
-              <option value="healthcare">🏥 Healthcare & Medical Devices</option>
-            </select>
+        <div class="w-full max-w-7xl mx-auto px-4 md:px-12 z-10">
+          <div class="max-w-3xl animate-fade-up">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel mb-6 border border-primary-container/30">
+              <span class="material-symbols-outlined text-primary-container text-sm">verified</span>
+              <span class="text-xs font-bold text-secondary uppercase tracking-widest">ISO • ZED • Compliance • Operational Excellence</span>
+            </div>
+            
+            <!-- Exact Required Headline -->
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight text-on-surface font-heading">
+              Transform Your Business.<br/>
+              <span class="text-primary-container">Build Excellence.</span><br/>
+              Achieve Growth.
+            </h1>
+
+            <!-- Exact Required Subheading -->
+            <p class="text-lg text-on-surface-variant mb-8 max-w-2xl leading-relaxed">
+              PRV Consultancy Services helps organizations improve quality, achieve certifications, strengthen compliance, increase productivity and build sustainable business growth.
+            </p>
+
+            <!-- Exact Required Buttons -->
+            <div class="flex flex-wrap items-center gap-4 mb-14">
+              <button class="bg-primary-container text-on-primary-container font-bold px-8 py-3.5 rounded-full hover:shadow-[0_0_25px_rgba(0,242,195,0.5)] transition-all flex items-center gap-2 open-modal-trigger" data-service="General Consultation">
+                <span class="material-symbols-outlined text-lg">calendar_today</span>
+                Get Free Consultation
+              </button>
+              <button id="hero-talk-ai-btn" class="glass-panel text-on-surface font-bold px-8 py-3.5 rounded-full hover:bg-white/10 transition-all flex items-center gap-2 border border-border-glass text-secondary">
+                <span class="material-symbols-outlined text-primary-container text-lg">smart_toy</span>
+                Talk to AI Consultant
+              </button>
+            </div>
           </div>
 
-          <div class="finder-field">
-            <label><i class="fa-solid fa-bullseye"></i> Primary Goal</label>
-            <select id="finder-goal">
-              <option value="subsidy">💰 Claim Govt Subsidy & Bank Loan Discount</option>
-              <option value="tender">🏆 Win Govt Tenders & OEM Empanelment</option>
-              <option value="export">🌍 International Buyer Export Clearance</option>
-              <option value="productivity">⚡ Reduce Shopfloor Waste & Boost Profit</option>
-            </select>
+          <!-- Animated Visual Diagram: Business → Assessment → Certification → Implementation → Operational Excellence → Growth -->
+          <div class="glass-panel p-8 rounded-2xl border border-primary-container/20 mt-6 shadow-2xl backdrop-blur-2xl">
+            <div class="text-center mb-6">
+              <span class="text-xs font-bold uppercase tracking-widest text-primary-container">PRV Strategic Execution Pipeline</span>
+              <h3 class="text-xl font-bold text-on-surface mt-1">End-to-End Organizational Transformation Journey</h3>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-4 text-center relative">
+              <div class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-primary-container transition-all">
+                <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center font-bold text-sm">1</div>
+                <div class="font-bold text-sm text-on-surface">Business</div>
+                <div class="text-xs text-on-surface-variant mt-1">Current State Evaluation</div>
+              </div>
+              <div class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-primary-container transition-all">
+                <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center font-bold text-sm">2</div>
+                <div class="font-bold text-sm text-on-surface">Assessment</div>
+                <div class="text-xs text-on-surface-variant mt-1">Gap & Compliance Audit</div>
+              </div>
+              <div class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-primary-container transition-all">
+                <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center font-bold text-sm">3</div>
+                <div class="font-bold text-sm text-on-surface">Certification</div>
+                <div class="text-xs text-on-surface-variant mt-1">ISO / ZED / Audit Standards</div>
+              </div>
+              <div class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-primary-container transition-all">
+                <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center font-bold text-sm">4</div>
+                <div class="font-bold text-sm text-on-surface">Implementation</div>
+                <div class="text-xs text-on-surface-variant mt-1">SOPs & 5S/Kaizen Handholding</div>
+              </div>
+              <div class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-primary-container transition-all">
+                <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center font-bold text-sm">5</div>
+                <div class="font-bold text-sm text-on-surface">Operational Excellence</div>
+                <div class="text-xs text-on-surface-variant mt-1">Productivity & Cost Optimization</div>
+              </div>
+              <div class="p-4 rounded-xl bg-primary-container/20 border border-primary-container text-primary-container transition-all pulse-glow">
+                <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm">6</div>
+                <div class="font-bold text-sm text-on-surface">Growth</div>
+                <div class="text-xs text-on-surface-variant mt-1">Sustainable Profit Expansion</div>
+              </div>
+            </div>
           </div>
 
-          <button type="button" id="finder-calculate-btn" class="btn finder-btn">
-            <i class="fa-solid fa-magnifying-glass-chart"></i> Match Solutions & Subsidies
+          <!-- Real Data Stat Cards -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
+            <div class="glass-panel p-6 rounded-xl border border-border-glass">
+              <div class="text-3xl md:text-4xl font-extrabold text-primary-container mb-1">500+</div>
+              <div class="text-sm text-on-surface-variant font-medium">Clients Certified</div>
+            </div>
+            <div class="glass-panel p-6 rounded-xl border border-border-glass">
+              <div class="text-3xl md:text-4xl font-extrabold text-primary-container mb-1">99.8%</div>
+              <div class="text-sm text-on-surface-variant font-medium">Audit Success Rate</div>
+            </div>
+            <div class="glass-panel p-6 rounded-xl border border-border-glass">
+              <div class="text-3xl md:text-4xl font-extrabold text-primary-container mb-1">50+</div>
+              <div class="text-sm text-on-surface-variant font-medium">Domain Experts</div>
+            </div>
+            <div class="glass-panel p-6 rounded-xl border border-border-glass">
+              <div class="text-3xl md:text-4xl font-extrabold text-primary-container mb-1">15+</div>
+              <div class="text-sm text-on-surface-variant font-medium">Years Excellence</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Services Preview Section -->
+      <section class="py-20 px-4 md:px-12 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+          <span class="text-xs font-bold text-secondary uppercase tracking-widest block mb-2">Our Core Offerings</span>
+          <h2 class="text-3xl md:text-4xl font-bold">Six Pillars of <span class="text-primary-container">Business Consulting</span></h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="glass-panel p-6 rounded-xl border border-border-glass hover:border-primary-container transition-all cursor-pointer explore-service-btn" data-service-id="zed">
+            <div class="w-12 h-12 rounded-lg bg-surface-variant flex items-center justify-center mb-4 text-primary-container text-2xl"><i class="fa-solid fa-award"></i></div>
+            <h3 class="text-xl font-bold mb-2">ZED & ISO Certifications</h3>
+            <p class="text-sm text-on-surface-variant mb-4">MSME ZED Rating (Bronze/Silver/Gold) with up to 80% subsidy, plus ISO 9001, 14001, 45001, 27001 & IATF 16949.</p>
+            <span class="text-xs font-bold text-primary-container flex items-center gap-1">Explore Service <i class="fa-solid fa-arrow-right text-xs"></i></span>
+          </div>
+
+          <div class="glass-panel p-6 rounded-xl border border-border-glass hover:border-primary-container transition-all cursor-pointer explore-service-btn" data-service-id="sedex">
+            <div class="w-12 h-12 rounded-lg bg-surface-variant flex items-center justify-center mb-4 text-primary-container text-2xl"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3 class="text-xl font-bold mb-2">Compliance & Social Audits</h3>
+            <p class="text-sm text-on-surface-variant mb-4">SEDEX, SMETA 2/4-Pillar ethical audits, MACE Audit, Social Audits, and FSSAI Licensing.</p>
+            <span class="text-xs font-bold text-primary-container flex items-center gap-1">Explore Service <i class="fa-solid fa-arrow-right text-xs"></i></span>
+          </div>
+
+          <div class="glass-panel p-6 rounded-xl border border-border-glass hover:border-primary-container transition-all cursor-pointer explore-service-btn" data-service-id="lean">
+            <div class="w-12 h-12 rounded-lg bg-surface-variant flex items-center justify-center mb-4 text-primary-container text-2xl"><i class="fa-solid fa-chart-line"></i></div>
+            <h3 class="text-xl font-bold mb-2">Operational Excellence</h3>
+            <p class="text-sm text-on-surface-variant mb-4">5S Shopfloor Organization, Kaizen micro-improvements, Lean Manufacturing, and Cost Reduction.</p>
+            <span class="text-xs font-bold text-primary-container flex items-center gap-1">Explore Service <i class="fa-solid fa-arrow-right text-xs"></i></span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==========================================================================
+         PAGE VIEW 2: ABOUT PAGE (#view-about)
+         ========================================================================== -->
+    <div class="page-view" id="view-about">
+      <section class="py-20 px-4 md:px-12 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <span class="text-xs font-bold text-secondary uppercase tracking-widest block mb-2">Who We Are</span>
+          <h2 class="text-3xl md:text-5xl font-bold font-heading">About <span class="text-primary-container">PRV Consultancy Services</span></h2>
+          <p class="text-on-surface-variant max-w-2xl mx-auto mt-4">Empowering organizations across India with world-class quality systems, regulatory compliance, and operational efficiency.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
+          <div class="glass-panel p-8 rounded-2xl border border-border-glass">
+            <h3 class="text-2xl font-bold text-primary-container mb-4">Our Vision</h3>
+            <p class="text-on-surface-variant leading-relaxed mb-6">To be the premier corporate consulting partner recognized globally for transforming micro, small, medium, and large enterprises into lean, compliant, highly productive, and sustainable industry leaders.</p>
+            <h3 class="text-2xl font-bold text-primary-container mb-4">Our Mission</h3>
+            <p class="text-on-surface-variant leading-relaxed">To deliver measurable operational improvements, 100% audit clearance guarantees, end-to-end certification handholding, and AI-driven business intelligence that maximizes profitability and global market competitiveness.</p>
+          </div>
+
+          <div class="glass-panel p-8 rounded-2xl border border-border-glass">
+            <h3 class="text-2xl font-bold text-secondary mb-4">Consulting Approach</h3>
+            <p class="text-on-surface-variant leading-relaxed mb-6">We don't just provide documentation; we embed continuous improvement into your organization's culture. Our senior consultants work on-site and virtually to audit existing gaps, optimize workflows, and implement ISO/ZED/5S standards effortlessly.</p>
+            <h3 class="text-2xl font-bold text-secondary mb-4">Why PRV Consultancy?</h3>
+            <ul class="space-y-3 text-sm text-on-surface-variant">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-primary-container"></i> 100% Guaranteed Audit Clearance Assurance</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-primary-container"></i> Fast-Track Implementation (10 to 20 Business Days)</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-primary-container"></i> Maximize Govt Subsidies (Up to 80% reimbursement under ZED)</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-primary-container"></i> Dedicated AI Assistant Support 24/7</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- PRV 8-Step Consulting Methodology -->
+        <div class="glass-panel p-8 rounded-2xl border border-primary-container/20">
+          <div class="text-center mb-10">
+            <span class="text-xs font-bold text-primary-container uppercase tracking-widest">Proven Execution Framework</span>
+            <h3 class="text-2xl font-bold text-on-surface mt-1">PRV 8-Step Consulting Methodology</h3>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-4 text-center">
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+              <div class="text-primary-container font-extrabold text-lg mb-1">Step 1</div>
+              <div class="font-bold text-sm">Understand</div>
+              <div class="text-xs text-on-surface-variant mt-1">Business Context</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+              <div class="text-primary-container font-extrabold text-lg mb-1">Step 2</div>
+              <div class="font-bold text-sm">Assess</div>
+              <div class="text-xs text-on-surface-variant mt-1">Gap Analysis</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+              <div class="text-primary-container font-extrabold text-lg mb-1">Step 3</div>
+              <div class="font-bold text-sm">Plan</div>
+              <div class="text-xs text-on-surface-variant mt-1">Roadmap & Timeline</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+              <div class="text-primary-container font-extrabold text-lg mb-1">Step 4</div>
+              <div class="font-bold text-sm">Implement</div>
+              <div class="text-xs text-on-surface-variant mt-1">SOPs & Setup</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+              <div class="text-primary-container font-extrabold text-lg mb-1">Step 5</div>
+              <div class="font-bold text-sm">Train</div>
+              <div class="text-xs text-on-surface-variant mt-1">Team Upskilling</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+              <div class="text-primary-container font-extrabold text-lg mb-1">Step 6</div>
+              <div class="font-bold text-sm">Review</div>
+              <div class="text-xs text-on-surface-variant mt-1">Internal Audit</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+              <div class="text-primary-container font-extrabold text-lg mb-1">Step 7</div>
+              <div class="font-bold text-sm">Improve</div>
+              <div class="text-xs text-on-surface-variant mt-1">Corrective Actions</div>
+            </div>
+            <div class="p-4 rounded-xl bg-primary-container/20 border border-primary-container text-primary-container">
+              <div class="font-extrabold text-lg mb-1">Step 8</div>
+              <div class="font-bold text-sm">Sustain</div>
+              <div class="text-xs text-on-surface-variant mt-1">Long-term Growth</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==========================================================================
+         PAGE VIEW 3: SERVICES ECOSYSTEM PAGE (#view-services)
+         ========================================================================== -->
+    <div class="page-view" id="view-services">
+      <section class="py-20 px-4 md:px-12 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+          <span class="text-xs font-bold text-secondary uppercase tracking-widest block mb-2">Interactive Ecosystem</span>
+          <h2 class="text-3xl md:text-5xl font-bold font-heading">Explore <span class="text-primary-container">All PRV Services</span></h2>
+          <p class="text-on-surface-variant max-w-2xl mx-auto mt-4">Select any service to access complete implementation blueprints, documentation lists, FAQs, and consultation booking.</p>
+        </div>
+
+        <!-- Filter Chips -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12" id="service-category-filters">
+          <button class="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-primary-container text-on-primary-container active" data-cat="all">All Services</button>
+          <button class="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-white/5 hover:bg-white/10 text-on-surface-variant" data-cat="certifications">Certifications</button>
+          <button class="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-white/5 hover:bg-white/10 text-on-surface-variant" data-cat="compliance">Compliance & Audits</button>
+          <button class="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-white/5 hover:bg-white/10 text-on-surface-variant" data-cat="excellence">Business Excellence</button>
+          <button class="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-white/5 hover:bg-white/10 text-on-surface-variant" data-cat="training">Training</button>
+          <button class="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-white/5 hover:bg-white/10 text-on-surface-variant" data-cat="government">Govt Schemes</button>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="services-cards-container">
+          <!-- Populated by JS with interactive cards for ISO 9001, ZED, IATF 16949, SEDEX, SMETA, FSSAI, Lean, 5S, NATS, NAPS, etc. -->
+        </div>
+      </section>
+    </div>
+
+    <!-- ==========================================================================
+         PAGE VIEW 4: CERTIFICATIONS PAGE (#view-certifications)
+         ========================================================================== -->
+    <div class="page-view" id="view-certifications">
+      <section class="py-20 px-4 md:px-12 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <span class="text-xs font-bold text-secondary uppercase tracking-widest block mb-2">Global Quality Standards</span>
+          <h2 class="text-3xl md:text-5xl font-bold font-heading">ISO & MSME <span class="text-primary-container">Certifications</span></h2>
+          <p class="text-on-surface-variant max-w-2xl mx-auto mt-4">Achieve internationally recognized quality badges required for corporate vendor registration and Govt tenders.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          <div class="glass-panel p-6 rounded-xl border border-border-glass hover:border-primary-container transition-all explore-service-btn cursor-pointer" data-service-id="zed">
+            <div class="text-primary-container text-3xl mb-3"><i class="fa-solid fa-award"></i></div>
+            <h3 class="text-xl font-bold mb-2">ZED Certification</h3>
+            <p class="text-xs text-on-surface-variant mb-4">Ministry of MSME Zero Defect Zero Effect rating (Bronze, Silver, Gold) with up to 80% subsidy reimbursement.</p>
+            <button class="text-xs font-bold text-primary-container">Explore ZED Guide →</button>
+          </div>
+
+          <div class="glass-panel p-6 rounded-xl border border-border-glass hover:border-primary-container transition-all explore-service-btn cursor-pointer" data-service-id="iso_9001">
+            <div class="text-primary-container text-3xl mb-3"><i class="fa-solid fa-certificate"></i></div>
+            <h3 class="text-xl font-bold mb-2">ISO 9001:2015 QMS</h3>
+            <p class="text-xs text-on-surface-variant mb-4">Quality Management System baseline certification for process standardization and customer satisfaction.</p>
+            <button class="text-xs font-bold text-primary-container">Explore ISO 9001 Guide →</button>
+          </div>
+
+          <div class="glass-panel p-6 rounded-xl border border-border-glass hover:border-primary-container transition-all explore-service-btn cursor-pointer" data-service-id="iatf_16949">
+            <div class="text-primary-container text-3xl mb-3"><i class="fa-solid fa-car"></i></div>
+            <h3 class="text-xl font-bold mb-2">IATF 16949 Automotive</h3>
+            <p class="text-xs text-on-surface-variant mb-4">Mandatory quality system for automotive component manufacturers and OEM supply chain empaneled vendors.</p>
+            <button class="text-xs font-bold text-primary-container">Explore IATF 16949 Guide →</button>
+          </div>
+
+          <div class="glass-panel p-6 rounded-xl border border-border-glass hover:border-primary-container transition-all explore-service-btn cursor-pointer" data-service-id="iso_14001">
+            <div class="text-primary-container text-3xl mb-3"><i class="fa-solid fa-leaf"></i></div>
+            <h3 class="text-xl font-bold mb-2">ISO 14001:2015 EMS</h3>
+            <p class="text-xs text-on-surface-variant mb-4">Environmental Management System standard to ensure statutory Pollution Board compliance & ESG metrics.</p>
+            <button class="text-xs font-bold text-primary-container">Explore ISO 14001 Guide →</button>
+          </div>
+
+          <div class="glass-panel p-6 rounded-xl border border-border-glass hover:border-primary-container transition-all explore-service-btn cursor-pointer" data-service-id="iso_45001">
+            <div class="text-primary-container text-3xl mb-3"><i class="fa-solid fa-user-shield"></i></div>
+            <h3 class="text-xl font-bold mb-2">ISO 45001:2018 OHSMS</h3>
+            <p class="text-xs text-on-surface-variant mb-4">Occupational Health & Safety Management System for industrial safety and factory labor compliance.</p>
+            <button class="text-xs font-bold text-primary-container">Explore ISO 45001 Guide →</button>
+          </div>
+
+          <div class="glass-panel p-6 rounded-xl border border-border-glass hover:border-primary-container transition-all explore-service-btn cursor-pointer" data-service-id="iso_27001">
+            <div class="text-primary-container text-3xl mb-3"><i class="fa-solid fa-lock"></i></div>
+            <h3 class="text-xl font-bold mb-2">ISO 27001:2022 ISMS</h3>
+            <p class="text-xs text-on-surface-variant mb-4">Information Security Management System for IT companies, data centers, and digital service providers.</p>
+            <button class="text-xs font-bold text-primary-container">Explore ISO 27001 Guide →</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==========================================================================
+         PAGE VIEW 5: COMPLIANCE & AUDITS PAGE (#view-compliance)
+         ========================================================================== -->
+    <div class="page-view" id="view-compliance">
+      <section class="py-20 px-4 md:px-12 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <span class="text-xs font-bold text-secondary uppercase tracking-widest block mb-2">Social & Legal Audits</span>
+          <h2 class="text-3xl md:text-5xl font-bold font-heading">Compliance & <span class="text-primary-container">Social Audits</span></h2>
+          <p class="text-on-surface-variant max-w-2xl mx-auto mt-4">Pre-audit prep, gap analysis, and clearance support for international buyer social audits.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="glass-panel p-8 rounded-2xl border border-border-glass hover:border-primary-container transition-all explore-service-btn cursor-pointer" data-service-id="sedex">
+            <div class="text-primary-container text-3xl mb-4"><i class="fa-solid fa-users"></i></div>
+            <h3 class="text-2xl font-bold mb-3">SEDEX / SMETA Audits</h3>
+            <p class="text-sm text-on-surface-variant mb-6">2-Pillar and 4-Pillar SMETA audit preparation covering Labor Standards, Health & Safety, Environment, and Business Ethics for global export clearance.</p>
+            <span class="text-xs font-bold text-primary-container flex items-center gap-1">View SMETA Blueprint →</span>
+          </div>
+
+          <div class="glass-panel p-8 rounded-2xl border border-border-glass hover:border-primary-container transition-all explore-service-btn cursor-pointer" data-service-id="mace_audit">
+            <div class="text-primary-container text-3xl mb-4"><i class="fa-solid fa-clipboard-check"></i></div>
+            <h3 class="text-2xl font-bold mb-3">MACE & OEM Audits</h3>
+            <p class="text-sm text-on-surface-variant mb-6">Maruti Suzuki Centre for Excellence (MACE) and Tier-1 Automotive vendor audit preparation to ensure top green-channel supplier rating.</p>
+            <span class="text-xs font-bold text-primary-container flex items-center gap-1">View MACE Blueprint →</span>
+          </div>
+
+          <div class="glass-panel p-8 rounded-2xl border border-border-glass hover:border-primary-container transition-all explore-service-btn cursor-pointer" data-service-id="fssai">
+            <div class="text-primary-container text-3xl mb-4"><i class="fa-solid fa-utensils"></i></div>
+            <h3 class="text-2xl font-bold mb-3">FSSAI Compliance</h3>
+            <p class="text-sm text-on-surface-variant mb-6">Food Safety & Standards Authority licensing, FOSTAC mandatory training, hygiene audits, and Schedule 4 compliance for food processors.</p>
+            <span class="text-xs font-bold text-primary-container flex items-center gap-1">View FSSAI Blueprint →</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==========================================================================
+         PAGE VIEW 6: BUSINESS EXCELLENCE PAGE (#view-business-excellence)
+         ========================================================================== -->
+    <div class="page-view" id="view-business-excellence">
+      <section class="py-20 px-4 md:px-12 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <span class="text-xs font-bold text-secondary uppercase tracking-widest block mb-2">Operational Transformation</span>
+          <h2 class="text-3xl md:text-5xl font-bold font-heading">Business <span class="text-primary-container">Excellence Model</span></h2>
+          <p class="text-on-surface-variant max-w-2xl mx-auto mt-4">Eliminate waste, increase machine uptime, improve shopfloor discipline, and boost net profitability.</p>
+        </div>
+
+        <!-- Animated Business Excellence Model Visual Flow -->
+        <div class="glass-panel p-10 rounded-2xl border border-primary-container/30 mb-16 shadow-2xl">
+          <h3 class="text-center text-xl font-bold text-primary-container mb-8">PRV Business Excellence Progression Flowchart</h3>
+          <div class="max-w-xl mx-auto space-y-4">
+            <div class="be-visual-node text-center">
+              <span class="text-xs font-bold uppercase text-secondary">Phase 1</span>
+              <h4 class="text-lg font-bold text-on-surface">Compliance</h4>
+              <p class="text-xs text-on-surface-variant mt-1">Regulatory & Statutory Baseline Setup</p>
+            </div>
+            <div class="be-arrow-down"></div>
+            <div class="be-visual-node text-center">
+              <span class="text-xs font-bold uppercase text-secondary">Phase 2</span>
+              <h4 class="text-lg font-bold text-on-surface">Process Control</h4>
+              <p class="text-xs text-on-surface-variant mt-1">SOPs, 5S Workplace & Work Instructions</p>
+            </div>
+            <div class="be-arrow-down"></div>
+            <div class="be-visual-node text-center">
+              <span class="text-xs font-bold uppercase text-secondary">Phase 3</span>
+              <h4 class="text-lg font-bold text-on-surface">Quality</h4>
+              <p class="text-xs text-on-surface-variant mt-1">Zero Defect Manufacturing & Defect Reduction</p>
+            </div>
+            <div class="be-arrow-down"></div>
+            <div class="be-visual-node text-center">
+              <span class="text-xs font-bold uppercase text-secondary">Phase 4</span>
+              <h4 class="text-lg font-bold text-on-surface">Productivity</h4>
+              <p class="text-xs text-on-surface-variant mt-1">OEE Optimization, Cycle Time & Kaizen</p>
+            </div>
+            <div class="be-arrow-down"></div>
+            <div class="be-visual-node text-center">
+              <span class="text-xs font-bold uppercase text-secondary">Phase 5</span>
+              <h4 class="text-lg font-bold text-on-surface">Cost Optimization</h4>
+              <p class="text-xs text-on-surface-variant mt-1">Raw Material Waste & Energy Cost Reduction</p>
+            </div>
+            <div class="be-arrow-down"></div>
+            <div class="be-visual-node text-center">
+              <span class="text-xs font-bold uppercase text-secondary">Phase 6</span>
+              <h4 class="text-lg font-bold text-on-surface">Profitability</h4>
+              <p class="text-xs text-on-surface-variant mt-1">Enhanced EBITDA Margins & Cashflow</p>
+            </div>
+            <div class="be-arrow-down"></div>
+            <div class="be-visual-node text-center bg-primary-container/20 border-primary-container pulse-glow">
+              <span class="text-xs font-bold uppercase text-primary-container">Phase 7</span>
+              <h4 class="text-xl font-extrabold text-primary-container">Sustainable Growth</h4>
+              <p class="text-xs text-on-surface mt-1">Market Leadership & Enterprise Value Creation</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="glass-panel p-6 rounded-xl border border-border-glass hover:border-primary-container cursor-pointer explore-service-btn" data-service-id="lean">
+            <h3 class="text-xl font-bold mb-2">Lean Manufacturing</h3>
+            <p class="text-xs text-on-surface-variant mb-4">Eliminate 7 MUDA wastes, shorten production lead times, and optimize inventory flow.</p>
+            <span class="text-xs font-bold text-primary-container">Learn Lean Implementation →</span>
+          </div>
+
+          <div class="glass-panel p-6 rounded-xl border border-border-glass hover:border-primary-container cursor-pointer explore-service-btn" data-service-id="5s">
+            <h3 class="text-xl font-bold mb-2">5S Workplace Organization</h3>
+            <p class="text-xs text-on-surface-variant mb-4">Sort, Set in order, Shine, Standardize, and Sustain shopfloor cleanliness and safety.</p>
+            <span class="text-xs font-bold text-primary-container">Learn 5S Program →</span>
+          </div>
+
+          <div class="glass-panel p-6 rounded-xl border border-border-glass hover:border-primary-container cursor-pointer explore-service-btn" data-service-id="kaizen">
+            <h3 class="text-xl font-bold mb-2">Kaizen Micro-Improvements</h3>
+            <p class="text-xs text-on-surface-variant mb-4">Empower shopfloor operators with daily low-cost continuous improvement ideas.</p>
+            <span class="text-xs font-bold text-primary-container">Learn Kaizen Framework →</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==========================================================================
+         PAGE VIEW 7: MASTER BUSINESS EXCELLENCE PROGRAM (#view-master-excellence)
+         ========================================================================== -->
+    <div class="page-view" id="view-master-excellence">
+      <section class="py-20 px-4 md:px-12 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <span class="text-xs font-bold text-secondary uppercase tracking-widest block mb-2">Flagship Transformation</span>
+          <h2 class="text-3xl md:text-5xl font-bold font-heading">Master Business <span class="text-primary-container">Excellence Program</span></h2>
+          <p class="text-on-surface-variant max-w-2xl mx-auto mt-4">The ultimate 12-month enterprise transformation ecosystem for ambitious business owners and corporate leadership.</p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-6 mb-16">
+          <div class="glass-panel p-6 rounded-xl border border-border-glass text-center">
+            <i class="fa-solid fa-chess-king text-2xl text-primary-container mb-3"></i>
+            <h4 class="font-bold text-sm">Strategy</h4>
+            <p class="text-xs text-on-surface-variant mt-1">Long-term Vision</p>
+          </div>
+          <div class="glass-panel p-6 rounded-xl border border-border-glass text-center">
+            <i class="fa-solid fa-medal text-2xl text-primary-container mb-3"></i>
+            <h4 class="font-bold text-sm">Quality</h4>
+            <p class="text-xs text-on-surface-variant mt-1">Zero Defect</p>
+          </div>
+          <div class="glass-panel p-6 rounded-xl border border-border-glass text-center">
+            <i class="fa-solid fa-certificate text-2xl text-primary-container mb-3"></i>
+            <h4 class="font-bold text-sm">Certification</h4>
+            <p class="text-xs text-on-surface-variant mt-1">ISO & ZED Gold</p>
+          </div>
+          <div class="glass-panel p-6 rounded-xl border border-border-glass text-center">
+            <i class="fa-solid fa-shield-halved text-2xl text-primary-container mb-3"></i>
+            <h4 class="font-bold text-sm">Compliance</h4>
+            <p class="text-xs text-on-surface-variant mt-1">100% Risk Free</p>
+          </div>
+          <div class="glass-panel p-6 rounded-xl border border-border-glass text-center">
+            <i class="fa-solid fa-users text-2xl text-primary-container mb-3"></i>
+            <h4 class="font-bold text-sm">People</h4>
+            <p class="text-xs text-on-surface-variant mt-1">NATS Apprentices</p>
+          </div>
+          <div class="glass-panel p-6 rounded-xl border border-border-glass text-center">
+            <i class="fa-solid fa-gauge-high text-2xl text-secondary mb-3"></i>
+            <h4 class="font-bold text-sm">Productivity</h4>
+            <p class="text-xs text-on-surface-variant mt-1">+30% Capacity</p>
+          </div>
+          <div class="glass-panel p-6 rounded-xl border border-border-glass text-center">
+            <i class="fa-solid fa-industry text-2xl text-secondary mb-3"></i>
+            <h4 class="font-bold text-sm">Operations</h4>
+            <p class="text-xs text-on-surface-variant mt-1">5S & Lean</p>
+          </div>
+          <div class="glass-panel p-6 rounded-xl border border-border-glass text-center">
+            <i class="fa-solid fa-piggy-bank text-2xl text-secondary mb-3"></i>
+            <h4 class="font-bold text-sm">Cost</h4>
+            <p class="text-xs text-on-surface-variant mt-1">Waste Reduction</p>
+          </div>
+          <div class="glass-panel p-6 rounded-xl border border-border-glass text-center">
+            <i class="fa-solid fa-user-tie text-2xl text-secondary mb-3"></i>
+            <h4 class="font-bold text-sm">Leadership</h4>
+            <p class="text-xs text-on-surface-variant mt-1">CEO Mindset</p>
+          </div>
+          <div class="glass-panel p-6 rounded-xl border border-primary-container text-center bg-primary-container/10">
+            <i class="fa-solid fa-chart-line text-2xl text-primary-container mb-3"></i>
+            <h4 class="font-bold text-sm text-primary-container">Growth</h4>
+            <p class="text-xs text-on-surface mt-1">Enterprise Expansion</p>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button class="bg-primary-container text-on-primary-container font-bold text-sm px-8 py-3.5 rounded-full hover:shadow-[0_0_20px_rgba(0,242,195,0.5)] open-seminar-trigger">
+            Apply for Master Business Excellence Workshop
           </button>
-        </form>
-
-        <div id="finder-result" class="finder-result-card" style="display: none;">
-          <!-- Result injected dynamically by JavaScript -->
         </div>
-      </div>
+      </section>
     </div>
-  </section>
 
-  <!-- ==========================================================================
-       TRUST ACCREDITATIONS & EMPANELMENTS BAR
-       ========================================================================== -->
-  <section class="trust-bar">
-    <div class="container">
-      <div class="trust-title">Recognized & Accredited Across Global Standards</div>
-      <div class="trust-logos">
-        <div class="trust-item"><i class="fa-solid fa-certificate"></i> Ministry of MSME ZED</div>
-        <div class="trust-item"><i class="fa-solid fa-award"></i> ISO 9001 / 14001 / 45001</div>
-        <div class="trust-item"><i class="fa-solid fa-car"></i> IATF 16949 Automotive</div>
-        <div class="trust-item"><i class="fa-solid fa-shield-halved"></i> SEDEX SMETA Ethical</div>
-        <div class="trust-item"><i class="fa-solid fa-graduation-cap"></i> NATS / NAPS Empaneled</div>
-      </div>
+    <!-- ==========================================================================
+         PAGE VIEW 8: TRAINING PAGE (#view-training)
+         ========================================================================== -->
+    <div class="page-view" id="view-training">
+      <section class="py-20 px-4 md:px-12 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <span class="text-xs font-bold text-secondary uppercase tracking-widest block mb-2">Workforce Development</span>
+          <h2 class="text-3xl md:text-5xl font-bold font-heading">Industrial & Corporate <span class="text-primary-container">Training</span></h2>
+          <p class="text-on-surface-variant max-w-2xl mx-auto mt-4">Practical skill-building modules for engineers, floor supervisors, and executive leaders.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="glass-panel p-6 rounded-xl border border-border-glass">
+            <i class="fa-solid fa-building-user text-3xl text-primary-container mb-4"></i>
+            <h3 class="text-xl font-bold mb-2">Corporate Training</h3>
+            <p class="text-xs text-on-surface-variant mb-4">Customized training programs on IATF Core Tools (APQP, PPAP, PFMEA, MSA, SPC), 5S, and Risk Management.</p>
+            <button class="text-xs font-bold text-primary-container open-seminar-trigger">Enroll Team →</button>
+          </div>
+
+          <div class="glass-panel p-6 rounded-xl border border-border-glass">
+            <i class="fa-solid fa-user-graduate text-3xl text-primary-container mb-4"></i>
+            <h3 class="text-xl font-bold mb-2">Industrial Apprenticeship</h3>
+            <p class="text-xs text-on-surface-variant mb-4">Hands-on shopfloor exposure under NATS/NAPS programs with government stipend subsidies.</p>
+            <button class="text-xs font-bold text-primary-container open-seminar-trigger">View Details →</button>
+          </div>
+
+          <div class="glass-panel p-6 rounded-xl border border-border-glass">
+            <i class="fa-solid fa-briefcase text-3xl text-primary-container mb-4"></i>
+            <h3 class="text-xl font-bold mb-2">Placement Preparation & Guidance</h3>
+            <p class="text-xs text-on-surface-variant mb-4">Resume building, technical interview prep, and placement assistance for fresh engineering graduates.</p>
+            <button class="text-xs font-bold text-primary-container open-seminar-trigger">Get Future Guidance →</button>
+          </div>
+        </div>
+      </section>
     </div>
-  </section>
 
-  <!-- ==========================================================================
-       4. SOLUTIONS (MEGA MENU CATEGORIES AS INTERACTIVE TABS)
-       ========================================================================== -->
-  <section class="solutions-section" id="solutions">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Solutions Overview</span>
-        <h2 class="section-title">Four Pillars of <span>Business Excellence</span></h2>
-        <p class="section-desc">Explore our full consultancy suite categorized as per the PRV master flowchart.</p>
-      </div>
-
-      <!-- Tab Buttons -->
-      <div class="solutions-tabs">
-        <button class="tab-btn active" data-category="certifications">
-          <i class="fa-solid fa-award"></i> Certifications
-        </button>
-        <button class="tab-btn" data-category="compliance">
-          <i class="fa-solid fa-shield-halved"></i> Compliance
-        </button>
-        <button class="tab-btn" data-category="improvement">
-          <i class="fa-solid fa-chart-line"></i> Business Improvement
-        </button>
-        <button class="tab-btn" data-category="people">
-          <i class="fa-solid fa-users-gear"></i> People & Growth
-        </button>
-      </div>
-
-      <!-- TAB 1: CERTIFICATIONS -->
-      <div class="solutions-content active" id="tab-certifications">
-        <div class="solution-card">
-          <div class="solution-icon"><i class="fa-solid fa-shield-cat"></i></div>
-          <h3 class="solution-card-title">ZED Certification</h3>
-          <p class="solution-card-desc">Zero Defect Zero Effect scheme consultancy for MSMEs across Bronze, Silver, &
-            Gold levels.</p>
-          <ul class="solution-card-list">
-            <li><i class="fa-solid fa-check"></i> What is ZED & Benefits</li>
-            <li><i class="fa-solid fa-check"></i> MSME Eligibility & Subsidies</li>
-            <li><i class="fa-solid fa-check"></i> Full Assessment & Handholding</li>
-          </ul>
-          <a href="#contact" class="btn btn-outline open-modal-trigger" data-service="ZED Certification">Get ZED
-            Assessment</a>
+    <!-- ==========================================================================
+         PAGE VIEW 9: GOVERNMENT SCHEMES PAGE (#view-government)
+         ========================================================================== -->
+    <div class="page-view" id="view-government">
+      <section class="py-20 px-4 md:px-12 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <span class="text-xs font-bold text-secondary uppercase tracking-widest block mb-2">Government Workforce Schemes</span>
+          <h2 class="text-3xl md:text-5xl font-bold font-heading">NATS & NAPS <span class="text-primary-container">Apprenticeship</span></h2>
+          <p class="text-on-surface-variant max-w-2xl mx-auto mt-4">Onboard skilled apprentices under National Apprenticeship Training Scheme (NATS) & National Apprenticeship Promotion Scheme (NAPS) with up to ₹1,500/month stipend reimbursement.</p>
         </div>
 
-        <div class="solution-card">
-          <div class="solution-icon"><i class="fa-solid fa-stamp"></i></div>
-          <h3 class="solution-card-title">ISO Certifications</h3>
-          <p class="solution-card-desc">Complete end-to-end implementation and certification support for global ISO
-            standards.</p>
-          <ul class="solution-card-list">
-            <li><i class="fa-solid fa-check"></i> ISO 9001 (Quality) & 14001 (Env)</li>
-            <li><i class="fa-solid fa-check"></i> ISO 45001 (OHS) & 27001 (ISMS)</li>
-            <li><i class="fa-solid fa-check"></i> ISO 22301 (BCMS) & 20000</li>
-          </ul>
-          <a href="#contact" class="btn btn-outline open-modal-trigger" data-service="ISO Certifications">ISO Audit
-            Readiness</a>
-        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="glass-panel p-8 rounded-2xl border border-border-glass hover:border-primary-container transition-all">
+            <span class="text-xs font-bold text-primary-container uppercase tracking-wider block mb-2">NATS Program</span>
+            <h3 class="text-2xl font-bold mb-4">National Apprenticeship Training Scheme</h3>
+            <p class="text-sm text-on-surface-variant mb-6">Designed for Engineering Graduates and Diploma holders. PRV Consultancy handles complete portal registration, contract generation, attendance submission, and Govt stipend claim processing.</p>
+            <button class="bg-primary-container text-on-primary-container font-bold text-xs px-6 py-3 rounded-full open-modal-trigger" data-service="NATS Program">Register Organization for NATS</button>
+          </div>
 
-        <div class="solution-card">
-          <div class="solution-icon"><i class="fa-solid fa-car"></i></div>
-          <h3 class="solution-card-title">IATF 16949 Automotive</h3>
-          <p class="solution-card-desc">Automotive Quality Management System standard implementation with Core Tools
-            execution.</p>
-          <ul class="solution-card-list">
-            <li><i class="fa-solid fa-check"></i> APQP, PFMEA, PPAP, MSA, SPC</li>
-            <li><i class="fa-solid fa-check"></i> Supplier Audit & Development</li>
-            <li><i class="fa-solid fa-check"></i> Process Audit & Roadmap</li>
-          </ul>
-          <a href="#contact" class="btn btn-outline open-modal-trigger" data-service="IATF 16949">IATF Roadmap</a>
+          <div class="glass-panel p-8 rounded-2xl border border-border-glass hover:border-primary-container transition-all">
+            <span class="text-xs font-bold text-secondary uppercase tracking-wider block mb-2">NAPS Program</span>
+            <h3 class="text-2xl font-bold mb-4">National Apprenticeship Promotion Scheme</h3>
+            <p class="text-sm text-on-surface-variant mb-6">Designed for ITI and non-engineering candidates. Direct financial support by Govt of India reimbursing 25% of prescribed stipend up to ₹1,500 per month per apprentice.</p>
+            <button class="glass-panel text-on-surface border border-border-glass font-bold text-xs px-6 py-3 rounded-full open-modal-trigger" data-service="NAPS Program">Register Organization for NAPS</button>
+          </div>
         </div>
-      </div>
-
-      <!-- TAB 2: COMPLIANCE -->
-      <div class="solutions-content" id="tab-compliance">
-        <div class="solution-card">
-          <div class="solution-icon"><i class="fa-solid fa-user-shield"></i></div>
-          <h3 class="solution-card-title">SEDEX / SMETA Audit</h3>
-          <p class="solution-card-desc">Ethical audit methodology covering Labour, Health & Safety, Environment and
-            Business Ethics.</p>
-          <ul class="solution-card-list">
-            <li><i class="fa-solid fa-check"></i> 2-Pillar & 4-Pillar SMETA</li>
-            <li><i class="fa-solid fa-check"></i> CAPA Resolution Support</li>
-            <li><i class="fa-solid fa-check"></i> Mock Audit Preparation</li>
-          </ul>
-          <a href="#contact" class="btn btn-outline open-modal-trigger" data-service="SEDEX / SMETA">SEDEX
-            Consultation</a>
-        </div>
-
-        <div class="solution-card">
-          <div class="solution-icon"><i class="fa-solid fa-utensils"></i></div>
-          <h3 class="solution-card-title">FSSAI Compliance</h3>
-          <p class="solution-card-desc">Food safety management, registration, licensing renewal, and hygiene SOP
-            creation.</p>
-          <ul class="solution-card-list">
-            <li><i class="fa-solid fa-check"></i> FSSAI Registration & Renewal</li>
-            <li><i class="fa-solid fa-check"></i> Hygiene Rating & GMP Audit</li>
-            <li><i class="fa-solid fa-check"></i> SOP & Food Safety Systems</li>
-          </ul>
-          <a href="#contact" class="btn btn-outline open-modal-trigger" data-service="FSSAI Compliance">FSSAI Audit
-            Help</a>
-        </div>
-
-        <div class="solution-card">
-          <div class="solution-icon"><i class="fa-solid fa-shirt"></i></div>
-          <h3 class="solution-card-title">OEKO-TEX & Social Audits</h3>
-          <p class="solution-card-desc">Sustainable textile certification, factory compliance, and buyer Code of Conduct
-            audits.</p>
-          <ul class="solution-card-list">
-            <li><i class="fa-solid fa-check"></i> MACE & Buyer Audits</li>
-            <li><i class="fa-solid fa-check"></i> OEKO-TEX Standard 100</li>
-            <li><i class="fa-solid fa-check"></i> Full Compliance Support</li>
-          </ul>
-          <a href="#contact" class="btn btn-outline open-modal-trigger" data-service="Social Audit">Social Audit
-            Prep</a>
-        </div>
-      </div>
-
-      <!-- TAB 3: BUSINESS IMPROVEMENT -->
-      <div class="solutions-content" id="tab-improvement">
-        <div class="solution-card">
-          <div class="solution-icon"><i class="fa-solid fa-recycle"></i></div>
-          <h3 class="solution-card-title">5S & Kaizen Mastery</h3>
-          <p class="solution-card-desc">Workplace organization and continuous micro-improvements to eliminate waste.</p>
-          <ul class="solution-card-list">
-            <li><i class="fa-solid fa-check"></i> 5S Audit & Tagging System</li>
-            <li><i class="fa-solid fa-check"></i> Kaizen Event Facilitation</li>
-            <li><i class="fa-solid fa-check"></i> Visual Management Setup</li>
-          </ul>
-          <a href="#contact" class="btn btn-outline open-modal-trigger" data-service="5S / Kaizen">5S Audit Request</a>
-        </div>
-
-        <div class="solution-card">
-          <div class="solution-icon"><i class="fa-solid fa-piggy-bank"></i></div>
-          <h3 class="solution-card-title">Cost & Waste Reduction</h3>
-          <p class="solution-card-desc">Streamlining manufacturing & service operations to maximize profit margins.</p>
-          <ul class="solution-card-list">
-            <li><i class="fa-solid fa-check"></i> Value Stream Mapping (VSM)</li>
-            <li><i class="fa-solid fa-check"></i> Capacity Optimization</li>
-            <li><i class="fa-solid fa-check"></i> KPI Tracking & Metrics</li>
-          </ul>
-          <a href="#contact" class="btn btn-outline open-modal-trigger" data-service="Cost Reduction">Reduce Costs</a>
-        </div>
-
-        <div class="solution-card">
-          <div class="solution-icon"><i class="fa-solid fa-gears"></i></div>
-          <h3 class="solution-card-title">Operational Excellence</h3>
-          <p class="solution-card-desc">Holistic business framework for quality improvement and productivity increases.
-          </p>
-          <ul class="solution-card-list">
-            <li><i class="fa-solid fa-check"></i> Quality & Throughput Boost</li>
-            <li><i class="fa-solid fa-check"></i> Bottleneck Elimination</li>
-            <li><i class="fa-solid fa-check"></i> Sustainable Process Controls</li>
-          </ul>
-          <a href="#contact" class="btn btn-outline open-modal-trigger" data-service="Operational Excellence">OpEx
-            Assessment</a>
-        </div>
-      </div>
-
-      <!-- TAB 4: PEOPLE & GROWTH -->
-      <div class="solutions-content" id="tab-people">
-        <div class="solution-card">
-          <div class="solution-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-          <h3 class="solution-card-title">NATS & NAPS Apprenticeship</h3>
-          <p class="solution-card-desc">Government apprenticeship engagement, portal registration, and stipend claims
-            management.</p>
-          <ul class="solution-card-list">
-            <li><i class="fa-solid fa-check"></i> NATS & NAPS Setup</li>
-            <li><i class="fa-solid fa-check"></i> Registration & Portal Help</li>
-            <li><i class="fa-solid fa-check"></i> Documentation & Stipend Claims</li>
-          </ul>
-          <a href="#programs" class="btn btn-outline">Explore Apprenticeship</a>
-        </div>
-
-        <div class="solution-card">
-          <div class="solution-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
-          <h3 class="solution-card-title">Training Academy</h3>
-          <p class="solution-card-desc">Industrial skills, soft skills, placement prep, and corporate leadership
-            programs.</p>
-          <ul class="solution-card-list">
-            <li><i class="fa-solid fa-check"></i> Practical Industrial Training</li>
-            <li><i class="fa-solid fa-check"></i> Professional Development</li>
-            <li><i class="fa-solid fa-check"></i> Corporate Skill Modules</li>
-          </ul>
-          <a href="#programs" class="btn btn-outline">View Training Modules</a>
-        </div>
-
-        <div class="solution-card">
-          <div class="solution-icon"><i class="fa-solid fa-user-tie"></i></div>
-          <h3 class="solution-card-title">Employee to CEO Program</h3>
-          <p class="solution-card-desc">Structured 8-tier career development pathway to build executive mindset and
-            capability.</p>
-          <ul class="solution-card-list">
-            <li><i class="fa-solid fa-check"></i> Supervisor & Leader Growth</li>
-            <li><i class="fa-solid fa-check"></i> Business Leader Mindset</li>
-            <li><i class="fa-solid fa-check"></i> CEO Execution Capability</li>
-          </ul>
-          <a href="#programs" class="btn btn-outline">Career Roadmap</a>
-        </div>
-      </div>
+      </section>
     </div>
-  </section>
 
-  <!-- ==========================================================================
-       4.5 INDUSTRIES WE SERVE (INTERACTIVE 10-CARD GRID 2 ROWS x 5 COLS)
-       ========================================================================== -->
-  <section class="industries-section" id="industries">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag"><i class="fa-solid fa-industry"></i> Industry Solutions</span>
-        <h2 class="section-title">Industries <span>We Serve</span></h2>
-        <p class="section-desc">Customized Solutions for Every Industry — Select your sector to explore targeted
-          certifications, audits, and operational excellence programs.</p>
-      </div>
-
-      <div class="industry-cards-grid">
-        <!-- 1. Manufacturing -->
-        <div class="industry-card">
-          <div>
-            <div class="ind-card-header">
-              <div class="ind-icon-box"><i class="fa-solid fa-industry"></i></div>
-              <h3 class="ind-card-title">Manufacturing</h3>
-            </div>
-            <ul class="ind-service-list">
-              <li><i class="fa-solid fa-circle-check"></i> ZED Certification (80% Subsidy)</li>
-              <li><i class="fa-solid fa-circle-check"></i> ISO 9001 / 14001 / 45001</li>
-              <li><i class="fa-solid fa-circle-check"></i> 5S & Lean Implementation</li>
-              <li><i class="fa-solid fa-circle-check"></i> Productivity Improvement</li>
-            </ul>
-          </div>
-          <a href="#contact" class="ind-cta-btn open-modal-trigger" data-service="Manufacturing Solutions">
-            Explore Solutions <i class="fa-solid fa-arrow-right"></i>
-          </a>
+    <!-- ==========================================================================
+         PAGE VIEW 10: INDUSTRIES PAGE (#view-industries)
+         ========================================================================== -->
+    <div class="page-view" id="view-industries">
+      <section class="py-20 px-4 md:px-12 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+          <span class="text-xs font-bold text-secondary uppercase tracking-widest block mb-2">Sector-Specific Expertise</span>
+          <h2 class="text-3xl md:text-5xl font-bold font-heading">Industries <span class="text-primary-container">We Serve</span></h2>
+          <p class="text-on-surface-variant max-w-2xl mx-auto mt-4">Select an industry to explore customized PRV certifications, audits, and business solutions.</p>
         </div>
 
-        <!-- 2. Automotive -->
-        <div class="industry-card">
-          <div>
-            <div class="ind-card-header">
-              <div class="ind-icon-box"><i class="fa-solid fa-car"></i></div>
-              <h3 class="ind-card-title">Automotive</h3>
-            </div>
-            <ul class="ind-service-list">
-              <li><i class="fa-solid fa-circle-check"></i> IATF 16949 Certification</li>
-              <li><i class="fa-solid fa-circle-check"></i> APQP, PPAP, FMEA, MSA, SPC</li>
-              <li><i class="fa-solid fa-circle-check"></i> Supplier Development</li>
-              <li><i class="fa-solid fa-circle-check"></i> MACE & OEM Audit Prep</li>
-            </ul>
-          </div>
-          <a href="#contact" class="ind-cta-btn open-modal-trigger" data-service="Automotive Solutions">
-            Explore Solutions <i class="fa-solid fa-arrow-right"></i>
-          </a>
+        <!-- Interactive Industry Selector Tabs -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12" id="industry-selector-tabs">
+          <button class="industry-tab-btn active" data-ind="automotive"><i class="fa-solid fa-car"></i> Automotive</button>
+          <button class="industry-tab-btn" data-ind="manufacturing"><i class="fa-solid fa-industry"></i> Manufacturing</button>
+          <button class="industry-tab-btn" data-ind="food"><i class="fa-solid fa-utensils"></i> Food & FMCG</button>
+          <button class="industry-tab-btn" data-ind="it"><i class="fa-solid fa-laptop-code"></i> IT & Technology</button>
+          <button class="industry-tab-btn" data-ind="textile"><i class="fa-solid fa-shirt"></i> Textile</button>
+          <button class="industry-tab-btn" data-ind="healthcare"><i class="fa-solid fa-hospital"></i> Healthcare</button>
+          <button class="industry-tab-btn" data-ind="construction"><i class="fa-solid fa-building"></i> Construction</button>
+          <button class="industry-tab-btn" data-ind="engineering"><i class="fa-solid fa-gear"></i> Engineering</button>
+          <button class="industry-tab-btn" data-ind="msme"><i class="fa-solid fa-store"></i> MSME</button>
         </div>
 
-        <!-- 3. Food & Beverage -->
-        <div class="industry-card">
-          <div>
-            <div class="ind-card-header">
-              <div class="ind-icon-box"><i class="fa-solid fa-utensils"></i></div>
-              <h3 class="ind-card-title">Food & Beverage</h3>
-            </div>
-            <ul class="ind-service-list">
-              <li><i class="fa-solid fa-circle-check"></i> FSSAI Licensing & Renewal</li>
-              <li><i class="fa-solid fa-circle-check"></i> ISO 22000 (FSMS) Standard</li>
-              <li><i class="fa-solid fa-circle-check"></i> HACCP Support & Audit</li>
-              <li><i class="fa-solid fa-circle-check"></i> Food Hygiene SOP Training</li>
-            </ul>
-          </div>
-          <a href="#contact" class="ind-cta-btn open-modal-trigger" data-service="Food & Beverage Solutions">
-            Explore Solutions <i class="fa-solid fa-arrow-right"></i>
-          </a>
+        <!-- Industry Relevant Solutions Card Container -->
+        <div class="glass-panel p-8 rounded-2xl border border-primary-container/30 shadow-2xl" id="industry-solutions-display">
+          <!-- Populated dynamically by JS -->
         </div>
-
-        <!-- 4. Textile & Apparel -->
-        <div class="industry-card">
-          <div>
-            <div class="ind-card-header">
-              <div class="ind-icon-box"><i class="fa-solid fa-shirt"></i></div>
-              <h3 class="ind-card-title">Textile & Apparel</h3>
-            </div>
-            <ul class="ind-service-list">
-              <li><i class="fa-solid fa-circle-check"></i> SEDEX / SMETA Ethical Audit</li>
-              <li><i class="fa-solid fa-circle-check"></i> OEKO-TEX Support</li>
-              <li><i class="fa-solid fa-circle-check"></i> Social Audit Compliance</li>
-              <li><i class="fa-solid fa-circle-check"></i> Global Buyer Audit Readiness</li>
-            </ul>
-          </div>
-          <a href="#contact" class="ind-cta-btn open-modal-trigger" data-service="Textile & Apparel Solutions">
-            Explore Solutions <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- 5. IT & Software -->
-        <div class="industry-card">
-          <div>
-            <div class="ind-card-header">
-              <div class="ind-icon-box"><i class="fa-solid fa-laptop-code"></i></div>
-              <h3 class="ind-card-title">IT & Software</h3>
-            </div>
-            <ul class="ind-service-list">
-              <li><i class="fa-solid fa-circle-check"></i> ISO/IEC 27001 (ISMS)</li>
-              <li><i class="fa-solid fa-circle-check"></i> ISO 20000-1 (ITSM)</li>
-              <li><i class="fa-solid fa-circle-check"></i> SOC 2 Type I & II Readiness</li>
-              <li><i class="fa-solid fa-circle-check"></i> Cyber Security Advisory</li>
-            </ul>
-          </div>
-          <a href="#contact" class="ind-cta-btn open-modal-trigger" data-service="IT & Software Solutions">
-            Explore Solutions <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- 6. Engineering -->
-        <div class="industry-card">
-          <div>
-            <div class="ind-card-header">
-              <div class="ind-icon-box"><i class="fa-solid fa-gear"></i></div>
-              <h3 class="ind-card-title">Engineering</h3>
-            </div>
-            <ul class="ind-service-list">
-              <li><i class="fa-solid fa-circle-check"></i> ISO 9001 / 14001 / 45001</li>
-              <li><i class="fa-solid fa-circle-check"></i> ZED Certification Scheme</li>
-              <li><i class="fa-solid fa-circle-check"></i> Quality & Process SOPs</li>
-              <li><i class="fa-solid fa-circle-check"></i> Productivity & Cost Reduction</li>
-            </ul>
-          </div>
-          <a href="#contact" class="ind-cta-btn open-modal-trigger" data-service="Engineering Solutions">
-            Explore Solutions <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- 7. Pharma & Healthcare -->
-        <div class="industry-card">
-          <div>
-            <div class="ind-card-header">
-              <div class="ind-icon-box"><i class="fa-solid fa-capsules"></i></div>
-              <h3 class="ind-card-title">Pharma & Healthcare</h3>
-            </div>
-            <ul class="ind-service-list">
-              <li><i class="fa-solid fa-circle-check"></i> ISO 13485 (Medical Devices)</li>
-              <li><i class="fa-solid fa-circle-check"></i> ISO 9001 Healthcare QMS</li>
-              <li><i class="fa-solid fa-circle-check"></i> CDSCO Licensing Readiness</li>
-              <li><i class="fa-solid fa-circle-check"></i> Hospital Safety & Hygiene</li>
-            </ul>
-          </div>
-          <a href="#contact" class="ind-cta-btn open-modal-trigger" data-service="Pharma & Healthcare Solutions">
-            Explore Solutions <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- 8. Construction -->
-        <div class="industry-card">
-          <div>
-            <div class="ind-card-header">
-              <div class="ind-icon-box"><i class="fa-solid fa-helmet-safety"></i></div>
-              <h3 class="ind-card-title">Construction</h3>
-            </div>
-            <ul class="ind-service-list">
-              <li><i class="fa-solid fa-circle-check"></i> ISO 9001 (Quality Control)</li>
-              <li><i class="fa-solid fa-circle-check"></i> ISO 45001 (Worker Safety)</li>
-              <li><i class="fa-solid fa-circle-check"></i> ISO 14001 (Environmental)</li>
-              <li><i class="fa-solid fa-circle-check"></i> Site EHS Audit & Compliance</li>
-            </ul>
-          </div>
-          <a href="#contact" class="ind-cta-btn open-modal-trigger" data-service="Construction Solutions">
-            Explore Solutions <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- 9. Education & Training -->
-        <div class="industry-card">
-          <div>
-            <div class="ind-card-header">
-              <div class="ind-icon-box"><i class="fa-solid fa-graduation-cap"></i></div>
-              <h3 class="ind-card-title">Education & Training</h3>
-            </div>
-            <ul class="ind-service-list">
-              <li><i class="fa-solid fa-circle-check"></i> NATS & NAPS Apprenticeship</li>
-              <li><i class="fa-solid fa-circle-check"></i> Placement Preparation</li>
-              <li><i class="fa-solid fa-circle-check"></i> Industrial Skill Workshops</li>
-              <li><i class="fa-solid fa-circle-check"></i> Leadership Development</li>
-            </ul>
-          </div>
-          <a href="#contact" class="ind-cta-btn open-modal-trigger" data-service="Education & Training Solutions">
-            Explore Solutions <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- 10. MSMEs & Startups -->
-        <div class="industry-card">
-          <div>
-            <div class="ind-card-header">
-              <div class="ind-icon-box"><i class="fa-solid fa-rocket"></i></div>
-              <h3 class="ind-card-title">MSMEs & Startups</h3>
-            </div>
-            <ul class="ind-service-list">
-              <li><i class="fa-solid fa-circle-check"></i> ZED Certification (80% Subsidy)</li>
-              <li><i class="fa-solid fa-circle-check"></i> ISO Fast-Track Certification</li>
-              <li><i class="fa-solid fa-circle-check"></i> Master Business Excellence</li>
-              <li><i class="fa-solid fa-circle-check"></i> GeM & Udyam Advisory</li>
-            </ul>
-          </div>
-          <a href="#contact" class="ind-cta-btn open-modal-trigger" data-service="MSME & Startup Solutions">
-            Explore Solutions <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-      </div>
+      </section>
     </div>
-  </section>
 
-  <!-- ==========================================================================
-       5. KEY SERVICE DETAIL CARDS (FLOWCHART ALIGNED)
-       ========================================================================== -->
-  <section class="detail-services-section" id="key-services">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Deep-Dive Portfolios</span>
-        <h2 class="section-title">Key Service <span>Detail Pages</span></h2>
-        <p class="section-desc">Comprehensive solutions mapping every operational aspect from quality to profit
-          maximization.</p>
-      </div>
-
-      <div class="services-grid">
-        <!-- 1. ZED -->
-        <div class="detail-card">
-          <div class="detail-card-badge">MSME Focus</div>
-          <h4 class="detail-card-title">ZED Certifications</h4>
-          <ul class="detail-features">
-            <li><i class="fa-solid fa-check"></i> What is ZED & Benefits</li>
-            <li><i class="fa-solid fa-check"></i> Who Should Apply</li>
-            <li><i class="fa-solid fa-check"></i> Bronze, Silver & Gold Levels</li>
-            <li><i class="fa-solid fa-check"></i> ZED Process & Assessment</li>
-          </ul>
-          <a href="#" class="card-cta-btn open-modal-trigger" data-service="ZED Certification">Get Assessment <i
-              class="fa-solid fa-chevron-right"></i></a>
+    <!-- ==========================================================================
+         PAGE VIEW 11: DEDICATED AI CONSULTANT PAGE (#view-ai-consultant)
+         ========================================================================== -->
+    <div class="page-view" id="view-ai-consultant">
+      <section class="py-16 px-4 md:px-12 max-w-5xl mx-auto">
+        <div class="text-center mb-8">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-container/10 border border-primary-container/30 mb-3">
+            <span class="material-symbols-outlined text-primary-container text-sm">smart_toy</span>
+            <span class="text-xs font-bold text-primary-container uppercase">PRV AI Enterprise Advisor</span>
+          </div>
+          <h2 class="text-3xl font-bold font-heading">AI Business <span class="text-primary-container">Excellence Advisor</span></h2>
+          <p class="text-xs text-on-surface-variant mt-2">Ask any question about ISO, ZED, SMETA, 5S, NATS/NAPS, or request tailored recommendations in your language.</p>
         </div>
 
-        <!-- 2. ISO -->
-        <div class="detail-card">
-          <div class="detail-card-badge">Global Standards</div>
-          <h4 class="detail-card-title">ISO Certifications</h4>
-          <ul class="detail-features">
-            <li><i class="fa-solid fa-check"></i> ISO 9001, 14001, 45001</li>
-            <li><i class="fa-solid fa-check"></i> ISO 27001 & ISO 22301</li>
-            <li><i class="fa-solid fa-check"></i> Gap Analysis & Auditing</li>
-            <li><i class="fa-solid fa-check"></i> Certification Guarantee</li>
-          </ul>
-          <a href="#" class="card-cta-btn open-modal-trigger" data-service="ISO Certifications">ISO Audit Readiness <i
-              class="fa-solid fa-chevron-right"></i></a>
-        </div>
-
-        <!-- 3. IATF 16949 -->
-        <div class="detail-card">
-          <div class="detail-card-badge">Automotive</div>
-          <h4 class="detail-card-title">IATF 16949</h4>
-          <ul class="detail-features">
-            <li><i class="fa-solid fa-check"></i> IATF Overview & Core Tools</li>
-            <li><i class="fa-solid fa-check"></i> APQP, PFMEA, PPAP, MSA, SPC</li>
-            <li><i class="fa-solid fa-check"></i> Supplier Development</li>
-            <li><i class="fa-solid fa-check"></i> Process Audit & Roadmap</li>
-          </ul>
-          <a href="#" class="card-cta-btn open-modal-trigger" data-service="IATF 16949">Automotive Audit <i
-              class="fa-solid fa-chevron-right"></i></a>
-        </div>
-
-        <!-- 4. COMPLIANCE & AUDITS -->
-        <div class="detail-card">
-          <div class="detail-card-badge">Ethical & Social</div>
-          <h4 class="detail-card-title">Compliance & Audits</h4>
-          <ul class="detail-features">
-            <li><i class="fa-solid fa-check"></i> SEDEX / SMETA Audits</li>
-            <li><i class="fa-solid fa-check"></i> Social & MACE Audits</li>
-            <li><i class="fa-solid fa-check"></i> OEKO-TEX Standard</li>
-            <li><i class="fa-solid fa-check"></i> Mock Audit Readiness</li>
-          </ul>
-          <a href="#" class="card-cta-btn open-modal-trigger" data-service="SEDEX / SMETA">Compliance Help <i
-              class="fa-solid fa-chevron-right"></i></a>
-        </div>
-
-        <!-- 5. FSSAI & FOOD SAFETY -->
-        <div class="detail-card">
-          <div class="detail-card-badge">Food Industry</div>
-          <h4 class="detail-card-title">FSSAI & Food Safety</h4>
-          <ul class="detail-features">
-            <li><i class="fa-solid fa-check"></i> FSSAI Registration & Renewal</li>
-            <li><i class="fa-solid fa-check"></i> Food Safety Systems & SOP</li>
-            <li><i class="fa-solid fa-check"></i> Hygiene & GMP Audits</li>
-            <li><i class="fa-solid fa-check"></i> Food Audit Preparation</li>
-          </ul>
-          <a href="#" class="card-cta-btn open-modal-trigger" data-service="FSSAI Compliance">FSSAI License <i
-              class="fa-solid fa-chevron-right"></i></a>
-        </div>
-
-        <!-- 6. IT SECTOR SOLUTIONS -->
-        <div class="detail-card">
-          <div class="detail-card-badge">Tech & Security</div>
-          <h4 class="detail-card-title">IT Sector Solutions</h4>
-          <ul class="detail-features">
-            <li><i class="fa-solid fa-check"></i> ISO/IEC 27001 ISMS</li>
-            <li><i class="fa-solid fa-check"></i> SOC 2 Readiness</li>
-            <li><i class="fa-solid fa-check"></i> CMMI & PCI DSS Support</li>
-            <li><i class="fa-solid fa-check"></i> ISO 20000-1 IT Service</li>
-          </ul>
-          <a href="#" class="card-cta-btn open-modal-trigger" data-service="IT Certifications">IT Security Audit <i
-              class="fa-solid fa-chevron-right"></i></a>
-        </div>
-
-        <!-- 7. OPERATIONAL EXCELLENCE -->
-        <div class="detail-card">
-          <div class="detail-card-badge">Lean Operations</div>
-          <h4 class="detail-card-title">Operational Excellence</h4>
-          <ul class="detail-features">
-            <li><i class="fa-solid fa-check"></i> 5S & Kaizen Execution</li>
-            <li><i class="fa-solid fa-check"></i> Quality & Productivity</li>
-            <li><i class="fa-solid fa-check"></i> Capacity Optimization</li>
-            <li><i class="fa-solid fa-check"></i> Continuous Improvement</li>
-          </ul>
-          <a href="#" class="card-cta-btn open-modal-trigger" data-service="5S / Kaizen">OpEx Roadmap <i
-              class="fa-solid fa-chevron-right"></i></a>
-        </div>
-
-        <!-- 8. PROFIT MAXIMIZATION -->
-        <div class="detail-card">
-          <div class="detail-card-badge">Financial Growth</div>
-          <h4 class="detail-card-title">Profit Maximization</h4>
-          <ul class="detail-features">
-            <li><i class="fa-solid fa-check"></i> Cost & Waste Reduction</li>
-            <li><i class="fa-solid fa-check"></i> Productivity & Output Boost</li>
-            <li><i class="fa-solid fa-check"></i> Profit Margin Improvement</li>
-            <li><i class="fa-solid fa-check"></i> KPI Tracking & Analytics</li>
-          </ul>
-          <a href="#" class="card-cta-btn open-modal-trigger" data-service="Profit Maximization">Maximize Profit <i
-              class="fa-solid fa-chevron-right"></i></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       6. SUPPORTING PAGES (NATS/NAPS, TRAINING, MASTER PROGRAM)
-       ========================================================================== -->
-  <section class="programs-section" id="programs">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Supporting Programs</span>
-        <h2 class="section-title">Human Capital & <span>Master Excellence</span></h2>
-        <p class="section-desc">Empowering workforces and organization leaders with apprenticeship schemes and executive
-          training.</p>
-      </div>
-
-      <div class="programs-grid">
-        <!-- NATS & NAPS Card -->
-        <div class="program-card">
-          <div class="program-header">
-            <div class="program-header-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-            <h3 class="program-title">NATS & NAPS Schemes</h3>
-          </div>
-          <div class="program-body">
-            <ul class="program-list">
-              <li><i class="fa-solid fa-check"></i> NATS & NAPS Scheme Overview</li>
-              <li><i class="fa-solid fa-check"></i> Industrial Eligibility Criteria</li>
-              <li><i class="fa-solid fa-check"></i> Complete Registration Help</li>
-              <li><i class="fa-solid fa-check"></i> Process Flow & Documentation</li>
-              <li><i class="fa-solid fa-check"></i> Government Stipend Subsidy</li>
-            </ul>
-            <a href="#" class="btn btn-primary open-modal-trigger" data-service="NATS" style="width: 100%;">Setup
-              Apprenticeship</a>
-          </div>
-        </div>
-
-        <!-- Training Academy Card -->
-        <div class="program-card">
-          <div class="program-header">
-            <div class="program-header-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
-            <h3 class="program-title">Training Academy</h3>
-          </div>
-          <div class="program-body">
-            <ul class="program-list">
-              <li><i class="fa-solid fa-check"></i> Industrial Skill Training</li>
-              <li><i class="fa-solid fa-check"></i> Professional Development</li>
-              <li><i class="fa-solid fa-check"></i> Soft Skills & Placement Prep</li>
-              <li><i class="fa-solid fa-check"></i> Future Career Guidance</li>
-              <li><i class="fa-solid fa-check"></i> Corporate Team Training</li>
-            </ul>
-            <a href="#" class="btn btn-primary open-seminar-trigger" style="width: 100%;">Register Seminar /
-              Training</a>
-          </div>
-        </div>
-
-        <!-- Master Business Excellence Program -->
-        <div class="program-card">
-          <div class="program-header" style="background: linear-gradient(135deg, #0F2537, #134074);">
-            <div class="program-header-icon" style="background: var(--accent-gold);"><i class="fa-solid fa-crown"></i>
-            </div>
-            <h3 class="program-title">Master Business Excellence</h3>
-          </div>
-          <div class="program-body">
-            <ul class="program-list">
-              <li><i class="fa-solid fa-check"></i> 11 Excellence Pillars</li>
-              <li><i class="fa-solid fa-check"></i> Readiness Assessment</li>
-              <li><i class="fa-solid fa-check"></i> Customized Implementation</li>
-              <li><i class="fa-solid fa-check"></i> Measurement & Analytics</li>
-              <li><i class="fa-solid fa-check"></i> Continuous Improvement Loop</li>
-            </ul>
-            <a href="#" class="btn btn-primary open-modal-trigger" data-service="Master Business Excellence Program"
-              style="width: 100%; background: var(--accent-gold);">Enroll In Program</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Employee to CEO Stepper Widget -->
-      <div class="roadmap-box">
-        <div class="roadmap-header">
-          <h3 class="roadmap-title"><i class="fa-solid fa-arrow-trend-up" style="color: var(--accent-green);"></i>
-            Employee to CEO Growth Pathway</h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">Click on any level to view the skill
-            progression framework.</p>
-        </div>
-
-        <div class="roadmap-steps">
-          <div class="roadmap-step active" data-stage="1">
-            <div class="roadmap-num">LVL 1</div>
-            <div class="roadmap-label">Employee</div>
-          </div>
-          <div class="roadmap-step" data-stage="2">
-            <div class="roadmap-num">LVL 2</div>
-            <div class="roadmap-label">Professional</div>
-          </div>
-          <div class="roadmap-step" data-stage="3">
-            <div class="roadmap-num">LVL 3</div>
-            <div class="roadmap-label">High Performer</div>
-          </div>
-          <div class="roadmap-step" data-stage="4">
-            <div class="roadmap-num">LVL 4</div>
-            <div class="roadmap-label">Supervisor</div>
-          </div>
-          <div class="roadmap-step" data-stage="5">
-            <div class="roadmap-num">LVL 5</div>
-            <div class="roadmap-label">Manager</div>
-          </div>
-          <div class="roadmap-step" data-stage="6">
-            <div class="roadmap-num">LVL 6</div>
-            <div class="roadmap-label">Leader</div>
-          </div>
-          <div class="roadmap-step" data-stage="7">
-            <div class="roadmap-num">LVL 7</div>
-            <div class="roadmap-label">Business Leader</div>
-          </div>
-          <div class="roadmap-step" data-stage="8">
-            <div class="roadmap-num">LVL 8</div>
-            <div class="roadmap-label">CEO Mindset</div>
-          </div>
-        </div>
-
-        <div
-          style="margin-top: 25px; padding: 16px; background: var(--accent-green-light); border-radius: var(--radius-md); border-left: 4px solid var(--accent-green);">
-          <p id="roadmap-info-text" style="font-weight: 700; color: var(--primary-navy); font-size: 0.95rem;">
-            Stage 1 - Employee: Focus on operational execution, task completion, and mastering fundamental skills.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       7. INTERACTIVE USER JOURNEY FLOW
-       ========================================================================== -->
-  <section class="user-journey-section" id="journey">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Client Engagement Process</span>
-        <h2 class="section-title">End-to-End <span>User Journey Flow</span></h2>
-        <p class="section-desc">How PRV Consultancy Services partners with your organization from first contact to
-          continuous excellence.</p>
-      </div>
-
-      <div class="journey-flow-wrapper">
-        <div class="journey-grid">
-          <!-- Step 1 -->
-          <div class="journey-node active" data-step="1">
-            <div class="journey-step-tag">STEP 1</div>
-            <div class="journey-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
-            <h4 class="journey-title">1. Visitor</h4>
-            <p class="journey-desc">User visits website or connects via referral.</p>
-          </div>
-
-          <!-- Step 2 -->
-          <div class="journey-node" data-step="2">
-            <div class="journey-step-tag">STEP 2</div>
-            <div class="journey-icon"><i class="fa-solid fa-user-check"></i></div>
-            <h4 class="journey-title">2. Identify Need</h4>
-            <p class="journey-desc">Explores solutions tailored to business requirements.</p>
-          </div>
-
-          <!-- Step 3 -->
-          <div class="journey-node" data-step="3">
-            <div class="journey-step-tag">STEP 3</div>
-            <div class="journey-icon"><i class="fa-solid fa-lightbulb"></i></div>
-            <h4 class="journey-title">3. Explore Options</h4>
-            <p class="journey-desc">Views detail service pages, standards & modules.</p>
-          </div>
-
-          <!-- Step 4 -->
-          <div class="journey-node" data-step="4">
-            <div class="journey-step-tag">STEP 4</div>
-            <div class="journey-icon"><i class="fa-solid fa-clipboard-list"></i></div>
-            <h4 class="journey-title">4. Request Consultation</h4>
-            <p class="journey-desc">Fills enquiry form, calls, or connects via WhatsApp.</p>
-          </div>
-
-          <!-- Step 5 -->
-          <div class="journey-node" data-step="5">
-            <div class="journey-step-tag">STEP 5</div>
-            <div class="journey-icon"><i class="fa-solid fa-comments"></i></div>
-            <h4 class="journey-title">5. Business Discussion</h4>
-            <p class="journey-desc">PRV expert team analyzes current gap & needs.</p>
-          </div>
-
-          <!-- Step 6 -->
-          <div class="journey-node" data-step="6">
-            <div class="journey-step-tag">STEP 6</div>
-            <div class="journey-icon"><i class="fa-solid fa-bullseye"></i></div>
-            <h4 class="journey-title">6. Customized Roadmap</h4>
-            <p class="journey-desc">Assessment & tailored solution proposal delivered.</p>
-          </div>
-
-          <!-- Step 7 -->
-          <div class="journey-node" data-step="7">
-            <div class="journey-step-tag">STEP 7</div>
-            <div class="journey-icon"><i class="fa-solid fa-handshake"></i></div>
-            <h4 class="journey-title">7. Implementation</h4>
-            <p class="journey-desc">On-site execution, staff training & audit support.</p>
-          </div>
-
-          <!-- Step 8 -->
-          <div class="journey-node" data-step="8">
-            <div class="journey-step-tag">STEP 8</div>
-            <div class="journey-icon"><i class="fa-solid fa-chart-line"></i></div>
-            <h4 class="journey-title">8. Measurement</h4>
-            <p class="journey-desc">Results audit, certification & continuous improvement.</p>
-          </div>
-        </div>
-
-        <div class="journey-detail-box">
-          <div class="journey-detail-left">
-            <h4 id="journey-detail-title">1. Visitor Initial Touchpoint</h4>
-            <p id="journey-detail-desc">The client visits PRV Consultancy Services website or touches base through
-              industry references to explore organizational improvement options.</p>
-          </div>
-          <a href="#contact" class="btn btn-primary open-modal-trigger" data-service="User Journey Consultation"
-            style="white-space: nowrap;">Start Step 1</a>
-        </div>
-      </div>
-  </section>
-
-  <!-- ==========================================================================
-       7.5 ABOUT US SECTION - TRANSFORMING BUSINESSES THROUGH EXCELLENCE
-       ========================================================================== -->
-  <section class="about-section" id="about">
-    <div class="container">
-      <!-- Section Header -->
-      <div class="section-header">
-        <span class="section-tag"><i class="fa-solid fa-building"></i> About PRV Consultancy Services</span>
-        <h2 class="section-title">Transforming Businesses Through <span>Excellence</span></h2>
-        <p class="section-desc">We don't just help organizations achieve certifications—we help them build stronger
-          systems, improve performance, develop people, and create sustainable business value.</p>
-      </div>
-
-      <!-- Who We Are / Problem Statement Grid -->
-      <div class="about-intro-grid">
-        <div class="about-intro-box">
-          <h3 class="about-intro-title">Beyond Certification: True Operational Value</h3>
-          <p class="about-intro-p">
-            <strong>PRV Consultancy Services</strong> is a professional business consulting firm dedicated to helping
-            organizations improve their management systems, operational performance, compliance, workforce capabilities,
-            and sustainable business growth.
-          </p>
-          <p class="about-intro-p">
-            We believe that <strong>certification is not the final goal—it is the beginning</strong> of building a
-            stronger, more efficient, and more competitive organization. Our approach combines consulting,
-            implementation, training, and continuous improvement to create long-term value for our clients.
-          </p>
-          <p class="about-intro-p" style="margin-bottom: 0;">
-            Whether you are an MSME, manufacturing company, IT organization, food business, educational institution, or
-            service provider, we provide customized solutions based on your unique business needs.
-          </p>
-        </div>
-
-        <div class="about-intro-box about-dark-card">
-          <h3 class="about-intro-title"><i class="fa-solid fa-bolt"></i> What We Solve For Our Clients</h3>
-          <ul>
-            <li><i class="fa-solid fa-circle-check"></i>
-              <div><strong>Eliminate Shopfloor Waste</strong>: Reduce operational losses by 20–30% via 5S & Kaizen.
+        <div class="glass-panel rounded-2xl border border-border-glass shadow-2xl overflow-hidden flex flex-col h-[600px]">
+          <!-- Header Bar -->
+          <div class="p-4 border-b border-border-glass bg-surface/90 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full bg-primary-container/20 border border-primary-container flex items-center justify-center text-primary-container">
+                <i class="fa-solid fa-robot"></i>
               </div>
-            </li>
-            <li><i class="fa-solid fa-circle-check"></i>
-              <div><strong>Unlock Govt Grants</strong>: Up to 80% subsidy on ZED & NATS stipend reimbursement.</div>
-            </li>
-            <li><i class="fa-solid fa-circle-check"></i>
-              <div><strong>Win Global & Govt Tenders</strong>: Full ISO 9001/14001/45001 & IATF 16949 audit readiness.
+              <div>
+                <div class="font-bold text-sm">PRV AI Advisor</div>
+                <div class="text-xs text-secondary flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary-container inline-block"></span> Online (Multi-lingual Engine)</div>
               </div>
-            </li>
-            <li><i class="fa-solid fa-circle-check"></i>
-              <div><strong>Clear Social & Export Audits</strong>: 100% compliance for SEDEX SMETA & OEM audits.</div>
-            </li>
-            <li style="margin-bottom: 0;"><i class="fa-solid fa-circle-check"></i>
-              <div><strong>Upskill Workforce</strong>: Hands-on industrial training & leadership development.</div>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Mission & Vision Cards -->
-      <div class="mission-vision-grid">
-        <div class="mv-card">
-          <div class="mv-card-icon"><i class="fa-solid fa-bullseye"></i></div>
-          <h3>Our Mission</h3>
-          <p>To help organizations build better systems, develop skilled people, improve operational performance, and
-            achieve sustainable business growth through practical consulting and continuous improvement.</p>
-        </div>
-
-        <div class="mv-card" style="background: linear-gradient(135deg, #1C2541 0%, #070D1F 100%);">
-          <div class="mv-card-icon"><i class="fa-solid fa-eye"></i></div>
-          <h3>Our Vision</h3>
-          <p>To become one of India's most trusted Business Excellence Consulting firms by delivering practical,
-            result-oriented, and customer-focused solutions.</p>
-        </div>
-      </div>
-
-      <!-- Core Values -->
-      <div style="text-align: center; margin-bottom: 30px;">
-        <span class="section-tag"><i class="fa-solid fa-gem"></i> Guiding Principles</span>
-        <h3 class="section-title" style="font-size: 1.8rem;">Our Core <span>Values</span></h3>
-      </div>
-      <div class="values-grid">
-        <div class="value-card">
-          <div class="value-icon"><i class="fa-solid fa-shield-halved"></i></div>
-          <h4>Integrity</h4>
-          <p>Transparent & ethical consulting standards in every engagement.</p>
-        </div>
-
-        <div class="value-card">
-          <div class="value-icon"><i class="fa-solid fa-award"></i></div>
-          <h4>Excellence</h4>
-          <p>Delivering benchmark operational quality across all audits.</p>
-        </div>
-
-        <div class="value-card">
-          <div class="value-icon"><i class="fa-solid fa-lightbulb"></i></div>
-          <h4>Innovation</h4>
-          <p>Custom-tailored solutions for modern evolving industries.</p>
-        </div>
-
-        <div class="value-card">
-          <div class="value-icon"><i class="fa-solid fa-handshake"></i></div>
-          <h4>Customer Focus</h4>
-          <p>Long-term business growth & value-creation partnerships.</p>
-        </div>
-
-        <div class="value-card">
-          <div class="value-icon"><i class="fa-solid fa-arrows-spin"></i></div>
-          <h4>Continuous Improvement</h4>
-          <p>Sustained Kaizen methodology for permanent growth.</p>
-        </div>
-      </div>
-
-      <!-- Why Choose PRV? -->
-      <div style="text-align: center; margin-bottom: 30px;">
-        <span class="section-tag"><i class="fa-solid fa-circle-check"></i> Competitive Advantage</span>
-        <h3 class="section-title" style="font-size: 1.8rem;">Why Choose <span>PRV Consultancy?</span></h3>
-      </div>
-      <div class="why-prv-grid">
-        <div class="why-prv-card">
-          <div class="why-prv-icon"><i class="fa-solid fa-user-tie"></i></div>
-          <div class="why-prv-text">
-            <h4>Experienced Consulting Approach</h4>
-            <p>Senior domain experts with 15+ years of shopfloor and management experience.</p>
-          </div>
-        </div>
-
-        <div class="why-prv-card">
-          <div class="why-prv-icon"><i class="fa-solid fa-sliders"></i></div>
-          <div class="why-prv-text">
-            <h4>Customized Industry Solutions</h4>
-            <p>Tailored frameworks for MSMEs, Automotive, IT, Food, and Textiles.</p>
-          </div>
-        </div>
-
-        <div class="why-prv-card">
-          <div class="why-prv-icon"><i class="fa-solid fa-list-check"></i></div>
-          <div class="why-prv-text">
-            <h4>End-to-End Implementation</h4>
-            <p>Complete handholding from gap analysis to final certification clearance.</p>
-          </div>
-        </div>
-
-        <div class="why-prv-card">
-          <div class="why-prv-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-          <div class="why-prv-text">
-            <h4>Practical Training Programs</h4>
-            <p>Hands-on skill building for workforce and shopfloor operators.</p>
-          </div>
-        </div>
-
-        <div class="why-prv-card">
-          <div class="why-prv-icon"><i class="fa-solid fa-chart-line"></i></div>
-          <div class="why-prv-text">
-            <h4>Continuous Improvement</h4>
-            <p>Permanent Kaizen methodology to sustain long-term quality gains.</p>
-          </div>
-        </div>
-
-        <div class="why-prv-card">
-          <div class="why-prv-icon"><i class="fa-solid fa-eye"></i></div>
-          <div class="why-prv-text">
-            <h4>Transparent Client Process</h4>
-            <p>No hidden charges, milestone payments, and honest timeline commitments.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Working Process (7 Steps) -->
-      <div style="text-align: center; margin-bottom: 30px;">
-        <span class="section-tag"><i class="fa-solid fa-diagram-project"></i> Proven Methodology</span>
-        <h3 class="section-title" style="font-size: 1.8rem;">Our 7-Step <span>Working Process</span></h3>
-      </div>
-      <div class="process-timeline-grid">
-        <div class="process-step-card">
-          <div class="process-step-num">1</div>
-          <h5>Understand Business</h5>
-        </div>
-        <div class="process-step-card">
-          <div class="process-step-num">2</div>
-          <h5>Identify Gaps</h5>
-        </div>
-        <div class="process-step-card">
-          <div class="process-step-num">3</div>
-          <h5>Develop Roadmap</h5>
-        </div>
-        <div class="process-step-card">
-          <div class="process-step-num">4</div>
-          <h5>Implement Solutions</h5>
-        </div>
-        <div class="process-step-card">
-          <div class="process-step-num">5</div>
-          <h5>Train Team</h5>
-        </div>
-        <div class="process-step-card">
-          <div class="process-step-num">6</div>
-          <h5>Measure Results</h5>
-        </div>
-        <div class="process-step-card">
-          <div class="process-step-num">7</div>
-          <h5>Continuous Improvement</h5>
-        </div>
-      </div>
-
-      <!-- Industries We Serve -->
-      <div style="text-align: center; margin-bottom: 30px;">
-        <span class="section-tag"><i class="fa-solid fa-industry"></i> Industry Coverage</span>
-        <h3 class="section-title" style="font-size: 1.8rem;">Industries We <span>Serve</span></h3>
-      </div>
-      <div class="industries-grid">
-        <div class="industry-badge-card"><i class="fa-solid fa-industry"></i> Manufacturing</div>
-        <div class="industry-badge-card"><i class="fa-solid fa-car"></i> Automotive</div>
-        <div class="industry-badge-card"><i class="fa-solid fa-utensils"></i> Food & Beverage</div>
-        <div class="industry-badge-card"><i class="fa-solid fa-shirt"></i> Textile & Apparel</div>
-        <div class="industry-badge-card"><i class="fa-solid fa-laptop-code"></i> IT & Software</div>
-        <div class="industry-badge-card"><i class="fa-solid fa-gear"></i> Engineering</div>
-        <div class="industry-badge-card"><i class="fa-solid fa-hospital"></i> Healthcare</div>
-        <div class="industry-badge-card"><i class="fa-solid fa-graduation-cap"></i> Education</div>
-        <div class="industry-badge-card"><i class="fa-solid fa-briefcase"></i> Service Sector</div>
-        <div class="industry-badge-card"><i class="fa-solid fa-rocket"></i> MSMEs & Startups</div>
-      </div>
-
-      <!-- Bottom Commitment CTA -->
-      <div class="about-cta-banner">
-        <blockquote>
-          "Partner with PRV Consultancy Services and take the next step towards Business Excellence, Compliance,
-          Operational Efficiency, and Sustainable Growth."
-        </blockquote>
-        <a href="#contact" class="btn btn-primary open-modal-trigger" data-service="General Consultation"
-          style="font-size: 1.05rem; padding: 14px 32px;">
-          <i class="fa-solid fa-calendar-check"></i> Book a Free Business Consultation
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       8. CASE STUDIES & RESOURCES HUB
-       ========================================================================== -->
-  <section class="resources-section" id="resources">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Knowledge & Success</span>
-        <h2 class="section-title">Case Studies & <span>Resources</span></h2>
-        <p class="section-desc">Downloadable templates, audit checklists, success stories, and expert webinars.</p>
-      </div>
-
-      <div class="resources-grid">
-        <div class="resource-card">
-          <div class="resource-tag">Case Study</div>
-          <h4 class="resource-title">Automotive Component Mfr: 35% Waste Reduction</h4>
-          <p class="resource-desc">How PRV implemented 5S & Kaizen alongside IATF 16949 audit readiness for a Tier-1
-            supplier.</p>
-          <a href="#" class="card-cta-btn open-modal-trigger" data-service="IATF 16949">Read Case Study <i
-              class="fa-solid fa-arrow-right"></i></a>
-        </div>
-
-        <div class="resource-card">
-          <div class="resource-tag">Downloadable Template</div>
-          <h4 class="resource-title">ISO 9001:2015 Gap Analysis Checklist</h4>
-          <p class="resource-desc">Complete self-assessment checklist for internal quality managers prior to
-            certification audit.</p>
-          <a href="#" class="card-cta-btn open-modal-trigger" data-service="ISO Certifications">Download Checklist <i
-              class="fa-solid fa-download"></i></a>
-        </div>
-
-        <div class="resource-card">
-          <div class="resource-tag">ZED Guide</div>
-          <h4 class="resource-title">MSME ZED Certification & Subsidy Handbook</h4>
-          <p class="resource-desc">Step-by-step guide on claiming up to 80% government subsidy on ZED certification
-            testing & handholding.</p>
-          <a href="#" class="card-cta-btn open-modal-trigger" data-service="ZED Certification">Download Handbook <i
-              class="fa-solid fa-file-pdf"></i></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       9. FOOTER SECTION
-       ========================================================================== -->
-  <footer class="footer-section" id="contact">
-    <div class="container">
-      <div class="footer-grid">
-        <!-- About Col -->
-        <div class="footer-col-about">
-          <div class="brand-logo">
-            <div class="logo-badge">PRV</div>
-            <div class="logo-text-wrapper">
-              <div class="brand-name" style="color: #FFF;">PRV <span>CONSULTANCY</span></div>
-              <div class="brand-tagline" style="color: #94A3B8;">One Partner. Complete Business Excellence.</div>
+            </div>
+            <div class="flex items-center gap-2">
+              <select id="full-page-ai-lang" class="bg-surface-variant text-on-surface text-xs rounded-lg px-2.5 py-1 border border-border-glass">
+                <option value="english">English</option>
+                <option value="hindi">Hindi (हिंदी)</option>
+                <option value="hinglish">Hinglish</option>
+                <option value="tamil">Tamil (தமிழ்)</option>
+                <option value="telugu">Telugu (తెలుగు)</option>
+                <option value="gujarati">Gujarati (ગુજરાતી)</option>
+                <option value="marathi">Marathi (मરાठी)</option>
+                <option value="punjabi">Punjabi (ਪੰਜਾਬੀ)</option>
+                <option value="bengali">Bengali (বাংলা)</option>
+                <option value="kannada">Kannada (ಕನ್ನಡ)</option>
+                <option value="malayalam">Malayalam (മലയാളം)</option>
+                <option value="urdu">Urdu (اردو)</option>
+              </select>
             </div>
           </div>
-          <p>
-            PRV Consultancy Services is India's leading business excellence partner specializing in ZED, ISO, IATF
-            16949, SEDEX Compliance, 5S/Kaizen, and NATS/NAPS Apprenticeship solutions.
-          </p>
-          <div class="social-links">
-            <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="#" class="social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" class="social-icon" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+
+          <!-- Messages Area -->
+          <div id="full-ai-chat-messages" class="flex-grow p-6 overflow-y-auto space-y-4">
+            <div class="flex gap-3">
+              <div class="w-8 h-8 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center text-xs flex-shrink-0"><i class="fa-solid fa-robot"></i></div>
+              <div class="glass-panel p-4 rounded-2xl max-w-xl text-sm leading-relaxed border border-border-glass">
+                Namaste! Welcome to PRV Consultancy Services. I am your AI Business Excellence Advisor.<br/><br/>
+                How can I assist your organization today? You can ask about <strong>ISO 9001</strong>, <strong>ZED Certification</strong>, <strong>SEDEX SMETA</strong>, <strong>5S / Kaizen</strong>, or request certification recommendations for your industry.
+              </div>
+            </div>
           </div>
-        </div>
 
-        <!-- Quick Links -->
-        <div>
-          <h4 class="footer-title">Quick Links</h4>
-          <div class="footer-links">
-            <a href="#">Home</a>
-            <a href="#solutions">All Solutions</a>
-            <a href="#key-services">Detail Pages</a>
-            <a href="#journey">User Journey</a>
-            <a href="#programs">Training & NATS</a>
-            <a href="admin.html" target="_blank" style="color: var(--accent-green); font-weight: 700;">Admin CRM
-              Dashboard</a>
+          <!-- Quick Chip Prompts -->
+          <div class="p-3 border-t border-border-glass bg-surface/50 flex gap-2 overflow-x-auto scrollbar-hide text-xs" id="full-ai-chips">
+            <button class="chip-btn px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-on-surface-variant whitespace-nowrap" data-prompt="What is ISO 9001 and why is it needed?">What is ISO 9001?</button>
+            <button class="chip-btn px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-on-surface-variant whitespace-nowrap" data-prompt="Explain ZED Certification subsidy benefits">ZED Subsidy Details</button>
+            <button class="chip-btn px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-on-surface-variant whitespace-nowrap" data-prompt="I have an automobile component factory. Which certification should I consider?">Automotive Certifications</button>
+            <button class="chip-btn px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-on-surface-variant whitespace-nowrap" data-prompt="What is SEDEX SMETA Audit?">SEDEX SMETA Guide</button>
+            <button class="chip-btn px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-on-surface-variant whitespace-nowrap" data-prompt="How can I improve factory productivity using 5S?">5S Productivity Improvement</button>
           </div>
-        </div>
 
-        <!-- Our Services -->
-        <div>
-          <h4 class="footer-title">Our Services</h4>
-          <div class="footer-links">
-            <a href="#key-services">ZED Certification</a>
-            <a href="#key-services">ISO Certifications</a>
-            <a href="#key-services">IATF 16949</a>
-            <a href="#key-services">SEDEX / SMETA</a>
-            <a href="#key-services">5S & Kaizen</a>
-            <a href="#key-services">FSSAI Compliance</a>
-          </div>
-        </div>
-
-        <!-- Industries -->
-        <div>
-          <h4 class="footer-title">Industries</h4>
-          <div class="footer-links">
-            <a href="#">Manufacturing</a>
-            <a href="#">Automotive</a>
-            <a href="#">Food & Agriculture</a>
-            <a href="#">IT & Tech Solutions</a>
-            <a href="#">Textile & Apparel</a>
-            <a href="#">Engineering & MSMEs</a>
-          </div>
-        </div>
-
-        <!-- Contact Info & Newsletter -->
-        <div>
-          <h4 class="footer-title">Contact & Updates</h4>
-          <ul class="contact-info-list" style="margin-bottom: 20px;">
-            <li><i class="fa-solid fa-location-dot"></i> Corporate Head Office, Business Park, India</li>
-            <li><a href="https://wa.me/917489351297?text=Hi%20PRV%20Consultancy,%20I%20want%20to%20inquire%20about%20your%20services." target="_blank" style="color: inherit; text-decoration: none;"><i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> WhatsApp: +91 7489 351 297</a></li>
-            <li><a href="tel:+917489351297" style="color: inherit; text-decoration: none;"><i class="fa-solid fa-phone"></i> +91 7489 351 297</a></li>
-            <li><i class="fa-solid fa-envelope"></i> info@prvconsultancy.com</li>
-          </ul>
-
-          <h5 style="color: #FFF; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px;">Newsletter</h5>
-          <form class="newsletter-form" id="newsletter-form">
-            <input type="email" class="newsletter-input" placeholder="Enter business email" required>
-            <button type="submit" class="btn btn-primary"
-              style="padding: 8px 14px; font-size: 0.82rem;">Subscribe</button>
+          <!-- Input Bar -->
+          <form id="full-ai-chat-form" class="p-4 border-t border-border-glass bg-surface flex items-center gap-3">
+            <input type="text" id="full-ai-input" placeholder="Type your query in English, Hindi, Hinglish, Tamil, Telugu..." class="flex-grow bg-white/5 border border-border-glass rounded-full px-5 py-3 text-sm focus:outline-none focus:border-primary-container text-on-surface" required>
+            <button type="submit" class="w-11 h-11 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold hover:shadow-[0_0_15px_rgba(0,242,195,0.4)] transition-all">
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
           </form>
         </div>
+      </section>
+    </div>
+
+    <!-- ==========================================================================
+         PAGE VIEW 12: RESOURCES & FAQS PAGE (#view-resources)
+         ========================================================================== -->
+    <div class="page-view" id="view-resources">
+      <section class="py-20 px-4 md:px-12 max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+          <span class="text-xs font-bold text-secondary uppercase tracking-widest block mb-2">Knowledge Base</span>
+          <h2 class="text-3xl md:text-5xl font-bold font-heading">Frequently Asked <span class="text-primary-container">Questions</span></h2>
+          <p class="text-on-surface-variant max-w-2xl mx-auto mt-4">Answers to standard client queries regarding certifications, audits, subsidies, and implementation timelines.</p>
+        </div>
+
+        <div class="space-y-4" id="faq-accordion-container">
+          <!-- Accordion 1 -->
+          <div class="glass-panel rounded-xl border border-border-glass overflow-hidden">
+            <button class="w-full text-left p-5 font-bold text-lg flex justify-between items-center faq-toggle hover:text-primary-container">
+              <span>What is ISO 9001 certification and why is it needed?</span>
+              <i class="fa-solid fa-chevron-down text-primary-container"></i>
+            </button>
+            <div class="p-5 pt-0 text-sm text-on-surface-variant border-t border-white/5 hidden">
+              ISO 9001:2015 is the premier international standard for Quality Management Systems (QMS). It establishes standard operating procedures (SOPs), customer satisfaction frameworks, and continuous risk-based quality assurance. It is mandatory for participating in government tenders, OEM vendor onboarding, corporate vendor registrations, and global export client eligibility.
+            </div>
+          </div>
+
+          <!-- Accordion 2 -->
+          <div class="glass-panel rounded-xl border border-border-glass overflow-hidden">
+            <button class="w-full text-left p-5 font-bold text-lg flex justify-between items-center faq-toggle hover:text-primary-container">
+              <span>What is MSME ZED Certification and what subsidy is available?</span>
+              <i class="fa-solid fa-chevron-down text-primary-container"></i>
+            </button>
+            <div class="p-5 pt-0 text-sm text-on-surface-variant border-t border-white/5 hidden">
+              Zero Defect Zero Effect (ZED) is a flagship scheme by the Ministry of MSME, Govt of India, to rate manufacturers on Bronze, Silver, and Gold standards. MSMEs receive up to 80% reimbursement on certification cost, up to ₹5 Lakh handholding support, 0.5% bank loan interest subsidy, and ₹1 Lakh subsidy for testing equipment.
+            </div>
+          </div>
+
+          <!-- Accordion 3 -->
+          <div class="glass-panel rounded-xl border border-border-glass overflow-hidden">
+            <button class="w-full text-left p-5 font-bold text-lg flex justify-between items-center faq-toggle hover:text-primary-container">
+              <span>What is IATF 16949 Automotive Quality Management System?</span>
+              <i class="fa-solid fa-chevron-down text-primary-container"></i>
+            </button>
+            <div class="p-5 pt-0 text-sm text-on-surface-variant border-t border-white/5 hidden">
+              IATF 16949:2016 is the global automotive industry quality management standard aligned with ISO 9001:2015. It is mandatory for Tier-1, Tier-2, and Tier-3 suppliers delivering components to OEMs like Maruti Suzuki, Tata Motors, Hyundai, Hero, Mahindra, etc. It mandates 5 Core Tools: APQP, PPAP, FMEA, MSA, and SPC.
+            </div>
+          </div>
+
+          <!-- Accordion 4 -->
+          <div class="glass-panel rounded-xl border border-border-glass overflow-hidden">
+            <button class="w-full text-left p-5 font-bold text-lg flex justify-between items-center faq-toggle hover:text-primary-container">
+              <span>What is SEDEX / SMETA Social Audit?</span>
+              <i class="fa-solid fa-chevron-down text-primary-container"></i>
+            </button>
+            <div class="p-5 pt-0 text-sm text-on-surface-variant border-t border-white/5 hidden">
+              SMETA (SEDEX Members Ethical Trade Audit) evaluates factory working conditions across 2 Pillars (Labor Standards + Health & Safety) or 4 Pillars (adds Environmental Assessment + Business Ethics). International buyers in Europe & US require SMETA audit clearance before issuing purchase orders to textile, food, and manufacturing exporters.
+            </div>
+          </div>
+
+          <!-- Accordion 5 -->
+          <div class="glass-panel rounded-xl border border-border-glass overflow-hidden">
+            <button class="w-full text-left p-5 font-bold text-lg flex justify-between items-center faq-toggle hover:text-primary-container">
+              <span>What is FSSAI licensing and schedule 4 compliance?</span>
+              <i class="fa-solid fa-chevron-down text-primary-container"></i>
+            </button>
+            <div class="p-5 pt-0 text-sm text-on-surface-variant border-t border-white/5 hidden">
+              FSSAI (Food Safety & Standards Authority of India) license is legally required for food processing units, hotels, catering, and food traders. PRV Consultancy provides end-to-end FSSAI state/central licensing, FOSTAC food supervisor training, hygiene audit readiness, and Schedule 4 sanitary implementation.
+            </div>
+          </div>
+
+          <!-- Accordion 6 -->
+          <div class="glass-panel rounded-xl border border-border-glass overflow-hidden">
+            <button class="w-full text-left p-5 font-bold text-lg flex justify-between items-center faq-toggle hover:text-primary-container">
+              <span>How does PRV help in NATS / NAPS Apprenticeship onboarding?</span>
+              <i class="fa-solid fa-chevron-down text-primary-container"></i>
+            </button>
+            <div class="p-5 pt-0 text-sm text-on-surface-variant border-t border-white/5 hidden">
+              Under NATS & NAPS schemes, factories and corporate companies can onboard apprentices while claiming up to ₹1,500/month per candidate stipend reimbursement from the Government of India. PRV handles portal empanelment, apprentice registration, contract approval, and monthly stipend claim submissions.
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==========================================================================
+         PAGE VIEW 13: CONTACT & CONSULTATION PAGE (#view-contact)
+         ========================================================================== -->
+    <div class="page-view" id="view-contact">
+      <section class="py-20 px-4 md:px-12 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <span class="text-xs font-bold text-secondary uppercase tracking-widest block mb-2">Get In Touch</span>
+          <h2 class="text-3xl md:text-5xl font-bold font-heading">Schedule Your <span class="text-primary-container">Free Consultation</span></h2>
+          <p class="text-on-surface-variant max-w-2xl mx-auto mt-4">Fill out the form below to connect with a PRV Senior Business Advisor and receive a customized execution roadmap.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <!-- Consultation Form (Submits to /api/enquiries SQLite Database) -->
+          <div class="glass-panel p-8 rounded-2xl border border-border-glass shadow-2xl">
+            <h3 class="text-xl font-bold mb-6 text-on-surface">Client Consultation Request</h3>
+            <form id="main-contact-form" class="space-y-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-on-surface-variant mb-1">Full Name *</label>
+                  <input type="text" id="contact-fullname" required class="w-full bg-white/5 border border-border-glass rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-primary-container text-on-surface" placeholder="e.g. Rajesh Kumar">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-on-surface-variant mb-1">Company Name</label>
+                  <input type="text" id="contact-company" class="w-full bg-white/5 border border-border-glass rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-primary-container text-on-surface" placeholder="e.g. Apex Manufacturing">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-on-surface-variant mb-1">Mobile Number *</label>
+                  <input type="tel" id="contact-mobile" required class="w-full bg-white/5 border border-border-glass rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-primary-container text-on-surface" placeholder="+91 98765 43210">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-on-surface-variant mb-1">Email Address *</label>
+                  <input type="email" id="contact-email" required class="w-full bg-white/5 border border-border-glass rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-primary-container text-on-surface" placeholder="name@company.com">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-on-surface-variant mb-1">Industry Sector</label>
+                  <select id="contact-industry" class="w-full bg-surface-variant border border-border-glass rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-primary-container text-on-surface">
+                    <option value="Manufacturing">Manufacturing & Engineering</option>
+                    <option value="Automotive">Automotive & Components</option>
+                    <option value="Food & Beverage">Food & FMCG Processing</option>
+                    <option value="IT & Tech">IT & Software Solutions</option>
+                    <option value="Textile">Textile & Garment Export</option>
+                    <option value="Healthcare">Healthcare & Pharma</option>
+                    <option value="Other">Other Industry</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-on-surface-variant mb-1">Service Required *</label>
+                  <select id="contact-service" required class="w-full bg-surface-variant border border-border-glass rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-primary-container text-on-surface">
+                    <option value="ZED Certification">ZED Certification (MSME)</option>
+                    <option value="ISO 9001">ISO 9001 Quality System</option>
+                    <option value="IATF 16949">IATF 16949 Automotive</option>
+                    <option value="SEDEX / SMETA">SEDEX / SMETA Audit</option>
+                    <option value="FSSAI">FSSAI Licensing & Audit</option>
+                    <option value="5S & Kaizen">5S / Kaizen Operational Excellence</option>
+                    <option value="NATS / NAPS">NATS / NAPS Apprenticeship</option>
+                    <option value="Master Business Excellence">Master Business Excellence</option>
+                    <option value="General Consultation">General Business Advisory</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-on-surface-variant mb-1">Message / Requirements</label>
+                <textarea id="contact-message" rows="3" class="w-full bg-white/5 border border-border-glass rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-primary-container text-on-surface" placeholder="Briefly describe your requirements or challenges..."></textarea>
+              </div>
+
+              <div class="flex gap-4 pt-2">
+                <button type="submit" class="flex-1 bg-primary-container text-on-primary-container font-bold text-sm py-3 rounded-full hover:shadow-[0_0_20px_rgba(0,242,195,0.4)] transition-all">
+                  Request Free Consultation
+                </button>
+                <button type="button" id="contact-talk-ai-btn" class="glass-panel text-secondary font-bold text-sm px-6 py-3 rounded-full border border-border-glass hover:bg-white/10 transition-all flex items-center gap-2">
+                  <i class="fa-solid fa-robot"></i> Talk to AI
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Contact Details & Map Card -->
+          <div class="space-y-6">
+            <div class="glass-panel p-8 rounded-2xl border border-border-glass space-y-6">
+              <h3 class="text-xl font-bold text-on-surface">PRV Corporate Headquarters</h3>
+              
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-lg bg-primary-container/10 border border-primary-container/30 flex items-center justify-center text-primary-container text-lg flex-shrink-0">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-on-surface-variant uppercase">Phone & WhatsApp</div>
+                  <div class="font-bold text-on-surface text-base mt-0.5">+91 74893 51297</div>
+                  <div class="text-xs text-secondary mt-0.5">Available Mon - Sat (9:00 AM - 7:00 PM IST)</div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-lg bg-primary-container/10 border border-primary-container/30 flex items-center justify-center text-primary-container text-lg flex-shrink-0">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-on-surface-variant uppercase">Email Contact</div>
+                  <div class="font-bold text-on-surface text-base mt-0.5">info@prvconsultancy.com</div>
+                  <div class="text-xs text-secondary mt-0.5">Direct Inquiry Desk</div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-lg bg-primary-container/10 border border-primary-container/30 flex items-center justify-center text-primary-container text-lg flex-shrink-0">
+                  <i class="fa-solid fa-globe"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-on-surface-variant uppercase">Pan-India Support</div>
+                  <div class="font-bold text-on-surface text-base mt-0.5">Serving 28+ States & Union Territories</div>
+                  <div class="text-xs text-secondary mt-0.5">On-site Audits & Virtual Consulting Support</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==========================================================================
+         PAGE VIEW 14: DYNAMIC SERVICE DETAIL CONTAINER (#view-service-detail)
+         ========================================================================== -->
+    <div class="page-view" id="view-service-detail">
+      <section class="py-12 px-4 md:px-12 max-w-6xl mx-auto" id="service-detail-render-target">
+        <!-- Rendered dynamically by js/main.js with all 11 required detail page sections -->
+      </section>
+    </div>
+
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="border-t border-border-glass bg-surface/90 py-12 px-4 md:px-12">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <a href="#home" class="font-heading text-xl font-bold text-on-surface flex items-center gap-2 mb-4">
+          <span class="material-symbols-outlined text-primary-container text-2xl">hexagon</span>
+          <span>PRV <span class="text-primary-container font-light">Consultancy</span></span>
+        </a>
+        <p class="text-xs text-on-surface-variant leading-relaxed">
+          Premium Business Consulting, ISO & ZED Certifications, SEDEX/SMETA Compliance, Operational Excellence, and AI Transformation.
+        </p>
       </div>
 
-      <div class="footer-bottom">
-        <div>© 2026 PRV Consultancy Services. All Rights Reserved. Aligned with Dual SQLite DB CRM Backend.</div>
-        <div>
-          <a href="#" style="color: #94A3B8; margin-right: 15px;">Privacy Policy</a>
-          <a href="#" style="color: #94A3B8;">Terms of Service</a>
-        </div>
+      <div>
+        <h4 class="font-bold text-sm text-on-surface mb-3 uppercase tracking-wider">Services</h4>
+        <ul class="space-y-2 text-xs text-on-surface-variant">
+          <li><a href="#services" class="hover:text-primary-container">ISO 9001 / 14001 / 45001</a></li>
+          <li><a href="#services" class="hover:text-primary-container">ZED MSME Certification</a></li>
+          <li><a href="#services" class="hover:text-primary-container">IATF 16949 Automotive</a></li>
+          <li><a href="#services" class="hover:text-primary-container">SEDEX SMETA Social Audits</a></li>
+          <li><a href="#services" class="hover:text-primary-container">5S / Kaizen Excellence</a></li>
+        </ul>
       </div>
+
+      <div>
+        <h4 class="font-bold text-sm text-on-surface mb-3 uppercase tracking-wider">Quick Links</h4>
+        <ul class="space-y-2 text-xs text-on-surface-variant">
+          <li><a href="#about" class="hover:text-primary-container">About PRV Methodology</a></li>
+          <li><a href="#master-excellence" class="hover:text-primary-container">Master Business Program</a></li>
+          <li><a href="#government" class="hover:text-primary-container">NATS / NAPS Apprenticeship</a></li>
+          <li><a href="#industries" class="hover:text-primary-container">Industry Solutions</a></li>
+          <li><a href="#ai-consultant" class="hover:text-primary-container">AI Advisor</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-bold text-sm text-on-surface mb-3 uppercase tracking-wider">Contact Us</h4>
+        <p class="text-xs text-on-surface-variant mb-2">Phone: +91 74893 51297</p>
+        <p class="text-xs text-on-surface-variant mb-4">Email: info@prvconsultancy.com</p>
+        <a href="admin.html" target="_blank" class="inline-flex items-center gap-2 text-xs font-bold text-primary-container border border-primary-container/30 px-3 py-1.5 rounded-full hover:bg-primary-container/10">
+          <i class="fa-solid fa-lock"></i> CRM Admin Portal
+        </a>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto mt-8 pt-6 border-t border-white/5 text-center text-xs text-on-surface-variant">
+      © 2026 PRV Consultancy Services. All Rights Reserved. Enterprise AI Powered Portal.
     </div>
   </footer>
 
   <!-- ==========================================================================
-       10. DATABASE 1: CLIENT ENQUIRIES POPUP CONSULTATION MODAL
+       FLOATING AI ASSISTANT WIDGET & CONSULTATION MODALS
        ========================================================================== -->
-  <div class="modal-overlay" id="consultation-modal">
-    <div class="modal-card">
-      <span class="modal-close"><i class="fa-solid fa-xmark"></i></span>
-      <h3 class="modal-title">Book Free Consultation</h3>
-      <p class="modal-subtitle">Request an assessment or inquiry for <span id="modal-service-name"
-          style="color: var(--accent-green); font-weight: 800;">General Consultation</span>.</p>
 
-      <form id="consultation-form">
-        <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+  <!-- Floating AI Toggle Button -->
+  <button id="ai-chat-toggle-btn" class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-[0_0_25px_rgba(0,242,195,0.6)] hover:scale-105 active:scale-95 transition-all cursor-pointer">
+    <span class="material-symbols-outlined text-3xl">smart_toy</span>
+    <span id="ai-unread-badge" class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-surface flex items-center justify-center text-[10px] font-bold text-white">1</span>
+  </button>
+
+  <!-- AI Floating Chat Window -->
+  <div id="ai-chat-window" class="fixed bottom-24 right-6 z-50 w-96 max-w-[90vw] h-[520px] glass-panel rounded-2xl border border-primary-container/30 shadow-2xl overflow-hidden flex flex-col hidden transition-all duration-300">
+    <div class="p-3 bg-surface/90 border-b border-border-glass flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center text-xs"><i class="fa-solid fa-robot"></i></div>
+        <div>
+          <div class="font-bold text-xs">PRV AI Assistant</div>
+          <div class="text-[10px] text-secondary">24/7 Advisor</div>
+        </div>
+      </div>
+      <button id="ai-chat-close-btn" class="text-on-surface-variant hover:text-on-surface p-1"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div id="ai-chat-messages" class="flex-grow p-4 overflow-y-auto space-y-3 text-xs">
+      <!-- Chat items -->
+    </div>
+
+    <div id="ai-quick-chips" class="p-2 border-t border-border-glass bg-surface/40 flex gap-1.5 overflow-x-auto scrollbar-hide text-[11px]">
+      <button class="chip-btn px-2.5 py-1 rounded-full bg-white/5 text-on-surface-variant whitespace-nowrap" data-prompt="What is ISO 9001?">ISO 9001</button>
+      <button class="chip-btn px-2.5 py-1 rounded-full bg-white/5 text-on-surface-variant whitespace-nowrap" data-prompt="ZED Certification subsidy details">ZED Subsidy</button>
+      <button class="chip-btn px-2.5 py-1 rounded-full bg-white/5 text-on-surface-variant whitespace-nowrap" data-prompt="SEDEX SMETA audit preparation">SMETA Audit</button>
+      <button class="chip-btn px-2.5 py-1 rounded-full bg-white/5 text-on-surface-variant whitespace-nowrap" data-prompt="5S Kaizen implementation">5S & Kaizen</button>
+    </div>
+
+    <form id="ai-chat-form" class="p-3 border-t border-border-glass bg-surface flex gap-2">
+      <input type="text" id="ai-chat-input" placeholder="Ask AI consultant..." class="flex-grow bg-white/5 border border-border-glass rounded-full px-4 py-2 text-xs focus:outline-none focus:border-primary-container text-on-surface" required>
+      <button type="submit" id="ai-chat-send-btn" class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center text-xs font-bold"><i class="fa-solid fa-paper-plane"></i></button>
+    </form>
+  </div>
+
+  <!-- Consultation Popup Modal -->
+  <div id="consultation-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="glass-panel p-6 rounded-2xl max-w-lg w-full border border-primary-container/30 relative">
+      <button class="modal-close absolute top-4 right-4 text-on-surface-variant hover:text-on-surface"><i class="fa-solid fa-xmark text-lg"></i></button>
+      <h3 class="text-xl font-bold mb-1">Request Consultation</h3>
+      <p class="text-xs text-secondary mb-4" id="modal-service-name">General Consultation</p>
+      
+      <form id="consultation-form" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold mb-1">Full Name *</label>
+          <input type="text" id="enq-fullname" required class="w-full bg-white/5 border border-border-glass rounded-lg p-2.5 text-on-surface">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="form-label">Full Name *</label>
-            <input type="text" id="enq-fullname" class="form-control" placeholder="e.g. Rajesh Kumar" required>
+            <label class="block font-bold mb-1">Mobile *</label>
+            <input type="tel" id="enq-mobile" required class="w-full bg-white/5 border border-border-glass rounded-lg p-2.5 text-on-surface">
           </div>
           <div>
-            <label class="form-label">Designation</label>
-            <input type="text" id="enq-designation" class="form-control" placeholder="e.g. Director / Plant Manager">
+            <label class="block font-bold mb-1">Email *</label>
+            <input type="email" id="enq-email" required class="w-full bg-white/5 border border-border-glass rounded-lg p-2.5 text-on-surface">
           </div>
         </div>
-
-        <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="form-label">Company Name</label>
-            <input type="text" id="enq-company" class="form-control" placeholder="e.g. Apex Mfg Pvt Ltd">
+            <label class="block font-bold mb-1">Company</label>
+            <input type="text" id="enq-company" class="w-full bg-white/5 border border-border-glass rounded-lg p-2.5 text-on-surface">
           </div>
           <div>
-            <label class="form-label">Company Size</label>
-            <select id="enq-size" class="form-control">
-              <option value="1-10 Employees">1-10 Employees</option>
-              <option value="10-50 Employees">10-50 Employees</option>
-              <option value="50-250 Employees">50-250 Employees</option>
-              <option value="250+ Employees">250+ Employees</option>
+            <label class="block font-bold mb-1">Service Required</label>
+            <select id="enq-service" class="w-full bg-surface-variant border border-border-glass rounded-lg p-2.5 text-on-surface">
+              <option value="General Consultation">General Consultation</option>
+              <option value="ISO 9001">ISO 9001 QMS</option>
+              <option value="ZED Certification">ZED MSME Certification</option>
+              <option value="IATF 16949">IATF 16949 Automotive</option>
+              <option value="SEDEX / SMETA">SEDEX / SMETA Audit</option>
+              <option value="5S & Kaizen">5S & Kaizen</option>
+              <option value="NATS / NAPS">NATS / NAPS Scheme</option>
             </select>
           </div>
         </div>
+        <div>
+          <label class="block font-bold mb-1">Message</label>
+          <textarea id="enq-message" rows="2" class="w-full bg-white/5 border border-border-glass rounded-lg p-2.5 text-on-surface"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-primary-container text-on-primary-container font-bold py-3 rounded-full text-xs">Submit Request to Database</button>
+      </form>
+    </div>
+  </div>
 
-        <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+  <!-- Seminar Modal -->
+  <div id="seminar-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="glass-panel p-6 rounded-2xl max-w-md w-full border border-primary-container/30 relative">
+      <button class="close-seminar absolute top-4 right-4 text-on-surface-variant hover:text-on-surface"><i class="fa-solid fa-xmark text-lg"></i></button>
+      <h3 class="text-xl font-bold mb-1">Master Class Registration</h3>
+      <p class="text-xs text-secondary mb-4">Enroll team in Master Business Excellence Program</p>
+      
+      <form id="seminar-form" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold mb-1">Full Name *</label>
+          <input type="text" id="sem-fullname" required class="w-full bg-white/5 border border-border-glass rounded-lg p-2 text-on-surface">
+        </div>
+        <div class="grid grid-cols-2 gap-2">
           <div>
-            <label class="form-label">Mobile Number *</label>
-            <input type="tel" id="enq-mobile" class="form-control" placeholder="+91 7489 351 297" required>
+            <label class="block font-bold mb-1">Mobile *</label>
+            <input type="tel" id="sem-mobile" required class="w-full bg-white/5 border border-border-glass rounded-lg p-2 text-on-surface">
           </div>
           <div>
-            <label class="form-label">Work Email *</label>
-            <input type="email" id="enq-email" class="form-control" placeholder="name@company.com" required>
+            <label class="block font-bold mb-1">Email *</label>
+            <input type="email" id="sem-email" required class="w-full bg-white/5 border border-border-glass rounded-lg p-2 text-on-surface">
           </div>
         </div>
-
-        <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+        <div class="grid grid-cols-2 gap-2">
           <div>
-            <label class="form-label">City</label>
-            <input type="text" id="enq-city" class="form-control" placeholder="e.g. Pune">
+            <label class="block font-bold mb-1">City</label>
+            <input type="text" id="sem-city" class="w-full bg-white/5 border border-border-glass rounded-lg p-2 text-on-surface">
           </div>
           <div>
-            <label class="form-label">State</label>
-            <input type="text" id="enq-state" class="form-control" placeholder="e.g. MH">
-          </div>
-          <div>
-            <label class="form-label">Industry</label>
-            <select id="enq-industry" class="form-control">
-              <option value="Manufacturing">Manufacturing</option>
-              <option value="Automotive">Automotive</option>
-              <option value="Textile & Apparel">Textile</option>
-              <option value="Food Industry">Food Industry</option>
-              <option value="IT & Tech">IT & Tech</option>
-              <option value="Other">Other</option>
-            </select>
+            <label class="block font-bold mb-1">Participants</label>
+            <input type="number" id="sem-headcount" value="1" min="1" class="w-full bg-white/5 border border-border-glass rounded-lg p-2 text-on-surface">
           </div>
         </div>
-
-        <div class="form-group">
-          <label class="form-label">Service Required *</label>
-          <select id="enq-service" class="form-control" required>
-            <option value="ZED Certification">ZED Certification</option>
-            <option value="ISO Certifications">ISO Certifications</option>
-            <option value="IATF 16949">IATF 16949</option>
-            <option value="SEDEX / SMETA">SEDEX / SMETA</option>
-            <option value="MACE Audit">MACE Audit</option>
-            <option value="Social Audit">Social Audit</option>
-            <option value="FSSAI Compliance">FSSAI Compliance</option>
-            <option value="IT Certifications">IT Certifications</option>
-            <option value="Quality Improvement">Quality Improvement</option>
-            <option value="Productivity Improvement">Productivity Improvement</option>
-            <option value="5S / Kaizen">5S / Kaizen</option>
-            <option value="Profit Maximization">Profit Maximization</option>
-            <option value="Cost Reduction">Cost Reduction</option>
-            <option value="Industrial Training">Industrial Training</option>
-            <option value="NATS">NATS Apprenticeship</option>
-            <option value="NAPS">NAPS Apprenticeship</option>
-            <option value="Placement Preparation">Placement Preparation</option>
-            <option value="Future Guidance Seminar">Future Guidance Seminar</option>
-            <option value="Leadership Development">Leadership Development</option>
-            <option value="Master Business Excellence Program">Master Business Excellence Program</option>
-            <option value="Other">Other</option>
+        <div>
+          <label class="block font-bold mb-1">Program Selection</label>
+          <select id="sem-name" class="w-full bg-surface-variant border border-border-glass rounded-lg p-2 text-on-surface">
+            <option value="Master Business Excellence Workshop">Master Business Excellence Workshop</option>
+            <option value="IATF Core Tools Masterclass">IATF Core Tools Masterclass</option>
+            <option value="5S Shopfloor Operator Certification">5S Shopfloor Operator Certification</option>
           </select>
         </div>
-
-        <div class="form-group">
-          <label class="form-label">Specific Requirement / Query</label>
-          <textarea id="enq-message" class="form-control" rows="2"
-            placeholder="Tell us about your certification timeline or audit needs..."></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 1rem;">
-          <i class="fa-solid fa-paper-plane"></i> Submit to Database
-        </button>
+        <button type="submit" class="w-full bg-primary-container text-on-primary-container font-bold py-2.5 rounded-full text-xs">Confirm Registration</button>
       </form>
     </div>
   </div>
 
-  <!-- ==========================================================================
-       11. DATABASE 2: SEMINAR & TRAINING REGISTRATION MODAL
-       ========================================================================== -->
-  <div class="modal-overlay" id="seminar-modal">
-    <div class="modal-card">
-      <span class="modal-close close-seminar"><i class="fa-solid fa-xmark"></i></span>
-      <h3 class="modal-title">Seminar & Training Registration</h3>
-      <p class="modal-subtitle">Enroll for PRV Industrial Workshops & Master Classes (Saved to
-        <code>seminar_registrations</code> database).
-      </p>
+  <!-- Toast Notification -->
+  <div id="toast-container" class="fixed top-6 right-6 z-50 space-y-2"></div>
 
-      <form id="seminar-form">
-        <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-          <div>
-            <label class="form-label">Full Name *</label>
-            <input type="text" id="sem-fullname" class="form-control" placeholder="e.g. Suresh Verma" required>
-          </div>
-          <div>
-            <label class="form-label">Mobile Number *</label>
-            <input type="tel" id="sem-mobile" class="form-control" placeholder="+91 7489 351 297" required>
-          </div>
-        </div>
-
-        <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-          <div>
-            <label class="form-label">Email Address *</label>
-            <input type="email" id="sem-email" class="form-control" placeholder="name@domain.com" required>
-          </div>
-          <div>
-            <label class="form-label">City / Location</label>
-            <input type="text" id="sem-city" class="form-control" placeholder="e.g. Noida">
-          </div>
-        </div>
-
-        <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-          <div>
-            <label class="form-label">Qualification / Role</label>
-            <input type="text" id="sem-qualification" class="form-control" placeholder="e.g. B.Tech / Quality Head">
-          </div>
-          <div>
-            <label class="form-label">Organization Name</label>
-            <input type="text" id="sem-org" class="form-control" placeholder="e.g. Precision Components">
-          </div>
-        </div>
-
-        <div class="form-group" style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 12px;">
-          <div>
-            <label class="form-label">Seminar / Workshop Title *</label>
-            <select id="sem-name" class="form-control" required>
-              <option value="Master Business Excellence Workshop">Master Business Excellence Workshop</option>
-              <option value="ZED Bronze to Gold Masterclass">ZED Bronze to Gold Masterclass</option>
-              <option value="5S & Kaizen Industrial Bootcamp">5S & Kaizen Industrial Bootcamp</option>
-              <option value="IATF Core Tools Practical Training">IATF Core Tools Practical Training</option>
-              <option value="SEDEX SMETA Audit Readiness Seminar">SEDEX SMETA Audit Readiness Seminar</option>
-              <option value="NATS & NAPS Onboarding Workshop">NATS & NAPS Onboarding Workshop</option>
-            </select>
-          </div>
-          <div>
-            <label class="form-label">No. of Participants</label>
-            <input type="number" id="sem-headcount" class="form-control" value="1" min="1" max="50">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Special Notes / Requirements</label>
-          <textarea id="sem-message" class="form-control" rows="2"
-            placeholder="Mention any specific dates or corporate group request..."></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary"
-          style="width: 100%; padding: 14px; font-size: 1rem; background: var(--accent-gold);">
-          <i class="fa-solid fa-graduation-cap"></i> Register for Seminar
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- WhatsApp & Seminar Quick Floating Action Buttons -->
-  <div
-    style="position: fixed; bottom: 30px; left: 30px; display: flex; flex-direction: column; gap: 12px; z-index: 1500;">
-    <a href="https://wa.me/917489351297?text=Hi%20PRV%20Consultancy,%20I%20want%20to%20inquire%20about%20your%20services."
-      target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp"
-      style="position: relative; bottom: 0; left: 0;">
-      <i class="fa-brands fa-whatsapp"></i>
-    </a>
-    <button class="open-seminar-trigger"
-      style="width: 56px; height: 56px; background: var(--primary-navy); color: var(--accent-green); border-radius: 99px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; box-shadow: var(--shadow-md);"
-      title="Register Seminar">
-      <i class="fa-solid fa-graduation-cap"></i>
-    </button>
-  </div>
-
-  <!-- ==========================================================================
-       AI ASSISTANT FLOATING WIDGET & CHAT WINDOW
-       ========================================================================== -->
-  <div id="prv-ai-widget">
-    <!-- Floating AI Trigger Button -->
-    <button id="ai-chat-toggle-btn" class="ai-float-btn" aria-label="Open PRV AI Assistant" aria-expanded="false">
-      <div class="ai-float-icon">
-        <i class="fa-solid fa-robot"></i>
-      </div>
-      <div class="ai-float-text">
-        <span class="ai-float-title">PRV AI Advisor</span>
-        <span class="ai-float-subtitle"><i class="fa-solid fa-sparkles"></i> Ask Questions 24/7</span>
-      </div>
-      <span class="ai-unread-badge" id="ai-unread-badge">AI</span>
-    </button>
-
-    <!-- AI Chat Popup Modal Window -->
-    <div id="ai-chat-window" class="ai-chat-window" role="dialog" aria-label="PRV AI Assistant Chat Window">
-      <!-- Header -->
-      <div class="ai-chat-header">
-        <div class="ai-chat-header-info">
-          <div class="ai-chat-avatar">
-            <i class="fa-solid fa-robot"></i>
-          </div>
-          <div>
-            <div class="ai-chat-title">PRV AI Sahayak <i class="fa-solid fa-certificate"
-                style="color: var(--accent-gold); font-size: 0.75rem;"></i></div>
-            <div class="ai-chat-status">
-              <span class="status-dot"></span> Instant Business Advisor • Online
-            </div>
-          </div>
-        </div>
-
-        <div class="ai-chat-header-actions">
-          <button id="ai-chat-whatsapp-btn" class="ai-header-btn" title="WhatsApp Chat Handover"
-            style="background: #25D366; color: #fff;">
-            <i class="fa-brands fa-whatsapp"></i>
-          </button>
-          <button id="ai-chat-brochure-btn" class="ai-header-btn" title="Download Official Brochure (PDF)"
-            style="background: #E11D48; color: #fff;">
-            <i class="fa-solid fa-file-pdf"></i>
-          </button>
-          <button id="ai-chat-book-btn" class="ai-header-btn" title="Book Free Consultation"
-            style="background: #3B82F6; color: #fff;">
-            <i class="fa-solid fa-calendar-check"></i>
-          </button>
-          <button id="ai-chat-tts-btn" class="ai-header-btn" title="Toggle Sound Output (Speech)">
-            <i class="fa-solid fa-volume-high"></i>
-          </button>
-          <button id="ai-chat-close-btn" class="ai-header-btn" title="Close Chat Window">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- Messages Area -->
-      <div id="ai-chat-messages" class="ai-chat-messages">
-        <!-- Messages dynamically rendered by js/ai-assistant.js -->
-      </div>
-
-      <!-- Quick Prompt Chips -->
-      <div id="ai-quick-chips" class="ai-quick-chips">
-        <!-- Chips injected dynamically -->
-      </div>
-
-      <!-- Input Area -->
-      <div class="ai-chat-input-area">
-        <input type="text" id="ai-chat-input" class="ai-chat-input"
-          placeholder="Ask about ISO, ZED, SEDEX, NATS or Hindi me puchhiye..." autocomplete="off">
-
-        <button id="ai-chat-voice-btn" class="ai-input-btn" title="Voice Input (Speak to ask)"
-          style="display: none; background: #64748B;">
-          <i class="fa-solid fa-microphone"></i>
-        </button>
-
-        <button id="ai-chat-send-btn" class="ai-input-btn" title="Send Message">
-          <i class="fa-solid fa-paper-plane"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Interactive FREE Consultation Booking Modal Overlay -->
-  <div id="ai-booking-modal" class="ai-booking-modal-overlay" style="display: none;">
-    <div class="ai-booking-modal-content">
-      <div class="ai-booking-modal-header">
-        <h3><i class="fa-solid fa-calendar-check"></i> Book FREE Expert Consultation</h3>
-        <button id="ai-booking-modal-close" class="ai-modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <form id="ai-booking-form" class="ai-booking-form">
-        <div class="form-group">
-          <label>Full Name *</label>
-          <input type="text" id="book-name" required placeholder="e.g. Rajesh Kumar">
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Mobile Number *</label>
-            <input type="tel" id="book-mobile" required placeholder="+91 7489 351 297">
-          </div>
-          <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" id="book-email" placeholder="rajesh@company.com">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Company Name</label>
-            <input type="text" id="book-company" placeholder="Company Pvt Ltd">
-          </div>
-          <div class="form-group">
-            <label>Required Service</label>
-            <select id="book-service">
-              <option value="ZED MSME Subsidy">ZED MSME Subsidy (Up to 80%)</option>
-              <option value="ISO 9001 QMS">ISO 9001 Quality Management</option>
-              <option value="ISO 14001 EMS">ISO 14001 Environment</option>
-              <option value="ISO 45001 Safety">ISO 45001 Health & Safety</option>
-              <option value="ISO 27001 Cybersecurity">ISO 27001 Cybersecurity</option>
-              <option value="IATF 16949 Automotive">IATF 16949 Automotive</option>
-              <option value="SEDEX SMETA Audit">SEDEX / SMETA Audit</option>
-              <option value="NATS / NAPS Apprenticeship">NATS / NAPS Apprenticeship</option>
-              <option value="5S & Kaizen">5S & Lean Productivity</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Preferred Date</label>
-            <input type="date" id="book-date">
-          </div>
-          <div class="form-group">
-            <label>Preferred Time</label>
-            <select id="book-time">
-              <option value="10:00 AM - 12:00 PM">Morning (10 AM - 12 PM)</option>
-              <option value="02:00 PM - 04:00 PM">Afternoon (2 PM - 4 PM)</option>
-              <option value="04:00 PM - 06:00 PM">Evening (4 PM - 6 PM)</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Specific Requirements / Notes</label>
-          <textarea id="book-notes" rows="2"
-            placeholder="Tell us about your unit size or target deadline..."></textarea>
-        </div>
-        <button type="submit" class="ai-submit-booking-btn">
-          <i class="fa-solid fa-paper-plane"></i> Confirm & Schedule Consultation
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Master JavaScript Files -->
+  <!-- Scripts -->
   <script src="js/main.js"></script>
   <script src="js/ai-assistant.js"></script>
 </body>
-
 </html>

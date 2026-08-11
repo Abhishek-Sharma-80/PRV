@@ -3,24 +3,25 @@
    ========================================================================== */
 
 :root {
-  --admin-navy: #0A192F;
-  --admin-navy-light: #112240;
-  --admin-green: #00B894;
-  --admin-green-dark: #00997B;
-  --admin-blue: #0984E3;
-  --admin-gold: #F39C12;
-  --admin-red: #D63031;
-  --admin-bg: #F4F7FA;
-  --admin-card: #FFFFFF;
-  --admin-border: #E2E8F0;
-  --admin-text: #1E293B;
-  --admin-muted: #64748B;
+  --admin-navy: #08122d;
+  --admin-navy-dark: #030c28;
+  --admin-navy-light: #151e3a;
+  --admin-green: #41e4c0;
+  --admin-green-dark: #00c7a5;
+  --admin-blue: #3b82f6;
+  --admin-gold: #ffb95f;
+  --admin-red: #ffb4ab;
+  --admin-bg: #08122d;
+  --admin-card: #151e3a;
+  --admin-border: rgba(255, 255, 255, 0.1);
+  --admin-text: #dbe1ff;
+  --admin-muted: #c6c6ce;
 
-  --shadow-card: 0 4px 12px rgba(15, 25, 47, 0.06);
-  --shadow-hover: 0 8px 24px rgba(15, 25, 47, 0.12);
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
+  --shadow-card: 0 4px 20px rgba(3, 12, 40, 0.5);
+  --shadow-hover: 0 8px 32px rgba(65, 228, 192, 0.2);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
 }
 
 * {
@@ -36,6 +37,10 @@ body {
   line-height: 1.5;
 }
 
+h1, h2, h3, h4, .login-title, .sidebar-logo {
+  font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+}
+
 /* LOGIN OVERLAY */
 .login-screen {
   position: fixed;
@@ -43,7 +48,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(135deg, var(--admin-navy), #050D1A);
+  background: radial-gradient(circle at 50% 50%, #151e3a 0%, #08122d 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -51,12 +56,15 @@ body {
 }
 
 .login-card {
-  background: #FFF;
+  background: rgba(21, 30, 58, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   width: 100%;
   max-width: 420px;
   border-radius: var(--radius-lg);
   padding: 40px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 50px rgba(3, 12, 40, 0.6);
   text-align: center;
 }
 
@@ -66,7 +74,7 @@ body {
   gap: 10px;
   font-size: 1.5rem;
   font-weight: 900;
-  color: var(--admin-navy);
+  color: var(--admin-text);
   margin-bottom: 24px;
 }
 
