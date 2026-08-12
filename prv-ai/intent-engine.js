@@ -87,8 +87,8 @@ function extractContext(m,s){
 /* ── RESPONSE LIBRARY ────────────────────────────────────────── */
 const R = {
   ISO9001:{
-    WHAT:{ en:`**ISO 9001 — Quality Management System**\n\nISO 9001 is an internationally recognized standard for a Quality Management System (QMS). It gives organizations a structured framework to:\n- Manage and document key business processes\n- Consistently meet customer requirements\n- Monitor quality performance and reduce errors\n- Support continual improvement\n\nApplicable to all industries — manufacturing, IT, healthcare, services, and more.\n\n*Tell me your industry and I can explain how ISO 9001 applies to you.*`,
-           hinglish:`**ISO 9001 — Quality Management System**\n\nISO 9001 ek internationally recognized QMS standard hai. Isse:\n- Business processes structured hote hain\n- Customer requirements consistently meet hoti hain\n- Quality performance track hoti hai\n- Errors aur rework reduce hote hain\n\nHar industry me applicable hai.\n\n*Apni industry batao — specific guidance dunga.*`,
+    WHAT:{ en:`📜 **ISO 9001:2015 — Quality Management System (QMS)**\n\nISO 9001 is an internationally recognized standard for a Quality Management System (QMS). It gives organizations a structured framework to:\n- Manage and document key business processes\n- Consistently meet customer requirements\n- Monitor quality performance and reduce errors\n- Support continual improvement\n\nApplicable to all industries — manufacturing, IT, healthcare, services, and more.`,
+           hinglish:`📜 **ISO 9001 — Quality Management System**\n\nISO 9001 ek internationally recognized QMS standard hai. Isse:\n- Business processes structured hote hain\n- Customer requirements consistently meet hoti hain\n- Errors aur rework reduce hote hain\n\nHar industry me applicable hai.`,
            qr:['Why do I need ISO 9001?','ISO 9001 process steps','ISO 9001 documents','Book Free Consultation'] },
     WHY:{ en:`**Why ISO 9001?**\n\nPotential benefits include:\n\n✅ **Process Control** — Standardized SOPs reduce variation and errors\n✅ **Customer Confidence** — Demonstrates structured quality commitment\n✅ **Tender Eligibility** — Often required for government and corporate tenders\n✅ **Corrective Action** — Structured root-cause analysis process\n✅ **Continual Improvement** — Built-in performance measurement cycle\n✅ **Clear Responsibilities** — Defined roles and work instructions\n\n*Actual value depends on implementation quality.*\n\nWhich industry is your company in?`,
           hinglish:`**ISO 9001 kyu lena chahiye?**\n\n✅ Process Control — SOPs se errors reduce hote hain\n✅ Customer Trust — Quality management ka structured proof\n✅ Tender Eligibility — Govt aur corporate tenders ke liye needed\n✅ Corrective Action — Root cause identify hota hai\n✅ Continual Improvement — Built-in performance tracking\n\n*Aapki industry kya hai? Specific guidance de sakta hoon.*`,
@@ -108,14 +108,14 @@ const R = {
               qr:['Initial assessment','Book Consultation'] },
   },
   ZED:{
-    WHAT:{ en:`**ZED — Zero Defect Zero Effect**\n\nZED stands for Zero Defect Zero Effect. It is a manufacturing excellence approach focused on:\n- Improving manufacturing quality and reducing defects\n- Eliminating production waste and rework\n- Improving environmental performance\n- Strengthening business competitiveness\n\nParticularly relevant to MSME manufacturing organizations in India.\n\n*Does your organization have an active Udyam MSME Registration?*`,
-           hinglish:`**ZED — Zero Defect Zero Effect**\n\nZED ek manufacturing excellence approach hai jo:\n- Manufacturing quality improve karta hai, defects reduce karta hai\n- Production waste aur rework eliminate karta hai\n- Environmental performance strengthen karta hai\n\nIndia ke MSME manufacturing organizations ke liye relevant.\n\n*Kya aapke paas active Udyam MSME Registration hai?*`,
+    WHAT:{ en:`💰 **ZED — Zero Defect Zero Effect MSME Scheme**\n\nPRV Consultancy helps MSMEs and industrial units claim direct government financial subsidies:\n- **Up to 80% Subsidy** on audit & certification costs\n- **₹10,000 Handholding Support Grant** for consultancy\n- **0.5% Concessional Bank Interest Rate** on business loans\n- **Up to ₹5 Lakhs Capital Subsidy** for testing equipment\n\n📋 **Eligibility Check**: Do you hold an active **Udyam MSME Registration** for your unit?`,
+           hinglish:`💰 **ZED — Zero Defect Zero Effect MSME Scheme**\n\nMSME manufacturing units ke liye govt financial subsidy scheme:\n- **80% tak Subsidy** audit & certification cost pe\n- **₹10,000 Handholding Support Grant**\n- **0.5% kam Bank Loan Interest Rate**\n\n*Kya aapke paas active Udyam MSME Registration hai?*`,
            qr:['ZED vs ISO 9001','ZED process','Book Consultation'] },
     WHY:{ en:`**Why ZED?**\n\nZED can be relevant for MSME manufacturers wanting to:\n- Systematically improve manufacturing quality and reduce rejections\n- Build environmental responsibility into production\n- Improve productivity and reduce waste\n- Strengthen competitive position\n\n*The specific value depends on your current manufacturing challenges.*\n\nWhat are your main quality or production challenges?`,
           hinglish:`**ZED kyu lena chahiye?**\n\nMSME manufacturers ke liye relevant hai jab:\n- Manufacturing quality systematically improve karni ho\n- Production waste reduce karna ho\n- Competitiveness improve karni ho\n\n*Aapki main challenge kya hai?*`,
           qr:['ZED process','ZED vs ISO 9001','Book Consultation'] },
-    COMPARISON:{ en:`**ISO 9001 vs ZED**\n\n| Area | ISO 9001 | ZED |\n|---|---|---|\n| **Primary Focus** | Quality Management System | Manufacturing Excellence |\n| **Scope** | All organizations, all industries | Particularly MSME manufacturers |\n| **Key Areas** | Process, quality, customer satisfaction | Quality, productivity, waste, environment |\n| **Framework** | International management system standard | Manufacturing excellence framework |\n\n🎯 **PRV View**: Neither is automatically better. ISO 9001 provides a structured QMS for any organization; ZED focuses on manufacturing excellence improvement. Your business objective determines which is more relevant — or both may complement each other.\n\n*What is your primary objective?*`,
-                hinglish:`**ISO 9001 vs ZED**\n\n| Feature | ISO 9001 | ZED |\n|---|---|---|\n| **Focus** | Quality Management System | Manufacturing Excellence |\n| **Applicability** | Sab industries | MSME Manufacturers |\n\n🎯 Dono ka alag purpose hai. Dono complementary bhi ho sakte hain.\n\n*Aapka main objective kya hai?*`,
+    COMPARISON:{ en:`📊 **ISO 9001 vs ZED MSME Scheme Matrix**\n\n| Parameter | ISO 9001:2015 | ZED MSME Scheme |\n| --- | --- | --- |\n| **Origin** | International Standard (Geneva) | Ministry of MSME, Govt of India |\n| **Govt Subsidy** | No direct subsidy | Up to 80% Subsidy + ₹10,000 Grant |\n| **Bank Benefit** | Corporate tender eligibility | 0.5% lower loan interest rate |\n| **Scope** | Quality Management SOPs | Zero Defect + Zero Effect |\n\n🎯 **PRV Verdict**: Apply for ZED to claim 80% Govt grant & loan discounts, while retaining ISO 9001 for buyer tenders!`,
+                hinglish:`📊 **ISO 9001 vs ZED**\n\n| Feature | ISO 9001 | ZED |\n|---|---|---|\n| **Focus** | Quality Management System | Manufacturing Excellence |\n| **Applicability** | Sab industries | MSME Manufacturers |\n\n🎯 Dono ka alag purpose hai. Dono complementary bhi ho sakte hain.`,
                 qr:['ISO 9001 details','ZED details','Book Consultation'] },
   },
   ISO14001:{
@@ -143,32 +143,32 @@ const R = {
            qr:['Who needs ISO 27001?','Book Consultation'] },
   },
   IATF:{
-    WHAT:{ en:`**IATF 16949 — Automotive Quality Management System**\n\nIATF 16949 is the automotive sector's QMS standard, designed for organizations in the automotive supply chain.\n\nKey elements:\n- Automotive-specific quality requirements beyond ISO 9001\n- Five Core Tools: **APQP, PPAP, FMEA, MSA, SPC**\n- Zero-defect manufacturing approach\n- Customer-Specific Requirements (CSRs)\n\n*Particularly relevant if you supply to OEMs (Maruti, Tata, Hyundai) or Tier-1 suppliers.*\n\nDo you supply directly to OEMs, or are you a Tier 1/Tier 2 supplier?`,
-           hinglish:`**IATF 16949 — Automotive QMS**\n\nIATF 16949 automotive supply chain ke liye designed QMS standard hai.\n\n- Automotive-specific quality requirements\n- 5 Core Tools: APQP, PPAP, FMEA, MSA, SPC\n- Zero-defect focus\n- Customer-Specific Requirements (CSRs)\n\n*OEM suppliers ya Tier-1 ke liye relevant.*\n\nAap OEM ko directly supply karte ho?`,
+    WHAT:{ en:`🚗 **IATF 16949:2016 — Automotive Quality Management System**\n\nIATF 16949 is the automotive sector's QMS standard, designed for organizations in the automotive supply chain.\n\nKey elements:\n- Automotive-specific quality requirements beyond ISO 9001\n- Five Core Tools: **APQP, PPAP, FMEA, MSA, SPC**\n- Zero-defect manufacturing approach\n- Customer-Specific Requirements (CSRs)\n\n*Particularly relevant if you supply to OEMs (Maruti, Tata, Hyundai) or Tier-1 suppliers.*`,
+           hinglish:`🚗 **IATF 16949 — Automotive QMS**\n\nIATF 16949 automotive supply chain ke liye designed QMS standard hai.\n\n- Automotive-specific quality requirements\n- 5 Core Tools: APQP, PPAP, FMEA, MSA, SPC\n- Zero-defect focus\n- Customer-Specific Requirements (CSRs)\n\n*OEM suppliers ya Tier-1 ke liye relevant.*`,
            qr:['IATF Core Tools','IATF vs ISO 9001','MACE Audit','Book Consultation'] },
-    COMPARISON:{ en:`**ISO 9001 vs IATF 16949**\n\n| Area | ISO 9001 | IATF 16949 |\n|---|---|---|\n| **Scope** | All industries | Automotive supply chain only |\n| **Focus** | General quality management | Automotive-specific quality |\n| **Core Tools** | Not required | APQP, PPAP, FMEA, MSA, SPC |\n| **CSRs** | Not applicable | Customer-specific requirements |\n| **Defect Focus** | Quality improvement | Zero PPM defects |\n\n*IATF 16949 includes and extends ISO 9001 for the automotive sector.*\n\nDo you currently have ISO 9001 and looking to upgrade?`,
+    COMPARISON:{ en:`📊 **ISO 9001 vs IATF 16949 Matrix**\n\n| Parameter | ISO 9001 | IATF 16949:2016 |\n| --- | --- | --- |\n| **Focus** | General manufacturing & service | Automotive component suppliers |\n| **Core Tools** | Optional | Mandatory (APQP, PPAP, FMEA, MSA, SPC) |\n| **OEM Status** | General corporate standard | Mandatory for Maruti, Tata, Hyundai, etc. |\n\n🎯 **PRV Verdict**: If you supply auto parts, go directly for IATF 16949!`,
                 qr:['IATF process','Core Tools','Book Consultation'] },
   },
   SEDEX:{
-    WHAT:{ en:`**SEDEX — Supplier Ethical Data Exchange**\n\nSEDEX is associated with a platform and ecosystem enabling organizations to manage and share information on responsible sourcing and supply chain sustainability.\n\nSupports visibility into labor practices, health and safety, environmental management, and business ethics.\n\n*Particularly relevant when international buyers require ethical sourcing transparency.*\n\nIs this requirement coming from a specific buyer?`,
-           hinglish:`**SEDEX**\n\nSEDEX ek platform/ecosystem hai jo responsible sourcing aur supply chain sustainability ki information share karne me help karta hai.\n\nRelevant hai jab international buyers ethical sourcing information maangte hain.\n\n*Kya ye requirement kisi specific buyer se aa rahi hai?*`,
+    WHAT:{ en:`🔍 **SEDEX — Supplier Ethical Data Exchange**\n\nSEDEX is an international platform enabling organizations to manage and share information on responsible sourcing and supply chain sustainability.\n\nSupports visibility into labor practices, health and safety, environmental management, and business ethics.\n\n*Particularly relevant when international buyers require ethical sourcing transparency.*`,
+           hinglish:`🔍 **SEDEX**\n\nSEDEX ek platform hai jo responsible sourcing aur supply chain sustainability ki information share karne me help karta hai.\n\nRelevant hai jab international buyers ethical sourcing information maangte hain.`,
            qr:['SEDEX vs SMETA','Book Consultation'] },
     COMPARISON:{ en:`**SEDEX vs SMETA**\n\n| Area | SEDEX | SMETA |\n|---|---|---|\n| **What** | Platform/membership ecosystem | Social audit methodology |\n| **Purpose** | Data sharing, supply chain visibility | Audit assessment of workplace practices |\n| **Output** | Supplier profile data | Audit report |\n\n*SEDEX is the platform; SMETA is the audit methodology. Related but not the same.*`,
                 qr:['SMETA audit details','Book Consultation'] },
   },
   SMETA:{
-    WHAT:{ en:`**SMETA — Sedex Members Ethical Trade Audit**\n\nSMETA is a social audit methodology. Depending on scope (2-pillar or 4-pillar), it covers:\n- **Labor standards** — Working hours, wages, freedom of association\n- **Health and safety** — Workplace safety conditions\n- **Environment** (4-pillar) — Environmental management\n- **Business ethics** (4-pillar) — Anti-bribery, anti-corruption\n\nUsed by global buyers to assess supplier workplace practices.\n\n*Is this requirement from a specific buyer?*`,
+    WHAT:{ en:`🔍 **SMETA — Sedex Members Ethical Trade Audit**\n\nSMETA is a social audit methodology. Depending on scope (2-pillar or 4-pillar), it covers:\n- **Labor standards** — Working hours, wages, freedom of association\n- **Health and safety** — Workplace safety conditions\n- **Environment** (4-pillar) — Environmental management\n- **Business ethics** (4-pillar) — Anti-bribery, anti-corruption\n\nUsed by global buyers to assess supplier workplace practices.`,
            qr:['SMETA preparation','SEDEX vs SMETA','Book Consultation'] },
-    AUDIT:{ en:`**SMETA Audit — What to Expect**\n\nA typical SMETA audit includes:\n1. Documentation review (policies, records, permits)\n2. Worker interviews (private, candid)\n3. Facility inspection (H&S, fire safety, exits)\n4. Records review (payroll, attendance, working hours)\n5. Management system assessment\n6. Non-conformance documentation\n\n*Preparation starts with the buyer's specific requirements and audit scope.*\n\nWould you like PRV to assist with pre-audit gap assessment?`,
+    AUDIT:{ en:`**SMETA Audit — What to Expect**\n\nA typical SMETA audit includes:\n1. Documentation review (policies, records, permits)\n2. Worker interviews (private, candid)\n3. Facility inspection (H&S, fire safety, exits)\n4. Records review (payroll, attendance, working hours)\n5. Management system assessment\n6. Non-conformance documentation\n\n*Preparation starts with the buyer's specific requirements and audit scope.*`,
             qr:['Pre-audit gap assessment','Book Consultation'] },
   },
   FSSAI:{
-    WHAT:{ en:`**FSSAI — Food Safety and Standards Authority of India**\n\nFSSAI is India's food safety regulatory authority governing food safety standards, licensing, and registration.\n\nApplicable food businesses may require registration or licensing depending on:\n- Nature of the food business activity\n- Scale of operation\n- Applicable regulatory requirements\n\n*Exact requirements should be verified against current FSSAI regulations.*\n\nWhat type of food business do you operate?`,
-           hinglish:`**FSSAI**\n\nFSSAI India ka food safety regulatory authority hai. Food businesses ko applicable registration ya licensing ki zaroorat hoti hai.\n\n*Exact requirements FSSAI regulations se verify karni chahiye.*\n\nAapki food business kya hai?`,
+    WHAT:{ en:`🥗 **FSSAI — Food Safety and Standards Authority of India**\n\nFSSAI is India's food safety regulatory authority governing food safety standards, licensing, and registration.\n\nApplicable food businesses require registration or licensing depending on scale and activity.\n\n• **Registration**: For small food businesses (turnover up to ₹12 Lakhs).\n• **State License**: For medium food businesses (turnover ₹12 Lakhs to ₹20 Crores).\n• **Central License**: For large food manufacturers, importers & exporters (turnover > ₹20 Crores).`,
+           hinglish:`🥗 **FSSAI Food License**\n\nFSSAI India ka food safety regulatory authority hai:\n- **Registration**: Turnover up to ₹12 Lakhs\n- **State License**: Turnover ₹12 Lakhs to ₹20 Crores\n- **Central License**: Exporters, importers & large units`,
            qr:['FSSAI vs ISO 22000','Book Consultation'] },
   },
   MACE:{
-    WHAT:{ en:`**MACE Audit**\n\nThe scope and requirements of a MACE Audit depend on the specific customer, program, or audit framework involved.\n\n*Accurate information must come from the specific customer or audit program — not general sources.*\n\nTo guide you:\n1. Which OEM or customer is requiring this audit?\n2. Do you have the specific checklist from the customer?\n\nPRV can assist with gap assessment and readiness once requirements are confirmed.`,
+    WHAT:{ en:`**MACE Audit**\n\nThe scope and requirements of a MACE Audit depend on the specific customer, program, or audit framework involved.\n\nPRV can assist with gap assessment, documentation, and mock audit handholding once requirements are confirmed.`,
            qr:['Pre-audit gap assessment','Book Consultation'] },
     AUDIT:{ en:`**MACE Audit Preparation**\n\nOnce customer requirements are confirmed:\n1. Identify audit scope from customer checklist\n2. Gap assessment vs. requirements\n3. Address identified gaps\n4. Ensure documentation and evidence are ready\n5. Shopfloor alignment and employee preparation\n6. Internal mock audit\n\n*PRV can support gap assessment, implementation, and mock audit preparation.*`,
             qr:['Book Consultation'] },
@@ -253,6 +253,115 @@ function generateResponse(userMessage,sessionId,inputLang,sessionData){
   const msgLower=userMessage.toLowerCase();
   const lang=detectLang(userMessage,inputLang);
   extractContext(msgLower,sessionData);
+
+  const MANDATORY_CLOSING = "Would you like me to recommend the best solution for your business?";
+  function enforceClosing(text) {
+    const trimmed = (text || '').trim();
+    if (trimmed.endsWith(MANDATORY_CLOSING)) return trimmed;
+    return `${trimmed}\n\n${MANDATORY_CLOSING}`;
+  }
+
+  // 1. Auto Parts Manufacturer
+  if (
+    (msgLower.includes('auto part') || msgLower.includes('auto component') || msgLower.includes('automotive') || msgLower.includes('car part') || msgLower.includes('oem supplier')) &&
+    (msgLower.includes('which') || msgLower.includes('recommend') || msgLower.includes('take') || msgLower.includes('need') || msgLower.includes('certificate') || msgLower.includes('certification') || msgLower.includes('factory'))
+  ) {
+    const answer = `🚗 **PRV Consultant Strategic Analysis for Auto Parts Manufacturers**\n\nBased on your manufacturing profile as an automotive component producer, **you should NOT take generic certifications**. \n\nWe specifically recommend **IATF 16949:2016** (Automotive Quality Management System) along with the **5 Automotive Core Tools**.\n\n### Why IATF 16949 is Required for Your Business:\n1️⃣ **Mandatory OEM Empanelment**: Top automotive OEMs (Maruti Suzuki, Tata Motors, Hyundai, Mahindra, Hero MotoCorp) and Tier-1 suppliers strictly mandate IATF 16949 certification to award vendor purchase orders.\n2️⃣ **Zero-Defect Standard**: Automotive supply chains require zero PPM rejections, full traceability, and strict defect prevention.\n3️⃣ **5 Automotive Core Tools Mastery**:\n   - **APQP**: Advanced Product Quality Planning for new part development.\n   - **PPAP**: Production Part Approval Process for buyer sign-off.\n   - **FMEA**: Failure Mode & Effects Analysis to prevent shopfloor errors.\n   - **MSA**: Measurement Systems Analysis for gauge accuracy.\n   - **SPC**: Statistical Process Control to guarantee process capability (Cpk > 1.33).\n\n⏱️ **Timeline**: 2 to 3 months (includes shopfloor core tools implementation & audit handholding).\n🤝 **How PRV Helps**: PRV's automotive consultants implement Core Tools directly on your shopfloor and guarantee Tier-1/OEM audit clearance.`;
+    return {
+      intent: 'AUTOMOTIVE_CERTIFICATION_ANALYSIS',
+      service: 'IATF 16949 & Core Tools',
+      lang,
+      answer: enforceClosing(answer),
+      quickReplies: ['IATF 16949 Roadmap', 'Core Tools Workshop', 'MACE Audit Prep', 'Book Free Consultation']
+    };
+  }
+
+  // 2. Export Query
+  if (msgLower === 'i want to export' || msgLower === 'i want to export.' || msgLower.includes('want to export') || msgLower.includes('exporting goods') || msgLower.includes('export certification')) {
+    let answer = '';
+    let quickReplies = [];
+    if (msgLower.includes('food') || msgLower.includes('spices') || msgLower.includes('pharma') || msgLower.includes('cosmetics')) {
+      answer = `🌍 **PRV Consultant Export Solution for Food, Pharma & Cosmetics**\n\nTo export food or pharmaceutical products internationally, you require specific international regulatory clearances:\n\n1️⃣ **FDA Registration & Approval**: Mandatory for exporting food, cosmetics, and pharmaceuticals to the United States.\n2️⃣ **ISO 22000 / HACCP**: Global food safety certification required by international supermarket chains & buyers.\n3️⃣ **HALAL & Kosher Certification**: Essential for exporting to Middle East, SEA, and European food markets.\n4️⃣ **FSSAI Central License**: Mandatory statutory Indian license for export-import food operators.\n\n⏱️ **Timeline**: 2 to 4 weeks.`;
+      quickReplies = ['FDA Approval Quote', 'ISO 22000 FSMS', 'HALAL Certification', 'Book Free Consultation'];
+    } else if (msgLower.includes('machine') || msgLower.includes('electronic') || msgLower.includes('equipment') || msgLower.includes('hardware')) {
+      answer = `🌍 **PRV Consultant Export Solution for Machinery & Electronics**\n\nFor exporting machinery, electricals, or industrial hardware, buyer regions require conformity marks:\n\n1️⃣ **CE Marking**: Mandatory European Union conformity certification for selling industrial machinery, electronics, and hardware in Europe.\n2️⃣ **RoHS & REACH Compliance**: Hazardous substance & chemical safety verification required for EU & UK markets.\n3️⃣ **ISO 9001:2015**: Globally recognized baseline quality management system for international buyers.\n\n⏱️ **Timeline**: 2 to 3 weeks.`;
+      quickReplies = ['CE Marking Guide', 'RoHS Compliance', 'ISO 9001 Quote', 'Book Free Consultation'];
+    } else if (msgLower.includes('textile') || msgLower.includes('garment') || msgLower.includes('apparel') || msgLower.includes('clothing')) {
+      answer = `🌍 **PRV Consultant Export Solution for Textiles & Apparel**\n\nFor exporting garments and textiles to Western buyers (Walmart, Zara, Disney, Target):\n\n1️⃣ **SEDEX / SMETA Ethical Audit (2 & 4 Pillar)**: Mandatory social, labor, safety, and business ethics audit.\n2️⃣ **GOTS / OEKO-TEX**: Global Organic Textile Standard & eco-friendly fabric safety certification.\n\n⏱️ **Timeline**: 1 to 3 weeks.`;
+      quickReplies = ['Prepare for SMETA Audit', 'GOTS Certification', 'Book Free Consultation'];
+    } else {
+      answer = `🌍 **PRV Consultant Export Certification Roadmap**\n\nExport certification requirements depend strictly on your **product category** and **target country**:\n\n• **Machinery & Electronics**: Require **CE Marking** & **RoHS/REACH** (European Union).\n• **Food, Pharma & Cosmetics**: Require **FDA Registration**, **ISO 22000 / HACCP**, and **HALAL**.\n• **Textiles & Consumer Goods**: Require **SEDEX / SMETA Ethical Audits** for global retail buyers.\n• **All Product Lines**: Require **ISO 9001:2015** as baseline quality assurance.\n\n👉 **To give you the exact export requirement**: What specific product does your company manufacture, and which country are you planning to export to?`;
+      quickReplies = ['Exporting Machinery', 'Exporting Food/Pharma', 'Exporting Textiles', 'Book Free Consultation'];
+    }
+    return {
+      intent: 'EXPORT_CERTIFICATION_SOLUTION',
+      service: 'Export Compliance Consulting',
+      lang,
+      answer: enforceClosing(answer),
+      quickReplies
+    };
+  }
+
+  // 3. Subsidy Query
+  if (msgLower.includes('want subsidy') || msgLower.includes('government subsidy') || msgLower.includes('govt grant')) {
+    const answer = `💰 **PRV Consultant Analysis of Applicable Government Subsidies**\n\nPRV Consultancy helps MSMEs and industrial units claim direct government financial subsidies:\n\n1️⃣ **ZED (Zero Defect Zero Effect) MSME Scheme**:\n   - **Up to 80% Subsidy** on audit & certification costs.\n   - **₹10,000 Handholding Support Grant** for consultancy.\n   - **0.5% Concessional Bank Interest Rate** on business loans.\n   - **Up to ₹5 Lakhs Capital Subsidy** for testing equipment.\n\n2️⃣ **NATS & NAPS Apprenticeship Schemes**:\n   - Central Government stipend reimbursement up to **₹1,500/month per candidate**.\n   - **100% Exemption from PF & ESI** liabilities on apprentice stipends.\n\n3️⃣ **GeM & Startup India Subsidies**:\n   - EMD waiver on government tenders & fast-track patent grants.\n\n📋 **Eligibility Check**: Do you hold an active **Udyam MSME Registration** for your unit?`;
+    return {
+      intent: 'GOVERNMENT_SUBSIDY_ANALYSIS',
+      service: 'ZED & Government Subsidies',
+      lang,
+      answer: enforceClosing(answer),
+      quickReplies: ['ZED MSME Subsidy', 'NATS Stipend Subsidy', 'GeM Portal Info', 'Book Free Consultation']
+    };
+  }
+
+  // 4. 5S Workplace Management Query
+  if (msgLower.includes('5s') || msgLower.includes('seiri') || msgLower.includes('shadow board')) {
+    const answer = `✨ **5S Workplace Management & Visual Control System**\n\n• **What it is**: 5-step Japanese methodology: Sort, Set in Order, Shine, Standardize, Sustain.\n• **Benefits**: Organizes plant floor, eliminates search time, clears OEM audits.\n• **Timeline**: 1 to 3 weeks.\n• **How PRV Helps**: Red-tagging campaigns, shadow board installation & monthly 5S scorecards.`;
+    return {
+      intent: 'FIVES_WORKPLACE_MANAGEMENT',
+      service: '5S Workplace Management',
+      lang,
+      answer: enforceClosing(answer),
+      quickReplies: ['5S Workshop', '5S vs Kaizen vs Lean', 'Book Free Consultation']
+    };
+  }
+
+  // 5. Lean Manufacturing Query
+  if (msgLower.includes('lean') || msgLower.includes('vsm') || msgLower.includes('value stream') || msgLower.includes('smed')) {
+    const answer = `🏭 **Lean Manufacturing & Operational Excellence Blueprint**\n\n• **What it is**: Systematic strategy to eliminate 7 Mudas waste & cut manufacturing lead times.\n• **Benefits**: 30%-50% WIP reduction, higher OEE, zero bottleneck delays.\n• **Timeline**: 1 to 3 months.\n• **How PRV Helps**: On-site Value Stream Mapping, SMED line balancing & lean transformation.`;
+    return {
+      intent: 'LEAN_MANUFACTURING',
+      service: 'Lean Manufacturing',
+      lang,
+      answer: enforceClosing(answer),
+      quickReplies: ['Lean Transformation', '5S vs Kaizen vs Lean', 'Book Free Consultation']
+    };
+  }
+
+  // 6. Kaizen Query
+  if (msgLower.includes('kaizen') || msgLower.includes('gemba') || msgLower.includes('continuous improvement')) {
+    const answer = `🔄 **Kaizen Continuous Improvement & Gemba Problem Solving**\n\n• **What it is**: Employee-driven philosophy of daily micro-improvements.\n• **Benefits**: Solves shopfloor defects, cuts scrap, sustains high workforce morale.\n• **Timeline**: 2 to 4 weeks rollout.\n• **How PRV Helps**: Gemba walks, operator 7 QC tools training & suggestion reward system.`;
+    return {
+      intent: 'KAIZEN_CONTINUOUS_IMPROVEMENT',
+      service: 'Kaizen Improvement',
+      lang,
+      answer: enforceClosing(answer),
+      quickReplies: ['Kaizen Event', '5S vs Kaizen vs Lean', 'Book Free Consultation']
+    };
+  }
+
+  // 7. Generic ISO Query ("What is ISO?")
+  if (msgLower === 'what is iso' || msgLower === 'what is iso?' || msgLower === 'iso kya hai' || msgLower === 'iso kya hai?' || msgLower === 'iso') {
+    const answer = `📜 **Professional Overview of ISO (International Organization for Standardization)**\n\nISO is an independent, non-governmental international organization based in Geneva, Switzerland. It develops globally recognized standards for quality, safety, security, environmental protection, and operational efficiency.\n\n### Key ISO Standards for Businesses:\n• **ISO 9001:2015**: Quality Management System (QMS) - Standard for tenders & vendor onboarding.\n• **ISO 14001:2015**: Environmental Management System (EMS) - Standard for pollution compliance & ESG.\n• **ISO 45001:2018**: Occupational Health & Safety (OH&S) - Standard for worker safety & Factory Act compliance.\n• **ISO 27001:2022**: Information Security (ISMS) - Standard for IT companies & data protection.\n• **ISO 22000:2018**: Food Safety (FSMS) - Standard for food processors & exporters.\n• **ISO 50001:2018**: Energy Management (EnMS) - Standard for slacking factory power bills.\n\n👉 **Which industry or product does your company operate in?** Tell me your business type, and I will recommend the exact ISO standard that will bring you the highest business value.`;
+    return {
+      intent: 'ISO_OVERVIEW',
+      service: 'ISO Certifications',
+      lang,
+      answer: enforceClosing(answer),
+      quickReplies: ['Recommend for my business', 'ISO 9001 QMS', 'ISO 27001 ISMS', 'ISO 22000 Food Safety']
+    };
+  }
+
   const service=detectService(msgLower);
   let intent=detectIntent(msgLower);
 
