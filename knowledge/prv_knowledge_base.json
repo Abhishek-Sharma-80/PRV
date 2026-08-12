@@ -215,7 +215,7 @@
         }
       ],
       "comparison": "ISO 27001 sets overall information security management systems, while SOC 2 evaluates operational security controls specifically for US SaaS buyers.",
-      "prv_approach": "PRV cybersecurity consultants conduct VAPT audits, draft SoA matrices, configure security controls, and lead audit defense.",
+      "prv_approach": "PRV cyasbersecurity consultants conduct VAPT audits, draft SoA matrices, configure security controls, and lead audit defense.",
       "prv_recommended_solution": "If you operate in IT, SaaS, or software services, ISO 27001:2022 is mandatory to unlock international enterprise deals."
     },
     "iso_22301": {
