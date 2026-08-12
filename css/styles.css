@@ -7,44 +7,37 @@
    1. CSS VARIABLES & DESIGN TOKENS
    -------------------------------------------------------------------------- */
 :root {
-  /* Brand Colors - Ultra Premium Deep Midnight & Emerald Glow */
-  --primary-navy: #0B132B;
-  --primary-navy-dark: #070D1F;
-  --primary-navy-light: #1C2541;
-  --accent-green: #00C9A7;
-  --accent-green-hover: #00B092;
-  --accent-green-light: rgba(0, 201, 167, 0.12);
-  --accent-blue: #3B82F6;
-  --accent-gold: #F59E0B;
-  --accent-purple: #8B5CF6;
+  /* Stitch Luminous Enterprise Design Tokens */
+  --primary-navy: #051424;
+  --primary-navy-dark: #010f1f;
+  --primary-navy-light: #1c2b3c;
+  --accent-green: #00f2fe;
+  --accent-green-hover: #00dce6;
+  --accent-green-light: rgba(0, 242, 254, 0.12);
+  --accent-blue: #38bdf8;
+  --accent-gold: #f59e0b;
+  --accent-purple: #8b5cf6;
 
-  /* Stitch Corporate Ecosystem Design Tokens (Project 995296504154024331) */
-  --stitch-surface: #f7f9fb;
-  --stitch-surface-dim: #d8dadc;
-  --stitch-surface-bright: #f7f9fb;
-  --stitch-surface-container-lowest: #ffffff;
-  --stitch-surface-container-low: #f2f4f6;
-  --stitch-surface-container: #eceef0;
-  --stitch-surface-container-high: #e6e8ea;
-  --stitch-surface-container-highest: #e0e3e5;
-  --stitch-on-surface: #191c1e;
-  --stitch-on-surface-variant: #44474d;
-  --stitch-primary: #000000;
-  --stitch-on-primary: #ffffff;
-  --stitch-primary-container: #0d1c32;
-  --stitch-on-primary-container: #76849f;
-  --stitch-secondary: #4f5e80;
-  --stitch-on-secondary: #ffffff;
-  --stitch-secondary-container: #c7d7fe;
-  --stitch-on-secondary-container: #4e5d7e;
-  --stitch-cyan-accent: #00E5FF;
-  --stitch-cyan-glow: rgba(0, 229, 255, 0.4);
+  /* Stitch Corporate Ecosystem Tokens */
+  --stitch-surface: #051424;
+  --stitch-surface-dim: #0d1c2d;
+  --stitch-surface-bright: #2c3a4c;
+  --stitch-surface-container: #122131;
+  --stitch-surface-container-high: #1c2b3c;
+  --stitch-on-surface: #d4e4fa;
+  --stitch-on-surface-variant: #b9cacb;
+  --stitch-primary: #e0fdff;
+  --stitch-primary-container: #00f2fe;
+  --stitch-on-primary-container: #006a70;
+  --stitch-secondary: #bec6e0;
+  --stitch-cyan-accent: #00f2fe;
+  --stitch-cyan-glow: rgba(0, 242, 254, 0.4);
 
   /* Premium Gradients */
-  --gradient-hero: linear-gradient(135deg, #0d1c32 0%, #0a192f 50%, #1c2541 100%);
-  --gradient-accent: linear-gradient(135deg, #00E5FF 0%, #00B4D8 100%);
-  --gradient-gold: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-  --gradient-card: linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.7) 100%);
+  --gradient-hero: linear-gradient(135deg, #051424 0%, #0d1c2d 50%, #1c2b3c 100%);
+  --gradient-accent: linear-gradient(135deg, #00f2fe 0%, #38bdf8 100%);
+  --gradient-gold: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  --gradient-card: linear-gradient(180deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.7) 100%);
 
   /* Neutral Tones */
   --bg-body: #f7f9fb;
