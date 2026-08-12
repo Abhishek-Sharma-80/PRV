@@ -89,6 +89,31 @@
   transform: translateY(-4px);
 }
 
+.hero-float-card {
+  position: absolute;
+  padding: 8px 16px;
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 242, 254, 0.3);
+  border-radius: 9999px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 242, 254, 0.25);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 20;
+}
+
+.hero-float-card-1 {
+  top: 12px;
+  right: -8px;
+}
+
+.hero-float-card-2 {
+  bottom: 20px;
+  left: -12px;
+}
+
 .text-gradient-mint {
   background: linear-gradient(135deg, #e2e2e2 0%, #00f2c3 100%);
   -webkit-background-clip: text;
