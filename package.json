@@ -1,0 +1,28 @@
+{
+  "name": "prv-consultancy-services",
+  "version": "1.0.0",
+  "description": "PRV Consultancy Services Website & AI Assistant Serverless Backend",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "node -e \"console.log('Build completed for Vercel deployment')\"",
+    "db:init": "node scripts/init-db.js"
+  },
+  "keywords": [
+    "prv-consultancy",
+    "iso",
+    "zed",
+    "iatf",
+    "fssai",
+    "sedex",
+    "ai-assistant",
+    "vercel"
+  ],
+  "author": "PRV Consultancy Services",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "pg": "^8.12.0"
+  }
+}

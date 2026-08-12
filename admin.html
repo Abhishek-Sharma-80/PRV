@@ -425,20 +425,16 @@
       }
     }
 
-    // API fetch helper with localhost:3000 fallback
+    // API fetch helper
     async function apiFetch(url, options = {}) {
       try {
         const res = await fetch(url, options);
         if (res && res.ok) return res;
-      } catch (e) {}
-
-      if (!url.startsWith('http')) {
-        try {
-          const res = await fetch('http://localhost:3000' + url, options);
-          if (res && res.ok) return res;
-        } catch (e) {}
+        return res;
+      } catch (e) {
+        console.error('API Fetch error:', e);
+        return null;
       }
-      return null;
     }
 
     // Login Handle

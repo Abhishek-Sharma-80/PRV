@@ -295,20 +295,11 @@
         }
 
         try {
-          let res = null;
-          try {
-            res = await fetch('/api/ai/book-consultation', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ full_name, mobile_number, email, company_name, service_required, preferred_date, preferred_time, notes })
-            });
-          } catch (errFetch) {
-            res = await fetch('http://localhost:3000/api/ai/book-consultation', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ full_name, mobile_number, email, company_name, service_required, preferred_date, preferred_time, notes })
-            });
-          }
+          const res = await fetch('/api/ai/book-consultation', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ full_name, mobile_number, email, company_name, service_required, preferred_date, preferred_time, notes })
+          });
 
           if (bookingModal) bookingModal.style.display = 'none';
           bookingForm.reset();
@@ -388,19 +379,11 @@
             body: JSON.stringify(payload)
           });
         } catch (eRel) {
-          try {
-            response = await fetch('/api/ai/chat', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(payload)
-            });
-          } catch (eRel2) {
-            response = await fetch('http://localhost:3000/api/chat', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(payload)
-            });
-          }
+          response = await fetch('/api/ai/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
         }
 
         if (response && response.ok) {
