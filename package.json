@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "node server.js",
     "start": "node server.js",
-    "build": "node -e \"console.log('Build completed for Vercel deployment')\"",
     "db:init": "node scripts/init-db.js"
   },
   "keywords": [
