@@ -1,0 +1,709 @@
+{
+  "company_profile": {
+    "name": "PRV Consultancy Services",
+    "website": "https://prvconsultancy.com",
+    "contact_phone": "+91 74893 51297",
+    "contact_email": "info@prvconsultancy.com",
+    "tagline": "Empowering Businesses Through Excellence, Compliance & Growth",
+    "core_offerings": [
+      "Business Consultancy & Process Improvement Support",
+      "ISO & Specialized Certification Consultancy",
+      "Corporate & Industrial Training",
+      "Audits & Compliance Support (SEDEX, SMETA, MACE, FSSAI)",
+      "Operational & Business Excellence (Lean, 5S, Kaizen)",
+      "Productivity & Quality Improvement Solutions",
+      "Workforce & Apprenticeship Guidance (NATS, NAPS)",
+      "Industry-Focused End-to-End Business Transformation"
+    ]
+  },
+  "services": [
+    {
+      "service": "ZED Certification",
+      "category": "Certification",
+      "definition": "ZED (Zero Defect Zero Effect) is an initiative by the Ministry of MSME, Government of India, to motivate MSMEs to manufacture products with zero defects and minimal environmental impact.",
+      "purpose": [
+        "Eliminate manufacturing defects and rework",
+        "Minimize environmental pollution and footprint",
+        "Empower Indian MSMEs to become globally competitive",
+        "Avail Ministry of MSME subsidies on certification and capital"
+      ],
+      "who_needs_it": [
+        "Registered Indian Micro, Small, and Medium Enterprises (MSMEs)",
+        "Manufacturing units with Udyam Registration",
+        "Exporters seeking government-backed quality credentials",
+        "Companies bidding for government tenders requiring ZED rating"
+      ],
+      "benefits": [
+        "Govt Subsidy up to 80% on certification cost for eligible MSMEs",
+        "Concession on bank loan processing fees and interest rates",
+        "Financial support for testing and equipment calibration",
+        "Enhanced customer trust and export readiness"
+      ],
+      "process": [
+        "Udyam Registration verification & Pledge taking",
+        "Self-assessment parameter evaluation",
+        "Gap analysis and PRV documentation guidance",
+        "Implementation of quality and environmental controls",
+        "Desktop assessment / On-site audit by accredited agency",
+        "ZED Certification award (Bronze/Silver/Gold)"
+      ],
+      "documents": [
+        "Udyam Registration Certificate",
+        "GST Registration Certificate",
+        "Plant layout and process flowcharts",
+        "Machine maintenance & calibration logs",
+        "Quality and environmental safety records"
+      ],
+      "faqs": [
+        {
+          "question": "What are the levels of ZED Certification?",
+          "answer": "ZED Certification is awarded at three levels: Bronze, Silver, and Gold, depending on the maturity of quality and environmental parameters implemented."
+        },
+        {
+          "question": "Can service sector MSMEs apply for ZED?",
+          "answer": "Currently, ZED scheme primary focus is on manufacturing MSMEs holding valid Udyam Registration."
+        }
+      ],
+      "comparisons": "Unlike ISO 9001 which is an international private management standard, ZED is a Government of India scheme specifically for Indian MSMEs with direct financial subsidies.",
+      "prv_support": [
+        "Udyam eligibility check",
+        "Parameter gap analysis",
+        "SOP drafting & staff training",
+        "Portal submission handholding",
+        "Audit readiness & guaranteed clearance support"
+      ]
+    },
+    {
+      "service": "ISO 9001",
+      "category": "Certification",
+      "definition": "ISO 9001:2015 is the internationally recognized standard for Quality Management Systems (QMS) that helps organizations consistently deliver high-quality products and services.",
+      "purpose": [
+        "Establish standardized operational processes",
+        "Enhance customer satisfaction and trust",
+        "Implement risk-based thinking and continuous improvement",
+        "Qualify for corporate vendor registration and govt tenders"
+      ],
+      "who_needs_it": [
+        "Manufacturing and engineering firms",
+        "Service sector businesses, IT firms, and consultants",
+        "SMEs seeking corporate growth and structured operations",
+        "Organizations bidding for government Tenders"
+      ],
+      "benefits": [
+        "Global recognition in over 170 countries",
+        "Substantial reduction in customer complaints and shopfloor rework",
+        "Mandatory requirement for corporate vendor onboarding",
+        "System-driven processes independent of individual personnel"
+      ],
+      "process": [
+        "Initial gap analysis of existing workflows",
+        "Quality Manual, SOPs, and Process Chart preparation",
+        "Employee training and SOP implementation",
+        "Internal Audit & Management Review Meeting (MRM)",
+        "Final Stage 1 & Stage 2 audit by accredited certification body"
+      ],
+      "documents": [
+        "Company Registration / GST Certificate",
+        "Organization Structure & Quality Policy",
+        "Standard Operating Procedures (SOPs)",
+        "Equipment Calibration & Maintenance Logs",
+        "Customer Feedback & Complaint Logs"
+      ],
+      "faqs": [
+        {
+          "question": "How long is the ISO 9001 certificate valid?",
+          "answer": "ISO 9001 certificate is valid for 3 years, subject to annual surveillance audits."
+        },
+        {
+          "question": "How fast can PRV assist in getting certified?",
+          "answer": "With PRV fast-track support, documentation and audit readiness can be completed in 10 to 15 working days."
+        }
+      ],
+      "comparisons": "ISO 9001 is a generic quality management standard applicable to any industry, whereas IATF 16949 is specialized strictly for automotive supply chain manufacturers.",
+      "prv_support": [
+        "Process mapping & Gap analysis",
+        "Customized SOP and Quality Manual creation",
+        "Staff awareness training",
+        "Internal mock audit",
+        "Guaranteed 100% audit clearance handholding"
+      ]
+    },
+    {
+      "service": "ISO 14001",
+      "category": "Certification",
+      "definition": "ISO 14001:2015 specifies the requirements for an Environmental Management System (EMS) to help organizations reduce waste, fulfill legal compliance obligations, and enhance environmental performance.",
+      "purpose": [
+        "Control environmental impact of operations",
+        "Ensure full statutory compliance with Pollution Board norms",
+        "Optimize energy, water, and raw material utilization",
+        "Enhance corporate ESG (Environmental, Social, Governance) profile"
+      ],
+      "who_needs_it": [
+        "Manufacturing plants, chemical and textile industries",
+        "Construction, mining, and energy generation companies",
+        "Organizations seeking international buyer clearances"
+      ],
+      "benefits": [
+        "Reduction in waste disposal and effluent treatment costs",
+        "Protection against legal penalties from CPCB/SPCB authorities",
+        "Improved brand image among eco-conscious global clients"
+      ],
+      "process": [
+        "Environmental Aspect-Impact Identification",
+        "Legal & Regulatory Compliance Register setup",
+        "EMS Documentation & Waste Management SOPs",
+        "Internal EMS Audit & Mock Emergency Drills",
+        "External Certification Audit"
+      ],
+      "documents": [
+        "Pollution Board NOC (Consent to Establish / Operate)",
+        "Hazardous Waste Disposal Records & ETP/STP Logs",
+        "Environmental Objectives & Legal Register"
+      ],
+      "faqs": [
+        {
+          "question": "Does ISO 14001 replace Pollution Control Board NOCs?",
+          "answer": "No. ISO 14001 helps you maintain and verify compliance with Pollution Board NOCs and environmental laws, but does not replace legal approvals."
+        }
+      ],
+      "comparisons": "ISO 14001 focuses on environmental sustainability, whereas ISO 45001 focuses on workplace occupational health and employee safety.",
+      "prv_support": [
+        "Aspect-Impact Register setup",
+        "Statutory compliance review",
+        "EMS SOP preparation",
+        "Internal EMS audit",
+        "Certification audit support"
+      ]
+    },
+    {
+      "service": "ISO 45001",
+      "category": "Certification",
+      "definition": "ISO 45001:2018 is the international standard for Occupational Health and Safety (OH&S) management systems, designed to prevent work-related injuries, illnesses, and fatal accidents.",
+      "purpose": [
+        "Provide safe and healthy workplaces for employees",
+        "Identify and mitigate workplace hazards and risks",
+        "Ensure compliance with Factory Act and labor laws",
+        "Reduce workplace accidents, downtime, and compensation claims"
+      ],
+      "who_needs_it": [
+        "Heavy manufacturing, steel, automotive, and chemical plants",
+        "Construction, infrastructure, and mining contractors",
+        "Logistics, warehouse, and high-risk operational facilities"
+      ],
+      "benefits": [
+        "Significant reduction in workplace lost-time accidents (LTI)",
+        "Lower insurance premiums and legal liabilities",
+        "Boosted employee morale and safety culture"
+      ],
+      "process": [
+        "Hazard Identification & Risk Assessment (HIRA)",
+        "Safety Policy, SOPs, and PPE protocols setup",
+        "Emergency response plan & mock drills execution",
+        "Internal Safety Audit & Safety Committee Review",
+        "Certification Body Audit"
+      ],
+      "documents": [
+        "HIRA Matrix & Safety Manual",
+        "Factory License & Statutory Compliance Certificates",
+        "Accident/Incident Investigation Logs & PPE Issue Logs"
+      ],
+      "faqs": [
+        {
+          "question": "Is ISO 45001 mandatory by law?",
+          "answer": "While ISO 45001 is a voluntary standard, many top corporate clients and international buyers make it mandatory for high-risk industrial suppliers."
+        }
+      ],
+      "comparisons": "ISO 45001 replaced the older OHSAS 18001 standard and integrates seamlessly with ISO 9001 and ISO 14001 as part of an Integrated Management System (IMS).",
+      "prv_support": [
+        "HIRA assessment",
+        "Safety manual drafting",
+        "Safety training & mock drills",
+        "Internal safety audit",
+        "Audit handholding"
+      ]
+    },
+    {
+      "service": "ISO 22000",
+      "category": "Certification",
+      "definition": "ISO 22000:2018 is the international standard for Food Safety Management Systems (FSMS), incorporating HACCP principles to ensure food safety across the entire supply chain.",
+      "purpose": [
+        "Ensure food safety from farm to fork",
+        "Identify and control food safety hazards (Biological, Chemical, Physical)",
+        "Comply with FSSAI regulations and global food trade standards"
+      ],
+      "who_needs_it": [
+        "Food manufacturing, processing, and packaging companies",
+        "Hotels, commercial kitchens, catering services, and cold chains",
+        "Food exporters, agricultural processors, and beverage firms"
+      ],
+      "benefits": [
+        "Eliminates food contamination risks and product recalls",
+        "Essential credential for selling to major supermarket chains and exports",
+        "Complements and elevates basic FSSAI licensing"
+      ],
+      "process": [
+        "Prerequisite Programs (PRPs) assessment",
+        "HACCP hazard analysis & Critical Control Point (CCP) setup",
+        "FSMS manual drafting and hygiene SOP training",
+        "Internal FSMS audit & traceability exercises",
+        "External certification audit"
+      ],
+      "documents": [
+        "FSSAI License",
+        "HACCP Plan & CCP Monitoring Sheets",
+        "Water & Pest Control Analysis Reports",
+        "Staff Health Checkup & Hygiene Logs"
+      ],
+      "faqs": [
+        {
+          "question": "Is ISO 22000 different from HACCP?",
+          "answer": "HACCP is a food safety system framework focused on critical control points, whereas ISO 22000 integrates HACCP into a broader business management framework."
+        }
+      ],
+      "comparisons": "FSSAI is a legal statutory requirement in India, while ISO 22000 is an internationally recognized quality standard for global export and corporate buyers.",
+      "prv_support": [
+        "PRP & HACCP gap study",
+        "Food safety manual drafting",
+        "Hygiene & CCP training",
+        "Internal FSMS audit",
+        "Audit clearance support"
+      ]
+    },
+    {
+      "service": "ISO 27001",
+      "category": "Certification",
+      "definition": "ISO/IEC 27001:2022 is the world's leading standard for Information Security Management Systems (ISMS), helping organizations protect data assets, customer privacy, and IT infrastructure.",
+      "purpose": [
+        "Protect intellectual property, financial data, and personal data",
+        "Prevent cyber attacks, data breaches, and insider threats",
+        "Ensure compliance with IT Act, GDPR, and data protection laws"
+      ],
+      "who_needs_it": [
+        "IT & Software Development companies, SaaS providers",
+        "BPOs, KPOs, FinTech, and healthcare data processors",
+        "E-commerce platforms and cloud service vendors"
+      ],
+      "benefits": [
+        "Mandatory requirement for international IT clients and US/EU contracts",
+        "Prevents costly data breach fines and reputational damage",
+        "Builds high trust with institutional enterprise clients"
+      ],
+      "process": [
+        "Asset identification & Risk Assessment",
+        "Statement of Applicability (SoA) setup across 93 controls",
+        "ISMS Policy & Access Control SOP drafting",
+        "Vulnerability assessment & Internal ISMS audit",
+        "Stage 1 & Stage 2 certification audit"
+      ],
+      "documents": [
+        "Information Security Policy & SoA",
+        "Asset Register & Risk Treatment Plan",
+        "Access Control, Backup & Disaster Recovery Plans"
+      ],
+      "faqs": [
+        {
+          "question": "How long does ISO 27001 implementation take?",
+          "answer": "Typically 30 to 60 days depending on IT infrastructure complexity, supported fast-track by PRV templates."
+        }
+      ],
+      "comparisons": "ISO 27001 covers overall information security management systems, while SOC 2 is an audit framework specifically tailored for US cloud and service providers.",
+      "prv_support": [
+        "Risk Assessment & SoA matrix design",
+        "ISMS documentation & policy templates",
+        "Staff cyber security training",
+        "Internal ISMS mock audit",
+        "Audit handholding"
+      ]
+    },
+    {
+      "service": "ISO 22301",
+      "category": "Certification",
+      "definition": "ISO 22301:2019 is the international standard for Business Continuity Management Systems (BCMS), ensuring businesses can continue operating during unexpected disruptions or disasters.",
+      "purpose": [
+        "Build organizational resilience against cyber threats, power outages, and disasters",
+        "Protect business reputation and maintain client delivery SLA during crises"
+      ],
+      "who_needs_it": [
+        "Data centers, telecom operators, financial institutions, and critical IT vendors"
+      ],
+      "benefits": [
+        "Minimized downtime financial losses",
+        "Enhanced customer and stakeholder confidence in crisis management"
+      ],
+      "process": [
+        "Business Impact Analysis (BIA)",
+        "Risk Assessment & BCMS Strategy definition",
+        "Continuity Plan drafting & Mock exercise",
+        "Certification audit clearance"
+      ],
+      "documents": [
+        "Business Impact Analysis Report",
+        "Disaster Recovery & Business Continuity Plans"
+      ],
+      "faqs": [
+        {
+          "question": "What is the difference between Disaster Recovery (DR) and BCMS?",
+          "answer": "DR focuses on restoring IT systems, while BCMS covers the entire business operation recovery including personnel, facilities, and processes."
+        }
+      ],
+      "comparisons": "ISO 22301 complements ISO 27001 by expanding IT resilience into overall business operational continuity.",
+      "prv_support": [
+        "BIA framework design",
+        "Continuity manual drafting",
+        "Disaster recovery tabletop drills",
+        "Certification audit guidance"
+      ]
+    },
+    {
+      "service": "ISO 50001",
+      "category": "Certification",
+      "definition": "ISO 50001:2018 specifies requirements for establishing, implementing, maintaining, and improving an Energy Management System (EnMS).",
+      "purpose": [
+        "Systematically reduce energy consumption, power bills, and greenhouse gas emissions"
+      ],
+      "who_needs_it": [
+        "Energy-intensive manufacturing units (Steel, Cement, Glass, Chemicals, Paper)"
+      ],
+      "benefits": [
+        "Significant annual power and fuel cost savings",
+        "Demonstrated carbon neutrality commitment"
+      ],
+      "process": [
+        "Energy Baseline & Energy Review assessment",
+        "Significant Energy Use (SEU) identification",
+        "Energy action planning & Monitoring SOPs",
+        "External certification audit"
+      ],
+      "documents": [
+        "Energy Audit Report & Baseline Data",
+        "Energy Policy & SEU Target Tracker"
+      ],
+      "faqs": [
+        {
+          "question": "Does ISO 50001 require expensive new machinery?",
+          "answer": "Not necessarily. Most energy savings come from process optimizations, waste heat recovery, and efficient operational controls."
+        }
+      ],
+      "comparisons": "ISO 50001 focuses strictly on energy efficiency, while ISO 14001 covers overall environmental waste and compliance.",
+      "prv_support": [
+        "Energy review handholding",
+        "EnMS manual drafting",
+        "Staff conservation awareness training",
+        "Certification audit support"
+      ]
+    },
+    {
+      "service": "ISO 13485",
+      "category": "Certification",
+      "definition": "ISO 13485:2016 specifies requirements for a Quality Management System for medical devices and related services.",
+      "purpose": [
+        "Ensure quality, safety, and regulatory compliance of medical devices across design and manufacturing"
+      ],
+      "who_needs_it": [
+        "Medical device manufacturers, surgical tool makers, and diagnostic equipment providers"
+      ],
+      "benefits": [
+        "Mandatory requirement for CDSCO licensing in India and global CE / FDA exports",
+        "Guaranteed product sterility, traceability, and safety compliance"
+      ],
+      "process": [
+        "Device risk classification & Design Controls setup",
+        "Cleanroom and sterilisation SOP implementation",
+        "Technical File & DMR preparation",
+        "Audit by accredited notified body"
+      ],
+      "documents": [
+        "Device Master Record (DMR) & Device History Record (DHR)",
+        "Risk Management File (ISO 14971)",
+        "CDSCO Manufacturing License"
+      ],
+      "faqs": [
+        {
+          "question": "Is ISO 9001 enough for medical device manufacturing?",
+          "answer": "No. Medical devices require ISO 13485 due to strict regulatory requirements, cleanroom controls, and risk management protocols."
+        }
+      ],
+      "comparisons": "ISO 13485 incorporates ISO 9001 structure but adds stringent medical regulatory and safety requirements.",
+      "prv_support": [
+        "Cleanroom SOP creation",
+        "ISO 14971 risk documentation",
+        "Technical File drafting",
+        "CDSCO audit handholding"
+      ]
+    },
+    {
+      "service": "ISO 17025",
+      "category": "Certification",
+      "definition": "ISO/IEC 17025:2017 specifies general requirements for the competence, impartiality, and consistent operation of testing and calibration laboratories.",
+      "purpose": [
+        "Demonstrate technical competence and produce precise, internationally accepted test results"
+      ],
+      "who_needs_it": [
+        "Independent testing & calibration labs, in-house industrial QC testing labs"
+      ],
+      "benefits": [
+        "NABL Accreditation eligibility in India",
+        "Global acceptance of laboratory test certificates"
+      ],
+      "process": [
+        "Measurement Uncertainty & Method Validation calculation",
+        "Quality Manual & Equipment Traceability setup",
+        "Proficiency Testing (PT) / Inter-Laboratory Comparison (ILC)",
+        "NABL / Accredited Body Assessment"
+      ],
+      "documents": [
+        "Lab Quality Manual & Calibration Certificates",
+        "Method Validation & Uncertainty Reports",
+        "Proficiency Testing Results"
+      ],
+      "faqs": [
+        {
+          "question": "Is ISO 17025 an accreditation or certification?",
+          "answer": "ISO 17025 leads to Accreditation (such as NABL in India), proving technical competence, whereas standard ISOs are certifications."
+        }
+      ],
+      "comparisons": "ISO 9001 assesses operational management quality, while ISO 17025 specifically accredits lab technical competence and measurement accuracy.",
+      "prv_support": [
+        "Uncertainty estimation assistance",
+        "Lab Quality Manual drafting",
+        "ILC/PT participation guidance",
+        "NABL audit handholding"
+      ]
+    },
+    {
+      "service": "IATF 16949",
+      "category": "Certification",
+      "definition": "IATF 16949:2016 is the global quality management standard for the automotive industry, established by the International Automotive Task Force.",
+      "purpose": [
+        "Ensure continuous defect prevention and reduction of variation in automotive supply chains"
+      ],
+      "who_needs_it": [
+        "Automobile component manufacturers, tier-1, tier-2, and tier-3 automotive suppliers"
+      ],
+      "benefits": [
+        "Mandatory requirement for supplying directly to Automotive OEMs (Tata, Maruti, Hyundai, Mahindra, etc.)",
+        "Drastic reduction in scrap, rework, and warranty claims"
+      ],
+      "process": [
+        "ISO 9001 baseline verification",
+        "Implementation of Core Tools (APQP, PPAP, FMEA, MSA, SPC)",
+        "Automotive SOP drafting & Traceability setup",
+        "Internal Audit by qualified IATF auditor",
+        "Stage 1 & Stage 2 IATF audit clearance"
+      ],
+      "documents": [
+        "APQP Documents & Control Plans",
+        "PFMEA & Process Flow Diagrams",
+        "PPAP Dossiers & Gauge MSA Reports"
+      ],
+      "faqs": [
+        {
+          "question": "Can a new factory get IATF 16949 certified directly?",
+          "answer": "A unit needs at least 12 months of automotive manufacturing data, or can obtain a Letter of Conformance (LOC) if newly established."
+        }
+      ],
+      "comparisons": "ISO 9001 is a basic quality standard, while IATF 16949 is an advanced automotive standard requiring mandatory APQP, FMEA, and PPAP core tools.",
+      "prv_support": [
+        "Automotive Core Tools training (APQP/PPAP/FMEA/MSA/SPC)",
+        "Control plan & PFMEA drafting",
+        "OEM audit readiness handholding",
+        "100% audit clearance support"
+      ]
+    },
+    {
+      "service": "SEDEX / SMETA",
+      "category": "Compliance & Audit",
+      "definition": "SEDEX (Supplier Ethical Data Exchange) and SMETA (SEDEX Members Ethical Trade Audit) evaluate ethical, labor, health & safety, and environmental standards in supply chains.",
+      "purpose": [
+        "Verify ethical trade, worker welfare, and workplace safety for global retail buyers"
+      ],
+      "who_needs_it": [
+        "Garment, textile, handicrafts, food packaging, and manufacturing exporters supplying to global brands (Walmart, Target, Disney, H&M, etc.)"
+      ],
+      "benefits": [
+        "Unlocks vendor onboarding with premier international retail buyers",
+        "Single audit report accepted by thousands of global brands on SEDEX platform"
+      ],
+      "process": [
+        "SEDEX platform registration & Self-Assessment Questionnaire (SAQ)",
+        "Pre-audit ethical & labor compliance gap analysis by PRV",
+        "Corrective action on workplace safety, wages, and working hours",
+        "Third-party SMETA 2-Pillar or 4-Pillar audit execution",
+        "Corrective Action Plan Report (CAPR) closure"
+      ],
+      "documents": [
+        "Wage Register & Attendance Records",
+        "Factory License & Building Stability Certificate",
+        "Fire NOC & First Aid / Safety Officer Records"
+      ],
+      "faqs": [
+        {
+          "question": "What is the difference between 2-Pillar and 4-Pillar SMETA?",
+          "answer": "2-Pillar covers Labor Standards and Health & Safety. 4-Pillar adds Environmental Assessment and Business Ethics."
+        }
+      ],
+      "comparisons": "ISO standards focus on internal quality/management systems, whereas SEDEX/SMETA is a social ethical audit requested directly by international buyers.",
+      "prv_support": [
+        "SEDEX SAQ filing handholding",
+        "Labor law & factory compliance audit",
+        "On-site corrective guidance",
+        "CAPR resolution & final clearance"
+      ]
+    },
+    {
+      "service": "FSSAI",
+      "category": "Compliance & Audit",
+      "definition": "FSSAI (Food Safety and Standards Authority of India) licensing and registration is the statutory requirement for all food business operators (FBOs) in India.",
+      "purpose": [
+        "Ensure food products meet statutory hygiene and safety standards"
+      ],
+      "who_needs_it": [
+        "Food manufacturers, repackers, distributors, wholesalers, restaurants, and cloud kitchens"
+      ],
+      "benefits": [
+        "100% legal compliance preventing heavy statutory fines and shop closures",
+        "Customer confidence and access to e-commerce food delivery platforms"
+      ],
+      "process": [
+        "Turnover & business capability evaluation (Basic / State / Central License)",
+        "FoSCoS portal application submission with PRV guidance",
+        "Hygiene rating audit and document verification",
+        "License issuance"
+      ],
+      "documents": [
+        "PAN, Aadhaar, GST & Business Address proof",
+        "Plant layout blueprint & List of machinery",
+        "Water testing report from NABL lab"
+      ],
+      "faqs": [
+        {
+          "question": "When is a Central FSSAI License required?",
+          "answer": "Central FSSAI is required for 100% export units, head offices operating across multiple states, or businesses with turnover exceeding ₹20 Crores."
+        }
+      ],
+      "comparisons": "FSSAI is mandatory government licensing, whereas ISO 22000 is an optional international quality excellence standard.",
+      "prv_support": [
+        "FoSCoS portal application filing",
+        "Water test report coordination",
+        "Hygiene SOP setup",
+        "Guaranteed approval support"
+      ]
+    },
+    {
+      "service": "Lean Manufacturing & 5S & Kaizen",
+      "category": "Business Improvement",
+      "definition": "Lean, 5S, and Kaizen are operational excellence methodologies aimed at eliminating waste (Muda), standardizing workplaces, and driving continuous daily process improvements.",
+      "purpose": [
+        "Eliminate 7 Deadly Wastes (Overproduction, Waiting, Transport, Inventory, Motion, Over-processing, Defects)",
+        "Establish clean, organized, and visual shopfloors",
+        "Boost machine uptime (OEE) and operational efficiency"
+      ],
+      "who_needs_it": [
+        "Manufacturing plants facing high rejection rates, inventory clutter, or production bottlenecks"
+      ],
+      "benefits": [
+        "Direct cost reduction and profit maximization",
+        "20% to 40% increase in productivity and throughput",
+        "Drastic reduction in shopfloor search time and accidents"
+      ],
+      "process": [
+        "Shopfloor Gemba Walk & Diagnostic Audit by PRV experts",
+        "5S Implementation (Sort, Set in order, Shine, Standardize, Sustain)",
+        "Kaizen workshop & suggestion scheme rollout for workers",
+        "Value Stream Mapping (VSM) and bottleneck elimination"
+      ],
+      "documents": [
+        "5S Red Tag Register & Audit Checklists",
+        "Kaizen Sheet Templates & Before/After Impact Reports"
+      ],
+      "faqs": [
+        {
+          "question": "How long does it take to see results from 5S and Kaizen?",
+          "answer": "Visual shopfloor transformation is visible within 7 to 14 days of PRV hands-on implementation."
+        }
+      ],
+      "comparisons": "ISO standardizes existing procedures, whereas Lean & 5S actively clean, optimize, and speed up operational workflows.",
+      "prv_support": [
+        "Hands-on shopfloor Gemba walk",
+        "Red-tag exercise and 5S zone creation",
+        "Staff motivation & Kaizen training",
+        "Monthly audit & productivity tracking"
+      ]
+    },
+    {
+      "service": "NATS & NAPS Guidance",
+      "category": "Government / Workforce",
+      "definition": "National Apprenticeship Training Scheme (NATS) and National Apprenticeship Promotion Scheme (NAPS) are Government of India schemes promoting industrial apprenticeship and stipend subsidies.",
+      "purpose": [
+        "Provide industry-ready trained technical workforce while availing government stipend financial reimbursements"
+      ],
+      "who_needs_it": [
+        "Manufacturing companies, engineering firms, and commercial establishments employing apprentices"
+      ],
+      "benefits": [
+        "Govt reimbursement of stipend expenses (up to ₹1,500/month per apprentice under NAPS)",
+        "Exemption from ESI and PF contributions on apprentice stipends",
+        "Access to skilled fresh talent pool"
+      ],
+      "process": [
+        "Portal registration & establishment profile setup",
+        "Apprentice vacancy posting and contract generation",
+        "Stipend disbursement & reimbursement claim filing"
+      ],
+      "documents": [
+        "Company PAN, GST & Provident Fund (PF) registration",
+        "Apprentice educational marksheets & bank details"
+      ],
+      "faqs": [
+        {
+          "question": "Is PF and ESI applicable to NATS/NAPS apprentices?",
+          "answer": "No. Statutory PF and ESI contributions are not applicable to apprentices under NATS/NAPS, saving significant employer costs."
+        }
+      ],
+      "comparisons": "NATS is focused on Diploma & Degree engineering graduates, while NAPS covers ITI and non-engineering apprentices.",
+      "prv_support": [
+        "Portal registration & onboarding",
+        "Contract generation assistance",
+        "Stipend reimbursement claim handholding"
+      ]
+    },
+    {
+      "service": "Master Business Excellence Program",
+      "category": "Business Transformation",
+      "definition": "PRV's flagship comprehensive business transformation program combining ISO systems, Lean manufacturing, 5S shopfloor organization, leadership coaching, and financial profit optimization.",
+      "purpose": [
+        "Transform traditional businesses into high-profit, system-driven, professional enterprises"
+      ],
+      "who_needs_it": [
+        "Business Owners, Directors, and MSME Promoters seeking hands-off management and rapid scaling"
+      ],
+      "benefits": [
+        "Complete transition from owner-driven to system-driven operations",
+        "Direct profit margin expansion and waste elimination",
+        "Ready for corporate expansion, franchising, or investor funding"
+      ],
+      "process": [
+        "Comprehensive 360-degree Business Diagnostic Audit",
+        "Customized 6 to 12 month Transformation Roadmap design",
+        "Weekly PRV expert on-site coaching & implementation",
+        "Quarterly review with Directors & ROI audit"
+      ],
+      "documents": [
+        "Business Governance Manual & KPI Dashboards",
+        "Standard Operating Procedures across all departments"
+      ],
+      "faqs": [
+        {
+          "question": "What is the duration of the Master Business Excellence Program?",
+          "answer": "Programs typically range from 6 months to 12 months with continuous on-site handholding."
+        }
+      ],
+      "comparisons": "Single certifications solve standard compliance, whereas the Master Program transforms the entire business end-to-end.",
+      "prv_support": [
+        "Dedicated senior consultant assignment",
+        "Weekly progress tracking & KPI dashboards",
+        "Guaranteed measurable operational & financial improvements"
+      ]
+    }
+  ]
+}

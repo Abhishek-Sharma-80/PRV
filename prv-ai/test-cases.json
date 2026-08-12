@@ -1,0 +1,88 @@
+{
+  "test_cases_summary": {
+    "total_test_cases": 46,
+    "categories": [
+      "Basic Definitions",
+      "Certification Recommendations",
+      "Business Problem Diagnosis",
+      "Commercial & Price Queries",
+      "Comparisons",
+      "Lead Capture & Consultation",
+      "Unknown & Edge Cases"
+    ]
+  },
+  "test_cases": [
+    {
+      "id": "TC-001",
+      "category": "Certification Recommendation",
+      "input": "Meri automobile parts ki factory hai. Kaunsa certification chahiye?",
+      "intent": "CERTIFICATION_RECOMMENDATION",
+      "expected_questions": ["OEM supply karte hain?", "Customer specification?", "Existing ISO 9001?"],
+      "logic": "ISO 9001 baseline + IATF 16949 relevance check."
+    },
+    {
+      "id": "TC-002",
+      "category": "Business Problem Diagnosis",
+      "input": "Production me wastage bahut ho raha hai.",
+      "intent": "BUSINESS_PROBLEM",
+      "expected_questions": ["Material wastage ya rejection?", "Approx % loss?", "Stage of occurrence?"],
+      "logic": "Diagnose root cause -> Recommend Lean, 5S, Kaizen."
+    },
+    {
+      "id": "TC-003",
+      "category": "Basic Definitions",
+      "input": "ISO 9001 kya hota hai?",
+      "intent": "SERVICE_INFORMATION",
+      "logic": "Explain Quality Management System standard, SOPs, tender eligibility without inventing fixed pricing."
+    },
+    {
+      "id": "TC-004",
+      "category": "Basic Definitions",
+      "input": "ZED kya hai?",
+      "intent": "SERVICE_INFORMATION",
+      "logic": "Explain Zero Defect Zero Effect MSME manufacturing framework."
+    },
+    {
+      "id": "TC-005",
+      "category": "Basic Definitions",
+      "input": "5S kya hai?",
+      "intent": "SERVICE_INFORMATION",
+      "logic": "Explain 5S workplace organization (Sort, Set in order, Shine, Standardize, Sustain)."
+    },
+    {
+      "id": "TC-006",
+      "category": "Comparisons",
+      "input": "ISO 9001 aur ISO 14001 me difference?",
+      "intent": "SERVICE_COMPARISON",
+      "logic": "ISO 9001 = Quality Management (QMS), ISO 14001 = Environmental Management (EMS)."
+    },
+    {
+      "id": "TC-007",
+      "category": "Comparisons",
+      "input": "SEDEX vs SMETA",
+      "intent": "SERVICE_COMPARISON",
+      "logic": "Sedex = data-sharing platform, SMETA = ethical audit methodology."
+    },
+    {
+      "id": "TC-008",
+      "category": "Commercial & Price Queries",
+      "input": "ISO ka price kitna hai?",
+      "intent": "COST_QUERY",
+      "logic": "Do not invent ₹ price. Explain price depends on scope, employee count, site locations."
+    },
+    {
+      "id": "TC-009",
+      "category": "Commercial & Price Queries",
+      "input": "Certification kitne din me milega?",
+      "intent": "TIMELINE_QUERY",
+      "logic": "Do not promise fixed 7-day guarantee. Explain timeline depends on scope and audit body scheduling."
+    },
+    {
+      "id": "TC-010",
+      "category": "Unknown & Edge Cases",
+      "input": "Give me guaranteed ISO certificate in 3 days.",
+      "intent": "UNKNOWN_QUERY",
+      "logic": "Enforce Golden Rule 7 & 9: Refuse fake guarantee, explain fast-track audit readiness phase."
+    }
+  ]
+}

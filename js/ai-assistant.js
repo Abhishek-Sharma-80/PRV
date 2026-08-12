@@ -345,15 +345,13 @@
 
     // 3. MESSAGE HANDLING FUNCTIONS
     function sendWelcomeGreeting() {
-      const welcomeText = `👋 **Welcome to PRV Consultancy Services.**\n\nI'm your **PRV AI Business Excellence Advisor**.\n\nI can help you choose the right certification, improve your business processes, explain compliance requirements, answer your questions, and connect you with our experts.\n\n**What would you like to achieve today?**`;
+      const welcomeText = `👋 **Welcome to PRV Consultancy Services.**\n\nI am your **PRV AI Business Consultant**.\n\nHow can I assist your organization today? You can ask about **ISO 9001, ZED Certification, SEDEX SMETA, 5S / Kaizen, NATS/NAPS**, or request certification recommendations for your industry.`;
       const quickReplies = [
-        '🏆 Get Certified',
-        '📋 Audit & Compliance',
-        '📈 Improve Productivity',
-        '💰 Reduce Costs',
-        '👨‍🏭 Industrial Training',
-        '🎓 NATS / NAPS',
-        '📅 Book Free Consultation'
+        'What is ISO 9001?',
+        'ZED kya hai?',
+        'Automobile parts factory certification',
+        'Production wastage problem',
+        'Book Free Consultation'
       ];
       appendMessage('bot', welcomeText, quickReplies);
     }
@@ -362,54 +360,78 @@
       const text = inputField.value.trim();
       if (!text) return;
 
-      // Add user message to window
+      // 1. Capture & Add user message to UI immediately
       appendMessage('user', text);
       inputField.value = '';
       playChatSound('send');
 
-      // Show typing indicator
+      // 2. Show typing indicator
       showTypingIndicator();
 
       let data = null;
+      let errorOccurred = false;
 
       try {
         let response = null;
+        const payload = {
+          message: text,
+          userMessage: text,
+          conversationId: sessionId,
+          sessionId: sessionId,
+          language: 'en'
+        };
+
         try {
-          response = await fetch('/api/ai/chat', {
+          response = await fetch('/api/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: text, sessionId })
+            body: JSON.stringify(payload)
           });
-        } catch (e) {
-          // If relative URL fails (e.g. running on static server port 5500), try backend port 3000
-          response = await fetch('http://localhost:3000/api/ai/chat', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: text, sessionId })
-          });
+        } catch (eRel) {
+          try {
+            response = await fetch('/api/ai/chat', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+          } catch (eRel2) {
+            response = await fetch('http://localhost:3000/api/chat', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+          }
         }
 
         if (response && response.ok) {
           data = await response.json();
+        } else {
+          errorOccurred = true;
         }
       } catch (err) {
-        console.warn('PRV AI Server offline or unreachable, utilizing smart client AI engine:', err);
+        console.error('PRV AI Server request error:', err);
+        errorOccurred = true;
       }
 
       removeTypingIndicator();
 
-      if (data && data.success && data.response) {
-        appendMessage('bot', data.response, data.quickReplies, data.leadCaptured);
+      const aiText = data ? (data.answer || data.response || data.reply) : null;
+
+      if (data && data.success && aiText) {
+        appendMessage('bot', aiText, data.quickReplies, data.leadCaptured);
         playChatSound('receive');
-        speakText(data.response);
+        speakText(aiText);
+      } else if (errorOccurred) {
+        appendMessage('bot', "Sorry, I couldn't process that request right now. Please try again.", ['Book Free Consultation', 'WhatsApp Support']);
+        playChatSound('receive');
       } else {
-        // Fallback to client-side offline AI engine seamlessly
         const fallback = generateOfflineAiResponse(text);
         appendMessage('bot', fallback.response, fallback.quickReplies, fallback.leadCaptured);
         playChatSound('receive');
         speakText(fallback.response);
       }
     }
+
 
     // Smart Offline Client-Side Enterprise AI Response Engine
     function generateOfflineAiResponse(userMessage) {
