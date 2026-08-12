@@ -3997,17 +3997,17 @@ body {
   border-radius: 99px;
   font-size: 0.72rem;
   font-weight: 700;
-  background: rgba(0, 242, 195, 0.07);
-  border: 1px solid rgba(0, 242, 195, 0.2);
-  color: #b9cac2;
+  background: rgba(0, 242, 254, 0.07);
+  border: 1px solid rgba(0, 242, 254, 0.2);
+  color: var(--md-sys-color-on-surface-variant);
   letter-spacing: 0.03em;
   transition: all 0.25s ease;
 }
 
 .hero-cert-tag:hover {
-  background: rgba(0, 242, 195, 0.14);
-  border-color: rgba(0, 242, 195, 0.45);
-  color: #00f2c3;
+  background: rgba(0, 242, 254, 0.14);
+  border-color: rgba(0, 242, 254, 0.45);
+  color: var(--md-sys-color-primary-container);
 }
 
 /* CTA Buttons */
@@ -4107,7 +4107,7 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 14px;
+  padding: 8px 14px;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.06);
   background: rgba(255, 255, 255, 0.025);
@@ -4123,27 +4123,27 @@ body {
 }
 
 .pipeline-step:hover {
-  background: rgba(0, 242, 195, 0.06);
-  border-color: rgba(0, 242, 195, 0.25);
+  background: rgba(0, 242, 254, 0.06);
+  border-color: rgba(0, 242, 254, 0.25);
 }
 
 .pipeline-step-active {
-  border-color: rgba(0, 242, 195, 0.25);
-  background: rgba(0, 242, 195, 0.06);
+  border-color: rgba(0, 242, 254, 0.25);
+  background: rgba(0, 242, 254, 0.06);
 }
 
 .pipeline-step-final {
-  border-color: rgba(0, 242, 195, 0.45);
-  background: rgba(0, 242, 195, 0.1);
-  box-shadow: 0 0 20px rgba(0, 242, 195, 0.15);
+  border-color: rgba(0, 242, 254, 0.45);
+  background: rgba(0, 242, 254, 0.1);
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);
 }
 
 .pipeline-step-icon {
   width: 30px;
   height: 30px;
   border-radius: 8px;
-  background: rgba(0, 242, 195, 0.15);
-  color: #00f2c3;
+  background: rgba(0, 242, 254, 0.15);
+  color: var(--md-sys-color-primary-container);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4151,8 +4151,8 @@ body {
 }
 
 .pipeline-step-icon-final {
-  background: #00f2c3;
-  color: #00382b;
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
 }
 
 .pipeline-step-content {
@@ -4163,18 +4163,18 @@ body {
 .pipeline-step-title {
   font-size: 0.8rem;
   font-weight: 700;
-  color: #e2e2e2;
+  color: var(--md-sys-color-on-surface);
   line-height: 1.2;
 }
 
 .pipeline-step-sub {
   font-size: 0.68rem;
-  color: #8892b0;
+  color: var(--md-sys-color-on-surface-variant);
   margin-top: 1px;
 }
 
 .pipeline-step-arrow {
-  color: rgba(0, 242, 195, 0.4);
+  color: rgba(0, 242, 254, 0.4);
   flex-shrink: 0;
 }
 
@@ -4182,8 +4182,8 @@ body {
   font-size: 0.6rem;
   font-weight: 900;
   letter-spacing: 0.12em;
-  background: #00f2c3;
-  color: #00382b;
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
   padding: 3px 8px;
   border-radius: 99px;
   flex-shrink: 0;

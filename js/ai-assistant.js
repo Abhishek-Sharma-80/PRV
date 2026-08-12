@@ -36,8 +36,8 @@
 
     #prv-ai-badge {
       position: absolute;
-      top: 0;
-      right: 0;
+      top: 2px;
+      right: 2px;
       width: 14px;
       height: 14px;
       background: #ef4444;
