@@ -1,7 +1,7 @@
 'use strict';
 
-const chatHandler = require('../chat');
+const mainHandler = require('../chat');
 
 module.exports = async function handler(req, res) {
-  return chatHandler(req, res);
+  return mainHandler(req, res);
 };

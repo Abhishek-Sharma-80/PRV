@@ -1,23 +1,9 @@
-# Environment and credentials
+node_modules/
 .env
 .env.local
-.env.production
-
-# Dependencies
-node_modules/
-
-# Local databases & logs
-*.db
-*.db-journal
-*.log
-
-# Vercel and build outputs
-.vercel/
-dist/
-build/
-
-# OS and IDE files
+.env.development.local
+.env.test.local
+.env.production.local
+prv_consultancy.db
+test.db
 .DS_Store
-Thumbs.db
-.vscode/
-.idea/

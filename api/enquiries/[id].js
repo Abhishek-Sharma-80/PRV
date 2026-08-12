@@ -31,7 +31,6 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  // Extract ID from req.query.id or URL path
   let id = req.query && req.query.id;
   if (!id) {
     const parts = (req.url || '').split('?')[0].split('/');
@@ -44,7 +43,6 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  // PATCH /api/enquiries/:id
   if (req.method === 'PATCH') {
     try {
       const data = await getRequestBody(req);
@@ -71,7 +69,6 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  // DELETE /api/enquiries/:id
   if (req.method === 'DELETE') {
     try {
       await db.query(`DELETE FROM client_enquiries WHERE id = ?`, [id]);

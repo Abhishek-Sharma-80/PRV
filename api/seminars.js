@@ -31,7 +31,6 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  // GET /api/seminars
   if (req.method === 'GET') {
     try {
       const result = await db.query(`SELECT * FROM seminar_registrations ORDER BY created_at DESC`);
@@ -45,7 +44,6 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  // POST /api/seminars
   if (req.method === 'POST') {
     try {
       const data = await getRequestBody(req);
@@ -82,7 +80,7 @@ module.exports = async function handler(req, res) {
       res.writeHead(201, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({
         success: true,
-        message: 'Seminar registration saved successfully in seminar_registrations database!',
+        message: 'Seminar registration saved successfully!',
         id: result.lastInsertRowid
       }));
     } catch (err) {

@@ -34,15 +34,10 @@ const apiHandlers = {
   '/api/seminars': require('./api/seminars'),
   '/api/appointments': require('./api/appointments'),
   '/api/dashboard/stats': require('./api/dashboard/stats'),
-  '/api/ai/training': require('./api/ai/training/index'),
-  '/api/ai/book-consultation': require('./api/ai/book-consultation'),
-  '/api/ai/logs': require('./api/ai/logs'),
-  '/api/prv-ai/knowledge': require('./api/prv-ai/knowledge'),
   '/api/auth/login': require('./api/auth/login')
 };
 
 const enquiriesIdHandler = require('./api/enquiries/[id]');
-const trainingIdHandler = require('./api/ai/training/[id]');
 
 const server = http.createServer(async (req, res) => {
   const parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
@@ -61,14 +56,6 @@ const server = http.createServer(async (req, res) => {
       req.query = req.query || {};
       req.query.id = enquiryIdMatch[1];
       return enquiriesIdHandler(req, res);
-    }
-
-    // Match /api/ai/training/:id
-    const trainingIdMatch = pathname.match(/^\/api\/ai\/training\/(\d+)$/);
-    if (trainingIdMatch) {
-      req.query = req.query || {};
-      req.query.id = trainingIdMatch[1];
-      return trainingIdHandler(req, res);
     }
 
     // Match exact API handlers

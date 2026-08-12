@@ -1,6 +1,6 @@
 'use strict';
 
-const { authenticateAdmin } = require('../../lib/auth');
+const auth = require('../../lib/auth');
 
 function setCorsHeaders(res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -41,18 +41,17 @@ module.exports = async function handler(req, res) {
     const data = await getRequestBody(req);
     const { username, password } = data;
 
-    const authResult = authenticateAdmin(username, password);
-
-    if (authResult.success) {
+    const result = auth.authenticate(username, password);
+    if (result.success) {
       res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(authResult));
+      res.end(JSON.stringify(result));
     } else {
       res.writeHead(401, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(authResult));
+      res.end(JSON.stringify(result));
     }
   } catch (err) {
-    console.error('Auth error:', err);
+    console.error('Error logging in:', err);
     res.writeHead(500, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ success: false, message: 'Auth processing error' }));
+    res.end(JSON.stringify({ success: false, message: 'Server error during authentication.' }));
   }
 };
