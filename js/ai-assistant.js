@@ -499,9 +499,51 @@
         quickReplies = ['ZED MSME Subsidy', 'NATS Stipend Subsidy', 'GeM Portal Info', 'Book Free Consultation'];
       }
 
+      // ISO 9001 QUERY
+      else if (msgLower.includes('9001') || msgLower.includes('iso 9001') || msgLower.includes('qms') || msgLower.includes('quality management')) {
+        detectedService = 'ISO 9001 QMS';
+        aiResponse = `📜 **ISO 9001:2015 — Quality Management System (QMS)**\n\nISO 9001 is an internationally recognized standard for a Quality Management System (QMS). It gives organizations a structured framework to:\n- Manage and document key business processes\n- Consistently meet customer requirements\n- Monitor quality performance and reduce errors\n- Support continual improvement\n\n### Key Benefits of ISO 9001:\n✅ **Process Control** — Standardized SOPs reduce variation and operational errors.\n✅ **Customer Confidence** — Demonstrates structured quality commitment to corporate buyers.\n✅ **Tender Eligibility** — Mandatory requirement for government and corporate tenders.\n✅ **Continual Improvement** — Built-in performance measurement & root-cause corrective actions.\n\n⏱️ **Timeline**: 2 to 4 weeks.\n🤝 **How PRV Helps**: Complete documentation, gap analysis, employee training, and guaranteed audit clearance.`;
+        quickReplies = ['Why do I need ISO 9001?', 'ISO 9001 process steps', 'ISO 9001 documents', 'Book Free Consultation'];
+      }
+
+      // ZED MSME QUERY
+      else if (msgLower.includes('zed') || msgLower.includes('zero defect')) {
+        detectedService = 'ZED MSME Scheme';
+        aiResponse = `💰 **ZED — Zero Defect Zero Effect MSME Scheme**\n\nPRV Consultancy helps MSMEs and industrial units claim direct government financial subsidies:\n- **Up to 80% Subsidy** on audit & certification costs\n- **₹10,000 Handholding Support Grant** for consultancy\n- **0.5% Concessional Bank Interest Rate** on business loans\n- **Up to ₹5 Lakhs Capital Subsidy** for testing equipment\n\n📋 **Eligibility Check**: Do you hold an active **Udyam MSME Registration** for your unit?`;
+        quickReplies = ['ZED MSME Subsidy', 'ZED vs ISO 9001', 'Book Free Consultation'];
+      }
+
+      // IATF 16949 QUERY
+      else if (msgLower.includes('iatf') || msgLower.includes('16949') || msgLower.includes('automotive qms')) {
+        detectedService = 'IATF 16949 Automotive QMS';
+        aiResponse = `🚗 **IATF 16949:2016 — Automotive Quality Management System**\n\nIATF 16949 is the automotive sector's QMS standard, designed for organizations in the automotive supply chain.\n\nKey elements:\n- Automotive-specific quality requirements beyond ISO 9001\n- Five Core Tools: **APQP, PPAP, FMEA, MSA, SPC**\n- Zero-defect manufacturing approach\n- Customer-Specific Requirements (CSRs)\n\n*Particularly relevant if you supply to OEMs (Maruti, Tata, Hyundai) or Tier-1 suppliers.*`;
+        quickReplies = ['IATF Core Tools', 'IATF vs ISO 9001', 'MACE Audit Prep', 'Book Free Consultation'];
+      }
+
+      // FSSAI QUERY
+      else if (msgLower.includes('fssai') || msgLower.includes('food license') || msgLower.includes('food authority')) {
+        detectedService = 'FSSAI Food Licensing';
+        aiResponse = `🥗 **FSSAI — Food Safety and Standards Authority of India**\n\nFSSAI is India's food safety regulatory authority governing food safety standards, licensing, and registration.\n\nApplicable food businesses require registration or licensing depending on scale and activity:\n• **Basic Registration**: For small food businesses (turnover up to ₹12 Lakhs).\n• **State License**: For medium food businesses (turnover ₹12 Lakhs to ₹20 Crores).\n• **Central License**: For large food manufacturers, importers & exporters (turnover > ₹20 Crores).`;
+        quickReplies = ['FSSAI vs ISO 22000', 'Book Free Consultation'];
+      }
+
+      // SEDEX / SMETA QUERY
+      else if (msgLower.includes('sedex') || msgLower.includes('smeta') || msgLower.includes('ethical audit') || msgLower.includes('social audit')) {
+        detectedService = 'SEDEX SMETA Ethical Audit';
+        aiResponse = `🔍 **SEDEX SMETA — Social & Ethical Trade Audit**\n\nSMETA is a social audit methodology used by global buyers (Walmart, Target, Zara, Disney). Depending on scope (2-pillar or 4-pillar), it covers:\n- **Labor standards** — Working hours, wages, statutory compliance\n- **Health and safety** — Workplace safety, fire exit readiness\n- **Environment** (4-pillar) — Environmental management\n- **Business ethics** (4-pillar) — Anti-bribery & fair practices`;
+        quickReplies = ['Prepare for SMETA Audit', 'SEDEX vs SMETA', 'Book Free Consultation'];
+      }
+
+      // NATS / NAPS QUERY
+      else if (msgLower.includes('nats') || msgLower.includes('naps') || msgLower.includes('apprentice')) {
+        detectedService = 'NATS / NAPS Scheme';
+        aiResponse = `🎓 **NATS & NAPS — National Apprenticeship Schemes**\n\nGovernment schemes designed to help industrial units optimize manpower costs:\n- Central Government stipend reimbursement up to **₹1,500/month per apprentice**\n- **100% Exemption from PF & ESI** liabilities on apprentice stipends\n- Practical industrial training framework for diploma & engineering candidates`;
+        quickReplies = ['NATS vs NAPS', 'Book Free Consultation'];
+      }
+
       // SCENARIO 4: DISAMBIGUATION FOR GENERIC ISO QUERY ("What is ISO?")
       else if (
-        msgLower === 'what is iso' || msgLower === 'what is iso?' || msgLower === 'iso kya hai' || msgLower === 'iso kya hai?' || msgLower === 'iso' || msgLower === 'tell me about iso'
+        msgLower === 'what is iso' || msgLower === 'what is iso?' || msgLower === 'iso kya hai' || msgLower === 'iso kya hai?' || msgLower === 'iso' || msgLower === 'tell me about iso' || msgLower.includes('what is iso')
       ) {
         detectedService = 'ISO Professional Overview';
         aiResponse = `📜 **Professional Overview of ISO (International Organization for Standardization)**\n\nISO is an independent, non-governmental international organization based in Geneva, Switzerland. It develops globally recognized standards for quality, safety, security, environmental protection, and operational efficiency.\n\n### Key ISO Standards for Businesses:\n• **ISO 9001:2015**: Quality Management System (QMS) - Standard for tenders & vendor onboarding.\n• **ISO 14001:2015**: Environmental Management System (EMS) - Standard for pollution compliance & ESG.\n• **ISO 45001:2018**: Occupational Health & Safety (OH&S) - Standard for worker safety & Factory Act compliance.\n• **ISO 27001:2022**: Information Security (ISMS) - Standard for IT companies & data protection.\n• **ISO 22000:2018**: Food Safety (FSMS) - Standard for food processors & exporters.\n• **ISO 50001:2018**: Energy Management (EnMS) - Standard for slacking factory power bills.\n\n👉 **Which industry or product does your company operate in?** Tell me your business type, and I will recommend the exact ISO standard that will bring you the highest business value.`;
