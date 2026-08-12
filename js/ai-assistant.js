@@ -404,9 +404,6 @@
         appendMessage('bot', aiText, data.quickReplies, data.leadCaptured);
         playChatSound('receive');
         speakText(aiText);
-      } else if (errorOccurred) {
-        appendMessage('bot', "Sorry, I couldn't process that request right now. Please try again.", ['Book Free Consultation', 'WhatsApp Support']);
-        playChatSound('receive');
       } else {
         const fallback = generateOfflineAiResponse(text);
         appendMessage('bot', fallback.response, fallback.quickReplies, fallback.leadCaptured);
