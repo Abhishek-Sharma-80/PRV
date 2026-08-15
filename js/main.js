@@ -216,13 +216,13 @@ const PRV_SERVICES_DATA = {
     icon: "fa-award",
     shortDesc: "Ministry of MSME Zero Defect Zero Effect rating (Bronze, Silver, Gold) with up to 80% subsidy reimbursement.",
     whatIsIt: "ZED (Zero Defect Zero Effect) is an official certification scheme launched by the Ministry of MSME, Government of India. It aims to motivate Indian manufacturers to produce high-quality products with Zero Defects while ensuring Zero Environmental Effect.",
-    whyImportant: "ZED certification opens doors to government financial subsidies (up to 80% reimbursement on certification costs), bank loan interest concessions (0.5%), testing equipment subsidies (up to ₹1 Lakh), and preference in Govt e-Marketplace (GeM) tenders.",
+    whyImportant: "ZED certification opens doors to government financial subsidies (up to 80% reimbursement on certification costs), ₹2 Lakh handholding consulting grant, ₹3 Lakh technology upgradation & capital testing subsidy, bank loan interest concessions (0.5%), and preference in Govt e-Marketplace (GeM) tenders.",
     whoShouldUse: "All registered Micro, Small, and Medium Enterprises (MSMEs) with a valid UDYAM registration certificate engaged in manufacturing.",
     benefits: [
       "80% Subsidy reimbursement on certification cost for Micro enterprises, 60% for Small, 50% for Medium",
-      "₹5 Lakh Handholding support by accredited consulting experts",
+      "₹2 Lakh Handholding support by accredited consulting experts",
+      "₹3 Lakh Technology Upgradation & capital testing equipment subsidy",
       "0.5% Interest rate concession on bank credit facilities",
-      "₹1 Lakh Subsidy for capital testing equipment acquisition",
       "Priority empanelment on GeM Portal & Govt Tenders"
     ],
     keyAreas: ["Quality Assurance", "Environmental Safety", "Energy Efficiency", "5S Workplace", "Occupational Health"],
@@ -591,11 +591,29 @@ const PRV_SERVICES_DATA = {
 };
 
 /* --------------------------------------------------------------------------
-   2. PAGE VIEW ROUTING ENGINE
+   2. PAGE VIEW ROUTING ENGINE & BREADCRUMB CONTROLLER
    -------------------------------------------------------------------------- */
 function initPageRouting() {
   const pageViews = document.querySelectorAll('.page-view');
-  const navLinks = document.querySelectorAll('.nav-link, #mobile-menu-drawer a');
+  const sidebarLinks = document.querySelectorAll('.sidebar-nav-link, .nav-link, #mobile-menu-drawer a');
+  const breadcrumbEl = document.getElementById('current-page-breadcrumb');
+
+  const ROUTE_TITLES = {
+    '#home': 'Dashboard Overview',
+    '#about': 'About PRV Firm',
+    '#services': 'Services Ecosystem',
+    '#certifications': 'Certifications (ISO/ZED)',
+    '#compliance': 'Compliance & Audits',
+    '#business-excellence': '5S & Kaizen Excellence',
+    '#master-excellence': 'Master Program',
+    '#training': 'Training & Workshops',
+    '#government': 'NATS / NAPS Schemes',
+    '#industries': 'Industries Served',
+    '#ai-consultant': 'AI Business Advisor',
+    '#resources': 'Resources & FAQs',
+    '#contact': 'Book Consultation',
+    '#view-service-detail': 'Service Blueprint'
+  };
 
   function handleRoute() {
     let hash = window.location.hash || '#home';
@@ -605,6 +623,7 @@ function initPageRouting() {
       const serviceId = hash.replace(/^#(services\/|service\/|service-)/, '');
       showServiceDetailPage(serviceId);
       updateNavHighlight('#services');
+      if (breadcrumbEl) breadcrumbEl.textContent = 'Service Blueprint';
       return;
     }
 
@@ -618,24 +637,28 @@ function initPageRouting() {
 
     pageViews.forEach(v => {
       v.classList.remove('active');
-      // Reset entrance animations on hidden pages
       v.querySelectorAll('.page-enter-item').forEach(el => el.classList.remove('entered'));
     });
     targetView.classList.add('active');
     updateNavHighlight(hash);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // Trigger staggered entrance animation for the newly active page
+    if (breadcrumbEl) {
+      breadcrumbEl.textContent = ROUTE_TITLES[hash] || 'Dashboard Overview';
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     triggerPageEntrance(targetView);
   }
 
   function updateNavHighlight(activeHash) {
-    navLinks.forEach(link => {
+    sidebarLinks.forEach(link => {
       const href = link.getAttribute('href');
-      if (href === activeHash) {
+      if (href === activeHash || (activeHash.startsWith('#services') && href === '#services')) {
+        link.classList.add('active');
         link.classList.add('text-primary-container', 'font-bold');
       } else {
-        link.classList.remove('text-primary-container');
+        link.classList.remove('active');
+        link.classList.remove('text-primary-container', 'font-bold');
       }
     });
   }
@@ -725,134 +748,199 @@ function showServiceDetailPage(serviceId) {
 
   targetContainer.innerHTML = `
     <!-- 1. HERO SECTION -->
-    <div class="service-detail-hero p-8 md:p-12 rounded-2xl mb-10 relative overflow-hidden">
-      <div class="inline-flex items-center gap-2 mb-4">
-        <span class="detail-badge-pill"><i class="fa-solid fa-certificate"></i> PRV Executive Service Guide</span>
-        <span class="detail-badge-pill"><i class="fa-solid fa-shield-halved"></i> 100% Audit Clearance</span>
+    <div class="blueprint-hero-banner">
+      <div class="blueprint-hero-tag-row">
+        <span class="blueprint-tag-pill cyan"><i class="fa-solid fa-certificate"></i> PRV Executive Service Guide</span>
+        <span class="blueprint-tag-pill emerald"><i class="fa-solid fa-shield-halved"></i> 100% Audit Clearance Guarantee</span>
+        <span class="blueprint-tag-pill purple"><i class="fa-solid fa-bolt"></i> Fast-Track Execution</span>
       </div>
-      <h1 class="text-3xl md:text-5xl font-extrabold text-on-surface mb-4 font-heading">${service.name}</h1>
-      <p class="text-lg text-on-surface-variant max-w-3xl leading-relaxed mb-8">${service.shortDesc}</p>
-      <div class="flex flex-wrap gap-4">
-        <button class="bg-primary-container text-on-primary-container font-bold text-sm px-8 py-3.5 rounded-full hover:shadow-[0_0_20px_rgba(0,242,195,0.4)] open-modal-trigger" data-service="${service.name}">
-          Request Consultation
+      <h1 class="blueprint-hero-title">${service.name}</h1>
+      <p class="blueprint-hero-desc">${service.shortDesc}</p>
+      <div class="blueprint-hero-actions">
+        <button class="blueprint-btn-primary open-modal-trigger" data-service="${service.name}">
+          <i class="fa-solid fa-calendar-check"></i> Request Free Consultation
         </button>
-        <button id="detail-ai-btn" class="glass-panel text-on-surface font-bold text-sm px-6 py-3.5 rounded-full border border-border-glass hover:bg-white/10 flex items-center gap-2 text-secondary">
-          <i class="fa-solid fa-robot text-primary-container"></i> Ask AI Consultant About ${service.name}
+        <button id="detail-ai-btn" class="blueprint-btn-ai">
+          <i class="fa-solid fa-robot" style="color: #00f2fe;"></i> Ask AI Consultant About ${service.name}
         </button>
+        <a href="tel:+917489351297" class="blueprint-tag-pill cyan" style="text-decoration: none; font-size: 0.82rem; padding: 10px 16px;">
+          <i class="fa-solid fa-phone"></i> +91 74893 51297
+        </a>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
-      <div class="lg:col-span-2 space-y-10">
+    <!-- 2-COLUMN ENTERPRISE BLUEPRINT GRID -->
+    <div class="blueprint-layout-grid">
+      
+      <!-- LEFT / MAIN CONTENT COLUMN -->
+      <div class="blueprint-main-col">
+        
         <!-- 2. WHAT IS IT? -->
-        <div class="glass-panel p-8 rounded-2xl border border-border-glass">
-          <h2 class="text-2xl font-bold text-primary-container mb-4">1. What is ${service.name}?</h2>
-          <p class="text-sm text-on-surface-variant leading-relaxed mb-4">${service.whatIsIt}</p>
+        <div class="blueprint-card">
+          <div class="blueprint-card-header">
+            <div class="blueprint-card-icon blue"><i class="fa-solid fa-circle-info"></i></div>
+            <h2 class="blueprint-card-title">1. What is ${service.name}?</h2>
+          </div>
+          <p class="blueprint-card-text">${service.whatIsIt}</p>
         </div>
 
         <!-- 3. WHY IS IT IMPORTANT? -->
-        <div class="glass-panel p-8 rounded-2xl border border-border-glass">
-          <h2 class="text-2xl font-bold text-secondary mb-4">2. Why is it Important?</h2>
-          <p class="text-sm text-on-surface-variant leading-relaxed">${service.whyImportant}</p>
+        <div class="blueprint-card">
+          <div class="blueprint-card-header">
+            <div class="blueprint-card-icon purple"><i class="fa-solid fa-chart-line"></i></div>
+            <h2 class="blueprint-card-title">2. Why is it Important for Your Business?</h2>
+          </div>
+          <p class="blueprint-card-text">${service.whyImportant}</p>
         </div>
 
         <!-- 4. WHO SHOULD USE IT? -->
-        <div class="glass-panel p-8 rounded-2xl border border-border-glass">
-          <h2 class="text-2xl font-bold text-on-surface mb-4">3. Who Should Use It? (Eligibility)</h2>
-          <p class="text-sm text-on-surface-variant leading-relaxed">${service.whoShouldUse}</p>
+        <div class="blueprint-card">
+          <div class="blueprint-card-header">
+            <div class="blueprint-card-icon emerald"><i class="fa-solid fa-building-circle-check"></i></div>
+            <h2 class="blueprint-card-title">3. Who Should Implement It? (Eligibility)</h2>
+          </div>
+          <p class="blueprint-card-text">${service.whoShouldUse}</p>
         </div>
 
         <!-- 5. BENEFITS -->
-        <div class="glass-panel p-8 rounded-2xl border border-border-glass">
-          <h2 class="text-2xl font-bold text-primary-container mb-6">4. Key Benefits</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="blueprint-card">
+          <div class="blueprint-card-header">
+            <div class="blueprint-card-icon amber"><i class="fa-solid fa-trophy"></i></div>
+            <h2 class="blueprint-card-title">4. Key Tangible Benefits & ROI</h2>
+          </div>
+          <div class="blueprint-benefits-grid">
             ${service.benefits.map(b => `
-              <div class="flex items-start gap-3 p-3 rounded-lg bg-white/5 border border-white/5">
-                <i class="fa-solid fa-circle-check text-primary-container mt-1"></i>
-                <span class="text-xs text-on-surface">${b}</span>
+              <div class="blueprint-benefit-item">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>${b}</span>
               </div>
             `).join('')}
           </div>
         </div>
 
         <!-- 6. KEY AREAS -->
-        <div class="glass-panel p-8 rounded-2xl border border-border-glass">
-          <h2 class="text-2xl font-bold text-secondary mb-4">5. Key Areas Covered</h2>
-          <div class="flex flex-wrap gap-2">
-            ${service.keyAreas.map(a => `<span class="px-3 py-1.5 rounded-full bg-surface-variant border border-border-glass text-xs font-semibold text-on-surface">${a}</span>`).join('')}
+        <div class="blueprint-card">
+          <div class="blueprint-card-header">
+            <div class="blueprint-card-icon blue"><i class="fa-solid fa-layer-group"></i></div>
+            <h2 class="blueprint-card-title">5. Core Compliance & Operational Scope Covered</h2>
+          </div>
+          <div class="blueprint-chips-wrap">
+            ${service.keyAreas.map(a => `<div class="blueprint-chip"><i class="fa-solid fa-check-double" style="color: #0284c7;"></i> ${a}</div>`).join('')}
           </div>
         </div>
 
         <!-- 7. GENERAL IMPLEMENTATION PROCESS -->
-        <div class="glass-panel p-8 rounded-2xl border border-border-glass">
-          <h2 class="text-2xl font-bold text-on-surface mb-6">6. General Implementation Process</h2>
-          <div class="space-y-4">
+        <div class="blueprint-card">
+          <div class="blueprint-card-header">
+            <div class="blueprint-card-icon purple"><i class="fa-solid fa-diagram-project"></i></div>
+            <h2 class="blueprint-card-title">6. End-to-End Implementation Roadmap</h2>
+          </div>
+          <div class="blueprint-steps-list">
             ${service.process.map((step, idx) => `
-              <div class="process-step-card p-4 rounded-xl flex items-start gap-4">
-                <div class="w-8 h-8 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center font-bold text-xs flex-shrink-0">${idx + 1}</div>
-                <div>
-                  <div class="font-bold text-sm text-on-surface">${step}</div>
-                </div>
+              <div class="blueprint-step-row">
+                <div class="blueprint-step-num">${idx + 1}</div>
+                <div class="blueprint-step-desc">${step}</div>
               </div>
             `).join('')}
           </div>
         </div>
 
         <!-- 8. TYPICAL DOCUMENTATION -->
-        <div class="glass-panel p-8 rounded-2xl border border-border-glass">
-          <h2 class="text-2xl font-bold text-primary-container mb-4">7. Typical Documentation Required</h2>
-          <ul class="space-y-2 text-xs text-on-surface-variant">
-            ${service.documentation.map(doc => `<li class="flex items-center gap-2"><i class="fa-solid fa-file-lines text-secondary"></i> ${doc}</li>`).join('')}
-          </ul>
-        </div>
-
-        <!-- 9. FREQUENTLY ASKED QUESTIONS -->
-        <div class="glass-panel p-8 rounded-2xl border border-border-glass">
-          <h2 class="text-2xl font-bold text-on-surface mb-6">8. Service FAQs</h2>
-          <div class="space-y-4">
-            ${service.faqs.map(faq => `
-              <div class="p-4 rounded-xl bg-white/5 border border-white/5">
-                <div class="font-bold text-sm text-primary-container mb-1">Q: ${faq.q}</div>
-                <div class="text-xs text-on-surface-variant leading-relaxed">A: ${faq.a}</div>
+        <div class="blueprint-card">
+          <div class="blueprint-card-header">
+            <div class="blueprint-card-icon emerald"><i class="fa-solid fa-folder-open"></i></div>
+            <h2 class="blueprint-card-title">7. Mandatory Documentation & Records Required</h2>
+          </div>
+          <div class="blueprint-docs-list">
+            ${service.documentation.map(doc => `
+              <div class="blueprint-doc-row">
+                <i class="fa-solid fa-file-contract"></i>
+                <span>${doc}</span>
               </div>
             `).join('')}
           </div>
         </div>
-      </div>
 
-      <!-- SIDEBAR (10. HOW PRV CAN HELP & 11. CTA FORM) -->
-      <div class="space-y-8">
-        <!-- 10. HOW PRV CAN HELP -->
-        <div class="glass-panel p-6 rounded-2xl border border-primary-container/30">
-          <h3 class="text-lg font-bold text-primary-container mb-3">9. How PRV Can Help</h3>
-          <p class="text-xs text-on-surface-variant leading-relaxed mb-4">${service.prvHelp}</p>
-          <div class="p-3 rounded-xl bg-primary-container/10 border border-primary-container/30 text-xs text-primary-container font-semibold">
-            <i class="fa-solid fa-shield"></i> Guaranteed 100% Audit Clearance & Fast-Track Execution
+        <!-- 9. FREQUENTLY ASKED QUESTIONS -->
+        <div class="blueprint-card">
+          <div class="blueprint-card-header">
+            <div class="blueprint-card-icon amber"><i class="fa-solid fa-circle-question"></i></div>
+            <h2 class="blueprint-card-title">8. Frequently Asked Questions</h2>
+          </div>
+          <div class="blueprint-faqs-wrap">
+            ${service.faqs.map(faq => `
+              <details class="blueprint-faq-card">
+                <summary>${faq.q}</summary>
+                <p>${faq.a}</p>
+              </details>
+            `).join('')}
           </div>
         </div>
 
-        <!-- 11. CONSULTATION CTA FORM -->
-        <div class="glass-panel p-6 rounded-2xl border border-border-glass">
-          <h3 class="text-lg font-bold text-on-surface mb-2">10. Quick Consultation</h3>
-          <p class="text-xs text-on-surface-variant mb-4">Get exact pricing & timeline estimate for ${service.name}.</p>
-          
-          <form id="detail-cta-form" class="space-y-3 text-xs">
+      </div>
+
+      <!-- RIGHT / STICKY ADVISORY SIDEBAR -->
+      <div class="blueprint-sidebar-col">
+        
+        <!-- PRV ADVISORY GUARANTEE -->
+        <div class="blueprint-guarantee-box">
+          <div class="blueprint-guarantee-title"><i class="fa-solid fa-shield"></i> PRV Advisory Guarantee</div>
+          <p class="blueprint-guarantee-desc">${service.prvHelp}</p>
+          <div class="blueprint-sla-list">
+            <div class="blueprint-sla-item"><i class="fa-solid fa-check-circle"></i> 100% First-Time Audit Pass SLA</div>
+            <div class="blueprint-sla-item"><i class="fa-solid fa-check-circle"></i> Complete Handholding & SOP Drafting</div>
+            <div class="blueprint-sla-item"><i class="fa-solid fa-check-circle"></i> Maximum Eligible Subsidy Realization</div>
+            <div class="blueprint-sla-item"><i class="fa-solid fa-check-circle"></i> Dedicated Lead-Auditor Assigned</div>
+          </div>
+        </div>
+
+        <!-- QUICK CONSULTATION CTA FORM -->
+        <div class="blueprint-card" style="padding: 24px;">
+          <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--admin-text-dark); margin-bottom: 6px;">
+            <i class="fa-solid fa-file-signature" style="color: var(--brand-primary);"></i> Quick Inquiry
+          </h3>
+          <p style="font-size: 0.84rem; color: var(--admin-text-muted); margin-bottom: 16px;">
+            Get timeline, fee structure & Govt subsidy report for <strong>${service.name}</strong>.
+          </p>
+
+          <form id="detail-cta-form" style="display: flex; flex-direction: column; gap: 12px;">
             <div>
-              <label class="block font-bold mb-1">Name *</label>
-              <input type="text" id="detail-name" required class="w-full bg-white/5 border border-border-glass rounded-lg p-2.5 text-on-surface">
+              <label class="saas-label">Contact Person Name *</label>
+              <input type="text" id="detail-name" required class="saas-input" placeholder="e.g. Vikram Singh">
             </div>
             <div>
-              <label class="block font-bold mb-1">Mobile *</label>
-              <input type="tel" id="detail-mobile" required class="w-full bg-white/5 border border-border-glass rounded-lg p-2.5 text-on-surface">
+              <label class="saas-label">Direct Mobile Number *</label>
+              <input type="tel" id="detail-mobile" required class="saas-input" placeholder="+91 98765 43210">
             </div>
             <div>
-              <label class="block font-bold mb-1">Email *</label>
-              <input type="email" id="detail-email" required class="w-full bg-white/5 border border-border-glass rounded-lg p-2.5 text-on-surface">
+              <label class="saas-label">Corporate Email Address *</label>
+              <input type="email" id="detail-email" required class="saas-input" placeholder="vikram@company.com">
             </div>
-            <button type="submit" class="w-full bg-primary-container text-on-primary-container font-bold py-3 rounded-full text-xs">Request Instant Call Back</button>
+            <button type="submit" class="saas-btn-submit" style="margin-top: 6px;">
+              <i class="fa-solid fa-bolt"></i> Request Immediate Advisory Call
+            </button>
           </form>
         </div>
+
+        <!-- CONTACT CHANNELS -->
+        <div class="blueprint-card" style="padding: 20px;">
+          <div style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: var(--admin-text-muted); letter-spacing: 0.08em; margin-bottom: 12px;">
+            Direct Auditor Hotline
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <a href="tel:+917489351297" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--admin-text-dark); font-weight: 700; font-size: 0.95rem;">
+              <div style="width: 32px; height: 32px; border-radius: 8px; background: var(--brand-blue-light); color: var(--brand-primary); display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-phone"></i></div>
+              <span>+91 74893 51297</span>
+            </a>
+            <a href="https://wa.me/917489351297?text=Hello%20PRV%20Consultancy,%20I%20need%20details%20on%20${encodeURIComponent(service.name)}" target="_blank" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #10b981; font-weight: 700; font-size: 0.95rem;">
+              <div style="width: 32px; height: 32px; border-radius: 8px; background: var(--brand-emerald-light); color: #10b981; display: flex; align-items: center; justify-content: center;"><i class="fa-brands fa-whatsapp"></i></div>
+              <span>WhatsApp Advisory</span>
+            </a>
+          </div>
+        </div>
+
       </div>
+
     </div>
   `;
 
@@ -1198,19 +1286,50 @@ function initFormHandlers() {
 }
 
 /* --------------------------------------------------------------------------
-   7. MOBILE NAVIGATION & TOAST UTILITY
+   7. SIDEBAR COLLAPSE / EXPAND & MOBILE NAVIGATION CONTROLLERS
    -------------------------------------------------------------------------- */
 function initMobileNav() {
-  const btn = document.getElementById('mobile-menu-btn');
-  const drawer = document.getElementById('mobile-menu-drawer');
-  if (btn && drawer) {
-    btn.addEventListener('click', () => {
-      drawer.classList.toggle('hidden');
-    });
+  const sidebar = document.getElementById('app-sidebar');
+  const toggleBtn = document.getElementById('app-sidebar-toggle') || document.getElementById('mobile-sidebar-toggle');
+  const closeBtn = document.getElementById('sidebar-close-btn');
+  const sidebarLinks = document.querySelectorAll('.sidebar-nav-link');
 
-    drawer.querySelectorAll('a').forEach(link => {
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (window.innerWidth <= 900) {
+        if (sidebar) sidebar.classList.toggle('open');
+      } else {
+        document.body.classList.toggle('sidebar-collapsed');
+      }
+    });
+  }
+
+  if (closeBtn && sidebar) {
+    closeBtn.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      document.body.classList.add('sidebar-collapsed');
+    });
+  }
+
+  sidebarLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900 && sidebar) {
+        sidebar.classList.remove('open');
+      }
+    });
+  });
+
+  // Legacy drawer support
+  const legacyBtn = document.getElementById('mobile-menu-btn');
+  const legacyDrawer = document.getElementById('mobile-menu-drawer');
+  if (legacyBtn && legacyDrawer) {
+    legacyBtn.addEventListener('click', () => {
+      legacyDrawer.classList.toggle('hidden');
+    });
+    legacyDrawer.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
-        drawer.classList.add('hidden');
+        legacyDrawer.classList.add('hidden');
       });
     });
   }
@@ -1229,7 +1348,10 @@ function initHeroActions() {
       if (serviceHeader) serviceHeader.textContent = serviceName;
       if (selectElem) {
         for (let opt of selectElem.options) {
-          if (opt.value === serviceName) { opt.selected = true; break; }
+          if (opt.value === serviceName || opt.value.toLowerCase().includes(serviceName.toLowerCase())) {
+            opt.selected = true;
+            break;
+          }
         }
       }
       if (modal) modal.classList.remove('hidden');
@@ -1238,30 +1360,39 @@ function initHeroActions() {
 
   // Open seminar modal delegate (works on Training page & Master Excellence page buttons)
   document.addEventListener('click', (e) => {
-    const trigger = e.target.closest('.open-seminar-trigger');
+    const trigger = e.target.closest('.open-seminar-modal-trigger, .open-seminar-trigger');
     if (trigger) {
+      const seminarName = trigger.getAttribute('data-seminar') || 'Internal Auditor Training';
       const modal = document.getElementById('seminar-modal');
+      const semInput = document.getElementById('sem-name');
+      if (semInput) semInput.value = seminarName;
       if (modal) modal.classList.remove('hidden');
     }
   });
 
   // Detail page AI button — navigate to #ai-consultant
   document.addEventListener('click', (e) => {
-    const trigger = e.target.closest('#detail-ai-btn');
+    const trigger = e.target.closest('#detail-ai-btn, #contact-talk-ai-btn, #hero-talk-ai-btn');
     if (trigger) {
       window.location.hash = '#ai-consultant';
     }
   });
 
-  const modalClose = document.querySelectorAll('.modal-close');
-  modalClose.forEach(b => b.addEventListener('click', () => {
-    document.getElementById('consultation-modal').classList.add('hidden');
-  }));
+  // Close consultation modal buttons
+  const closeConsultBtn = document.getElementById('close-consultation-modal');
+  if (closeConsultBtn) {
+    closeConsultBtn.addEventListener('click', () => {
+      document.getElementById('consultation-modal').classList.add('hidden');
+    });
+  }
 
-  const seminarClose = document.querySelectorAll('.close-seminar');
-  seminarClose.forEach(b => b.addEventListener('click', () => {
-    document.getElementById('seminar-modal').classList.add('hidden');
-  }));
+  // Close seminar modal buttons
+  const closeSemBtn = document.getElementById('close-seminar-modal');
+  if (closeSemBtn) {
+    closeSemBtn.addEventListener('click', () => {
+      document.getElementById('seminar-modal').classList.add('hidden');
+    });
+  }
 
   // Close modals on backdrop click
   document.addEventListener('click', (e) => {
@@ -1447,40 +1578,28 @@ function initRoiCalculator() {
   const tierBtns = calcSection.querySelectorAll('.calc-tier-btn');
   const certBtns = calcSection.querySelectorAll('.calc-cert-btn');
   const apprenticeSlider = document.getElementById('calc-apprentice-slider');
-  const apprenticeVal = document.getElementById('calc-apprentice-val');
-  const loanSlider = document.getElementById('calc-loan-slider');
-  const loanVal = document.getElementById('calc-loan-val');
+  const apprenticeVal = document.getElementById('calc-apprentice-count-val') || document.getElementById('calc-apprentice-val');
 
-  const grandTotalEl = document.getElementById('calc-grand-total');
-  const zedBreakdownEl = document.getElementById('calc-breakdown-zed');
-  const testBreakdownEl = document.getElementById('calc-breakdown-test');
-  const natsBreakdownEl = document.getElementById('calc-breakdown-nats');
-  const interestBreakdownEl = document.getElementById('calc-breakdown-interest');
-  const resetBtn = document.getElementById('calc-reset-btn');
+  const grandTotalEl = document.getElementById('calc-total-benefit') || document.getElementById('calc-grand-total');
+  const zedBreakdownEl = document.getElementById('calc-zed-subsidy') || document.getElementById('calc-breakdown-zed');
+  const natsBreakdownEl = document.getElementById('calc-nats-subsidy') || document.getElementById('calc-breakdown-nats');
 
   let currentTierRate = 0.80; // Micro = 80%
-  let currentHandholdingBase = 500000; // ZED Gold = 5 Lakh max
-  let currentTestingBase = 100000;
-  let currentApprentices = 10;
-  let currentLoanLakhs = 100; // ₹1 Crore = 100 Lakhs
+  let currentHandholdingBase = 200000; // ZED Gold = ₹2 Lakh Handholding
+  let currentTestingBase = 300000; // ZED Gold = ₹3 Lakh Technology Upgradation
+  let currentApprentices = 5;
 
   function formatINR(val) {
     return '₹' + Math.round(val).toLocaleString('en-IN');
   }
 
   function calculate() {
-    const zedSubsidy = currentHandholdingBase * currentTierRate;
-    const testSubsidy = currentTestingBase * currentTierRate;
+    const zedSubsidy = (currentHandholdingBase + currentTestingBase) * currentTierRate;
     const natsReimbursement = currentApprentices * 1500 * 12; // ₹1,500/mo * 12 mos
-    const loanPrincipal = currentLoanLakhs * 100000;
-    const interestSavings = loanPrincipal * 0.005; // 0.5% interest rate concession
-
-    const grandTotal = zedSubsidy + testSubsidy + natsReimbursement + interestSavings;
+    const grandTotal = zedSubsidy + natsReimbursement;
 
     if (zedBreakdownEl) zedBreakdownEl.textContent = formatINR(zedSubsidy);
-    if (testBreakdownEl) testBreakdownEl.textContent = formatINR(testSubsidy);
-    if (natsBreakdownEl) natsBreakdownEl.textContent = formatINR(natsReimbursement) + ' / yr';
-    if (interestBreakdownEl) interestBreakdownEl.textContent = formatINR(interestSavings) + ' / yr';
+    if (natsBreakdownEl) natsBreakdownEl.textContent = formatINR(natsReimbursement);
 
     if (grandTotalEl) {
       animateValue(grandTotalEl, grandTotal);
@@ -1489,7 +1608,7 @@ function initRoiCalculator() {
 
   function animateValue(el, targetVal) {
     const startVal = parseInt(el.textContent.replace(/[^0-9]/g, '')) || 0;
-    const duration = 600;
+    const duration = 400;
     const startTime = performance.now();
 
     function update(now) {
@@ -1506,17 +1625,8 @@ function initRoiCalculator() {
   // Tier Buttons
   tierBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      tierBtns.forEach(b => {
-        b.classList.remove('active', 'border-primary-container', 'bg-primary-container/10');
-        b.classList.add('border-border-glass');
-        const h = b.querySelector('.text-sm');
-        if (h) { h.classList.remove('text-primary-container'); h.classList.add('text-on-surface'); }
-      });
-      btn.classList.add('active', 'border-primary-container', 'bg-primary-container/10');
-      btn.classList.remove('border-border-glass');
-      const h = btn.querySelector('.text-sm');
-      if (h) { h.classList.add('text-primary-container'); h.classList.remove('text-on-surface'); }
-
+      tierBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
       currentTierRate = parseFloat(btn.getAttribute('data-zed-rate')) || 0.80;
       calculate();
     });
@@ -1525,15 +1635,10 @@ function initRoiCalculator() {
   // Cert Buttons
   certBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      certBtns.forEach(b => {
-        b.classList.remove('active', 'border-primary-container', 'bg-primary-container/10');
-        b.classList.add('border-border-glass');
-      });
-      btn.classList.add('active', 'border-primary-container', 'bg-primary-container/10');
-      btn.classList.remove('border-border-glass');
-
-      currentHandholdingBase = parseFloat(btn.getAttribute('data-handholding')) || 500000;
-      currentTestingBase = parseFloat(btn.getAttribute('data-testing')) || 100000;
+      certBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentHandholdingBase = parseFloat(btn.getAttribute('data-handholding')) || 200000;
+      currentTestingBase = parseFloat(btn.getAttribute('data-testing')) || 300000;
       calculate();
     });
   });
@@ -1542,28 +1647,8 @@ function initRoiCalculator() {
   if (apprenticeSlider) {
     apprenticeSlider.addEventListener('input', (e) => {
       currentApprentices = parseInt(e.target.value) || 0;
-      if (apprenticeVal) apprenticeVal.textContent = `${currentApprentices} Candidates`;
+      if (apprenticeVal) apprenticeVal.textContent = currentApprentices;
       calculate();
-    });
-  }
-
-  // Loan Slider
-  if (loanSlider) {
-    loanSlider.addEventListener('input', (e) => {
-      currentLoanLakhs = parseInt(e.target.value) || 0;
-      const crVal = (currentLoanLakhs / 100).toFixed(2);
-      if (loanVal) loanVal.textContent = `₹${crVal} Crore`;
-      calculate();
-    });
-  }
-
-  // Reset
-  if (resetBtn) {
-    resetBtn.addEventListener('click', () => {
-      if (tierBtns[0]) tierBtns[0].click();
-      if (certBtns[0]) certBtns[0].click();
-      if (apprenticeSlider) { apprenticeSlider.value = 10; apprenticeSlider.dispatchEvent(new Event('input')); }
-      if (loanSlider) { loanSlider.value = 100; loanSlider.dispatchEvent(new Event('input')); }
     });
   }
 
@@ -1697,45 +1782,56 @@ function initDiagnosticQuiz() {
 }
 
 /* --------------------------------------------------------------------------
-   13. GLOBAL SPOTLIGHT COMMAND PALETTE (Ctrl+K)
+   13. GLOBAL SPOTLIGHT COMMAND PALETTE (Ctrl+K) & SEARCH ENGINE
    -------------------------------------------------------------------------- */
 function initCommandPalette() {
-  const modal = document.getElementById('command-search-modal');
+  const modal = document.getElementById('search-modal') || document.getElementById('command-search-modal');
   const openBtn = document.getElementById('nav-search-btn');
-  const closeBtn = document.getElementById('close-command-search');
-  const searchInput = document.getElementById('command-search-input');
-  const resultsContainer = document.getElementById('command-search-results');
+  const dashSearch = document.getElementById('dash-quick-search-input');
+  const closeBtn = document.getElementById('close-search-modal') || document.getElementById('close-command-search');
+  const searchInput = document.getElementById('global-search-input') || document.getElementById('command-search-input');
+  const resultsContainer = document.getElementById('global-search-results') || document.getElementById('command-search-results');
   const filterChips = document.querySelectorAll('.search-filter-chip');
 
   if (!modal || !searchInput || !resultsContainer) return;
 
   let activeCategory = 'all';
 
-  function openPalette() {
+  function openPalette(initialQuery = '') {
     modal.classList.remove('hidden');
-    searchInput.value = '';
+    modal.style.display = 'flex';
+    searchInput.value = initialQuery;
     searchInput.focus();
-    renderResults('');
+    renderResults(initialQuery);
   }
 
   function closePalette() {
     modal.classList.add('hidden');
+    modal.style.display = 'none';
   }
 
-  if (openBtn) openBtn.addEventListener('click', openPalette);
+  if (openBtn) openBtn.addEventListener('click', () => openPalette(''));
+  if (dashSearch) {
+    dashSearch.addEventListener('focus', () => {
+      openPalette(dashSearch.value);
+    });
+    dashSearch.addEventListener('input', (e) => {
+      openPalette(e.target.value);
+    });
+  }
   if (closeBtn) closeBtn.addEventListener('click', closePalette);
 
   // Global Hotkey (Ctrl+K / Cmd+K / Escape)
   window.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
       e.preventDefault();
-      if (modal.classList.contains('hidden')) {
-        openPalette();
+      if (modal.classList.contains('hidden') || modal.style.display === 'none') {
+        openPalette('');
       } else {
         closePalette();
       }
     }
-    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+    if (e.key === 'Escape') {
       closePalette();
     }
   });
@@ -1764,7 +1860,7 @@ function initCommandPalette() {
 
   // Keyboard navigation within search input
   searchInput.addEventListener('keydown', (e) => {
-    const items = resultsContainer.querySelectorAll('.command-result-item');
+    const items = resultsContainer.querySelectorAll('.search-result-item, .command-result-item');
     if (!items.length) return;
 
     if (e.key === 'ArrowDown') {
@@ -1818,10 +1914,10 @@ function initCommandPalette() {
 
     if (filtered.length === 0) {
       resultsContainer.innerHTML = `
-        <div class="text-center py-10 text-on-surface-variant text-xs">
-          <i class="fa-solid fa-magnifying-glass text-3xl mb-3 text-primary-container/40"></i>
-          <div class="font-bold text-sm text-on-surface">No standards found matching "${query}"</div>
-          <div class="mt-2 text-primary-container hover:underline cursor-pointer open-modal-trigger text-xs" data-service="General Consultation">Request a Custom Advisory Session →</div>
+        <div style="text-align: center; padding: 30px 16px; color: var(--admin-text-muted);">
+          <i class="fa-solid fa-magnifying-glass" style="font-size: 2rem; color: #cbd5e1; margin-bottom: 10px;"></i>
+          <div style="font-weight: 700; font-size: 0.95rem; color: var(--admin-text-dark);">No standards found matching "${query}"</div>
+          <div style="margin-top: 8px; color: #0284c7; cursor: pointer; font-size: 0.85rem; font-weight: 700;" onclick="window.openPrvConsultationModal('General Consultation', 'search_empty')">Request a Custom Consultation Session →</div>
         </div>
       `;
       return;
@@ -1829,20 +1925,20 @@ function initCommandPalette() {
 
     filtered.forEach((srv, idx) => {
       const item = document.createElement('div');
-      item.className = 'command-result-item p-3.5 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-primary-container/[0.08] hover:border-primary-container/60 transition-all cursor-pointer flex items-center justify-between group';
+      item.className = 'search-result-item';
       item.innerHTML = `
-        <div class="flex items-center gap-3.5 min-w-0">
-          <div class="w-10 h-10 rounded-xl bg-primary-container/10 border border-primary-container/25 flex items-center justify-center text-primary-container text-sm flex-shrink-0 group-hover:scale-105 group-hover:bg-primary-container group-hover:text-on-primary-container transition-all">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 36px; height: 36px; border-radius: 8px; background: var(--brand-blue-light); color: var(--brand-primary); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; shrink: 0;">
             <i class="fa-solid ${srv.icon || 'fa-certificate'}"></i>
           </div>
-          <div class="min-w-0">
-            <div class="font-bold text-xs text-on-surface group-hover:text-primary-container transition-colors truncate">${srv.name}</div>
-            <div class="text-[11px] text-on-surface-variant line-clamp-1 mt-0.5">${srv.shortDesc}</div>
+          <div>
+            <div style="font-weight: 700; font-size: 0.9rem; color: var(--admin-text-dark);">${srv.name}</div>
+            <div style="font-size: 0.78rem; color: var(--admin-text-muted);">${srv.shortDesc}</div>
           </div>
         </div>
-        <div class="flex items-center gap-2 flex-shrink-0 pl-2">
-          <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-white/5 border border-white/10 uppercase tracking-wider text-on-surface-variant group-hover:border-primary-container/30 group-hover:text-primary-container transition-colors">${srv.category}</span>
-          <i class="fa-solid fa-arrow-right text-xs text-primary-container opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all"></i>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="saas-card-tag">${srv.category}</span>
+          <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem; color: var(--brand-primary);"></i>
         </div>
       `;
 
@@ -1856,6 +1952,44 @@ function initCommandPalette() {
     });
   }
 }
+
+// Global Diagnostics and AI Prompt Triggers
+window.selectDiagnosticOption = function(btn, step) {
+  const resultCard = document.getElementById('diag-result-card');
+  const stepContainer = document.getElementById('diag-step-1');
+  const scoreType = btn.getAttribute('data-score');
+
+  if (stepContainer) stepContainer.style.display = 'none';
+  if (resultCard) {
+    resultCard.style.display = 'block';
+    const tag = document.getElementById('diag-recommend-tag');
+    const title = document.getElementById('diag-recommend-title');
+    const desc = document.getElementById('diag-recommend-desc');
+
+    if (scoreType === 'zed') {
+      if (tag) tag.textContent = 'MSME Subsidy Track';
+      if (title) title.textContent = 'ZED Gold Certification (80% Govt Grant)';
+      if (desc) desc.textContent = 'Your enterprise qualifies for up to ₹2 Lakhs handholding grant + ₹3 Lakhs technology upgradation subsidy and 0.5% bank interest rate reduction.';
+    } else if (scoreType === 'iso') {
+      if (tag) tag.textContent = 'Export Readiness Track';
+      if (title) title.textContent = 'ISO 9001 + SEDEX SMETA Ethical Audit';
+      if (desc) desc.textContent = 'Mandatory framework to clear international buyer audits, Walmart/Target vendor onboarding, and global supply chains.';
+    } else {
+      if (tag) tag.textContent = 'Shopfloor Excellence Track';
+      if (title) title.textContent = '5S Visual Workplace + Kaizen Rollout';
+      if (desc) desc.textContent = 'Eliminates manufacturing scrap, recovers usable floor space, and establishes daily visual management standard.';
+    }
+  }
+};
+
+window.sendAiPrompt = function(promptText) {
+  const aiInput = document.getElementById('full-ai-input');
+  const aiForm = document.getElementById('full-ai-form');
+  if (aiInput) {
+    aiInput.value = promptText;
+    if (aiForm) aiForm.dispatchEvent(new Event('submit'));
+  }
+};
 
 // Global Export/Aliases
 window.showServiceDetailPage = showServiceDetailPage;
