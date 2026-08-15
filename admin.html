@@ -24,23 +24,32 @@
   <div class="login-screen" id="login-overlay">
     <div class="login-card">
       <div class="login-logo">
-        <img src="images/logo.png" alt="PRV CRM Logo" style="height: 120px; width: auto; margin: 0 auto;">
+        <img src="images/logo.png" alt="PRV CRM Logo" style="height: 100px; width: auto; margin: 0 auto;">
       </div>
       <h2 class="login-title">Admin Portal Login</h2>
       <p class="login-subtitle">Enter your credentials to access the Lead Management System.</p>
 
-      <form id="admin-login-form">
+      <div id="login-error-msg" style="display: none; background: #FEE2E2; border: 1px solid #F87171; color: #991B1B; padding: 10px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; margin-bottom: 16px; text-align: left;">
+        <i class="fa-solid fa-triangle-exclamation" style="margin-right: 6px;"></i> <span id="login-error-text">Invalid login credentials!</span>
+      </div>
+
+      <form id="admin-login-form" autocomplete="off">
         <div style="margin-bottom: 16px; text-align: left;">
           <label style="font-size: 0.85rem; font-weight: 700; color: var(--admin-navy);">Username</label>
-          <input type="text" id="login-username" class="search-input" style="width: 100%; margin-top: 4px;" value="admin" required>
+          <input type="text" id="login-username" class="search-input" style="width: 100%; margin-top: 4px;" placeholder="Enter admin username" autocomplete="off" required>
         </div>
 
         <div style="margin-bottom: 24px; text-align: left;">
           <label style="font-size: 0.85rem; font-weight: 700; color: var(--admin-navy);">Password</label>
-          <input type="password" id="login-password" class="search-input" style="width: 100%; margin-top: 4px;" value="admin123" required>
+          <div style="position: relative; margin-top: 4px;">
+            <input type="password" id="login-password" class="search-input" style="width: 100%; padding-right: 40px;" placeholder="Enter password" autocomplete="new-password" required>
+            <button type="button" id="toggle-pwd-btn" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--admin-muted); cursor: pointer; font-size: 0.9rem;" title="Show/Hide Password">
+              <i class="fa-solid fa-eye" id="toggle-pwd-icon"></i>
+            </button>
+          </div>
         </div>
 
-        <button type="submit" class="btn-export" style="width: 100%; padding: 12px; font-size: 1rem; cursor: pointer;">
+        <button type="submit" id="btn-login-submit" class="btn-export" style="width: 100%; padding: 12px; font-size: 1rem; cursor: pointer; justify-content: center;">
           <i class="fa-solid fa-right-to-bracket"></i> Sign In to Dashboard
         </button>
       </form>
@@ -409,25 +418,58 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      // Clear legacy persistent localStorage token so it never logs in automatically
+      try {
+        localStorage.removeItem('prv_admin_token');
+      } catch (e) {}
+
+      // Reset login form fields
+      const uInput = document.getElementById('login-username');
+      const pInput = document.getElementById('login-password');
+      if (uInput) uInput.value = '';
+      if (pInput) pInput.value = '';
+
+      // Toggle password visibility
+      const togglePwdBtn = document.getElementById('toggle-pwd-btn');
+      if (togglePwdBtn && pInput) {
+        togglePwdBtn.addEventListener('click', () => {
+          const isPwd = pInput.type === 'password';
+          pInput.type = isPwd ? 'text' : 'password';
+          const icon = document.getElementById('toggle-pwd-icon');
+          if (icon) {
+            icon.className = isPwd ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+          }
+        });
+      }
+
       checkAuth();
       initEvents();
     });
 
     function checkAuth() {
-      const token = localStorage.getItem('prv_admin_token');
+      // Use sessionStorage so admin is never automatically logged in across new sessions/tabs
+      const token = sessionStorage.getItem('prv_admin_token');
+      const loginOverlay = document.getElementById('login-overlay');
+      const adminWrapper = document.getElementById('admin-dashboard-wrapper');
+
       if (token) {
-        document.getElementById('login-overlay').style.display = 'none';
-        document.getElementById('admin-dashboard-wrapper').style.display = 'flex';
+        loginOverlay.style.display = 'none';
+        adminWrapper.style.display = 'flex';
         loadDashboardData();
       } else {
-        document.getElementById('login-overlay').style.display = 'flex';
-        document.getElementById('admin-dashboard-wrapper').style.display = 'none';
+        loginOverlay.style.display = 'flex';
+        adminWrapper.style.display = 'none';
       }
     }
 
     // API fetch helper
     async function apiFetch(url, options = {}) {
       try {
+        const token = sessionStorage.getItem('prv_admin_token');
+        options.headers = options.headers || {};
+        if (token) {
+          options.headers['Authorization'] = `Bearer ${token}`;
+        }
         const res = await fetch(url, options);
         if (res && res.ok) return res;
         return res;
@@ -437,11 +479,40 @@
       }
     }
 
+    function showLoginError(msg) {
+      const errBox = document.getElementById('login-error-msg');
+      const errTxt = document.getElementById('login-error-text');
+      if (errBox && errTxt) {
+        errTxt.textContent = msg || 'Invalid username or password.';
+        errBox.style.display = 'block';
+      } else {
+        alert(msg || 'Invalid login credentials!');
+      }
+    }
+
+    function hideLoginError() {
+      const errBox = document.getElementById('login-error-msg');
+      if (errBox) errBox.style.display = 'none';
+    }
+
     // Login Handle
     document.getElementById('admin-login-form').addEventListener('submit', async (e) => {
       e.preventDefault();
+      hideLoginError();
+
       const u = document.getElementById('login-username').value.trim();
       const p = document.getElementById('login-password').value.trim();
+      const submitBtn = document.getElementById('btn-login-submit');
+
+      if (!u || !p) {
+        showLoginError('Please enter both username and password.');
+        return;
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Signing In...';
+      }
 
       try {
         const res = await apiFetch('/api/auth/login', {
@@ -452,31 +523,52 @@
         if (res && res.ok) {
           const data = await res.json();
           if (data.success) {
-            localStorage.setItem('prv_admin_token', data.token);
-            document.getElementById('user-display-name').textContent = data.user.name;
+            sessionStorage.setItem('prv_admin_token', data.token);
+            try { localStorage.removeItem('prv_admin_token'); } catch (e) {}
+            document.getElementById('user-display-name').textContent = (data.user && data.user.name) ? data.user.name : 'Master Admin';
             checkAuth();
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Sign In to Dashboard';
+            }
             return;
           } else {
-            alert('Invalid login credentials! Use admin / admin123');
+            showLoginError(data.message || 'Invalid admin username or password.');
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Sign In to Dashboard';
+            }
             return;
           }
         }
       } catch (err) {
-        // Backend API not reachable (Vercel static hosting)
+        // Backend API not reachable (e.g. static hosting)
       }
 
-      // Fallback for Vercel static deployment
-      if (u === 'admin' && p === 'admin123') {
-        localStorage.setItem('prv_admin_token', 'demo-vercel-token');
-        document.getElementById('user-display-name').textContent = 'Master Admin';
+      // Fallback for static demo environments
+      if ((u === 'admin' && p === 'admin123') || (u === 'sales' && p === 'admin123')) {
+        sessionStorage.setItem('prv_admin_token', 'demo-session-token-' + Date.now());
+        try { localStorage.removeItem('prv_admin_token'); } catch (e) {}
+        document.getElementById('user-display-name').textContent = u === 'admin' ? 'Master Admin' : 'Sales Lead';
         checkAuth();
       } else {
-        alert('Invalid login credentials! Use admin / admin123');
+        showLoginError('Invalid username or password. Please try again.');
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Sign In to Dashboard';
       }
     });
 
     document.getElementById('logout-btn').addEventListener('click', () => {
-      localStorage.removeItem('prv_admin_token');
+      sessionStorage.removeItem('prv_admin_token');
+      try { localStorage.removeItem('prv_admin_token'); } catch (e) {}
+      const uInput = document.getElementById('login-username');
+      const pInput = document.getElementById('login-password');
+      if (uInput) uInput.value = '';
+      if (pInput) pInput.value = '';
+      hideLoginError();
       checkAuth();
     });
 
