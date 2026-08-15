@@ -1289,6 +1289,16 @@ function showServiceDetailPage(serviceId) {
   document.getElementById('view-service-detail').classList.add('active');
 
   targetContainer.innerHTML = `
+    <!-- 0. TOP NAVIGATION BREADCRUMB / BUTTONS -->
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+      <a href="#home" class="btn-action" style="background: #ffffff; border: 1px solid var(--card-border); color: var(--text-dark); text-decoration: none; padding: 8px 18px; border-radius: 12px; font-weight: 700; font-size: 0.86rem; display: inline-flex; align-items: center; gap: 8px; box-shadow: var(--shadow-xs); transition: all 0.2s ease;">
+        <i class="fa-solid fa-house" style="color: var(--brand-primary);"></i> Home Page
+      </a>
+      <a href="#services" class="btn-action" style="background: #ffffff; border: 1px solid var(--card-border); color: var(--text-body); text-decoration: none; padding: 8px 18px; border-radius: 12px; font-weight: 700; font-size: 0.86rem; display: inline-flex; align-items: center; gap: 8px; box-shadow: var(--shadow-xs); transition: all 0.2s ease;">
+        <i class="fa-solid fa-layer-group"></i> All 27+ Services
+      </a>
+    </div>
+
     <!-- 1. HERO SECTION -->
     <div class="blueprint-hero-banner">
       <div class="blueprint-hero-tag-row">

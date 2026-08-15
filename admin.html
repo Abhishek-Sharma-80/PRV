@@ -52,6 +52,12 @@
         <button type="submit" id="btn-login-submit" class="btn-export" style="width: 100%; padding: 12px; font-size: 1rem; cursor: pointer; justify-content: center;">
           <i class="fa-solid fa-right-to-bracket"></i> Sign In to Dashboard
         </button>
+
+        <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid #e2e8f0; text-align: center;">
+          <a href="index.html" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 10px; border-radius: 8px; background: #f8fafc; border: 1px solid #e2e8f0; color: var(--admin-navy); font-weight: 700; font-size: 0.88rem; text-decoration: none; transition: all 0.2s ease;">
+            <i class="fa-solid fa-house"></i> Return to Website Home
+          </a>
+        </div>
       </form>
     </div>
   </div>
@@ -64,7 +70,9 @@
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="sidebar-logo">
-        <img src="images/logo.png" alt="PRV CRM Logo" style="height: 70px; width: auto;">
+        <a href="index.html" title="Back to Website Home" style="display: inline-block;">
+          <img src="images/logo.png" alt="PRV CRM Logo" style="height: 70px; width: auto;">
+        </a>
       </div>
 
       <div class="sidebar-menu">
@@ -80,6 +88,9 @@
         <div class="sidebar-item" data-view="ai-logs">
           <i class="fa-solid fa-robot" style="color: var(--admin-green);"></i> AI Chat Logs & Insights
         </div>
+        <a href="index.html" class="sidebar-item" style="text-decoration: none; color: inherit; margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 14px;" title="Open Website Home Page">
+          <i class="fa-solid fa-house" style="color: #00f2fe;"></i> Website Home
+        </a>
       </div>
 
       <div class="sidebar-user">
@@ -103,7 +114,10 @@
           <p style="color: var(--admin-muted); font-size: 0.9rem;">Real-time inquiry capture from <code>client_enquiries</code> & <code>seminar_registrations</code> databases.</p>
         </div>
 
-        <div style="display: flex; gap: 10px;">
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <a href="index.html" class="btn-export" style="text-decoration: none; background: #0f172a; color: #ffffff;" title="Open Main Website Home Page">
+            <i class="fa-solid fa-house"></i> Home Page
+          </a>
           <a href="/api/enquiries/export" target="_blank" class="btn-export" style="text-decoration: none;">
             <i class="fa-solid fa-file-csv"></i> Export CSV
           </a>
