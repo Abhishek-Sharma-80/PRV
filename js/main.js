@@ -587,6 +587,470 @@ const PRV_SERVICES_DATA = {
       { q: "What is the maximum stipend subsidy under NAPS?", a: "The Govt reimburses 25% of prescribed stipend up to a maximum of ₹1,500 per apprentice per month." }
     ],
     prvHelp: "PRV offers end-to-end NAPS management: portal setup, contract generation, attendance logging, and claim clearance."
+  },
+  "iso_22000": {
+    id: "iso_22000",
+    category: "certifications",
+    name: "ISO 22000:2018 Food Safety Management (FSMS)",
+    icon: "fa-bowl-food",
+    shortDesc: "International Food Safety Management System combining HACCP principles and prerequisite programs (PRPs).",
+    whatIsIt: "ISO 22000:2018 is the global standard for Food Safety Management Systems (FSMS), applying across the entire food supply chain from farm to fork.",
+    whyImportant: "Mandatory for modern food exporters, airline caterers, FMCG brands, and high-end retail supplier onboarding.",
+    whoShouldUse: "Food processing plants, bakeries, dairy plants, spice mills, packaging converters, and commercial kitchens.",
+    benefits: [
+      "International acceptance across Europe, US, and Middle East",
+      "Harmonized HACCP hazard analysis and CCP control",
+      "Complete traceability from raw material to dispatch",
+      "Satisfies statutory FSSAI and export inspection council norms"
+    ],
+    keyAreas: ["HACCP Principles", "Prerequisite Programs (PRPs)", "Hazard Analysis", "CCP Identification", "Traceability System"],
+    process: [
+      "Food Safety Gap Assessment & Hazard Identification",
+      "HACCP Plan & Prerequisite Programs formulation",
+      "Food Handler Training & Sanitation standard work",
+      "Internal FSMS Audit & Mock Recall exercise",
+      "Certification Audit clearance"
+    ],
+    documentation: ["FSMS Manual", "HACCP Plan", "CCP Monitoring Logs", "Water Potability Test Reports", "Pest Management Logs"],
+    faqs: [
+      { q: "What is the difference between FSSAI and ISO 22000?", a: "FSSAI is mandatory Indian law, whereas ISO 22000 is an international management benchmark accepted worldwide." }
+    ],
+    prvHelp: "PRV food technologists design custom HACCP manuals, CCP control plans, and internal auditor training."
+  },
+  "iso_50001": {
+    id: "iso_50001",
+    category: "certifications",
+    name: "ISO 50001:2018 Energy Management System (EnMS)",
+    icon: "fa-bolt-lightning",
+    shortDesc: "Systematic energy management framework to slash power tariffs, optimize fuel usage, and reduce carbon footprint.",
+    whatIsIt: "ISO 50001:2018 establishes a data-driven framework for industrial plants to continuously measure, benchmark, and reduce energy consumption.",
+    whyImportant: "Significantly cuts utility bills in heavy manufacturing, clears PAT scheme norms, and earns green energy credits.",
+    whoShouldUse: "Foundries, steel plants, textile mills, cement plants, chemical processing, and large commercial facilities.",
+    benefits: [
+      "10% to 25% Reduction in industrial power and fuel expenditure",
+      "Identifies significant energy uses (SEUs) and thermal waste",
+      "Strengthens corporate ESG ratings and carbon disclosures",
+      "Compliance with BEE (Bureau of Energy Efficiency) mandates"
+    ],
+    keyAreas: ["Energy Review & Baselines (EnB)", "Energy Performance Indicators (EnPI)", "SEU Optimization", "Operational Controls", "Thermal & Electrical Audits"],
+    process: [
+      "Comprehensive Plant Energy Review & Baseline setting",
+      "EnPI Metrics calculation and target assignment",
+      "Energy Conservation Measures (ECMs) deployment",
+      "Internal EnMS Audit & Verification",
+      "Accredited Certification Audit clearance"
+    ],
+    documentation: ["Energy Policy", "Energy Review Report", "EnB & EnPI Baseline Charts", "Metering & Monitoring Logs"],
+    faqs: [
+      { q: "Can MSMEs benefit from ISO 50001?", a: "Yes, even small manufacturing units save ₹2 Lakhs to ₹15 Lakhs annually on electricity through EnMS practices." }
+    ],
+    prvHelp: "PRV certified energy auditors conduct baseline power analysis, metering architecture, and certification handholding."
+  },
+  "iso_13485": {
+    id: "iso_13485",
+    category: "certifications",
+    name: "ISO 13485:2016 Medical Devices QMS",
+    icon: "fa-stethoscope",
+    shortDesc: "Comprehensive Quality Management System for medical device manufacturers and in-vitro diagnostics (IVD).",
+    whatIsIt: "ISO 13485:2016 specifies requirements for a quality management system where an organization needs to demonstrate its ability to provide medical devices and related services that consistently meet customer and regulatory requirements.",
+    whyImportant: "Prerequisite for CDSCO medical device manufacturing licenses, CE Marking under MDR, and US FDA 510(k) export submissions.",
+    whoShouldUse: "Medical equipment manufacturers, surgical tool makers, disposable syringe plants, orthopedic implant producers, and IVD kit makers.",
+    benefits: [
+      "Fast-track clearance for CDSCO Manufacturing / Import licenses",
+      "Fulfills EU MDR and global medical device regulatory requirements",
+      "Robust risk management based on ISO 14971 standards",
+      "Strict cleanroom, sterilization, and bio-burden controls"
+    ],
+    keyAreas: ["Risk Management (ISO 14971)", "Cleanroom Validation", "Design & Development Controls", "Traceability & Device Master Record", "Post-Market Surveillance"],
+    process: [
+      "Regulatory Gap Assessment (CDSCO & ISO 13485)",
+      "Device Master File (DMF) & Technical File compilation",
+      "Cleanroom & Sterilization protocol validation",
+      "Internal Audit by biomedical quality specialists",
+      "Notified Body Certification clearance"
+    ],
+    documentation: ["Device Master Record (DMR)", "Device History Record (DHR)", "ISO 14971 Risk Assessment File", "Validation Reports"],
+    faqs: [
+      { q: "Is ISO 13485 mandatory for CDSCO license?", a: "Yes, CDSCO medical device rules recognize ISO 13485 as the benchmark quality compliance framework." }
+    ],
+    prvHelp: "PRV biomedical consultants handle technical file compilation, risk management matrices, and audit execution."
+  },
+  "safety_audit": {
+    id: "safety_audit",
+    category: "compliance",
+    name: "Industrial Safety Audits & Fire Compliance",
+    icon: "fa-triangle-exclamation",
+    shortDesc: "Comprehensive plant safety inspection, electrical thermography, HAZOP study, and Fire NOC documentation.",
+    whatIsIt: "A systematic statutory safety assessment of industrial plant premises to identify hazardous conditions, evaluate emergency preparedness, and ensure full compliance with the Factories Act and State Fire Rules.",
+    whyImportant: "Prevents fatal shopfloor accidents, avoids Factory Inspectorate penalties/closure, and satisfies insurance underwriting mandates.",
+    whoShouldUse: "Chemical units, engineering plants, warehouses, auto component factories, and heavy industrial facilities.",
+    benefits: [
+      "100% Compliance with Section 7A & 41A of Factories Act",
+      "Identifies hidden electrical hot spots using thermography",
+      "Comprehensive Fire NOC inspection readiness",
+      "Significant reduction in workman compensation risk"
+    ],
+    keyAreas: ["Hazard Identification (HAZOP/HIRA)", "Electrical Safety & Thermography", "Machine Guarding", "Fire Protection Systems", "Emergency Mock Drills"],
+    process: [
+      "On-site plant walk-through & physical hazard tagging",
+      "Electrical panel infrared thermography inspection",
+      "Fire hydrant, extinguisher, and smoke detector audit",
+      "Emergency Disaster Management Plan (DMP) formulation",
+      "Detailed Safety Audit Report with time-bound action plan"
+    ],
+    documentation: ["Safety Audit Report (Form 18)", "HIRA Matrix", "Fire NOC Inspection File", "Emergency Evacuation Map"],
+    faqs: [
+      { q: "How frequently must safety audits be conducted?", a: "Statutory safety audits are mandated annually or bi-annually depending on plant category and hazardous chemical inventory." }
+    ],
+    prvHelp: "PRV certified safety officers and chartered engineers provide turnkey plant safety audits and corrective action closure."
+  },
+  "vendor_audit": {
+    id: "vendor_audit",
+    category: "compliance",
+    name: "Second-Party Vendor & OEM Supplier Audits",
+    icon: "fa-clipboard-list",
+    shortDesc: "Independent second-party supply chain evaluations, supplier capability scoring, and quality risk assessments.",
+    whatIsIt: "Independent second-party audit services where PRV evaluates your suppliers and vendor network against your technical drawings, quality parameters, and delivery standards.",
+    whyImportant: "Prevents incoming material defects, ensures Tier-2/3 transparency, and protects your brand reputation with final clients.",
+    whoShouldUse: "OEMs, Tier-1 manufacturers, retail brand aggregators, and large EPC contractors with extensive supplier ecosystems.",
+    benefits: [
+      "Reduces incoming defect rates by up to 75%",
+      "Impartial third-party scoring of vendor capability",
+      "Standardizes vendor quality control procedures",
+      "Faster supplier onboarding with verified scorecards"
+    ],
+    keyAreas: ["Supplier Quality Assurance (SQA)", "Process Capability (Cpk)", "Incoming Material QC", "Tooling & Machine Health", "Traceability Records"],
+    process: [
+      "Audit Checklist customized to your OEM requirements",
+      "On-site Vendor Plant Audit execution by PRV lead auditors",
+      "Comprehensive scoring across 10 quality & capacity pillars",
+      "Detailed Audit Report with high-res photos & NC list",
+      "Corrective Action (CAPA) tracking and verification"
+    ],
+    documentation: ["Vendor Evaluation Matrix", "CAPA Tracker", "Process Audit Report", "PPM Rejection Log"],
+    faqs: [
+      { q: "Can PRV audit suppliers across different cities in India?", a: "Yes, PRV has an extensive auditor presence covering all major industrial clusters in India." }
+    ],
+    prvHelp: "PRV acts as your extended Quality Assurance team, conducting unannounced or scheduled vendor audits nationwide."
+  },
+  "ce_marking": {
+    id: "ce_marking",
+    category: "compliance",
+    name: "CE Marking & EU Product Compliance",
+    icon: "fa-stamp",
+    shortDesc: "European Conformity CE mark certification for machinery, electrical products, pressure vessels, and export goods.",
+    whatIsIt: "CE marking indicates that a product complies with applicable European Union (EU) health, safety, and environmental protection legislation directives.",
+    whyImportant: "Mandatory legal requirement for exporting goods to the European Economic Area (EEA) comprising 30 countries.",
+    whoShouldUse: "Exporters of machinery, electrical appliances, electronics, pressure equipment, personal protective equipment (PPE), and construction products.",
+    benefits: [
+      "Unlocks duty-free access to all 30 European Economic Area nations",
+      "Eliminates risk of customs seizure at European ports",
+      "Enhances brand value and engineering standard globally",
+      "Direct technical file compliance with EU Directives"
+    ],
+    keyAreas: ["Machinery Directive (2006/42/EC)", "Low Voltage Directive (LVD)", "EMC Directive", "Technical Construction File (TCF)", "EU Declaration of Conformity"],
+    process: [
+      "Identification of applicable EU Directives & harmonized standards",
+      "Product Risk Assessment & essential safety health requirements",
+      "Type Testing in NABL / European accredited laboratories",
+      "Technical Construction File (TCF) documentation",
+      "Issuance of EU Declaration of Conformity & CE Marking"
+    ],
+    documentation: ["Technical Construction File (TCF)", "Lab Test Reports", "Risk Assessment File", "User Manuals & Schematics", "Declaration of Conformity"],
+    faqs: [
+      { q: "Is third-party Notified Body mandatory for all CE marks?", a: "For low-risk machinery, self-declaration (Module A) applies. High-risk machinery requires Notified Body inspection." }
+    ],
+    prvHelp: "PRV CE compliance engineers handle directive mapping, lab testing coordination, technical file compilation, and Notified Body liaising."
+  },
+  "rohs_reach": {
+    id: "rohs_reach",
+    category: "compliance",
+    name: "RoHS & REACH Chemical Compliance",
+    icon: "fa-flask-vial",
+    shortDesc: "Restriction of Hazardous Substances (RoHS) and REACH chemical regulations for global electronics & hardware exports.",
+    whatIsIt: "RoHS restricts specific hazardous materials (such as Lead, Mercury, Cadmium, Hexavalent Chromium, PBBs, and PBDEs) in electrical/electronic products, while REACH governs chemical substances across all consumer goods.",
+    whyImportant: "Mandatory prerequisite for exporting electronic components, automotive parts, and consumer hardware to EU, USA, and Japan.",
+    whoShouldUse: "Electronics manufacturers, PCB assemblers, cable producers, plastic molders, and automotive hardware suppliers.",
+    benefits: [
+      "100% Export clearance for global electronic supply chains",
+      "Eliminates heavy metal toxicity risks in products",
+      "Satisfies OEM Green Procurement guidelines",
+      "Generates verified RoHS Test Reports and Bill of Materials (BOM) files"
+    ],
+    keyAreas: ["10 Restricted Substances Screening", "Substances of Very High Concern (SVHC)", "BOM Material Declarations", "XRF Lab Screening", "Supplier Compliance Audits"],
+    process: [
+      "Bill of Materials (BOM) chemical composition review",
+      "XRF screening and lab chemical testing of component samples",
+      "Supplier Material Declaration collection & verification",
+      "RoHS / REACH Technical Compliance Dossier creation",
+      "Issuance of Certificate of Compliance"
+    ],
+    documentation: ["Full Material Declaration (FMD)", "XRF Test Reports", "SVHC Declaration", "RoHS Compliance Certificate"],
+    faqs: [
+      { q: "What are the key substances restricted under RoHS 3?", a: "Lead, Mercury, Cadmium, Hexavalent Chromium, PBB, PBDE, DEHP, BBP, DBP, and DIBP." }
+    ],
+    prvHelp: "PRV material compliance specialists provide complete BOM mapping, lab testing coordination, and declaration dossiers."
+  },
+  "kaizen": {
+    id: "kaizen",
+    category: "excellence",
+    name: "Kaizen Continuous Micro-Improvements",
+    icon: "fa-arrow-trend-up",
+    shortDesc: "Employee-driven continuous improvement blitzes to eliminate shopfloor bottlenecks, waste, and micro-stoppages.",
+    whatIsIt: "Kaizen (Japanese for 'change for the better') is a philosophy and methodology focusing on continuous, incremental improvements involving everyone from operators to senior management.",
+    whyImportant: "Generates massive cumulative savings through hundreds of small, low-cost or zero-cost employee ideas implemented rapidly.",
+    whoShouldUse: "Manufacturing plants, machining shops, packaging lines, and logistics warehouses.",
+    benefits: [
+      "Dozens of shopfloor micro-improvements generated every month",
+      "Immediate reduction in cycle time and operator fatigue",
+      "Empowers shopfloor workforce and boosts employee retention",
+      "Direct enhancement of safety, quality, delivery, and cost (SQDC)"
+    ],
+    keyAreas: ["Kaizen Event Blitzes", "Idea Suggestion Schemes", "Before/After Kaizen Sheets", "Yokoten (Lateral Sharing)", "SQDC Board Reviews"],
+    process: [
+      "Kaizen Awareness & Gemba Walk workshop for shopfloor teams",
+      "Formation of Cross-Functional Kaizen Circles",
+      "Monthly Idea Generation, Screening, and Rapid Implementation",
+      "Kaizen Board setup & Before/After documentation",
+      "Monthly Kaizen Recognition & Award ceremony"
+    ],
+    documentation: ["Kaizen 1-Point Lessons", "Before/After Kaizen Sheets", "Suggestion Tracking Log", "Monthly Savings Register"],
+    faqs: [
+      { q: "How is Kaizen different from Six Sigma?", a: "Kaizen focuses on rapid, low-cost incremental improvements, while Six Sigma tackles complex statistical variations." }
+    ],
+    prvHelp: "PRV facilitators establish active Kaizen culture on your shopfloor, driving hundreds of verified employee improvements."
+  },
+  "tpm": {
+    id: "tpm",
+    category: "excellence",
+    name: "Total Productive Maintenance (TPM - 8 Pillars)",
+    icon: "fa-screwdriver-wrench",
+    shortDesc: "Zero breakdowns, zero accidents, and zero defects through Autonomous Maintenance (Jishu Hozen) and OEE optimization.",
+    whatIsIt: "TPM is a comprehensive equipment management system aimed at maximizing Overall Equipment Effectiveness (OEE) and achieving Zero Breakdowns, Zero Defects, and Zero Accidents through operator ownership.",
+    whyImportant: "Drastically cuts machine downtime and prevents sudden breakdown crises on critical production lines.",
+    whoShouldUse: "Continuous process plants, CNC machine shops, stamping presses, injection molding units, and packaging plants.",
+    benefits: [
+      "OEE increase from typical 55-65% up to 85%+ world-class levels",
+      "Up to 80% reduction in unexpected machine breakdowns",
+      "Operators trained to perform daily cleaning, lubrication, and inspection",
+      "Extends machine lifespan and eliminates chronic quality defects"
+    ],
+    keyAreas: ["Autonomous Maintenance (Jishu Hozen)", "Planned Maintenance", "Kobetsu Kaizen", "Quality Maintenance", "Training & Education"],
+    process: [
+      "OEE baseline calculation across key bottleneck machines",
+      "Initial Cleanliness & Restoration campaign on pilot machine",
+      "Autonomous Maintenance (Jishu Hozen) Step 1 to Step 3 deployment",
+      "Preventive & Predictive Maintenance schedules setup",
+      "TPM 8-Pillar institutionalization and review"
+    ],
+    documentation: ["CLIT Standards (Clean, Lubricate, Inspect, Tighten)", "Machine Breakdown Logs", "MTBF & MTTR Charts", "OEE Daily Sheets"],
+    faqs: [
+      { q: "What is the key metric tracked in TPM?", a: "Overall Equipment Effectiveness (OEE), calculated as Availability × Performance × Quality." }
+    ],
+    prvHelp: "PRV TPM specialists conduct hands-on shopfloor restoration, Jishu Hozen implementation, and MTTR/MTBF reduction."
+  },
+  "six_sigma": {
+    id: "six_sigma",
+    category: "excellence",
+    name: "Lean Six Sigma DMAIC Projects",
+    icon: "fa-chart-pie",
+    shortDesc: "Data-driven DMAIC problem solving to eliminate chronic defects and achieve 3.4 Defects Per Million Opportunities.",
+    whatIsIt: "Six Sigma is a disciplined, data-driven approach and methodology for eliminating defects in any process—from manufacturing to transactional and from product to service.",
+    whyImportant: "Solves chronic quality issues that standard trial-and-error cannot fix, saving millions in warranty claims and scrap.",
+    whoShouldUse: "Precision engineering, automotive suppliers, pharmaceutical plants, electronics manufacturing, and high-volume operations.",
+    benefits: [
+      "Statistical reduction of process variation and defect rates",
+      "Direct, quantifiable financial bottom-line cost savings",
+      "Root cause validation using Minitab and hypothesis testing",
+      "Standardized control plans preventing problem recurrence"
+    ],
+    keyAreas: ["DMAIC Roadmap", "Process Capability (Cp/Cpk)", "Design of Experiments (DOE)", "Root Cause Hypothesis Testing", "Statistical Process Control (SPC)"],
+    process: [
+      "Define: Project Charter & Customer CTQ identification",
+      "Measure: Data collection plan & Gage R&R validation",
+      "Analyze: Root cause hypothesis testing & Regression analysis",
+      "Improve: Solution piloting & Design of Experiments (DOE)",
+      "Control: SPC Control charts & SOP institutionalization"
+    ],
+    documentation: ["Project Charter", "Gage R&R Studies", "Process Capability Reports", "Minitab Analysis Files", "Control Plans"],
+    faqs: [
+      { q: "What does Six Sigma level quality mean?", a: "Six Sigma corresponds to 3.4 defects per million opportunities (DPMO), representing 99.99966% defect-free output." }
+    ],
+    prvHelp: "PRV Master Black Belts mentor your engineering teams to deliver verified ₹10 Lakh+ cost savings per DMAIC project."
+  },
+  "poka_yoke": {
+    id: "poka_yoke",
+    category: "excellence",
+    name: "Poka-Yoke & Visual Management",
+    icon: "fa-eye",
+    shortDesc: "Mistake-proofing mechanisms, sensor interlocks, and 100% visual factory controls to eliminate human error.",
+    whatIsIt: "Poka-Yoke (mistake-proofing) is a Japanese technique that prevents human errors in manufacturing processes by introducing mechanical fixtures, sensors, and visual locks.",
+    whyImportant: "Guarantees zero defective parts reach downstream operations or customers without relying on operator vigilance.",
+    whoShouldUse: "Assembly plants, welding fixtures, packaging units, electronic assembly lines, and high-speed production plants.",
+    benefits: [
+      "100% Elimination of wrong assembly and missing part defects",
+      "Eliminates dependency on 100% manual visual inspection",
+      "Low-cost mechanical guides, pins, limit switches, and light curtains",
+      "Instant visual warning before defective parts can be processed"
+    ],
+    keyAreas: ["Contact Poka-Yoke", "Fixed-Value Poka-Yoke", "Motion-Step Poka-Yoke", "Andon Signal Towers", "Visual SOP Boards"],
+    process: [
+      "Process FMEA review to identify high-RPN human error modes",
+      "Design of mechanical guides, locating pins, and sensor interlocks",
+      "Prototype fabrication and testing on live production line",
+      "Visual Andon indicator and alarm integration",
+      "Poka-Yoke daily verification checklist implementation"
+    ],
+    documentation: ["Poka-Yoke Master Matrix", "Daily Verification Checklists", "Visual SOP Boards", "Red Tag Bin Logs"],
+    faqs: [
+      { q: "What is an example of a simple Poka-Yoke?", a: "A SIM card slot with a beveled corner that makes it physically impossible to insert the card the wrong way." }
+    ],
+    prvHelp: "PRV industrial engineers design and install custom mechanical mistake-proofing fixtures on your machines."
+  },
+  "lead_auditor": {
+    id: "lead_auditor",
+    category: "training",
+    name: "IRCA / CQI Certified Lead Auditor Training",
+    icon: "fa-user-tie",
+    shortDesc: "Globally accredited 5-day Lead Auditor training for ISO 9001, ISO 14001, ISO 45001, and IATF 16949.",
+    whatIsIt: "An intensive 5-day professional certification course accredited by IRCA/CQI, training professionals to plan, conduct, lead, and report third-party certification audits.",
+    whyImportant: "Gold standard qualification for quality managers, compliance heads, and aspiring professional auditors.",
+    whoShouldUse: "Quality Managers, Management Representatives (MRs), Plant Heads, EHS Officers, and Consulting Professionals.",
+    benefits: [
+      "IRCA / CQI Global Lead Auditor credential recognized worldwide",
+      "Mastery of ISO 19011 auditing principles and NC report drafting",
+      "Career advancement into high-paying global audit roles",
+      "Enables company to conduct in-house second-party vendor audits"
+    ],
+    keyAreas: ["ISO 19011 Auditing Guidelines", "Audit Planning & Checklist Design", "Opening & Closing Meetings", "Non-Conformance (NC) Writing", "Audit Report Finalization"],
+    process: [
+      "5-Day Live Interactive Masterclass by senior IRCA certified tutors",
+      "Case studies, mock audit simulations, and role-playing exercises",
+      "Continuous daily assessment on audit techniques",
+      "Final Written Examination / Online IRCA Assessment",
+      "Issuance of Official IRCA Lead Auditor Certificate"
+    ],
+    documentation: ["IRCA Course Material", "Delegate Workbook", "Sample Audit Case Studies", "Official IRCA Certificate"],
+    faqs: [
+      { q: "Is the certificate valid internationally?", a: "Yes, CQI / IRCA certificates are the highest global benchmark and valid in all countries." }
+    ],
+    prvHelp: "PRV conducts monthly batch registrations with 98%+ pass guarantee, practical workshops, and career mentoring."
+  },
+  "internal_auditor": {
+    id: "internal_auditor",
+    category: "training",
+    name: "Internal Quality Auditor Certification",
+    icon: "fa-certificate",
+    shortDesc: "2-Day intensive certification for plant engineers and executives to conduct mandatory internal QMS/EMS/OHSMS audits.",
+    whatIsIt: "A 2-day practical training workshop designed to qualify internal department champions to conduct periodic internal audits mandated by ISO standards.",
+    whyImportant: "ISO standards mandate independent internal audits before every surveillance and recertification audit.",
+    whoShouldUse: "Cross-functional department heads, engineers, supervisors, and internal audit team members.",
+    benefits: [
+      "Certified Internal Auditor qualification for employees",
+      "Saves thousands in external consultant fees for routine audits",
+      "Deep understanding of standard clauses and objective evidence",
+      "Equips team to identify and close non-conformances internally"
+    ],
+    keyAreas: ["Standard Clause Interpretation", "Audit Checklists & Sampling", "Interviewing & Evidence Gathering", "Root Cause Analysis (5-Why/Fishbone)", "Corrective Action (CAPA)"],
+    process: [
+      "2-Day interactive classroom training and clause walkthrough",
+      "Live mock internal audit on client's actual plant premises",
+      "NC drafting and 5-Why root cause analysis workshop",
+      "Internal Auditor Qualification Exam",
+      "Issuance of Internal Auditor Certificate"
+    ],
+    documentation: ["Internal Auditor Handbook", "Standard Audit Checklists", "NC Templates", "Course Completion Certificate"],
+    faqs: [
+      { q: "How many internal auditors should a plant have?", a: "A typical manufacturing plant should have 4 to 8 trained internal auditors to cover all departments independently." }
+    ],
+    prvHelp: "PRV delivers customized on-site or virtual 2-day certified Internal Auditor workshops tailored to your factory."
+  },
+  "core_tools": {
+    id: "core_tools",
+    category: "training",
+    name: "IATF 5 Core Tools Hands-on Masterclass",
+    icon: "fa-toolbox",
+    shortDesc: "Comprehensive practical training on APQP, PPAP, FMEA (AIAG-VDA), MSA, and SPC for automotive engineers.",
+    whatIsIt: "A specialized automotive quality workshop covering the 5 Core Tools essential for achieving IATF 16949 compliance and passing OEM supplier audits.",
+    whyImportant: "OEM audits (Maruti, Tata, Hyundai, etc.) heavily scrutinize plant engineers' hands-on knowledge of Core Tools.",
+    whoShouldUse: "Automotive engineers, design teams, quality inspectors, tool room managers, and production supervisors.",
+    benefits: [
+      "Hands-on mastery of new AIAG-VDA 7-Step FMEA methodology",
+      "Ability to compile 18-element PPAP submission packages",
+      "Conduct Gage R&R and Measurement System Analysis independently",
+      "Calculate Cp, Cpk, Pp, Ppk and interpret SPC Control Charts"
+    ],
+    keyAreas: ["APQP 5 Phases", "PPAP 18 Elements", "AIAG-VDA 7-Step FMEA", "MSA (Gage R&R, Bias, Linearity)", "SPC (X-bar R, Capability Analysis)"],
+    process: [
+      "Phase-by-phase walkthrough with live automotive component examples",
+      "Hands-on Excel / Minitab calculation workshops",
+      "Live PPAP dossier compilation exercise",
+      "Core Tools Competency Assessment",
+      "Certification of Competence issuance"
+    ],
+    documentation: ["Core Tools Reference Manuals", "PPAP Form Templates", "AIAG-VDA FMEA Worksheets", "SPC / MSA Excel Calculators"],
+    faqs: [
+      { q: "What is the new AIAG-VDA FMEA standard?", a: "It harmonized US AIAG and German VDA methodologies into a 7-step structured approach with Action Priority (AP) replacing RPN." }
+    ],
+    prvHelp: "PRV automotive trainers provide real component templates, Excel automation sheets, and practical hands-on coaching."
+  },
+  "fostac_training": {
+    id: "fostac_training",
+    category: "training",
+    name: "FSSAI FoSTaC Food Safety Certification",
+    icon: "fa-award",
+    shortDesc: "Mandatory FSSAI Food Safety Supervisor training for food handlers, kitchen staff, and factory personnel.",
+    whatIsIt: "FoSTaC (Food Safety Training & Certification) is an official initiative by FSSAI requiring every food business operator to have trained Food Safety Supervisors on staff.",
+    whyImportant: "Mandatory under FSSAI regulations; failure to appoint certified FoSTaC supervisors attracts statutory penalties.",
+    whoShouldUse: "Food factories, cloud kitchens, hotels, catering companies, retail chains, and beverage bottling plants.",
+    benefits: [
+      "100% Fulfillment of FSSAI mandatory supervisor licensing quota",
+      "Official FSSAI FoSTaC Certificate issued directly by the Govt",
+      "Prevention of food contamination, spoilage, and consumer complaints",
+      "Complete grounding in Good Hygiene Practices (GHP) and GMP"
+    ],
+    keyAreas: ["Personal Hygiene & Health", "Cross-Contamination Prevention", "Temperature & Storage Control", "Pest Control Protocols", "Cleaning & Sanitization Standards"],
+    process: [
+      "Course enrollment on official FSSAI FoSTaC portal",
+      "Full-day interactive session by FSSAI empanelled trainers",
+      "Demonstration of hand hygiene, swab testing, and sanitizer titration",
+      "Online FSSAI Assessment test",
+      "Direct download of Govt Food Safety Supervisor Certificate"
+    ],
+    documentation: ["FSSAI FoSTaC Delegate Manual", "Sanitation Checklists", "Govt FoSTaC Certificate"],
+    faqs: [
+      { q: "How many FoSTaC supervisors are required per business?", a: "FSSAI mandates at least 1 trained supervisor for every 25 food handlers on premises." }
+    ],
+    prvHelp: "PRV coordinates certified batches with authorized FSSAI trainers, handling complete portal registration and certificates."
+  },
+  "msme_subsidy": {
+    id: "msme_subsidy",
+    category: "government",
+    name: "MSME Technology & Testing Capital Subsidy",
+    icon: "fa-hand-holding-dollar",
+    shortDesc: "Guidance on claiming ₹3 Lakh testing subsidies, ₹2 Lakh consulting grants, and 80% certification reimbursement.",
+    whatIsIt: "A specialized financial advisory service helping registered MSMEs unlock central and state government subsidy schemes for quality certification, capital testing equipment, and technology upgradation.",
+    whyImportant: "Enables MSMEs to recover up to 80% of their investment in certifications, lab testing, and consultancy.",
+    whoShouldUse: "All registered Micro, Small, and Medium Enterprises with valid UDYAM certificates.",
+    benefits: [
+      "Up to 80% Direct reimbursement on certification & audit charges",
+      "₹2 Lakh Government consulting grant under ZED Scheme",
+      "₹3 Lakh Equipment testing & lab analysis reimbursement",
+      "0.5% Concession on bank working capital loan interest rates"
+    ],
+    keyAreas: ["UDYAM MSME Verification", "ZED Subsidy Claims", "Testing Equipment Grants", "Bank Concession Letters", "State Industrial Policy Subsidies"],
+    process: [
+      "Eligibility & UDYAM registration verification",
+      "Compilation of expenditure vouchers, invoices, and certificates",
+      "Online subsidy application submission on Ministry portal",
+      "Liaison with MSME Development Institute (MSME-DI) officials",
+      "Direct DBT credit into enterprise bank account"
+    ],
+    documentation: ["UDYAM Certificate", "GST Returns", "Paid Invoices & Bank Statements", "Accredited Certificates"],
+    faqs: [
+      { q: "How long does it take for subsidy reimbursement to arrive?", a: "Once approved on the MSME portal, subsidies are credited directly into the bank account within 30 to 60 days." }
+    ],
+    prvHelp: "PRV provides end-to-end subsidy documentation, portal uploading, and guaranteed claim follow-ups."
   }
 };
 
@@ -670,27 +1134,66 @@ function initPageRouting() {
 /* --------------------------------------------------------------------------
    3. SERVICES ECOSYSTEM RENDERER & DETAIL PAGE ENGINE
    -------------------------------------------------------------------------- */
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function getCategoryMeta(category) {
+  switch (category) {
+    case 'certifications':
+      return { label: 'ISO / ZED', themeClass: 'theme-cert', iconBg: 'theme-cert' };
+    case 'compliance':
+      return { label: 'Compliance & Audit', themeClass: 'theme-comp', iconBg: 'theme-comp' };
+    case 'excellence':
+      return { label: 'Business Excellence', themeClass: 'theme-excel', iconBg: 'theme-excel' };
+    case 'training':
+      return { label: 'Training & Skill', themeClass: 'theme-train', iconBg: 'theme-train' };
+    case 'government':
+      return { label: 'Govt Scheme', themeClass: 'theme-govt', iconBg: 'theme-govt' };
+    default:
+      return { label: 'Executive Program', themeClass: 'theme-cert', iconBg: 'theme-cert' };
+  }
+}
+
 function initServicesEcosystem() {
   const container = document.getElementById('services-cards-container');
   if (!container) return;
 
-  renderServiceCards('all');
+  let currentCategory = 'all';
+  let searchQuery = '';
+
+  function refreshCards() {
+    renderServiceCards(currentCategory, searchQuery);
+  }
+
+  refreshCards();
 
   // Category filter tabs
   const filterBtns = document.querySelectorAll('#service-category-filters button');
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      filterBtns.forEach(b => {
-        b.classList.remove('bg-primary-container', 'text-on-primary-container', 'active');
-        b.classList.add('bg-white/5', 'text-on-surface-variant');
-      });
-      btn.classList.remove('bg-white/5', 'text-on-surface-variant');
-      btn.classList.add('bg-primary-container', 'text-on-primary-container', 'active');
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-      const cat = btn.getAttribute('data-cat');
-      renderServiceCards(cat);
+      currentCategory = btn.getAttribute('data-cat') || 'all';
+      refreshCards();
     });
   });
+
+  // Search filter input
+  const searchInput = document.getElementById('services-search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = (e.target.value || '').trim().toLowerCase();
+      refreshCards();
+    });
+  }
 
   // Global delegate click listener for service detail triggers
   document.addEventListener('click', (e) => {
@@ -704,30 +1207,69 @@ function initServicesEcosystem() {
   });
 }
 
-function renderServiceCards(category) {
+function renderServiceCards(category = 'all', search = '') {
   const container = document.getElementById('services-cards-container');
   if (!container) return;
 
   container.innerHTML = '';
 
-  Object.values(PRV_SERVICES_DATA).forEach(service => {
-    if (category !== 'all' && service.category !== category) return;
+  const servicesList = Object.values(PRV_SERVICES_DATA);
+  const filtered = servicesList.filter(service => {
+    const matchesCat = category === 'all' || service.category === category;
+    if (!matchesCat) return false;
 
+    if (!search) return true;
+    const nameMatch = (service.name || '').toLowerCase().includes(search);
+    const descMatch = (service.shortDesc || '').toLowerCase().includes(search);
+    const catMatch = (service.category || '').toLowerCase().includes(search);
+    const keyMatch = (service.keyAreas || []).some(k => k.toLowerCase().includes(search));
+    return nameMatch || descMatch || catMatch || keyMatch;
+  });
+
+  // Update count badge
+  const countAll = document.getElementById('count-all');
+  if (countAll) countAll.textContent = servicesList.length;
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div class="no-services-found">
+        <div style="font-size: 2.2rem; color: var(--text-muted); margin-bottom: 12px;"><i class="fa-solid fa-folder-open"></i></div>
+        <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--text-heading); margin-bottom: 6px;">No matching programs found</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Try adjusting your search query or selecting another category filter above.</p>
+      </div>
+    `;
+    return;
+  }
+
+  filtered.forEach(service => {
+    const meta = getCategoryMeta(service.category);
     const card = document.createElement('div');
-    card.className = 'glass-panel p-6 rounded-xl border border-border-glass hover:border-primary-container transition-all flex flex-col justify-between group cursor-pointer explore-service-btn';
+    card.className = 'service-ecosystem-card explore-service-btn';
     card.setAttribute('data-service-id', service.id);
+
+    const chips = (service.keyAreas || []).slice(0, 2).map(area => `<span class="service-chip">${escapeHtml(area)}</span>`).join('');
 
     card.innerHTML = `
       <div>
-        <div class="w-12 h-12 rounded-lg bg-surface-variant border border-border-glass flex items-center justify-center mb-4 text-primary-container text-2xl group-hover:scale-110 transition-transform">
-          <i class="fa-solid ${service.icon}"></i>
+        <div class="service-card-top-row">
+          <div class="service-icon-box ${meta.iconBg}">
+            <i class="fa-solid ${service.icon || 'fa-certificate'}"></i>
+          </div>
+          <span class="service-category-badge ${meta.themeClass}">
+            ${meta.label}
+          </span>
         </div>
-        <h3 class="text-xl font-bold mb-2 text-on-surface group-hover:text-primary-container transition-colors">${service.name}</h3>
-        <p class="text-xs text-on-surface-variant leading-relaxed mb-6">${service.shortDesc}</p>
+
+        <h3 class="service-card-title">${escapeHtml(service.name)}</h3>
+        <p class="service-card-desc">${escapeHtml(service.shortDesc)}</p>
       </div>
-      <div class="flex items-center justify-between pt-4 border-t border-white/5">
-        <span class="text-xs font-bold text-primary-container">Explore Blueprint →</span>
-        <i class="fa-solid fa-arrow-right text-xs text-primary-container group-hover:translate-x-1 transition-transform"></i>
+
+      <div>
+        ${chips ? `<div class="service-chips-row">${chips}</div>` : ''}
+        <div class="service-card-footer">
+          <span class="service-footer-cta">Explore Blueprint</span>
+          <span class="service-footer-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+        </div>
       </div>
     `;
 

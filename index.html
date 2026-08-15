@@ -718,22 +718,40 @@
         <div class="page-view" id="view-services">
           
           <div class="saas-section-block">
-            <div class="dash-welcome-header">
+            <div class="ecosystem-header-row">
               <div>
-                <span class="saas-tag-pill"><i class="fa-solid fa-briefcase"></i> Complete Portfolio</span>
-                <h1 class="dash-welcome-title">PRV Services Ecosystem</h1>
-                <p class="dash-welcome-sub">Explore our 27+ industry-leading consulting, certification, compliance, and excellence programs.</p>
+                <span class="saas-tag-pill"><i class="fa-solid fa-briefcase"></i> Complete Advisory Portfolio</span>
+                <h1 class="dash-welcome-title" style="margin-top: 8px;">PRV Services Ecosystem</h1>
+                <p class="dash-welcome-sub">Explore our 27+ industry-leading consulting, certification, compliance, and operational excellence programs.</p>
+              </div>
+
+              <!-- Search Bar for 27+ Services -->
+              <div class="ecosystem-search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="services-search-input" placeholder="Search standard (e.g. ISO 9001, ZED, 5S, FSSAI)..." autocomplete="off">
               </div>
             </div>
 
             <!-- Filter Tabs -->
             <div class="services-category-tabs" id="service-category-filters">
-              <button type="button" class="service-tab-btn active" data-cat="all">All Services (27+)</button>
-              <button type="button" class="service-tab-btn" data-cat="certifications">Certifications (ISO/ZED)</button>
-              <button type="button" class="service-tab-btn" data-cat="compliance">Compliance & Audits</button>
-              <button type="button" class="service-tab-btn" data-cat="excellence">Business Excellence</button>
-              <button type="button" class="service-tab-btn" data-cat="training">Training & Placement</button>
-              <button type="button" class="service-tab-btn" data-cat="government">Govt Schemes (NATS)</button>
+              <button type="button" class="service-tab-btn active" data-cat="all">
+                All Services <span class="tab-count-pill" id="count-all">27</span>
+              </button>
+              <button type="button" class="service-tab-btn" data-cat="certifications">
+                <i class="fa-solid fa-certificate"></i> Certifications (ISO/ZED)
+              </button>
+              <button type="button" class="service-tab-btn" data-cat="compliance">
+                <i class="fa-solid fa-shield-halved"></i> Compliance & Audits
+              </button>
+              <button type="button" class="service-tab-btn" data-cat="excellence">
+                <i class="fa-solid fa-arrow-trend-up"></i> Business Excellence
+              </button>
+              <button type="button" class="service-tab-btn" data-cat="training">
+                <i class="fa-solid fa-graduation-cap"></i> Training & Skill
+              </button>
+              <button type="button" class="service-tab-btn" data-cat="government">
+                <i class="fa-solid fa-landmark"></i> Govt Schemes (NATS)
+              </button>
             </div>
 
             <!-- Dynamic Services Cards Grid (Rendered via JS) -->
