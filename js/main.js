@@ -2,12 +2,193 @@
    PRV CONSULTANCY SERVICES - MASTER FRONTEND & ROUTING ENGINE
    Page Views Switcher, Dynamic Service Detail Renderer (27+ Services),
    Interactive Industry Selector, Business Excellence Model,
-   AJAX Database Form Handlers & Toast Notifications
+   AJAX Database Form Handlers, Universal Click-to-Contact & Analytics
    ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   CENTRALIZED PRV CONTACT CONFIGURATION & ACTION SYSTEM
+   -------------------------------------------------------------------------- */
+window.CONTACT_CONFIG = {
+  phone: "+91 74893 51297",
+  whatsapp: "917489351297",
+  email: "prvconsultancyservices@gmail.com",
+  defaultWhatsAppMessage: "Hello PRV Consultancy Services, I would like to know more about your consultancy services. Please guide me regarding my business requirement.",
+  defaultEmailSubject: "Business Consultation Request",
+  defaultEmailBody: "Hello PRV Consultancy Services,\n\nI would like to know more about your consultancy services.\n\nMy Requirement: "
+};
+
+window.getDynamicContactMessages = function (topicOrText) {
+  const text = (topicOrText || '').toLowerCase();
+  
+  if (text.includes('iso') || text.includes('9001')) {
+    return {
+      serviceName: "ISO 9001 QMS",
+      whatsapp: "Hello PRV Consultancy Services, I am interested in ISO 9001 certification for my manufacturing company. I would like to discuss the requirements, process and consultancy support.",
+      subject: "Inquiry: ISO 9001 Certification Support",
+      body: "Hello PRV Consultancy Services,\n\nI am interested in ISO 9001 certification for my manufacturing company. I would like to discuss the requirements, process and consultancy support.\n\nCompany Name: \nContact Person: \nLocation: "
+    };
+  }
+  
+  if (text.includes('zed') || text.includes('subsidy') || text.includes('zero defect') || text.includes('msme')) {
+    return {
+      serviceName: "ZED MSME Certification",
+      whatsapp: "Hello PRV Consultancy Services, I am interested in ZED Certification. I would like to understand the eligibility, process, requirements and consultancy support.",
+      subject: "Inquiry: ZED MSME Certification & Subsidy",
+      body: "Hello PRV Consultancy Services,\n\nI am interested in ZED Certification and government MSME subsidy. I would like to understand the eligibility, process, requirements and consultancy support.\n\nCompany Name: \nUDYAM Registration: \nContact Person: "
+    };
+  }
+  
+  if (text.includes('iatf') || text.includes('16949') || text.includes('auto')) {
+    return {
+      serviceName: "IATF 16949 Automotive QMS",
+      whatsapp: "Hello PRV Consultancy Services, I am interested in IATF 16949 for my automotive business. I would like to discuss the requirements and implementation process.",
+      subject: "Inquiry: IATF 16949 Automotive QMS Support",
+      body: "Hello PRV Consultancy Services,\n\nI am interested in IATF 16949 for my automotive business. I would like to discuss the requirements and implementation process.\n\nCompany Name: \nAutomotive Components: \nContact Person: "
+    };
+  }
+  
+  if (text.includes('sedex') || text.includes('smeta') || text.includes('ethical') || text.includes('social audit')) {
+    return {
+      serviceName: "SEDEX SMETA Audit",
+      whatsapp: "Hello PRV Consultancy Services, I am interested in SEDEX SMETA ethical audit preparation. Please guide me on the requirements and audit process.",
+      subject: "Inquiry: SEDEX SMETA Ethical Audit Support",
+      body: "Hello PRV Consultancy Services,\n\nI am interested in SEDEX SMETA ethical audit preparation. Please guide me on the requirements and audit process.\n\nCompany Name: \nLocation: \nContact Person: "
+    };
+  }
+  
+  if (text.includes('5s') || text.includes('kaizen') || text.includes('lean')) {
+    return {
+      serviceName: "5S & Kaizen Excellence",
+      whatsapp: "Hello PRV Consultancy Services, I am interested in 5S & Kaizen operational excellence consulting. Please share details on shopfloor implementation.",
+      subject: "Inquiry: 5S & Kaizen Operational Excellence Support",
+      body: "Hello PRV Consultancy Services,\n\nI am interested in 5S & Kaizen operational excellence consulting. Please share details on shopfloor implementation.\n\nPlant Location: \nTeam Size: \nContact Person: "
+    };
+  }
+  
+  if (text.includes('nats') || text.includes('naps') || text.includes('apprentice') || text.includes('stipend')) {
+    return {
+      serviceName: "NATS / NAPS Apprenticeship",
+      whatsapp: "Hello PRV Consultancy Services, I am interested in NATS/NAPS Apprenticeship scheme and stipend subsidy optimization for my enterprise.",
+      subject: "Inquiry: NATS / NAPS Apprenticeship Scheme Optimization",
+      body: "Hello PRV Consultancy Services,\n\nI am interested in NATS/NAPS Apprenticeship scheme and stipend subsidy optimization for my enterprise.\n\nCompany Name: \nTotal Headcount: \nContact Person: "
+    };
+  }
+  
+  return {
+    serviceName: "General Consultation",
+    whatsapp: window.CONTACT_CONFIG.defaultWhatsAppMessage,
+    subject: window.CONTACT_CONFIG.defaultEmailSubject,
+    body: window.CONTACT_CONFIG.defaultEmailBody
+  };
+};
+
+window.getPrvWhatsAppUrl = function (customMessage) {
+  const msg = customMessage || window.CONTACT_CONFIG.defaultWhatsAppMessage;
+  return `https://wa.me/${window.CONTACT_CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+};
+
+window.getPrvMailtoUrl = function (customSubject, customBody) {
+  const subject = customSubject || window.CONTACT_CONFIG.defaultEmailSubject;
+  const body = customBody || window.CONTACT_CONFIG.defaultEmailBody;
+  return `mailto:${window.CONTACT_CONFIG.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+};
+
+window.getPrvGmailUrl = function (customSubject, customBody) {
+  const subject = customSubject || window.CONTACT_CONFIG.defaultEmailSubject;
+  const body = customBody || window.CONTACT_CONFIG.defaultEmailBody;
+  return `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(window.CONTACT_CONFIG.email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+};
+
+window.trackContactEvent = function (eventName, details = {}) {
+  try {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', eventName, details);
+    }
+    if (window.dataLayer && Array.isArray(window.dataLayer)) {
+      window.dataLayer.push({ event: eventName, ...details });
+    }
+    window.dispatchEvent(new CustomEvent('prv_contact_tracking', { detail: { event: eventName, ...details } }));
+    console.log(`[PRV Tracking] ${eventName}`, details);
+  } catch (e) {
+    console.warn('[PRV Tracking] Error:', e);
+  }
+};
+
+window.openPrvWhatsApp = function (customMessage, source = 'website') {
+  window.trackContactEvent('whatsapp_click', { source, message: customMessage || 'default' });
+  const url = window.getPrvWhatsAppUrl(customMessage);
+  window.open(url, '_blank', 'noopener,noreferrer');
+};
+
+window.openPrvEmail = function (customSubject, customBody, source = 'website') {
+  window.trackContactEvent('email_click', { source, subject: customSubject || 'default' });
+  const url = window.getPrvMailtoUrl(customSubject, customBody);
+  window.location.href = url;
+};
+
+window.openPrvGmail = function (customSubject, customBody, source = 'website') {
+  window.trackContactEvent('gmail_click', { source, subject: customSubject || 'default' });
+  const url = window.getPrvGmailUrl(customSubject, customBody);
+  const win = window.open(url, '_blank', 'noopener,noreferrer');
+  if (!win || win.closed || typeof win.closed === 'undefined') {
+    window.location.href = window.getPrvMailtoUrl(customSubject, customBody);
+  }
+};
+
+window.openPrvConsultationModal = function (serviceName = 'General Consultation', source = 'website') {
+  window.trackContactEvent('consultation_click', { source, service: serviceName });
+  const modal = document.getElementById('consultation-modal');
+  const serviceHeader = document.getElementById('modal-service-name');
+  const selectElem = document.getElementById('enq-service');
+  if (serviceHeader) serviceHeader.textContent = serviceName;
+  if (selectElem) {
+    for (let opt of selectElem.options) {
+      if (opt.value.toLowerCase() === serviceName.toLowerCase() || serviceName.toLowerCase().includes(opt.value.toLowerCase())) {
+        selectElem.value = opt.value;
+        break;
+      }
+    }
+  }
+  if (modal) modal.classList.remove('hidden');
+};
+
+function initUniversalContactHandlers() {
+  document.addEventListener('click', (e) => {
+    // Intercept clicks on links or buttons with contact actions
+    const waTrigger = e.target.closest('[data-contact-action="whatsapp"], a[href*="wa.me"]');
+    if (waTrigger) {
+      const customMsg = waTrigger.getAttribute('data-message');
+      const source = waTrigger.getAttribute('data-source') || 'link';
+      window.trackContactEvent('whatsapp_click', { source, message: customMsg || 'default' });
+      return;
+    }
+
+    const emailTrigger = e.target.closest('[data-contact-action="email"], a[href^="mailto:"]');
+    if (emailTrigger) {
+      const source = emailTrigger.getAttribute('data-source') || 'link';
+      window.trackContactEvent('email_click', { source });
+      return;
+    }
+
+    const gmailTrigger = e.target.closest('[data-contact-action="gmail"], a[href*="mail.google.com"]');
+    if (gmailTrigger) {
+      const source = gmailTrigger.getAttribute('data-source') || 'link';
+      window.trackContactEvent('gmail_click', { source });
+      return;
+    }
+
+    const consultTrigger = e.target.closest('.open-modal-trigger');
+    if (consultTrigger) {
+      const service = consultTrigger.getAttribute('data-service') || 'General Consultation';
+      window.trackContactEvent('consultation_click', { service });
+    }
+  });
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('PRV Consultancy Services - Master Application Initialized.');
 
+  initUniversalContactHandlers();
   initPageRouting();
   initServicesEcosystem();
   initIndustrySelector();
@@ -17,6 +198,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroActions();
   initScrollAnimations();
   initCounterAnimation();
+  initThreeHeroCanvas();
+  initRoiCalculator();
+  initDiagnosticQuiz();
+  initCommandPalette();
+  initCardGlowSpotlight();
 });
 
 /* --------------------------------------------------------------------------
@@ -414,9 +600,9 @@ function initPageRouting() {
   function handleRoute() {
     let hash = window.location.hash || '#home';
 
-    // Handle deep service links like #services/iso-9001
-    if (hash.startsWith('#services/')) {
-      const serviceId = hash.split('/')[1];
+    // Handle deep service links like #services/zed or #service-zed or #service/zed
+    if (hash.startsWith('#services/') || hash.startsWith('#service/') || hash.startsWith('#service-')) {
+      const serviceId = hash.replace(/^#(services\/|service\/|service-)/, '');
       showServiceDetailPage(serviceId);
       updateNavHighlight('#services');
       return;
@@ -1158,3 +1344,535 @@ function initCounterAnimation() {
     requestAnimationFrame(update);
   });
 }
+
+/* --------------------------------------------------------------------------
+   10. THREE.JS 3D INTERACTIVE PARTICLE CANVAS
+   -------------------------------------------------------------------------- */
+function initThreeHeroCanvas() {
+  const canvas = document.getElementById('hero-three-canvas');
+  if (!canvas || typeof THREE === 'undefined') return;
+
+  try {
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, canvas.clientWidth / canvas.clientHeight, 1, 1000);
+    camera.position.z = 300;
+
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Create 3D Particle Constellation
+    const particleCount = 180;
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+
+    const cyanColor = new THREE.Color(0x00f2fe);
+    const blueColor = new THREE.Color(0x38bdf8);
+    const mintColor = new THREE.Color(0x00f2c3);
+
+    for (let i = 0; i < particleCount; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 600;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 400;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 300;
+
+      const mixedColor = i % 3 === 0 ? cyanColor : i % 3 === 1 ? blueColor : mintColor;
+      colors[i * 3] = mixedColor.r;
+      colors[i * 3 + 1] = mixedColor.g;
+      colors[i * 3 + 2] = mixedColor.b;
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    // Particle Material
+    const material = new THREE.PointsMaterial({
+      size: 3.5,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.85,
+      blending: THREE.AdditiveBlending
+    });
+
+    const particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+
+    // Mouse Interaction
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetX = 0;
+    let targetY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = (e.clientX - window.innerWidth / 2) * 0.2;
+      mouseY = (e.clientY - window.innerHeight / 2) * 0.2;
+    });
+
+    // Resize Handler
+    window.addEventListener('resize', () => {
+      if (!canvas.clientWidth || !canvas.clientHeight) return;
+      camera.aspect = canvas.clientWidth / canvas.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    });
+
+    // Render Loop
+    function animate() {
+      requestAnimationFrame(animate);
+
+      targetX += (mouseX - targetX) * 0.05;
+      targetY += (mouseY - targetY) * 0.05;
+
+      particles.rotation.y += 0.0012;
+      particles.rotation.x += 0.0006;
+
+      particles.position.x = targetX * 0.4;
+      particles.position.y = -targetY * 0.4;
+
+      renderer.render(scene, camera);
+    }
+    animate();
+  } catch (e) {
+    console.warn('Three.js canvas initialization skipped:', e);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   11. INTERACTIVE MSME SUBSIDY & FINANCIAL ROI CALCULATOR
+   -------------------------------------------------------------------------- */
+function initRoiCalculator() {
+  const calcSection = document.getElementById('calculator-section');
+  if (!calcSection) return;
+
+  const tierBtns = calcSection.querySelectorAll('.calc-tier-btn');
+  const certBtns = calcSection.querySelectorAll('.calc-cert-btn');
+  const apprenticeSlider = document.getElementById('calc-apprentice-slider');
+  const apprenticeVal = document.getElementById('calc-apprentice-val');
+  const loanSlider = document.getElementById('calc-loan-slider');
+  const loanVal = document.getElementById('calc-loan-val');
+
+  const grandTotalEl = document.getElementById('calc-grand-total');
+  const zedBreakdownEl = document.getElementById('calc-breakdown-zed');
+  const testBreakdownEl = document.getElementById('calc-breakdown-test');
+  const natsBreakdownEl = document.getElementById('calc-breakdown-nats');
+  const interestBreakdownEl = document.getElementById('calc-breakdown-interest');
+  const resetBtn = document.getElementById('calc-reset-btn');
+
+  let currentTierRate = 0.80; // Micro = 80%
+  let currentHandholdingBase = 500000; // ZED Gold = 5 Lakh max
+  let currentTestingBase = 100000;
+  let currentApprentices = 10;
+  let currentLoanLakhs = 100; // ₹1 Crore = 100 Lakhs
+
+  function formatINR(val) {
+    return '₹' + Math.round(val).toLocaleString('en-IN');
+  }
+
+  function calculate() {
+    const zedSubsidy = currentHandholdingBase * currentTierRate;
+    const testSubsidy = currentTestingBase * currentTierRate;
+    const natsReimbursement = currentApprentices * 1500 * 12; // ₹1,500/mo * 12 mos
+    const loanPrincipal = currentLoanLakhs * 100000;
+    const interestSavings = loanPrincipal * 0.005; // 0.5% interest rate concession
+
+    const grandTotal = zedSubsidy + testSubsidy + natsReimbursement + interestSavings;
+
+    if (zedBreakdownEl) zedBreakdownEl.textContent = formatINR(zedSubsidy);
+    if (testBreakdownEl) testBreakdownEl.textContent = formatINR(testSubsidy);
+    if (natsBreakdownEl) natsBreakdownEl.textContent = formatINR(natsReimbursement) + ' / yr';
+    if (interestBreakdownEl) interestBreakdownEl.textContent = formatINR(interestSavings) + ' / yr';
+
+    if (grandTotalEl) {
+      animateValue(grandTotalEl, grandTotal);
+    }
+  }
+
+  function animateValue(el, targetVal) {
+    const startVal = parseInt(el.textContent.replace(/[^0-9]/g, '')) || 0;
+    const duration = 600;
+    const startTime = performance.now();
+
+    function update(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(startVal + (targetVal - startVal) * ease);
+      el.textContent = formatINR(current);
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  }
+
+  // Tier Buttons
+  tierBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tierBtns.forEach(b => {
+        b.classList.remove('active', 'border-primary-container', 'bg-primary-container/10');
+        b.classList.add('border-border-glass');
+        const h = b.querySelector('.text-sm');
+        if (h) { h.classList.remove('text-primary-container'); h.classList.add('text-on-surface'); }
+      });
+      btn.classList.add('active', 'border-primary-container', 'bg-primary-container/10');
+      btn.classList.remove('border-border-glass');
+      const h = btn.querySelector('.text-sm');
+      if (h) { h.classList.add('text-primary-container'); h.classList.remove('text-on-surface'); }
+
+      currentTierRate = parseFloat(btn.getAttribute('data-zed-rate')) || 0.80;
+      calculate();
+    });
+  });
+
+  // Cert Buttons
+  certBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      certBtns.forEach(b => {
+        b.classList.remove('active', 'border-primary-container', 'bg-primary-container/10');
+        b.classList.add('border-border-glass');
+      });
+      btn.classList.add('active', 'border-primary-container', 'bg-primary-container/10');
+      btn.classList.remove('border-border-glass');
+
+      currentHandholdingBase = parseFloat(btn.getAttribute('data-handholding')) || 500000;
+      currentTestingBase = parseFloat(btn.getAttribute('data-testing')) || 100000;
+      calculate();
+    });
+  });
+
+  // Apprentice Slider
+  if (apprenticeSlider) {
+    apprenticeSlider.addEventListener('input', (e) => {
+      currentApprentices = parseInt(e.target.value) || 0;
+      if (apprenticeVal) apprenticeVal.textContent = `${currentApprentices} Candidates`;
+      calculate();
+    });
+  }
+
+  // Loan Slider
+  if (loanSlider) {
+    loanSlider.addEventListener('input', (e) => {
+      currentLoanLakhs = parseInt(e.target.value) || 0;
+      const crVal = (currentLoanLakhs / 100).toFixed(2);
+      if (loanVal) loanVal.textContent = `₹${crVal} Crore`;
+      calculate();
+    });
+  }
+
+  // Reset
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      if (tierBtns[0]) tierBtns[0].click();
+      if (certBtns[0]) certBtns[0].click();
+      if (apprenticeSlider) { apprenticeSlider.value = 10; apprenticeSlider.dispatchEvent(new Event('input')); }
+      if (loanSlider) { loanSlider.value = 100; loanSlider.dispatchEvent(new Event('input')); }
+    });
+  }
+
+  calculate();
+}
+
+/* --------------------------------------------------------------------------
+   12. 60-SECOND AUDIT READINESS DIAGNOSTIC ENGINE
+   -------------------------------------------------------------------------- */
+function initDiagnosticQuiz() {
+  const quizWidget = document.getElementById('diagnostic-widget');
+  if (!quizWidget) return;
+
+  let currentStep = 1;
+  const answers = { industry: 'auto', challenge: 'tenders', currentStatus: 'basic' };
+
+  const stepIndicator = document.getElementById('quiz-step-indicator');
+  const percentIndicator = document.getElementById('quiz-percent-indicator');
+  const progressBar = document.getElementById('quiz-progress-bar');
+  const restartBtn = document.getElementById('quiz-restart-btn');
+
+  const stepViews = [
+    document.getElementById('quiz-step-1'),
+    document.getElementById('quiz-step-2'),
+    document.getElementById('quiz-step-3'),
+    document.getElementById('quiz-result-view')
+  ];
+
+  quizWidget.querySelectorAll('.quiz-opt-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const step = parseInt(btn.getAttribute('data-step'));
+      const val = btn.getAttribute('data-val');
+
+      if (step === 1) answers.industry = val;
+      if (step === 2) answers.challenge = val;
+      if (step === 3) answers.currentStatus = val;
+
+      if (step < 3) {
+        goToStep(step + 1);
+      } else {
+        showResults();
+      }
+    });
+  });
+
+  function goToStep(s) {
+    currentStep = s;
+    stepViews.forEach((v, idx) => {
+      if (v) {
+        if (idx === s - 1) {
+          v.classList.remove('hidden');
+          v.classList.add('active');
+        } else {
+          v.classList.add('hidden');
+          v.classList.remove('active');
+        }
+      }
+    });
+
+    const percent = Math.round((s / 3) * 100);
+    if (progressBar) progressBar.style.width = `${percent}%`;
+    if (percentIndicator) percentIndicator.textContent = `${percent}% Completed`;
+
+    if (s === 1 && stepIndicator) stepIndicator.textContent = 'Step 1 of 3: Industry & Core Activity';
+    if (s === 2 && stepIndicator) stepIndicator.textContent = 'Step 2 of 3: Primary Business Objective';
+    if (s === 3 && stepIndicator) stepIndicator.textContent = 'Step 3 of 3: Current Quality Infrastructure';
+  }
+
+  function showResults() {
+    stepViews.forEach((v, idx) => {
+      if (v) {
+        if (idx === 3) {
+          v.classList.remove('hidden');
+          v.classList.add('active');
+        } else {
+          v.classList.add('hidden');
+          v.classList.remove('active');
+        }
+      }
+    });
+
+    if (progressBar) progressBar.style.width = '100%';
+    if (percentIndicator) percentIndicator.textContent = '100% Diagnostic Complete';
+    if (stepIndicator) stepIndicator.textContent = 'Strategic Diagnostic Summary';
+
+    // Calculate score & recommendation
+    let score = 84;
+    let recStd = 'ZED Gold + ISO 9001:2015';
+    let recTime = '18 - 25 Working Days';
+    let recSubsidy = 'Up to ₹5,00,000 Grant (80%)';
+    let recDesc = 'High Potential for Fast-Track ZED Gold & ISO 9001 Certification with Govt Subsidy.';
+
+    if (answers.industry === 'auto' || answers.challenge === 'oem') {
+      score = 92;
+      recStd = 'IATF 16949:2016 + 5 Core Tools';
+      recTime = '35 - 50 Working Days';
+      recSubsidy = 'Up to ₹2,50,000 Handholding Grant';
+      recDesc = 'Mandatory for Maruti, Tata, Hyundai and Tier-1 Automotive supply chain empanelment.';
+    } else if (answers.challenge === 'export') {
+      score = 86;
+      recStd = 'SEDEX SMETA 4-Pillar + ISO 14001';
+      recTime = '14 - 20 Working Days';
+      recSubsidy = 'Export Council Subsidy Eligible';
+      recDesc = 'Essential for European & US buyer purchase order clearance and social compliance.';
+    } else if (answers.challenge === 'quality') {
+      score = 78;
+      recStd = '5S Workplace Organization + Kaizen';
+      recTime = '15 - 30 Working Days';
+      recSubsidy = 'Cost Optimization Grant Eligible';
+      recDesc = 'Focused on reducing shopfloor scrap, cutting changeover downtime, and boosting OEE.';
+    }
+
+    const scoreNum = document.getElementById('quiz-score-num');
+    const recStdEl = document.getElementById('quiz-rec-std');
+    const recTimeEl = document.getElementById('quiz-rec-time');
+    const recSubsidyEl = document.getElementById('quiz-rec-subsidy');
+    const recDescEl = document.getElementById('quiz-recommendation-desc');
+
+    if (scoreNum) scoreNum.textContent = score + '%';
+    if (recStdEl) recStdEl.textContent = recStd;
+    if (recTimeEl) recTimeEl.textContent = recTime;
+    if (recSubsidyEl) recSubsidyEl.textContent = recSubsidy;
+    if (recDescEl) recDescEl.textContent = recDesc;
+  }
+
+  if (restartBtn) {
+    restartBtn.addEventListener('click', () => {
+      goToStep(1);
+    });
+  }
+}
+
+/* --------------------------------------------------------------------------
+   13. GLOBAL SPOTLIGHT COMMAND PALETTE (Ctrl+K)
+   -------------------------------------------------------------------------- */
+function initCommandPalette() {
+  const modal = document.getElementById('command-search-modal');
+  const openBtn = document.getElementById('nav-search-btn');
+  const closeBtn = document.getElementById('close-command-search');
+  const searchInput = document.getElementById('command-search-input');
+  const resultsContainer = document.getElementById('command-search-results');
+  const filterChips = document.querySelectorAll('.search-filter-chip');
+
+  if (!modal || !searchInput || !resultsContainer) return;
+
+  let activeCategory = 'all';
+
+  function openPalette() {
+    modal.classList.remove('hidden');
+    searchInput.value = '';
+    searchInput.focus();
+    renderResults('');
+  }
+
+  function closePalette() {
+    modal.classList.add('hidden');
+  }
+
+  if (openBtn) openBtn.addEventListener('click', openPalette);
+  if (closeBtn) closeBtn.addEventListener('click', closePalette);
+
+  // Global Hotkey (Ctrl+K / Cmd+K / Escape)
+  window.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      if (modal.classList.contains('hidden')) {
+        openPalette();
+      } else {
+        closePalette();
+      }
+    }
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+      closePalette();
+    }
+  });
+
+  // Close on backdrop click
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closePalette();
+  });
+
+  // Filter Chips
+  filterChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      filterChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+
+      activeCategory = chip.getAttribute('data-cat') || 'all';
+      renderResults(searchInput.value);
+    });
+  });
+
+  searchInput.addEventListener('input', (e) => {
+    renderResults(e.target.value);
+  });
+
+  let selectedIndex = -1;
+
+  // Keyboard navigation within search input
+  searchInput.addEventListener('keydown', (e) => {
+    const items = resultsContainer.querySelectorAll('.command-result-item');
+    if (!items.length) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (selectedIndex < items.length - 1) {
+        selectedIndex++;
+      } else {
+        selectedIndex = 0;
+      }
+      updateSelection(items);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (selectedIndex > 0) {
+        selectedIndex--;
+      } else {
+        selectedIndex = items.length - 1;
+      }
+      updateSelection(items);
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (selectedIndex >= 0 && selectedIndex < items.length) {
+        items[selectedIndex].click();
+      } else if (items.length > 0) {
+        items[0].click();
+      }
+    }
+  });
+
+  function updateSelection(items) {
+    items.forEach((it, idx) => {
+      if (idx === selectedIndex) {
+        it.classList.add('selected-item');
+        it.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      } else {
+        it.classList.remove('selected-item');
+      }
+    });
+  }
+
+  function renderResults(query) {
+    const q = query.toLowerCase().trim();
+    resultsContainer.innerHTML = '';
+    selectedIndex = -1;
+
+    const services = Object.values(PRV_SERVICES_DATA);
+    const filtered = services.filter(srv => {
+      const matchCat = activeCategory === 'all' || srv.category === activeCategory;
+      const matchText = !q || srv.name.toLowerCase().includes(q) || srv.shortDesc.toLowerCase().includes(q) || srv.id.toLowerCase().includes(q);
+      return matchCat && matchText;
+    });
+
+    if (filtered.length === 0) {
+      resultsContainer.innerHTML = `
+        <div class="text-center py-10 text-on-surface-variant text-xs">
+          <i class="fa-solid fa-magnifying-glass text-3xl mb-3 text-primary-container/40"></i>
+          <div class="font-bold text-sm text-on-surface">No standards found matching "${query}"</div>
+          <div class="mt-2 text-primary-container hover:underline cursor-pointer open-modal-trigger text-xs" data-service="General Consultation">Request a Custom Advisory Session →</div>
+        </div>
+      `;
+      return;
+    }
+
+    filtered.forEach((srv, idx) => {
+      const item = document.createElement('div');
+      item.className = 'command-result-item p-3.5 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-primary-container/[0.08] hover:border-primary-container/60 transition-all cursor-pointer flex items-center justify-between group';
+      item.innerHTML = `
+        <div class="flex items-center gap-3.5 min-w-0">
+          <div class="w-10 h-10 rounded-xl bg-primary-container/10 border border-primary-container/25 flex items-center justify-center text-primary-container text-sm flex-shrink-0 group-hover:scale-105 group-hover:bg-primary-container group-hover:text-on-primary-container transition-all">
+            <i class="fa-solid ${srv.icon || 'fa-certificate'}"></i>
+          </div>
+          <div class="min-w-0">
+            <div class="font-bold text-xs text-on-surface group-hover:text-primary-container transition-colors truncate">${srv.name}</div>
+            <div class="text-[11px] text-on-surface-variant line-clamp-1 mt-0.5">${srv.shortDesc}</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 flex-shrink-0 pl-2">
+          <span class="text-[9px] font-bold px-2 py-0.5 rounded-md bg-white/5 border border-white/10 uppercase tracking-wider text-on-surface-variant group-hover:border-primary-container/30 group-hover:text-primary-container transition-colors">${srv.category}</span>
+          <i class="fa-solid fa-arrow-right text-xs text-primary-container opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all"></i>
+        </div>
+      `;
+
+      item.addEventListener('click', () => {
+        closePalette();
+        showServiceDetailPage(srv.id);
+        window.location.hash = `#services/${srv.id}`;
+      });
+
+      resultsContainer.appendChild(item);
+    });
+  }
+}
+
+// Global Export/Aliases
+window.showServiceDetailPage = showServiceDetailPage;
+window.renderServiceDetail = showServiceDetailPage;
+
+/* --------------------------------------------------------------------------
+   14. CARD SPOTLIGHT GLOW MICRO-INTERACTIONS
+   -------------------------------------------------------------------------- */
+function initCardGlowSpotlight() {
+  document.querySelectorAll('.glass-panel, .home-service-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  });
+}
+

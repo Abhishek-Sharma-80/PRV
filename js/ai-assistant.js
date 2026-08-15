@@ -2,12 +2,13 @@
  * PRV Consultancy Services - Ultra Premium AI Consultant Frontend Engine
  * Powered by Groq LLM (llama-3.3-70b-versatile)
  * Handles both Floating Chat Widget AND Full Page Embedded AI Advisor (#ai-consultant)
+ * Integrated with Centralized Contact Configuration, Dynamic WhatsApp & Email Actions
  */
 
 (function () {
   'use strict';
 
-  // Inject UI Styles for Floating Chat Widget
+  // Inject UI Styles for Floating Chat Widget & Action Buttons
   const style = document.createElement('style');
   style.textContent = `
     /* Floating Toggle Button */
@@ -52,11 +53,11 @@
       bottom: 98px;
       right: 24px;
       z-index: 9999;
-      width: 380px;
+      width: 400px;
       max-width: calc(100vw - 32px);
-      height: 560px;
+      height: 580px;
       max-height: calc(100vh - 120px);
-      background: rgba(15, 23, 42, 0.96);
+      background: rgba(15, 23, 42, 0.97);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.12);
@@ -175,7 +176,7 @@
     }
 
     .prv-ai-msg {
-      max-width: 88%;
+      max-width: 92%;
       padding: 12px 16px;
       border-radius: 16px;
       font-size: 13px;
@@ -278,6 +279,78 @@
       transform: translateY(-1px);
     }
 
+    /* Contact Action Buttons inside AI Messages */
+    .prv-ai-contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .prv-ai-contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      outline: none;
+      text-decoration: none;
+    }
+
+    .prv-btn-wa {
+      background: rgba(37, 211, 102, 0.15);
+      border: 1px solid rgba(37, 211, 102, 0.45);
+      color: #25d366 !important;
+    }
+    .prv-btn-wa:hover {
+      background: rgba(37, 211, 102, 0.3);
+      border-color: #25d366;
+      box-shadow: 0 0 12px rgba(37, 211, 102, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .prv-btn-email {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      color: #38bdf8 !important;
+    }
+    .prv-btn-email:hover {
+      background: rgba(56, 189, 248, 0.3);
+      border-color: #38bdf8;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .prv-btn-gmail {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.45);
+      color: #f87171 !important;
+    }
+    .prv-btn-gmail:hover {
+      background: rgba(239, 68, 68, 0.3);
+      border-color: #f87171;
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .prv-btn-consult {
+      background: rgba(0, 242, 254, 0.15);
+      border: 1px solid rgba(0, 242, 254, 0.45);
+      color: #00f2fe !important;
+    }
+    .prv-btn-consult:hover {
+      background: rgba(0, 242, 254, 0.3);
+      border-color: #00f2fe;
+      box-shadow: 0 0 12px rgba(0, 242, 254, 0.4);
+      transform: translateY(-1px);
+    }
+
     /* Input Bar */
     .prv-ai-footer {
       padding: 12px 14px;
@@ -337,6 +410,87 @@
   const sendIconSvg = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>`;
   const closeIconSvg = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
 
+  // Helper to create rich action buttons for direct contact
+  function createActionButtons(topicText, isFullPage) {
+    const dyn = window.getDynamicContactMessages ? window.getDynamicContactMessages(topicText) : {
+      serviceName: "General Consultation",
+      whatsapp: "Hello PRV Consultancy Services, I would like to know more about your consultancy services. Please guide me regarding my business requirement.",
+      subject: "Business Consultation Request",
+      body: "Hello PRV Consultancy Services,\n\nI would like to know more about your consultancy services.\n\nMy Requirement: "
+    };
+
+    const actionContainer = document.createElement('div');
+    actionContainer.className = 'prv-ai-contact-actions';
+
+    // WhatsApp Action Button
+    const waBtn = document.createElement('button');
+    waBtn.type = 'button';
+    waBtn.className = 'prv-ai-contact-btn prv-btn-wa';
+    waBtn.innerHTML = `<i class="fa-brands fa-whatsapp"></i> WhatsApp PRV`;
+    waBtn.title = 'Open WhatsApp directly with pre-filled message';
+    waBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (window.openPrvWhatsApp) {
+        window.openPrvWhatsApp(dyn.whatsapp, isFullPage ? 'full_ai_advisor' : 'floating_ai_assistant');
+      } else {
+        window.open(`https://wa.me/917489351297?text=${encodeURIComponent(dyn.whatsapp)}`, '_blank', 'noopener,noreferrer');
+      }
+    });
+
+    // Email Action Button (Default Mail Client)
+    const emailBtn = document.createElement('button');
+    emailBtn.type = 'button';
+    emailBtn.className = 'prv-ai-contact-btn prv-btn-email';
+    emailBtn.innerHTML = `<i class="fa-solid fa-envelope"></i> Email PRV`;
+    emailBtn.title = 'Open default email app with pre-filled subject and body';
+    emailBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (window.openPrvEmail) {
+        window.openPrvEmail(dyn.subject, dyn.body, isFullPage ? 'full_ai_advisor' : 'floating_ai_assistant');
+      } else {
+        window.location.href = `mailto:prvconsultancyservices@gmail.com?subject=${encodeURIComponent(dyn.subject)}&body=${encodeURIComponent(dyn.body)}`;
+      }
+    });
+
+    // Gmail Web Button
+    const gmailBtn = document.createElement('button');
+    gmailBtn.type = 'button';
+    gmailBtn.className = 'prv-ai-contact-btn prv-btn-gmail';
+    gmailBtn.innerHTML = `<i class="fa-brands fa-google"></i> Gmail`;
+    gmailBtn.title = 'Open Gmail in browser with pre-filled compose';
+    gmailBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (window.openPrvGmail) {
+        window.openPrvGmail(dyn.subject, dyn.body, isFullPage ? 'full_ai_advisor' : 'floating_ai_assistant');
+      } else {
+        window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=prvconsultancyservices@gmail.com&su=${encodeURIComponent(dyn.subject)}&body=${encodeURIComponent(dyn.body)}`, '_blank', 'noopener,noreferrer');
+      }
+    });
+
+    // Request Consultation Modal Button
+    const consultBtn = document.createElement('button');
+    consultBtn.type = 'button';
+    consultBtn.className = 'prv-ai-contact-btn prv-btn-consult';
+    consultBtn.innerHTML = `<i class="fa-solid fa-calendar-check"></i> Request Consultation`;
+    consultBtn.title = 'Open instant consultation booking modal';
+    consultBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (window.openPrvConsultationModal) {
+        window.openPrvConsultationModal(dyn.serviceName, isFullPage ? 'full_ai_advisor' : 'floating_ai_assistant');
+      } else {
+        const modal = document.getElementById('consultation-modal');
+        if (modal) modal.classList.remove('hidden');
+      }
+    });
+
+    actionContainer.appendChild(waBtn);
+    actionContainer.appendChild(emailBtn);
+    actionContainer.appendChild(gmailBtn);
+    actionContainer.appendChild(consultBtn);
+
+    return actionContainer;
+  }
+
   // Create Floating UI Structure
   const container = document.createElement('div');
   container.innerHTML = `
@@ -369,7 +523,12 @@
           • <strong>IATF 16949 & Automotive Core Tools</strong><br>
           • <strong>FSSAI License & SEDEX SMETA Audits</strong><br>
           • <strong>NATS / NAPS Manpower Cost Optimization</strong><br><br>
-          Please share your company's industry or goal, and I will recommend the best solution for your business!
+          Please share your company's industry or goal, or click below to connect directly with our advisory team!
+          <div class="prv-ai-contact-actions">
+            <button type="button" class="prv-ai-contact-btn prv-btn-wa" onclick="window.openPrvWhatsApp('Hello PRV Consultancy Services, I would like to know more about your consultancy services. Please guide me regarding my business requirement.', 'floating_ai_welcome')"><i class="fa-brands fa-whatsapp"></i> WhatsApp PRV</button>
+            <button type="button" class="prv-ai-contact-btn prv-btn-email" onclick="window.openPrvEmail('Business Consultation Request', 'Hello PRV Consultancy Services,\\n\\nI would like to know more about your consultancy services.\\n\\nMy Requirement: ', 'floating_ai_welcome')"><i class="fa-solid fa-envelope"></i> Email PRV</button>
+            <button type="button" class="prv-ai-contact-btn prv-btn-consult" onclick="window.openPrvConsultationModal('General Consultation', 'floating_ai_welcome')"><i class="fa-solid fa-calendar-check"></i> Request Consultation</button>
+          </div>
         </div>
       </div>
 
@@ -378,7 +537,7 @@
         <div class="prv-ai-chip">ZED Subsidy Details</div>
         <div class="prv-ai-chip">Automotive Certifications</div>
         <div class="prv-ai-chip">SEDEX SMETA Guide</div>
-        <div class="prv-ai-chip">5S Productivity Improvement</div>
+        <div class="prv-ai-chip">Speak With Consultant</div>
       </div>
 
       <div class="prv-ai-footer">
@@ -428,10 +587,17 @@
       .replace(/\n/g, '<br>');
   }
 
-  function appendMsg(containerEl, role, text) {
+  function appendMsg(containerEl, role, text, promptTopic) {
     const el = document.createElement('div');
     el.className = `prv-ai-msg ${role}`;
     el.innerHTML = formatMarkdown(text);
+
+    // If bot message, append contact action bar
+    if (role === 'bot') {
+      const actionBox = createActionButtons(promptTopic || text, false);
+      el.appendChild(actionBox);
+    }
+
     containerEl.appendChild(el);
     containerEl.scrollTop = containerEl.scrollHeight;
   }
@@ -500,18 +666,18 @@
       hideTyping(typingId);
 
       if (data && data.answer) {
-        appendMsg(msgsContainer, 'bot', data.answer);
+        appendMsg(msgsContainer, 'bot', data.answer, userText);
         history.push({ role: 'assistant', content: data.answer });
         if (data.quickReplies) {
           renderChips(data.quickReplies);
         }
       } else {
-        appendMsg(msgsContainer, 'bot', 'Apologies, I could not process your request. Please try again.');
+        appendMsg(msgsContainer, 'bot', 'Apologies, I could not process your request. Please try again or reach out to our team directly.', userText);
       }
     } catch (err) {
       console.error('[AI Chat] Request failed:', err);
       hideTyping(typingId);
-      appendMsg(msgsContainer, 'bot', 'I am experiencing a temporary connection issue. Please try again in a moment.');
+      appendMsg(msgsContainer, 'bot', 'I am experiencing a temporary connection issue. You can reach PRV Senior Consultants directly on WhatsApp or Email below.', userText);
     }
   }
 
@@ -532,6 +698,13 @@
     const fullChips = document.getElementById('full-ai-chips');
 
     if (!fullForm || !fullInput || !fullMsgs) return;
+
+    // Check if welcome message in fullMsgs needs contact action buttons
+    const initialBotMessage = fullMsgs.querySelector('.glass-panel');
+    if (initialBotMessage && !initialBotMessage.querySelector('.prv-ai-contact-actions')) {
+      const initialActions = createActionButtons('General Consultation', true);
+      initialBotMessage.appendChild(initialActions);
+    }
 
     let fullHistory = [];
     const fullSessionId = 'full_session_' + Date.now();
@@ -579,6 +752,11 @@
               ${formatMarkdown(data.answer)}
             </div>
           `;
+          
+          // Append dynamic contact action bar
+          const actionBox = createActionButtons(userText || data.answer, true);
+          botDiv.querySelector('.glass-panel').appendChild(actionBox);
+
           fullMsgs.appendChild(botDiv);
           fullMsgs.scrollTop = fullMsgs.scrollHeight;
           fullHistory.push({ role: 'assistant', content: data.answer });
@@ -586,6 +764,19 @@
       } catch (err) {
         hideTyping(typingId);
         console.error('[Full AI Chat] Error:', err);
+        const errDiv = document.createElement('div');
+        errDiv.className = 'flex gap-3 animate-fade-up';
+        errDiv.innerHTML = `
+          <div class="w-8 h-8 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center text-xs flex-shrink-0">
+            ${botIconSvg}
+          </div>
+          <div class="glass-panel p-4 rounded-2xl max-w-xl text-sm leading-relaxed border border-border-glass text-on-surface">
+            I am currently unable to reach the cloud AI engine. Please connect directly with our senior consultant team below:
+          </div>
+        `;
+        errDiv.querySelector('.glass-panel').appendChild(createActionButtons(userText, true));
+        fullMsgs.appendChild(errDiv);
+        fullMsgs.scrollTop = fullMsgs.scrollHeight;
       }
     }
 
