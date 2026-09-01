@@ -575,14 +575,61 @@
   // Format Markdown Text safely
   function formatMarkdown(text) {
     if (!text) return '';
-    return text
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      .replace(/###\s+(.*)/g, '<strong>$1</strong>')
-      .replace(/##\s+(.*)/g, '<strong>$1</strong>')
-      .replace(/#\s+(.*)/g, '<strong>$1</strong>')
+    let esc = text
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+    // Handle Markdown tables
+    const lines = esc.split('\n');
+    let inTable = false;
+    let tableHtml = '';
+    let outLines = [];
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (line.startsWith('|') && line.endsWith('|')) {
+        if (line.includes('---') || line.includes(':---') || line.includes('---:')) {
+          continue; // skip separator row
+        }
+        const cells = line.split('|').slice(1, -1).map(c => c.trim());
+        if (!inTable) {
+          inTable = true;
+          tableHtml = '<div style="overflow-x:auto;margin:12px 0;"><table style="width:100%;border-collapse:collapse;font-size:0.82rem;border:1px solid rgba(148,163,184,0.3);border-radius:6px;overflow:hidden;"><thead><tr style="background:rgba(2,132,199,0.12);">';
+          cells.forEach(c => {
+            tableHtml += `<th style="padding:8px 10px;border:1px solid rgba(148,163,184,0.3);text-align:left;font-weight:700;">${c}</th>`;
+          });
+          tableHtml += '</tr></thead><tbody>';
+        } else {
+          tableHtml += '<tr style="border-bottom:1px solid rgba(148,163,184,0.2);">';
+          cells.forEach(c => {
+            tableHtml += `<td style="padding:8px 10px;border:1px solid rgba(148,163,184,0.2);">${c}</td>`;
+          });
+          tableHtml += '</tr>';
+        }
+      } else {
+        if (inTable) {
+          tableHtml += '</tbody></table></div>';
+          outLines.push(tableHtml);
+          inTable = false;
+          tableHtml = '';
+        }
+        outLines.push(line);
+      }
+    }
+    if (inTable) {
+      tableHtml += '</tbody></table></div>';
+      outLines.push(tableHtml);
+    }
+
+    let processed = outLines.join('\n');
+
+    return processed
+      .replace(/###\s+(.*)/g, '<div style="font-weight:700;font-size:1.05em;margin:10px 0 4px;color:#0284c7;">$1</div>')
+      .replace(/##\s+(.*)/g, '<div style="font-weight:700;font-size:1.15em;margin:12px 0 6px;color:#0284c7;">$1</div>')
+      .replace(/#\s+(.*)/g, '<div style="font-weight:700;font-size:1.25em;margin:14px 0 8px;color:#0284c7;">$1</div>')
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
-      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/`([^`]+)`/g, '<code style="background:rgba(0,0,0,0.06);padding:2px 5px;border-radius:4px;font-family:monospace;font-size:0.85em;">$1</code>')
+      .replace(/^[•\-\*]\s+(.*)/gm, '<div style="display:flex;gap:6px;margin:3px 0;"><span>•</span><span>$1</span></div>')
       .replace(/\n\n/g, '<br><br>')
       .replace(/\n/g, '<br>');
   }
@@ -692,93 +739,128 @@
      FULL PAGE EMBEDDED AI ADVISOR SECTION HANDLER (#view-ai-consultant)
      ========================================================================== */
   function initFullPageAiAdvisor() {
-    const fullForm = document.getElementById('full-ai-chat-form');
+    const fullForm = document.getElementById('full-ai-form') || document.getElementById('full-ai-chat-form');
     const fullInput = document.getElementById('full-ai-input');
-    const fullMsgs = document.getElementById('full-ai-chat-messages');
-    const fullChips = document.getElementById('full-ai-chips');
+    const fullMsgs = document.getElementById('full-ai-chat-container') || document.getElementById('full-ai-chat-messages');
 
     if (!fullForm || !fullInput || !fullMsgs) return;
 
-    // Check if welcome message in fullMsgs needs contact action buttons
-    const initialBotMessage = fullMsgs.querySelector('.glass-panel');
-    if (initialBotMessage && !initialBotMessage.querySelector('.prv-ai-contact-actions')) {
-      const initialActions = createActionButtons('General Consultation', true);
-      initialBotMessage.appendChild(initialActions);
+    // Attach contact actions to initial welcome message if needed
+    const initialWelcome = fullMsgs.firstElementChild;
+    if (initialWelcome && !initialWelcome.querySelector('.prv-ai-contact-actions')) {
+      const welcomeContentDiv = initialWelcome.querySelector('div:last-child');
+      if (welcomeContentDiv) {
+        welcomeContentDiv.appendChild(createActionButtons('General Consultation', true));
+      }
     }
 
     let fullHistory = [];
     const fullSessionId = 'full_session_' + Date.now();
 
+    function showFullTypingIndicator() {
+      const el = document.createElement('div');
+      el.style.cssText = 'display: flex; gap: 12px; align-items: center; margin-top: 6px;';
+      const id = 'full-typing-' + Math.random().toString(36).substring(7);
+      el.id = id;
+      el.innerHTML = `
+        <div style="width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #0284c7, #00f2fe); color: #051424; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;">
+          <i class="fa-solid fa-robot"></i>
+        </div>
+        <div style="background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 12px; border-top-left-radius: 2px; padding: 12px 18px; display: flex; gap: 6px; align-items: center;">
+          <span style="width: 7px; height: 7px; background: #0284c7; border-radius: 50%; animation: prvDotPulse 1.4s infinite -0.32s both;"></span>
+          <span style="width: 7px; height: 7px; background: #0284c7; border-radius: 50%; animation: prvDotPulse 1.4s infinite -0.16s both;"></span>
+          <span style="width: 7px; height: 7px; background: #0284c7; border-radius: 50%; animation: prvDotPulse 1.4s infinite 0s both;"></span>
+        </div>
+      `;
+      fullMsgs.appendChild(el);
+      fullMsgs.scrollTop = fullMsgs.scrollHeight;
+      return id;
+    }
+
     async function sendFullChatMessage(userText) {
-      if (!userText) return;
+      const text = (userText || '').trim();
+      if (!text) return;
 
       // Append user msg to full page container
       const userDiv = document.createElement('div');
-      userDiv.className = 'flex justify-end gap-3 animate-fade-up';
+      userDiv.style.cssText = 'display: flex; justify-content: flex-end; margin-top: 6px;';
       userDiv.innerHTML = `
-        <div class="bg-gradient-to-r from-sky-600 to-blue-600 text-white p-4 rounded-2xl max-w-xl text-sm leading-relaxed shadow-lg">
-          ${userText}
+        <div style="background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%); color: #ffffff; padding: 14px 18px; border-radius: 14px; border-top-right-radius: 3px; max-width: 82%; font-size: 0.9rem; line-height: 1.55; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);">
+          ${formatMarkdown(text)}
         </div>
       `;
       fullMsgs.appendChild(userDiv);
       fullMsgs.scrollTop = fullMsgs.scrollHeight;
 
       // Append typing indicator
-      const typingId = showTyping(fullMsgs);
-      fullHistory.push({ role: 'user', content: userText });
+      const typingId = showFullTypingIndicator();
+      fullHistory.push({ role: 'user', content: text });
 
       try {
         const res = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            message: userText,
+            message: text,
             sessionId: fullSessionId,
             history: fullHistory
           })
         });
 
         const data = await res.json();
-        hideTyping(typingId);
+        const typingEl = document.getElementById(typingId);
+        if (typingEl) typingEl.remove();
 
         if (data && data.answer) {
           const botDiv = document.createElement('div');
-          botDiv.className = 'flex gap-3 animate-fade-up';
+          botDiv.style.cssText = 'display: flex; gap: 12px; align-items: flex-start; margin-top: 6px;';
           botDiv.innerHTML = `
-            <div class="w-8 h-8 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center text-xs flex-shrink-0">
-              ${botIconSvg}
+            <div style="width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #0284c7, #00f2fe); color: #051424; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; margin-top: 2px;">
+              <i class="fa-solid fa-robot"></i>
             </div>
-            <div class="glass-panel p-4 rounded-2xl max-w-xl text-sm leading-relaxed border border-border-glass text-on-surface">
-              ${formatMarkdown(data.answer)}
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 14px; border-top-left-radius: 3px; padding: 16px 20px; font-size: 0.9rem; line-height: 1.6; color: #1e293b; max-width: 85%; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+              <div>${formatMarkdown(data.answer)}</div>
             </div>
           `;
           
           // Append dynamic contact action bar
-          const actionBox = createActionButtons(userText || data.answer, true);
-          botDiv.querySelector('.glass-panel').appendChild(actionBox);
+          const actionBox = createActionButtons(text || data.answer, true);
+          botDiv.querySelector('div:last-child').appendChild(actionBox);
 
           fullMsgs.appendChild(botDiv);
           fullMsgs.scrollTop = fullMsgs.scrollHeight;
           fullHistory.push({ role: 'assistant', content: data.answer });
+        } else {
+          throw new Error('Invalid answer format from API');
         }
       } catch (err) {
-        hideTyping(typingId);
         console.error('[Full AI Chat] Error:', err);
+        const typingEl = document.getElementById(typingId);
+        if (typingEl) typingEl.remove();
+
         const errDiv = document.createElement('div');
-        errDiv.className = 'flex gap-3 animate-fade-up';
+        errDiv.style.cssText = 'display: flex; gap: 12px; align-items: flex-start; margin-top: 6px;';
         errDiv.innerHTML = `
-          <div class="w-8 h-8 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center text-xs flex-shrink-0">
-            ${botIconSvg}
+          <div style="width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #0284c7, #00f2fe); color: #051424; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; margin-top: 2px;">
+            <i class="fa-solid fa-robot"></i>
           </div>
-          <div class="glass-panel p-4 rounded-2xl max-w-xl text-sm leading-relaxed border border-border-glass text-on-surface">
-            I am currently unable to reach the cloud AI engine. Please connect directly with our senior consultant team below:
+          <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 14px; border-top-left-radius: 3px; padding: 16px 20px; font-size: 0.9rem; line-height: 1.6; color: #991b1b; max-width: 85%;">
+            We are experiencing a temporary network delay. You can connect directly with our senior consultant team below:
           </div>
         `;
-        errDiv.querySelector('.glass-panel').appendChild(createActionButtons(userText, true));
+        errDiv.querySelector('div:last-child').appendChild(createActionButtons(text, true));
         fullMsgs.appendChild(errDiv);
         fullMsgs.scrollTop = fullMsgs.scrollHeight;
       }
     }
+
+    // Expose sendAiPrompt globally to work with suggestion chip buttons
+    window.sendAiPrompt = function(promptText) {
+      if (fullInput) {
+        fullInput.value = promptText;
+      }
+      sendFullChatMessage(promptText);
+    };
 
     fullForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -788,15 +870,6 @@
         sendFullChatMessage(txt);
       }
     });
-
-    if (fullChips) {
-      fullChips.querySelectorAll('button').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const prompt = btn.getAttribute('data-prompt') || btn.textContent.trim();
-          sendFullChatMessage(prompt);
-        });
-      });
-    }
   }
 
   if (document.readyState === 'loading') {
